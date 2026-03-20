@@ -1,0 +1,33 @@
+# mapping_set_id: https://w3id.org/lmodel/cis-controls/mappings/cis_controls_to_nist_csf_v2
+# mapping_set_version: 0.1.0
+# mapping_set_title: CIS Controls v8.1 to NIST CSF 2.0 Schema Mappings
+# mapping_set_description: Schema-level mappings between the CIS Critical Security Controls v8.1 LinkML schema and the NIST Cybersecurity Framework 2.0 LinkML schema. Covers class, slot, and enum-value correspondences.
+# license: https://creativecommons.org/licenses/by/4.0/
+# subject_source: https://w3id.org/lmodel/cis-controls
+# object_source: https://w3id.org/lmodel/nist-csf-v2
+# mapping_date: 2026-04-15
+# author_id: https://orcid.org/0000-0000-0000-0000
+# curie_map:
+#   cis_controls: https://w3id.org/lmodel/cis-controls/
+#   nist_csf_v2: https://w3id.org/lmodel/nist-csf-v2/
+#   skos: http://www.w3.org/2004/02/skos/core#
+#   semapv: https://w3id.org/semapv/vocab/
+subject_id	subject_label	subject_category	predicate_id	predicate_label	object_id	object_label	object_category	mapping_justification	comment
+cis_controls:CISControlsDocument	CISControlsDocument	owl:Class	skos:closeMatch	close match	nist_csf_v2:CSFDocument	CSFDocument	owl:Class	semapv:ManualMappingCuration	Both are tree-root document containers wrapping a versioned cybersecurity framework publication
+cis_controls:CISControl	CISControl	owl:Class	skos:closeMatch	close match	nist_csf_v2:CSFCategory	CSFCategory	owl:Class	semapv:ManualMappingCuration	CIS Controls (18 items) are analogous in granularity to CSF Categories (second-level groupings within a Function); both group related specific actions
+cis_controls:Safeguard	Safeguard	owl:Class	skos:closeMatch	close match	nist_csf_v2:CSFSubcategory	CSFSubcategory	owl:Class	semapv:ManualMappingCuration	CIS Safeguards are specific measurable defensive actions, directly analogous to CSF Subcategories (specific cybersecurity outcomes)
+cis_controls:SecurityFunction	SecurityFunction	owl:Class	skos:closeMatch	close match	nist_csf_v2:CSFFunction	CSFFunction	owl:Class	semapv:ManualMappingCuration	The SecurityFunction enum enumerates exactly the six NIST CSF 2.0 Functions (GV, ID, PR, DE, RS, RC); enum as a whole corresponds to the CSFFunction class
+cis_controls:Govern	Govern	skos:Concept	skos:exactMatch	exact match	nist_csf_v2:GV	GOVERN	skos:Concept	semapv:ManualMappingCuration	CIS SecurityFunction.Govern is the CIS Controls representation of NIST CSF 2.0 Function GV (GOVERN), added in CSF 2.0
+cis_controls:Identify	Identify	skos:Concept	skos:exactMatch	exact match	nist_csf_v2:ID	IDENTIFY	skos:Concept	semapv:ManualMappingCuration	CIS SecurityFunction.Identify maps directly to NIST CSF 2.0 Function ID (IDENTIFY)
+cis_controls:Protect	Protect	skos:Concept	skos:exactMatch	exact match	nist_csf_v2:PR	PROTECT	skos:Concept	semapv:ManualMappingCuration	CIS SecurityFunction.Protect maps directly to NIST CSF 2.0 Function PR (PROTECT)
+cis_controls:Detect	Detect	skos:Concept	skos:exactMatch	exact match	nist_csf_v2:DE	DETECT	skos:Concept	semapv:ManualMappingCuration	CIS SecurityFunction.Detect maps directly to NIST CSF 2.0 Function DE (DETECT)
+cis_controls:Respond	Respond	skos:Concept	skos:exactMatch	exact match	nist_csf_v2:RS	RESPOND	skos:Concept	semapv:ManualMappingCuration	CIS SecurityFunction.Respond maps directly to NIST CSF 2.0 Function RS (RESPOND)
+cis_controls:Recover	Recover	skos:Concept	skos:exactMatch	exact match	nist_csf_v2:RC	RECOVER	skos:Concept	semapv:ManualMappingCuration	CIS SecurityFunction.Recover maps directly to NIST CSF 2.0 Function RC (RECOVER)
+cis_controls:id	id	owl:ObjectProperty	skos:exactMatch	exact match	nist_csf_v2:id	id	owl:ObjectProperty	semapv:ManualMappingCuration	Both are identifier slots serving as the primary key for catalog elements
+cis_controls:title	title	owl:ObjectProperty	skos:exactMatch	exact match	nist_csf_v2:title	title	owl:ObjectProperty	semapv:ManualMappingCuration	Both are human-readable title slots mapped to dct:title
+cis_controls:version	version	owl:ObjectProperty	skos:exactMatch	exact match	nist_csf_v2:version	version	owl:ObjectProperty	semapv:ManualMappingCuration	Both are version identifier slots for the document
+cis_controls:description	description	owl:ObjectProperty	skos:closeMatch	close match	nist_csf_v2:prose	prose	owl:ObjectProperty	semapv:ManualMappingCuration	Both carry free-text narrative content; CSF uses prose within structured CSFPart, CIS uses description as a flat string
+cis_controls:overview	overview	owl:ObjectProperty	skos:closeMatch	close match	nist_csf_v2:prose	prose	owl:ObjectProperty	semapv:ManualMappingCuration	CIS overview (control-level narrative) corresponds to the prose field of a CSFPart with name=overview
+cis_controls:safeguards	safeguards	owl:ObjectProperty	skos:closeMatch	close match	nist_csf_v2:controls	controls	owl:ObjectProperty	semapv:ManualMappingCuration	Both are inlined list slots holding child security elements (Safeguards vs CSFSubcategories) within a parent grouping
+cis_controls:controls	controls	owl:ObjectProperty	skos:closeMatch	close match	nist_csf_v2:groups	groups	owl:ObjectProperty	semapv:ManualMappingCuration	Both are the top-level collection slots in the root document — CISControlsDocument.controls (list of CISControl) mirrors CSFCatalogBody.groups (list of CSFFunction at one level up)
+cis_controls:implementation_groups	implementation_groups	owl:ObjectProperty	skos:relatedMatch	related match	nist_csf_v2:props	props	owl:ObjectProperty	semapv:ManualMappingCuration	CIS IG tiers have no direct CSF equivalent; the closest analog is CSFProperty metadata on elements (props), but the semantics differ significantly

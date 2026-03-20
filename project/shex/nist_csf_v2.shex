@@ -1,0 +1,209 @@
+# metamodel_version: 1.7.0
+# version: 2.0.0
+BASE <https://w3id.org/lmodel/nist-csf-v2/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX linkml: <https://w3id.org/linkml/>
+
+
+linkml:String xsd:string
+
+linkml:Integer xsd:integer
+
+linkml:Boolean xsd:boolean
+
+linkml:Float xsd:float
+
+linkml:Double xsd:double
+
+linkml:Decimal xsd:decimal
+
+linkml:Time xsd:time
+
+linkml:Date xsd:date
+
+linkml:Datetime xsd:dateTime
+
+linkml:DateOrDatetime linkml:DateOrDatetime
+
+linkml:Uriorcurie IRI
+
+linkml:Curie xsd:string
+
+linkml:Uri IRI
+
+linkml:Ncname xsd:string
+
+linkml:Objectidentifier IRI
+
+linkml:Nodeidentifier NONLITERAL
+
+linkml:Jsonpointer xsd:string
+
+linkml:Jsonpath xsd:string
+
+linkml:Sparqlpath xsd:string
+
+<Address> CLOSED {
+    (  $<Address_tes> (  <addr_lines> @linkml:String * ;
+          <city> @linkml:String ? ;
+          <state> @linkml:String ? ;
+          <postal_code> @linkml:String ?
+       ) ;
+       rdf:type [ linkml:Any ] ?
+    )
+}
+
+<BackMatter> CLOSED {
+    (  $<BackMatter_tes> <resources> @<Resource> * ;
+       rdf:type [ linkml:Any ] ?
+    )
+}
+
+<CSFCatalogBody> CLOSED {
+    (  $<CSFCatalogBody_tes> (  <uuid> @linkml:String ? ;
+          <metadata> @<CSFMetadata> ? ;
+          <groups> @<CSFFunction> * ;
+          <back_matter> @<BackMatter> ?
+       ) ;
+       rdf:type [ linkml:Any ] ?
+    )
+}
+
+<CSFCategory> CLOSED {
+    (  $<CSFCategory_tes> (  &<CSFElement_tes> ;
+          rdf:type [ <CSFElement> ] ? ;
+          <controls> @<CSFSubcategory> *
+       ) ;
+       rdf:type [ <CSFCategory> ] ?
+    )
+}
+
+<CSFDocument> CLOSED {
+    (  $<CSFDocument_tes> <catalog> @<CSFCatalogBody> ? ;
+       rdf:type [ linkml:Any ] ?
+    )
+}
+
+<CSFElement>  (
+    @<CSFCategory> OR @<CSFFunction> OR @<CSFSubcategory>
+)
+
+<CSFElement_struct> {
+    (  $<CSFElement_tes> (  <id> @linkml:String ? ;
+          <class> [ <https://w3id.org/lmodel/nist-csf-v2/CSFElementClassValue#function>
+             <https://w3id.org/lmodel/nist-csf-v2/CSFElementClassValue#category>
+             <https://w3id.org/lmodel/nist-csf-v2/CSFElementClassValue#subcategory> ] ? ;
+          <title> @linkml:String ? ;
+          <props> @<CSFProperty> * ;
+          <parts> @<CSFPart> *
+       ) ;
+       rdf:type [ <CSFElement> ] ?
+    )
+}
+
+<CSFFunction> CLOSED {
+    (  $<CSFFunction_tes> (  &<CSFElement_tes> ;
+          rdf:type [ <CSFElement> ] ? ;
+          <controls> @<CSFCategory> *
+       ) ;
+       rdf:type [ <CSFFunction> ] ?
+    )
+}
+
+<CSFMetadata> CLOSED {
+    (  $<CSFMetadata_tes> (  <title> @linkml:String ? ;
+          <published> @linkml:String ? ;
+          <last_modified> @linkml:String ? ;
+          <version> @linkml:String ? ;
+          <oscal_version> @linkml:String ? ;
+          <props> @<CSFProperty> * ;
+          <links> @<Link> * ;
+          <roles> @<Role> * ;
+          <parties> @<Party> * ;
+          <responsible_parties> @<ResponsibleParty> *
+       ) ;
+       rdf:type [ linkml:Any ] ?
+    )
+}
+
+<CSFPart> CLOSED {
+    (  $<CSFPart_tes> (  <id> @linkml:String ? ;
+          <name> @linkml:String ? ;
+          <ns> @linkml:String ? ;
+          <prose> @linkml:String ?
+       ) ;
+       rdf:type [ linkml:Any ] ?
+    )
+}
+
+<CSFProperty> CLOSED {
+    (  $<CSFProperty_tes> (  <name> @linkml:String ? ;
+          <value> @linkml:String ? ;
+          <ns> @linkml:String ? ;
+          <remarks> @linkml:String ?
+       ) ;
+       rdf:type [ <CSFProperty> ] ?
+    )
+}
+
+<CSFSubcategory> CLOSED {
+    (  $<CSFSubcategory_tes> (  &<CSFElement_tes> ;
+          rdf:type [ <CSFElement> ] ?
+       ) ;
+       rdf:type [ <CSFSubcategory> ] ?
+    )
+}
+
+<Link> CLOSED {
+    (  $<Link_tes> (  <href> @linkml:String ? ;
+          <rel> @linkml:String ?
+       ) ;
+       rdf:type [ <Link> ] ?
+    )
+}
+
+<Party> CLOSED {
+    (  $<Party_tes> (  <uuid> @linkml:String ? ;
+          <type> @linkml:String ? ;
+          <name> @linkml:String ? ;
+          <short_name> @linkml:String ? ;
+          <email_addresses> @linkml:String * ;
+          <addresses> @<Address> *
+       ) ;
+       rdf:type [ linkml:Any ] ?
+    )
+}
+
+<Resource> CLOSED {
+    (  $<Resource_tes> (  <uuid> @linkml:String ? ;
+          <title> @linkml:String ? ;
+          <rlinks> @<ResourceLink> *
+       ) ;
+       rdf:type [ linkml:Any ] ?
+    )
+}
+
+<ResourceLink> CLOSED {
+    (  $<ResourceLink_tes> (  <href> @linkml:String ? ;
+          <media_type> @linkml:String ?
+       ) ;
+       rdf:type [ linkml:Any ] ?
+    )
+}
+
+<ResponsibleParty> CLOSED {
+    (  $<ResponsibleParty_tes> (  <role_id> @linkml:String ? ;
+          <party_uuids> @linkml:String *
+       ) ;
+       rdf:type [ linkml:Any ] ?
+    )
+}
+
+<Role> CLOSED {
+    (  $<Role_tes> (  <id> @linkml:String ? ;
+          <title> @linkml:String ?
+       ) ;
+       rdf:type [ <Role> ] ?
+    )
+}

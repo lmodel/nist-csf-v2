@@ -1,0 +1,720 @@
+{
+    "$defs": {
+        "Address": {
+            "additionalProperties": true,
+            "description": "Postal address",
+            "properties": {
+                "addr_lines": {
+                    "description": "Address lines",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "city": {
+                    "description": "City name",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "postal_code": {
+                    "description": "Postal code",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "state": {
+                    "description": "State or region",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "Address",
+            "type": [
+                "null",
+                "boolean",
+                "object",
+                "number",
+                "string"
+            ]
+        },
+        "BackMatter": {
+            "additionalProperties": true,
+            "description": "OSCAL back-matter section containing resource references",
+            "properties": {
+                "resources": {
+                    "description": "Back-matter resources",
+                    "items": {
+                        "$ref": "#/$defs/Resource"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "title": "BackMatter",
+            "type": [
+                "null",
+                "boolean",
+                "object",
+                "number",
+                "string"
+            ]
+        },
+        "CSFCatalogBody": {
+            "additionalProperties": true,
+            "description": "Main CSF catalog object",
+            "properties": {
+                "back_matter": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/BackMatter"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Back-matter references and resources"
+                },
+                "groups": {
+                    "description": "List of CSF functions (top-level groupings) in the catalog",
+                    "items": {
+                        "$ref": "#/$defs/CSFFunction"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "metadata": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/CSFMetadata"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Catalog metadata"
+                },
+                "uuid": {
+                    "description": "UUID for catalog or resource element",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "CSFCatalogBody",
+            "type": [
+                "null",
+                "boolean",
+                "object",
+                "number",
+                "string"
+            ]
+        },
+        "CSFCategory": {
+            "additionalProperties": false,
+            "description": "A CSF category - second-level grouping within a function (e.g. GV.OC Organizational Context, ID.AM Asset Management)",
+            "properties": {
+                "class": {
+                    "$ref": "#/$defs/CSFElementClassValue",
+                    "description": "Classification of a CSF catalog element (function, category, subcategory)"
+                },
+                "controls": {
+                    "description": "List of categories or subcategories within a function or category",
+                    "items": {
+                        "$ref": "#/$defs/CSFSubcategory"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "description": "Unique identifier for a catalog element",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "parts": {
+                    "description": "Structured narrative parts (e.g., statement, overview, example)",
+                    "items": {
+                        "$ref": "#/$defs/CSFPart"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "props": {
+                    "description": "List of properties",
+                    "items": {
+                        "$ref": "#/$defs/CSFProperty"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "title": {
+                    "description": "Human-readable title",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "CSFCategory",
+            "type": "object"
+        },
+        "CSFDocument": {
+            "additionalProperties": true,
+            "description": "Root wrapper for CSF catalog content",
+            "properties": {
+                "catalog": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/CSFCatalogBody"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Root catalog payload"
+                }
+            },
+            "title": "CSFDocument",
+            "type": [
+                "null",
+                "boolean",
+                "object",
+                "number",
+                "string"
+            ]
+        },
+        "CSFElementClassValue": {
+            "description": "Allowed class values for CSF catalog elements",
+            "enum": [
+                "function",
+                "category",
+                "subcategory"
+            ],
+            "title": "CSFElementClassValue",
+            "type": "string"
+        },
+        "CSFFunction": {
+            "additionalProperties": false,
+            "description": "A CSF function - top-level grouping (e.g. GOVERN, IDENTIFY, PROTECT, DETECT, RESPOND, RECOVER)",
+            "properties": {
+                "class": {
+                    "$ref": "#/$defs/CSFElementClassValue",
+                    "description": "Classification of a CSF catalog element (function, category, subcategory)"
+                },
+                "controls": {
+                    "description": "List of categories or subcategories within a function or category",
+                    "items": {
+                        "$ref": "#/$defs/CSFCategory"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "description": "Unique identifier for a catalog element",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "parts": {
+                    "description": "Structured narrative parts (e.g., statement, overview, example)",
+                    "items": {
+                        "$ref": "#/$defs/CSFPart"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "props": {
+                    "description": "List of properties",
+                    "items": {
+                        "$ref": "#/$defs/CSFProperty"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "title": {
+                    "description": "Human-readable title",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "CSFFunction",
+            "type": "object"
+        },
+        "CSFMetadata": {
+            "additionalProperties": true,
+            "description": "OSCAL metadata section for the CSF catalog",
+            "properties": {
+                "last_modified": {
+                    "description": "Last modification timestamp",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "links": {
+                    "description": "List of links and relationships",
+                    "items": {
+                        "$ref": "#/$defs/Link"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "oscal_version": {
+                    "description": "OSCAL version identifier",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "parties": {
+                    "description": "Parties used in metadata",
+                    "items": {
+                        "$ref": "#/$defs/Party"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "props": {
+                    "description": "List of properties",
+                    "items": {
+                        "$ref": "#/$defs/CSFProperty"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "published": {
+                    "description": "Publication timestamp",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "responsible_parties": {
+                    "description": "Responsible party assignments",
+                    "items": {
+                        "$ref": "#/$defs/ResponsibleParty"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "roles": {
+                    "description": "Roles used in metadata",
+                    "items": {
+                        "$ref": "#/$defs/Role"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "title": {
+                    "description": "Human-readable title",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "version": {
+                    "description": "Version identifier",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "CSFMetadata",
+            "type": [
+                "null",
+                "boolean",
+                "object",
+                "number",
+                "string"
+            ]
+        },
+        "CSFPart": {
+            "additionalProperties": true,
+            "description": "Structured narrative part (statement, overview, or example)",
+            "properties": {
+                "id": {
+                    "description": "Unique identifier for a catalog element",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Name of a property or part",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "ns": {
+                    "description": "Namespace URI for a property or part",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "prose": {
+                    "description": "Free-text prose content",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "CSFPart",
+            "type": [
+                "null",
+                "boolean",
+                "object",
+                "number",
+                "string"
+            ]
+        },
+        "CSFProperty": {
+            "additionalProperties": false,
+            "description": "A name-value property with optional namespace and supplemental remarks",
+            "properties": {
+                "name": {
+                    "description": "Name of a property or part",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "ns": {
+                    "description": "Namespace URI for a property or part",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "remarks": {
+                    "description": "Supplemental remarks on a property",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "value": {
+                    "description": "Property value",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "CSFProperty",
+            "type": "object"
+        },
+        "CSFSubcategory": {
+            "additionalProperties": false,
+            "description": "A CSF subcategory - specific cybersecurity outcome (e.g. GV.OC-01, ID.AM-01)",
+            "properties": {
+                "class": {
+                    "$ref": "#/$defs/CSFElementClassValue",
+                    "description": "Classification of a CSF catalog element (function, category, subcategory)"
+                },
+                "id": {
+                    "description": "Unique identifier for a catalog element",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "parts": {
+                    "description": "Structured narrative parts (e.g., statement, overview, example)",
+                    "items": {
+                        "$ref": "#/$defs/CSFPart"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "props": {
+                    "description": "List of properties",
+                    "items": {
+                        "$ref": "#/$defs/CSFProperty"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "title": {
+                    "description": "Human-readable title",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "CSFSubcategory",
+            "type": "object"
+        },
+        "Link": {
+            "additionalProperties": false,
+            "description": "Relationship link with href and optional rel attribute",
+            "properties": {
+                "href": {
+                    "description": "Link or resource reference",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "rel": {
+                    "description": "Relationship type for a link",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "Link",
+            "type": "object"
+        },
+        "Party": {
+            "additionalProperties": true,
+            "description": "Party definition (person or organization)",
+            "properties": {
+                "addresses": {
+                    "description": "Postal addresses",
+                    "items": {
+                        "$ref": "#/$defs/Address"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "email_addresses": {
+                    "description": "Party email addresses",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Name of a property or part",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "short_name": {
+                    "description": "Short display name for a party",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "type": {
+                    "description": "Party type (e.g., organization, person)",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "uuid": {
+                    "description": "UUID for catalog or resource element",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "Party",
+            "type": [
+                "null",
+                "boolean",
+                "object",
+                "number",
+                "string"
+            ]
+        },
+        "Resource": {
+            "additionalProperties": true,
+            "description": "Referenced resource in back-matter",
+            "properties": {
+                "rlinks": {
+                    "description": "Resource links",
+                    "items": {
+                        "$ref": "#/$defs/ResourceLink"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "title": {
+                    "description": "Human-readable title",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "uuid": {
+                    "description": "UUID for catalog or resource element",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "Resource",
+            "type": [
+                "null",
+                "boolean",
+                "object",
+                "number",
+                "string"
+            ]
+        },
+        "ResourceLink": {
+            "additionalProperties": true,
+            "description": "Reference link for a back-matter resource",
+            "properties": {
+                "href": {
+                    "description": "Link or resource reference",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "media_type": {
+                    "description": "Media type for a resource link",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "ResourceLink",
+            "type": [
+                "null",
+                "boolean",
+                "object",
+                "number",
+                "string"
+            ]
+        },
+        "ResponsibleParty": {
+            "additionalProperties": true,
+            "description": "Assignment of parties to a role",
+            "properties": {
+                "party_uuids": {
+                    "description": "Referenced party UUIDs",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "role_id": {
+                    "description": "Assigned role identifier",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "ResponsibleParty",
+            "type": [
+                "null",
+                "boolean",
+                "object",
+                "number",
+                "string"
+            ]
+        },
+        "Role": {
+            "additionalProperties": false,
+            "description": "Role definition used in metadata",
+            "properties": {
+                "id": {
+                    "description": "Unique identifier for a catalog element",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "title": {
+                    "description": "Human-readable title",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "Role",
+            "type": "object"
+        }
+    },
+    "$id": "https://w3id.org/lmodel/nist-csf-v2",
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "additionalProperties": true,
+    "description": "Root wrapper for CSF catalog content",
+    "metamodel_version": "1.7.0",
+    "properties": {
+        "catalog": {
+            "anyOf": [
+                {
+                    "$ref": "#/$defs/CSFCatalogBody"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "description": "Root catalog payload"
+        }
+    },
+    "title": "nist-csf-v2",
+    "type": "object",
+    "version": "2.0.0"
+}

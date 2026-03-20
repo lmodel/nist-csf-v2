@@ -16,6 +16,9 @@ prefixes:
   linkml:
     prefix_prefix: linkml
     prefix_reference: https://w3id.org/linkml/
+  cis_controls:
+    prefix_prefix: cis_controls
+    prefix_reference: https://w3id.org/lmodel/cis-controls/
 default_prefix: nist_csf_v2
 default_range: string
 subsets:
@@ -344,6 +347,8 @@ slots:
     in_subset:
     - nist_csf_v2_catalog
     from_schema: https://w3id.org/lmodel/nist-csf-v2
+    close_mappings:
+    - cis_controls:controls
     slot_uri: nist_csf_v2:groups
     owner: CSFCatalogBody
     domain_of:
@@ -359,6 +364,8 @@ slots:
     in_subset:
     - nist_csf_v2_catalog
     from_schema: https://w3id.org/lmodel/nist-csf-v2
+    close_mappings:
+    - cis_controls:safeguards
     slot_uri: nist_csf_v2:controls
     owner: CSFCategory
     domain_of:
@@ -529,6 +536,8 @@ slots:
     in_subset:
     - nist_csf_v2_catalog
     from_schema: https://w3id.org/lmodel/nist-csf-v2
+    exact_mappings:
+    - cis_controls:id
     slot_uri: nist_csf_v2:id
     owner: Role
     domain_of:
@@ -557,6 +566,8 @@ slots:
     in_subset:
     - nist_csf_v2_catalog
     from_schema: https://w3id.org/lmodel/nist-csf-v2
+    exact_mappings:
+    - cis_controls:title
     slot_uri: nist_csf_v2:title
     owner: Resource
     domain_of:
@@ -598,6 +609,8 @@ slots:
     in_subset:
     - nist_csf_v2_catalog
     from_schema: https://w3id.org/lmodel/nist-csf-v2
+    exact_mappings:
+    - cis_controls:version
     slot_uri: nist_csf_v2:version
     owner: CSFMetadata
     domain_of:
@@ -624,7 +637,8 @@ slots:
     in_subset:
     - nist_csf_v2_catalog
     from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:_class
+    slot_uri: nist_csf_v2:class
+    alias: class
     owner: CSFElement
     domain_of:
     - CSFElement
@@ -675,6 +689,9 @@ slots:
     in_subset:
     - nist_csf_v2_catalog
     from_schema: https://w3id.org/lmodel/nist-csf-v2
+    close_mappings:
+    - cis_controls:description
+    - cis_controls:overview
     slot_uri: nist_csf_v2:prose
     owner: CSFPart
     domain_of:
@@ -863,8 +880,8 @@ slots:
     from_schema: https://w3id.org/lmodel/nist-csf-v2
     is_a: _class
     domain: CSFElement
-    slot_uri: nist_csf_v2:_class
-    alias: _class
+    slot_uri: nist_csf_v2:class
+    alias: class
     owner: CSFElement
     domain_of:
     - CSFElement
@@ -878,6 +895,8 @@ slots:
     in_subset:
     - nist_csf_v2_catalog
     from_schema: https://w3id.org/lmodel/nist-csf-v2
+    close_mappings:
+    - cis_controls:safeguards
     is_a: controls
     domain: CSFCategory
     slot_uri: nist_csf_v2:controls
@@ -901,6 +920,8 @@ classes:
     from_schema: https://w3id.org/lmodel/nist-csf-v2
     mappings:
     - linkml:Any
+    close_mappings:
+    - cis_controls:CISControlsDocument
     slots:
     - catalog
     class_uri: linkml:Any
@@ -968,6 +989,8 @@ classes:
     in_subset:
     - nist_csf_v2_catalog
     from_schema: https://w3id.org/lmodel/nist-csf-v2
+    close_mappings:
+    - cis_controls:SecurityFunction
     is_a: CSFElement
     slots:
     - id
@@ -985,6 +1008,8 @@ classes:
     in_subset:
     - nist_csf_v2_catalog
     from_schema: https://w3id.org/lmodel/nist-csf-v2
+    close_mappings:
+    - cis_controls:CISControl
     is_a: CSFElement
     slots:
     - id
@@ -1006,6 +1031,8 @@ classes:
     in_subset:
     - nist_csf_v2_catalog
     from_schema: https://w3id.org/lmodel/nist-csf-v2
+    close_mappings:
+    - cis_controls:Safeguard
     is_a: CSFElement
     slots:
     - id
@@ -1150,7 +1177,7 @@ classes:
     class_uri: linkml:Any
 metamodel_version: 1.7.0
 source_file: nist_csf_v2.yaml
-source_file_date: '2026-03-20T17:45:35'
-source_file_size: 9990
-generation_date: '2026-03-20T17:45:54'
+source_file_date: '2026-04-15T20:46:42'
+source_file_size: 10548
+generation_date: '2026-04-15T23:33:05'
 

@@ -11,8 +11,9 @@ see_also:
   - https://lmodel.github.io/nist-csf-v2
 
 prefixes:
-  nist_csf_v2: https://w3id.org/lmodel/nist-csf-v2/
-  linkml: https://w3id.org/linkml/
+  nist_csf_v2:  https://w3id.org/lmodel/nist-csf-v2/
+  linkml:       https://w3id.org/linkml/
+  cis_controls: https://w3id.org/lmodel/cis-controls/
 default_prefix: nist_csf_v2
 default_range: string
 
@@ -45,6 +46,7 @@ slots:
     multivalued: true
     inlined: true
     inlined_as_list: true
+    close_mappings: [cis_controls:controls]
     in_subset:
       - nist_csf_v2_catalog
 
@@ -54,6 +56,7 @@ slots:
     multivalued: true
     inlined: true
     inlined_as_list: true
+    close_mappings: [cis_controls:safeguards]
     in_subset:
       - nist_csf_v2_catalog
 
@@ -151,6 +154,7 @@ slots:
 
   id:
     description: Unique identifier for a catalog element
+    exact_mappings: [cis_controls:id]
     in_subset:
       - nist_csf_v2_catalog
 
@@ -161,6 +165,7 @@ slots:
 
   title:
     description: Human-readable title
+    exact_mappings: [cis_controls:title]
     in_subset:
       - nist_csf_v2_catalog
 
@@ -178,6 +183,7 @@ slots:
 
   version:
     description: Version identifier
+    exact_mappings: [cis_controls:version]
     in_subset:
       - nist_csf_v2_catalog
 
@@ -211,6 +217,7 @@ slots:
 
   prose:
     description: Free-text prose content
+    close_mappings: [cis_controls:description, cis_controls:overview]
     in_subset:
       - nist_csf_v2_catalog
 
@@ -313,6 +320,7 @@ classes:
     class_uri: linkml:Any
     slots:
       - catalog
+    close_mappings: [cis_controls:CISControlsDocument]
     in_subset:
       - nist_csf_v2_catalog
 
@@ -366,6 +374,7 @@ classes:
     is_a: CSFElement
     slots:
       - controls
+    close_mappings: [cis_controls:SecurityFunction]
     in_subset:
       - nist_csf_v2_catalog
 
@@ -379,6 +388,7 @@ classes:
     slot_usage:
       controls:
         range: CSFSubcategory
+    close_mappings: [cis_controls:CISControl]
     in_subset:
       - nist_csf_v2_catalog
 
@@ -387,6 +397,7 @@ classes:
       A CSF subcategory - specific cybersecurity outcome
       (e.g. GV.OC-01, ID.AM-01)
     is_a: CSFElement
+    close_mappings: [cis_controls:Safeguard]
     in_subset:
       - nist_csf_v2_catalog
 

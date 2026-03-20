@@ -1,0 +1,35 @@
+{
+   "cis_controls": "https://w3id.org/lmodel/cis-controls/",
+   "linkml": "https://w3id.org/linkml/",
+   "nist_csf_v2": "https://w3id.org/lmodel/nist-csf-v2/",
+   "Address": {
+      "@id": "linkml:Any"
+   },
+   "BackMatter": {
+      "@id": "linkml:Any"
+   },
+   "CSFCatalogBody": {
+      "@id": "linkml:Any"
+   },
+   "CSFDocument": {
+      "@id": "linkml:Any"
+   },
+   "CSFMetadata": {
+      "@id": "linkml:Any"
+   },
+   "CSFPart": {
+      "@id": "linkml:Any"
+   },
+   "Party": {
+      "@id": "linkml:Any"
+   },
+   "Resource": {
+      "@id": "linkml:Any"
+   },
+   "ResourceLink": {
+      "@id": "linkml:Any"
+   },
+   "ResponsibleParty": {
+      "@id": "linkml:Any"
+   }
+}
