@@ -624,7 +624,8 @@ slots:
     in_subset:
     - nist_csf_v2_catalog
     from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:_class
+    slot_uri: nist_csf_v2:class
+    alias: class
     owner: CSFElement
     domain_of:
     - CSFElement
@@ -863,8 +864,8 @@ slots:
     from_schema: https://w3id.org/lmodel/nist-csf-v2
     is_a: _class
     domain: CSFElement
-    slot_uri: nist_csf_v2:_class
-    alias: _class
+    slot_uri: nist_csf_v2:class
+    alias: class
     owner: CSFElement
     domain_of:
     - CSFElement
@@ -1150,7 +1151,7 @@ classes:
     class_uri: linkml:Any
 metamodel_version: 1.7.0
 source_file: nist_csf_v2.yaml
-source_file_date: '2026-03-20T17:45:35'
-source_file_size: 9990
-generation_date: '2026-03-20T17:45:54'
+source_file_date: '2026-03-20T23:25:48'
+source_file_size: 10007
+generation_date: '2026-03-20T23:34:18'
 

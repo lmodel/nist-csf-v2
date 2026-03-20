@@ -105,6 +105,7 @@ testdoc: gen-doc _serve
 gen-python:
   uv run gen-project -d  {{pymodel}} -I python {{source_schema_path}}
   uv run gen-pydantic {{gen_pydantic_args}} {{source_schema_path}} > {{pymodel}}/{{schema_name}}_pydantic.py
+  just fix-python-keywords
 
 # Generate project files including Python data model
 [group('model development')]
