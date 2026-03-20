@@ -497,7 +497,7 @@
 
 
 <h1 id="slot-controls">Slot: controls</h1>
-<p><em>List of categories or subcategories within a function or category</em></p>
+<p><em>List of controls, requirements, or practices in a group</em></p>
 <p>URI: <a href="https://w3id.org/lmodel/nist-csf-v2/controls">nist_csf_v2:controls</a>
 Alias: controls</p>
 <!-- no inheritance hierarchy -->
@@ -520,6 +520,11 @@ Alias: controls</p>
 <tr>
 <td><a href="../CSFFunction/">CSFFunction</a></td>
 <td>A CSF function - top-level grouping (e</td>
+<td>yes</td>
+</tr>
+<tr>
+<td><a href="../ControlGroup/">ControlGroup</a></td>
+<td>A top-level control or requirement family group</td>
 <td>no</td>
 </tr>
 </tbody>
@@ -536,11 +541,11 @@ Alias: controls</p>
 <tbody>
 <tr>
 <td>Range</td>
-<td><a href="../CSFCategory/">CSFCategory</a></td>
+<td><a href="../Control/">Control</a></td>
 </tr>
 <tr>
 <td>Domain Of</td>
-<td><a href="../CSFFunction/">CSFFunction</a>, <a href="../CSFCategory/">CSFCategory</a></td>
+<td><a href="../CSFFunction/">CSFFunction</a>, <a href="../CSFCategory/">CSFCategory</a>, <a href="../ControlGroup/">ControlGroup</a></td>
 </tr>
 </tbody>
 </table>
@@ -561,7 +566,7 @@ Alias: controls</p>
 </table>
 <h2 id="in-subsets">In Subsets</h2>
 <ul>
-<li><a href="../NistCsfV2Catalog/">NistCsfV2Catalog</a></li>
+<li><a href="../OscalCatalogCommon/">OscalCatalogCommon</a></li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
@@ -590,16 +595,17 @@ Alias: controls</p>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">controls</span>
-<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">List of categories or subcategories within a function or category</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">List of controls, requirements, or practices in a group</span>
 <span class="nt">in_subset</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nist_csf_v2_catalog</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">oscal_catalog_common</span>
 <span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/lmodel/nist-csf-v2</span>
 <span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">controls</span>
 <span class="nt">domain_of</span><span class="p">:</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CSFFunction</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CSFCategory</span>
-<span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CSFCategory</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ControlGroup</span>
+<span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Control</span>
 <span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="nt">inlined</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="nt">inlined_as_list</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>

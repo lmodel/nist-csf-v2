@@ -565,7 +565,55 @@
 </tr>
 <tr>
 <td><a href="BackMatter/">BackMatter</a></td>
-<td>OSCAL back-matter section containing resource references</td>
+<td>OSCAL back-matter section</td>
+</tr>
+<tr>
+<td><a href="CatalogBody/">CatalogBody</a></td>
+<td>Main catalog object (uuid + metadata + groups + back-matter)</td>
+</tr>
+<tr>
+<td><a href="CatalogElement/">CatalogElement</a></td>
+<td>Abstract base class for identifiable catalog elements</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="CSFElement/">CSFElement</a></td>
+<td>Abstract base class for CSF catalog elements</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="CSFCategory/">CSFCategory</a></td>
+<td>A CSF category - second-level grouping within a function (e</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="CSFFunction/">CSFFunction</a></td>
+<td>A CSF function - top-level grouping (e</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="CSFSubcategory/">CSFSubcategory</a></td>
+<td>A CSF subcategory - specific cybersecurity outcome (e</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="IdentifiedElement/">IdentifiedElement</a></td>
+<td>A catalog element with title, optional class/label, and inherited id/props/li...</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="Control/">Control</a></td>
+<td>A control, requirement, or practice</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="ControlGroup/">ControlGroup</a></td>
+<td>A top-level control or requirement family group</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="Parameter/">Parameter</a></td>
+<td>A configurable or organization-defined parameter</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="Part/">Part</a></td>
+<td>Structured narrative part containing prose and optional nested parts</td>
+</tr>
+<tr>
+<td><a href="Citation/">Citation</a></td>
+<td>Citation wrapper</td>
 </tr>
 <tr>
 <td><a href="CSFCatalogBody/">CSFCatalogBody</a></td>
@@ -576,40 +624,36 @@
 <td>Root wrapper for CSF catalog content</td>
 </tr>
 <tr>
-<td><a href="CSFElement/">CSFElement</a></td>
-<td>Abstract base class for CSF catalog elements</td>
-</tr>
-<tr>
-<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="CSFCategory/">CSFCategory</a></td>
-<td>A CSF category - second-level grouping within a function (e</td>
-</tr>
-<tr>
-<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="CSFFunction/">CSFFunction</a></td>
-<td>A CSF function - top-level grouping (e</td>
-</tr>
-<tr>
-<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="CSFSubcategory/">CSFSubcategory</a></td>
-<td>A CSF subcategory - specific cybersecurity outcome (e</td>
-</tr>
-<tr>
-<td><a href="CSFMetadata/">CSFMetadata</a></td>
-<td>OSCAL metadata section for the CSF catalog</td>
-</tr>
-<tr>
 <td><a href="CSFPart/">CSFPart</a></td>
 <td>Structured narrative part (statement, overview, or example)</td>
 </tr>
 <tr>
-<td><a href="CSFProperty/">CSFProperty</a></td>
-<td>A name-value property with optional namespace and supplemental remarks</td>
+<td><a href="Guideline/">Guideline</a></td>
+<td>Additional prose guidance associated with a parameter</td>
 </tr>
 <tr>
 <td><a href="Link/">Link</a></td>
-<td>Relationship link with href and optional rel attribute</td>
+<td>Relationship link with href and optional rel/text attributes</td>
+</tr>
+<tr>
+<td><a href="Metadata/">Metadata</a></td>
+<td>OSCAL metadata section</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="CSFMetadata/">CSFMetadata</a></td>
+<td></td>
 </tr>
 <tr>
 <td><a href="Party/">Party</a></td>
 <td>Party definition (person or organization)</td>
+</tr>
+<tr>
+<td><a href="Property/">Property</a></td>
+<td>A name-value property with optional namespace and class</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="CSFProperty/">CSFProperty</a></td>
+<td>A name-value property with optional namespace and supplemental remarks</td>
 </tr>
 <tr>
 <td><a href="Resource/">Resource</a></td>
@@ -617,7 +661,7 @@
 </tr>
 <tr>
 <td><a href="ResourceLink/">ResourceLink</a></td>
-<td>Reference link for a back-matter resource</td>
+<td>Reference link for a resource</td>
 </tr>
 <tr>
 <td><a href="ResponsibleParty/">ResponsibleParty</a></td>
@@ -625,7 +669,7 @@
 </tr>
 <tr>
 <td><a href="Role/">Role</a></td>
-<td>Role definition used in metadata</td>
+<td>Role definition</td>
 </tr>
 </tbody>
 </table>
@@ -640,7 +684,7 @@
 <tbody>
 <tr>
 <td><a href="_class/">_class</a></td>
-<td>Classification of a CSF catalog element (function, category, subcategory)</td>
+<td>Classification of a catalog element</td>
 </tr>
 <tr>
 <td><a href="addr_lines/">addr_lines</a></td>
@@ -659,12 +703,20 @@
 <td>Root catalog payload</td>
 </tr>
 <tr>
+<td><a href="citation/">citation</a></td>
+<td>Citation details for a resource</td>
+</tr>
+<tr>
 <td><a href="city/">city</a></td>
 <td>City name</td>
 </tr>
 <tr>
 <td><a href="controls/">controls</a></td>
-<td>List of categories or subcategories within a function or category</td>
+<td>List of controls, requirements, or practices in a group</td>
+</tr>
+<tr>
+<td><a href="description/">description</a></td>
+<td>Resource or element description</td>
 </tr>
 <tr>
 <td><a href="email_addresses/">email_addresses</a></td>
@@ -672,15 +724,23 @@
 </tr>
 <tr>
 <td><a href="groups/">groups</a></td>
-<td>List of CSF functions (top-level groupings) in the catalog</td>
+<td>List of top-level groupings in the catalog</td>
+</tr>
+<tr>
+<td><a href="guidelines/">guidelines</a></td>
+<td>List of guidelines for a parameter</td>
 </tr>
 <tr>
 <td><a href="href/">href</a></td>
-<td>Link or resource reference</td>
+<td>Link or resource reference URI</td>
 </tr>
 <tr>
 <td><a href="id/">id</a></td>
-<td>Unique identifier for a catalog element</td>
+<td>Unique identifier for an element</td>
+</tr>
+<tr>
+<td><a href="label/">label</a></td>
+<td>Human-readable label</td>
 </tr>
 <tr>
 <td><a href="last_modified/">last_modified</a></td>
@@ -711,12 +771,16 @@
 <td>OSCAL version identifier</td>
 </tr>
 <tr>
+<td><a href="params/">params</a></td>
+<td>List of parameters for a control or requirement</td>
+</tr>
+<tr>
 <td><a href="parties/">parties</a></td>
 <td>Parties used in metadata</td>
 </tr>
 <tr>
 <td><a href="parts/">parts</a></td>
-<td>Structured narrative parts (e</td>
+<td>Nested parts providing prose and structure</td>
 </tr>
 <tr>
 <td><a href="party_uuids/">party_uuids</a></td>
@@ -744,7 +808,7 @@
 </tr>
 <tr>
 <td><a href="remarks/">remarks</a></td>
-<td>Supplemental remarks on a property</td>
+<td>Supplemental remarks</td>
 </tr>
 <tr>
 <td><a href="resources/">resources</a></td>
@@ -768,11 +832,15 @@
 </tr>
 <tr>
 <td><a href="short_name/">short_name</a></td>
-<td>Short display name for a party</td>
+<td>Short display name</td>
 </tr>
 <tr>
 <td><a href="state/">state</a></td>
 <td>State or region</td>
+</tr>
+<tr>
+<td><a href="text/">text</a></td>
+<td>Citation or link annotation text</td>
 </tr>
 <tr>
 <td><a href="title/">title</a></td>
@@ -781,6 +849,10 @@
 <tr>
 <td><a href="type/">type</a></td>
 <td>Party type (e</td>
+</tr>
+<tr>
+<td><a href="usage/">usage</a></td>
+<td>Human-readable description of a parameter's expected value</td>
 </tr>
 <tr>
 <td><a href="uuid/">uuid</a></td>
@@ -910,6 +982,10 @@
 <tr>
 <td><a href="NistCsfV2Catalog/">NistCsfV2Catalog</a></td>
 <td>NIST CSF 2</td>
+</tr>
+<tr>
+<td><a href="OscalCatalogCommon/">OscalCatalogCommon</a></td>
+<td>Shared OSCAL-derived elements common across all NIST catalog schemas</td>
 </tr>
 </tbody>
 </table>

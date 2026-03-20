@@ -497,9 +497,9 @@
 
 
 <h1 id="slot-_class">Slot: _class</h1>
-<p><em>Classification of a CSF catalog element (function, category, subcategory)</em></p>
+<p><em>Classification of a catalog element</em></p>
 <p>URI: <a href="https://w3id.org/lmodel/nist-csf-v2/_class">nist_csf_v2:_class</a>
-Alias: class</p>
+Alias: _class</p>
 <!-- no inheritance hierarchy -->
 
 <h2 id="applicable-classes">Applicable Classes</h2>
@@ -513,6 +513,36 @@ Alias: class</p>
 </thead>
 <tbody>
 <tr>
+<td><a href="../Control/">Control</a></td>
+<td>A control, requirement, or practice</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../ControlGroup/">ControlGroup</a></td>
+<td>A top-level control or requirement family group</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../CSFProperty/">CSFProperty</a></td>
+<td>A name-value property with optional namespace and supplemental remarks</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../CSFElement/">CSFElement</a></td>
+<td>Abstract base class for CSF catalog elements</td>
+<td>yes</td>
+</tr>
+<tr>
+<td><a href="../Part/">Part</a></td>
+<td>Structured narrative part containing prose and optional nested parts</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../Property/">Property</a></td>
+<td>A name-value property with optional namespace and class</td>
+<td>no</td>
+</tr>
+<tr>
 <td><a href="../CSFCategory/">CSFCategory</a></td>
 <td>A CSF category - second-level grouping within a function (e</td>
 <td>no</td>
@@ -523,13 +553,18 @@ Alias: class</p>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../CSFElement/">CSFElement</a></td>
-<td>Abstract base class for CSF catalog elements</td>
-<td>yes</td>
-</tr>
-<tr>
 <td><a href="../CSFFunction/">CSFFunction</a></td>
 <td>A CSF function - top-level grouping (e</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../Parameter/">Parameter</a></td>
+<td>A configurable or organization-defined parameter</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../IdentifiedElement/">IdentifiedElement</a></td>
+<td>A catalog element with title, optional class/label, and inherited id/props/li...</td>
 <td>no</td>
 </tr>
 </tbody>
@@ -550,7 +585,7 @@ Alias: class</p>
 </tr>
 <tr>
 <td>Domain Of</td>
-<td><a href="../CSFElement/">CSFElement</a></td>
+<td><a href="../CSFElement/">CSFElement</a>, <a href="../Property/">Property</a>, <a href="../IdentifiedElement/">IdentifiedElement</a>, <a href="../Part/">Part</a></td>
 </tr>
 </tbody>
 </table>
@@ -571,7 +606,7 @@ Alias: class</p>
 </table>
 <h2 id="in-subsets">In Subsets</h2>
 <ul>
-<li><a href="../NistCsfV2Catalog/">NistCsfV2Catalog</a></li>
+<li><a href="../OscalCatalogCommon/">OscalCatalogCommon</a></li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
@@ -600,14 +635,17 @@ Alias: class</p>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">_class</span>
-<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Classification of a CSF catalog element (function, category, subcategory)</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Classification of a catalog element</span>
 <span class="nt">in_subset</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nist_csf_v2_catalog</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">oscal_catalog_common</span>
 <span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/lmodel/nist-csf-v2</span>
 <span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">class</span>
+<span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">_class</span>
 <span class="nt">domain_of</span><span class="p">:</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CSFElement</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Property</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">IdentifiedElement</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Part</span>
 <span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
 </code></pre></div>
 </details>

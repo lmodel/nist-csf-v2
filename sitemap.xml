@@ -65,6 +65,26 @@
          <lastmod>2026-03-20</lastmod>
     </url>
     <url>
+         <loc>https://lmodel.github.io/nist-csf-v2/elements/CatalogBody/</loc>
+         <lastmod>2026-03-20</lastmod>
+    </url>
+    <url>
+         <loc>https://lmodel.github.io/nist-csf-v2/elements/CatalogElement/</loc>
+         <lastmod>2026-03-20</lastmod>
+    </url>
+    <url>
+         <loc>https://lmodel.github.io/nist-csf-v2/elements/Citation/</loc>
+         <lastmod>2026-03-20</lastmod>
+    </url>
+    <url>
+         <loc>https://lmodel.github.io/nist-csf-v2/elements/Control/</loc>
+         <lastmod>2026-03-20</lastmod>
+    </url>
+    <url>
+         <loc>https://lmodel.github.io/nist-csf-v2/elements/ControlGroup/</loc>
+         <lastmod>2026-03-20</lastmod>
+    </url>
+    <url>
          <loc>https://lmodel.github.io/nist-csf-v2/elements/Curie/</loc>
          <lastmod>2026-03-20</lastmod>
     </url>
@@ -93,6 +113,14 @@
          <lastmod>2026-03-20</lastmod>
     </url>
     <url>
+         <loc>https://lmodel.github.io/nist-csf-v2/elements/Guideline/</loc>
+         <lastmod>2026-03-20</lastmod>
+    </url>
+    <url>
+         <loc>https://lmodel.github.io/nist-csf-v2/elements/IdentifiedElement/</loc>
+         <lastmod>2026-03-20</lastmod>
+    </url>
+    <url>
          <loc>https://lmodel.github.io/nist-csf-v2/elements/Integer/</loc>
          <lastmod>2026-03-20</lastmod>
     </url>
@@ -106,6 +134,10 @@
     </url>
     <url>
          <loc>https://lmodel.github.io/nist-csf-v2/elements/Link/</loc>
+         <lastmod>2026-03-20</lastmod>
+    </url>
+    <url>
+         <loc>https://lmodel.github.io/nist-csf-v2/elements/Metadata/</loc>
          <lastmod>2026-03-20</lastmod>
     </url>
     <url>
@@ -125,7 +157,23 @@
          <lastmod>2026-03-20</lastmod>
     </url>
     <url>
+         <loc>https://lmodel.github.io/nist-csf-v2/elements/OscalCatalogCommon/</loc>
+         <lastmod>2026-03-20</lastmod>
+    </url>
+    <url>
+         <loc>https://lmodel.github.io/nist-csf-v2/elements/Parameter/</loc>
+         <lastmod>2026-03-20</lastmod>
+    </url>
+    <url>
+         <loc>https://lmodel.github.io/nist-csf-v2/elements/Part/</loc>
+         <lastmod>2026-03-20</lastmod>
+    </url>
+    <url>
          <loc>https://lmodel.github.io/nist-csf-v2/elements/Party/</loc>
+         <lastmod>2026-03-20</lastmod>
+    </url>
+    <url>
+         <loc>https://lmodel.github.io/nist-csf-v2/elements/Property/</loc>
          <lastmod>2026-03-20</lastmod>
     </url>
     <url>
@@ -185,11 +233,19 @@
          <lastmod>2026-03-20</lastmod>
     </url>
     <url>
+         <loc>https://lmodel.github.io/nist-csf-v2/elements/citation/</loc>
+         <lastmod>2026-03-20</lastmod>
+    </url>
+    <url>
          <loc>https://lmodel.github.io/nist-csf-v2/elements/city/</loc>
          <lastmod>2026-03-20</lastmod>
     </url>
     <url>
          <loc>https://lmodel.github.io/nist-csf-v2/elements/controls/</loc>
+         <lastmod>2026-03-20</lastmod>
+    </url>
+    <url>
+         <loc>https://lmodel.github.io/nist-csf-v2/elements/description/</loc>
          <lastmod>2026-03-20</lastmod>
     </url>
     <url>
@@ -201,11 +257,19 @@
          <lastmod>2026-03-20</lastmod>
     </url>
     <url>
+         <loc>https://lmodel.github.io/nist-csf-v2/elements/guidelines/</loc>
+         <lastmod>2026-03-20</lastmod>
+    </url>
+    <url>
          <loc>https://lmodel.github.io/nist-csf-v2/elements/href/</loc>
          <lastmod>2026-03-20</lastmod>
     </url>
     <url>
          <loc>https://lmodel.github.io/nist-csf-v2/elements/id/</loc>
+         <lastmod>2026-03-20</lastmod>
+    </url>
+    <url>
+         <loc>https://lmodel.github.io/nist-csf-v2/elements/label/</loc>
          <lastmod>2026-03-20</lastmod>
     </url>
     <url>
@@ -238,6 +302,10 @@
     </url>
     <url>
          <loc>https://lmodel.github.io/nist-csf-v2/elements/oscal_version/</loc>
+         <lastmod>2026-03-20</lastmod>
+    </url>
+    <url>
+         <loc>https://lmodel.github.io/nist-csf-v2/elements/params/</loc>
          <lastmod>2026-03-20</lastmod>
     </url>
     <url>
@@ -305,11 +373,19 @@
          <lastmod>2026-03-20</lastmod>
     </url>
     <url>
+         <loc>https://lmodel.github.io/nist-csf-v2/elements/text/</loc>
+         <lastmod>2026-03-20</lastmod>
+    </url>
+    <url>
          <loc>https://lmodel.github.io/nist-csf-v2/elements/title/</loc>
          <lastmod>2026-03-20</lastmod>
     </url>
     <url>
          <loc>https://lmodel.github.io/nist-csf-v2/elements/type/</loc>
+         <lastmod>2026-03-20</lastmod>
+    </url>
+    <url>
+         <loc>https://lmodel.github.io/nist-csf-v2/elements/usage/</loc>
          <lastmod>2026-03-20</lastmod>
     </url>
     <url>

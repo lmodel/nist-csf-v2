@@ -8,11 +8,15 @@ id: https://w3id.org/lmodel/nist-csf-v2
 version: 2.0.0
 imports:
 - linkml:types
+- ./nist_catalog
 license: Apache-2.0
 prefixes:
   nist_csf_v2:
     prefix_prefix: nist_csf_v2
     prefix_reference: https://w3id.org/lmodel/nist-csf-v2/
+  schema_catalog:
+    prefix_prefix: schema_catalog
+    prefix_reference: https://w3id.org/lmodel/nist-catalog/schema/
   linkml:
     prefix_prefix: linkml
     prefix_reference: https://w3id.org/linkml/
@@ -24,6 +28,11 @@ subsets:
     definition_uri: https://w3id.org/lmodel/nist-csf-v2/NistCsfV2Catalog
     description: NIST CSF 2.0 Catalog subset for functions, categories, and subcategories
     from_schema: https://w3id.org/lmodel/nist-csf-v2
+  oscal_catalog_common:
+    name: oscal_catalog_common
+    definition_uri: https://w3id.org/lmodel/nist-catalog/OscalCatalogCommon
+    description: Shared OSCAL-derived elements common across all NIST catalog schemas
+    from_schema: https://w3id.org/lmodel/nist-catalog
 types:
   string:
     name: string
@@ -311,180 +320,230 @@ enums:
 slots:
   catalog:
     name: catalog
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/catalog
+    definition_uri: https://w3id.org/lmodel/nist-catalog/catalog
     description: Root catalog payload
     in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:catalog
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
+    slot_uri: nist_catalog:catalog
     owner: CSFDocument
     domain_of:
     - CSFDocument
-    range: CSFCatalogBody
+    range: CatalogBody
     inlined: true
     inlined_as_list: true
   metadata:
     name: metadata
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/metadata
+    definition_uri: https://w3id.org/lmodel/nist-catalog/metadata
     description: Catalog metadata
     in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:metadata
-    owner: CSFCatalogBody
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
+    slot_uri: nist_catalog:metadata
+    owner: CatalogBody
     domain_of:
     - CSFCatalogBody
-    range: CSFMetadata
+    - CatalogBody
+    range: Metadata
     inlined: true
     inlined_as_list: true
   groups:
     name: groups
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/groups
-    description: List of CSF functions (top-level groupings) in the catalog
+    definition_uri: https://w3id.org/lmodel/nist-catalog/groups
+    description: List of top-level groupings in the catalog
     in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:groups
-    owner: CSFCatalogBody
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
+    slot_uri: nist_catalog:groups
+    owner: CatalogBody
     domain_of:
     - CSFCatalogBody
-    range: CSFFunction
+    - CatalogBody
+    range: ControlGroup
     multivalued: true
     inlined: true
     inlined_as_list: true
   controls:
     name: controls
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/controls
-    description: List of categories or subcategories within a function or category
+    definition_uri: https://w3id.org/lmodel/nist-catalog/controls
+    description: List of controls, requirements, or practices in a group
     in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:controls
-    owner: CSFCategory
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
+    slot_uri: nist_catalog:controls
+    owner: ControlGroup
     domain_of:
     - CSFFunction
     - CSFCategory
-    range: CSFCategory
+    - ControlGroup
+    range: Control
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  params:
+    name: params
+    definition_uri: https://w3id.org/lmodel/nist-catalog/params
+    description: List of parameters for a control or requirement
+    in_subset:
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
+    slot_uri: nist_catalog:params
+    owner: Control
+    domain_of:
+    - Control
+    range: Parameter
     multivalued: true
     inlined: true
     inlined_as_list: true
   props:
     name: props
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/props
+    definition_uri: https://w3id.org/lmodel/nist-catalog/props
     description: List of properties
     in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:props
-    owner: CSFElement
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
+    slot_uri: nist_catalog:props
+    owner: CatalogElement
     domain_of:
-    - CSFMetadata
-    - CSFElement
-    range: CSFProperty
+    - Metadata
+    - CatalogElement
+    range: Property
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  guidelines:
+    name: guidelines
+    definition_uri: https://w3id.org/lmodel/nist-catalog/guidelines
+    description: List of guidelines for a parameter
+    in_subset:
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
+    slot_uri: nist_catalog:guidelines
+    owner: Parameter
+    domain_of:
+    - Parameter
+    range: Guideline
     multivalued: true
     inlined: true
     inlined_as_list: true
   links:
     name: links
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/links
+    definition_uri: https://w3id.org/lmodel/nist-catalog/links
     description: List of links and relationships
     in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:links
-    owner: CSFMetadata
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
+    slot_uri: nist_catalog:links
+    owner: CatalogElement
     domain_of:
-    - CSFMetadata
+    - Metadata
+    - CatalogElement
     range: Link
     multivalued: true
     inlined: true
     inlined_as_list: true
   parts:
     name: parts
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/parts
-    description: Structured narrative parts (e.g., statement, overview, example)
+    definition_uri: https://w3id.org/lmodel/nist-catalog/parts
+    description: Nested parts providing prose and structure
     in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:parts
-    owner: CSFElement
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
+    slot_uri: nist_catalog:parts
+    owner: CatalogElement
     domain_of:
-    - CSFElement
-    range: CSFPart
+    - CatalogElement
+    range: Part
     multivalued: true
     inlined: true
     inlined_as_list: true
   roles:
     name: roles
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/roles
+    definition_uri: https://w3id.org/lmodel/nist-catalog/roles
     description: Roles used in metadata
     in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:roles
-    owner: CSFMetadata
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
+    slot_uri: nist_catalog:roles
+    owner: Metadata
     domain_of:
-    - CSFMetadata
+    - Metadata
     range: Role
     multivalued: true
     inlined: true
     inlined_as_list: true
   parties:
     name: parties
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/parties
+    definition_uri: https://w3id.org/lmodel/nist-catalog/parties
     description: Parties used in metadata
     in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:parties
-    owner: CSFMetadata
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
+    slot_uri: nist_catalog:parties
+    owner: Metadata
     domain_of:
-    - CSFMetadata
+    - Metadata
     range: Party
     multivalued: true
     inlined: true
     inlined_as_list: true
   responsible-parties:
     name: responsible-parties
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/responsible_parties
+    definition_uri: https://w3id.org/lmodel/nist-catalog/responsible_parties
     description: Responsible party assignments
     in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
     aliases:
     - responsible_parties
-    slot_uri: nist_csf_v2:responsible_parties
-    owner: CSFMetadata
+    slot_uri: nist_catalog:responsible_parties
+    owner: Metadata
     domain_of:
-    - CSFMetadata
+    - Metadata
     range: ResponsibleParty
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  addresses:
+    name: addresses
+    definition_uri: https://w3id.org/lmodel/nist-catalog/addresses
+    description: Postal addresses
+    in_subset:
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
+    slot_uri: nist_catalog:addresses
+    owner: Party
+    domain_of:
+    - Party
+    range: Address
     multivalued: true
     inlined: true
     inlined_as_list: true
   back-matter:
     name: back-matter
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/back_matter
+    definition_uri: https://w3id.org/lmodel/nist-catalog/back_matter
     description: Back-matter references and resources
     in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
     aliases:
     - back_matter
-    slot_uri: nist_csf_v2:back_matter
-    owner: CSFCatalogBody
+    slot_uri: nist_catalog:back_matter
+    owner: CatalogBody
     domain_of:
     - CSFCatalogBody
+    - CatalogBody
     range: BackMatter
     inlined: true
     inlined_as_list: true
   resources:
     name: resources
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/resources
+    definition_uri: https://w3id.org/lmodel/nist-catalog/resources
     description: Back-matter resources
     in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:resources
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
+    slot_uri: nist_catalog:resources
     owner: BackMatter
     domain_of:
     - BackMatter
@@ -494,12 +553,12 @@ slots:
     inlined_as_list: true
   rlinks:
     name: rlinks
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/rlinks
+    definition_uri: https://w3id.org/lmodel/nist-catalog/rlinks
     description: Resource links
     in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:rlinks
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
+    slot_uri: nist_catalog:rlinks
     owner: Resource
     domain_of:
     - Resource
@@ -507,253 +566,337 @@ slots:
     multivalued: true
     inlined: true
     inlined_as_list: true
-  addresses:
-    name: addresses
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/addresses
-    description: Postal addresses
+  citation:
+    name: citation
+    definition_uri: https://w3id.org/lmodel/nist-catalog/citation
+    description: Citation details for a resource
     in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:addresses
-    owner: Party
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
+    slot_uri: nist_catalog:citation
+    owner: Resource
     domain_of:
-    - Party
-    range: Address
-    multivalued: true
+    - Resource
+    range: Citation
     inlined: true
     inlined_as_list: true
   id:
     name: id
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/id
-    description: Unique identifier for a catalog element
+    definition_uri: https://w3id.org/lmodel/nist-catalog/id
+    description: Unique identifier for an element
     in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:id
-    owner: Role
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
+    slot_uri: nist_catalog:id
+    owner: CatalogElement
     domain_of:
-    - CSFElement
     - CSFPart
     - Role
+    - CatalogElement
     range: string
   uuid:
     name: uuid
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/uuid
+    definition_uri: https://w3id.org/lmodel/nist-catalog/uuid
     description: UUID for catalog or resource element
     in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:uuid
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
+    slot_uri: nist_catalog:uuid
     owner: Resource
     domain_of:
     - CSFCatalogBody
+    - CatalogBody
     - Party
     - Resource
     range: string
   title:
     name: title
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/title
+    definition_uri: https://w3id.org/lmodel/nist-catalog/title
     description: Human-readable title
     in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:title
-    owner: Resource
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
+    slot_uri: nist_catalog:title
+    owner: IdentifiedElement
     domain_of:
-    - CSFMetadata
     - CSFElement
+    - Metadata
     - Role
     - Resource
+    - IdentifiedElement
     range: string
   published:
     name: published
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/published
+    definition_uri: https://w3id.org/lmodel/nist-catalog/published
     description: Publication timestamp
     in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:published
-    owner: CSFMetadata
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
+    slot_uri: nist_catalog:published
+    owner: Metadata
     domain_of:
-    - CSFMetadata
-    range: string
-  last-modified:
-    name: last-modified
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/last_modified
-    description: Last modification timestamp
-    in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    aliases:
-    - last_modified
-    slot_uri: nist_csf_v2:last_modified
-    owner: CSFMetadata
-    domain_of:
-    - CSFMetadata
+    - Metadata
     range: string
   version:
     name: version
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/version
+    definition_uri: https://w3id.org/lmodel/nist-catalog/version
     description: Version identifier
     in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:version
-    owner: CSFMetadata
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
+    slot_uri: nist_catalog:version
+    owner: Metadata
     domain_of:
-    - CSFMetadata
+    - Metadata
+    range: string
+  last-modified:
+    name: last-modified
+    definition_uri: https://w3id.org/lmodel/nist-catalog/last_modified
+    description: Last modification timestamp
+    in_subset:
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
+    aliases:
+    - last_modified
+    slot_uri: nist_catalog:last_modified
+    owner: Metadata
+    domain_of:
+    - Metadata
     range: string
   oscal-version:
     name: oscal-version
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/oscal_version
+    definition_uri: https://w3id.org/lmodel/nist-catalog/oscal_version
     description: OSCAL version identifier
     in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
     aliases:
     - oscal_version
-    slot_uri: nist_csf_v2:oscal_version
-    owner: CSFMetadata
+    slot_uri: nist_catalog:oscal_version
+    owner: Metadata
     domain_of:
-    - CSFMetadata
+    - Metadata
     range: string
   _class:
     name: _class
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/_class
-    description: Classification of a CSF catalog element (function, category, subcategory)
+    definition_uri: https://w3id.org/lmodel/nist-catalog/_class
+    description: Classification of a catalog element
     in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:class
-    alias: class
-    owner: CSFElement
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
+    slot_uri: nist_catalog:_class
+    owner: Part
     domain_of:
     - CSFElement
+    - Property
+    - IdentifiedElement
+    - Part
+    range: string
+  label:
+    name: label
+    definition_uri: https://w3id.org/lmodel/nist-catalog/label
+    description: Human-readable label
+    in_subset:
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
+    slot_uri: nist_catalog:label
+    owner: IdentifiedElement
+    domain_of:
+    - IdentifiedElement
     range: string
   name:
     name: name
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/name
+    definition_uri: https://w3id.org/lmodel/nist-catalog/name
     description: Name of a property or part
     in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:name
-    owner: Party
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
+    slot_uri: nist_catalog:name
+    owner: Part
     domain_of:
     - CSFPart
-    - CSFProperty
     - Party
+    - Property
+    - Part
     range: string
   value:
     name: value
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/value
+    definition_uri: https://w3id.org/lmodel/nist-catalog/value
     description: Property value
     in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:value
-    owner: CSFProperty
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
+    slot_uri: nist_catalog:value
+    owner: Property
     domain_of:
-    - CSFProperty
+    - Property
     range: string
   ns:
     name: ns
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/ns
+    definition_uri: https://w3id.org/lmodel/nist-catalog/ns
     description: Namespace URI for a property or part
     in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:ns
-    owner: CSFProperty
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
+    slot_uri: nist_catalog:ns
+    owner: Property
     domain_of:
     - CSFPart
-    - CSFProperty
+    - Property
     range: string
   prose:
     name: prose
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/prose
+    definition_uri: https://w3id.org/lmodel/nist-catalog/prose
     description: Free-text prose content
     in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:prose
-    owner: CSFPart
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
+    slot_uri: nist_catalog:prose
+    owner: Part
     domain_of:
     - CSFPart
+    - Guideline
+    - Part
+    range: string
+  usage:
+    name: usage
+    definition_uri: https://w3id.org/lmodel/nist-catalog/usage
+    description: Human-readable description of a parameter's expected value
+    in_subset:
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
+    slot_uri: nist_catalog:usage
+    owner: Parameter
+    domain_of:
+    - Parameter
     range: string
   remarks:
     name: remarks
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/remarks
-    description: Supplemental remarks on a property
+    definition_uri: https://w3id.org/lmodel/nist-catalog/remarks
+    description: Supplemental remarks
     in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:remarks
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
+    slot_uri: nist_catalog:remarks
     owner: CSFProperty
     domain_of:
     - CSFProperty
     range: string
+  description:
+    name: description
+    definition_uri: https://w3id.org/lmodel/nist-catalog/description
+    description: Resource or element description
+    in_subset:
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
+    slot_uri: nist_catalog:description
+    owner: Resource
+    domain_of:
+    - Resource
+    range: string
+  text:
+    name: text
+    definition_uri: https://w3id.org/lmodel/nist-catalog/text
+    description: Citation or link annotation text
+    in_subset:
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
+    slot_uri: nist_catalog:text
+    owner: Link
+    domain_of:
+    - Citation
+    - Link
+    range: string
   href:
     name: href
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/href
-    description: Link or resource reference
+    definition_uri: https://w3id.org/lmodel/nist-catalog/href
+    description: Link or resource reference URI
     in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:href
-    owner: ResourceLink
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
+    slot_uri: nist_catalog:href
+    owner: Link
     domain_of:
-    - Link
     - ResourceLink
+    - Link
     range: string
   rel:
     name: rel
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/rel
+    definition_uri: https://w3id.org/lmodel/nist-catalog/rel
     description: Relationship type for a link
     in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:rel
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
+    slot_uri: nist_catalog:rel
     owner: Link
     domain_of:
     - Link
     range: string
+  role-id:
+    name: role-id
+    definition_uri: https://w3id.org/lmodel/nist-catalog/role_id
+    description: Assigned role identifier
+    in_subset:
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
+    aliases:
+    - role_id
+    slot_uri: nist_catalog:role_id
+    owner: ResponsibleParty
+    domain_of:
+    - ResponsibleParty
+    range: string
+  party-uuids:
+    name: party-uuids
+    definition_uri: https://w3id.org/lmodel/nist-catalog/party_uuids
+    description: Referenced party UUIDs
+    in_subset:
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
+    aliases:
+    - party_uuids
+    slot_uri: nist_catalog:party_uuids
+    owner: ResponsibleParty
+    domain_of:
+    - ResponsibleParty
+    range: string
+    multivalued: true
   type:
     name: type
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/type
+    definition_uri: https://w3id.org/lmodel/nist-catalog/type
     description: Party type (e.g., organization, person)
     in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:type
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
+    slot_uri: nist_catalog:type
     owner: Party
     domain_of:
     - Party
     range: string
   short-name:
     name: short-name
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/short_name
-    description: Short display name for a party
+    definition_uri: https://w3id.org/lmodel/nist-catalog/short_name
+    description: Short display name
     in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
     aliases:
     - short_name
-    slot_uri: nist_csf_v2:short_name
+    slot_uri: nist_catalog:short_name
     owner: Party
     domain_of:
     - Party
     range: string
   email-addresses:
     name: email-addresses
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/email_addresses
+    definition_uri: https://w3id.org/lmodel/nist-catalog/email_addresses
     description: Party email addresses
     in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
     aliases:
     - email_addresses
-    slot_uri: nist_csf_v2:email_addresses
+    slot_uri: nist_catalog:email_addresses
     owner: Party
     domain_of:
     - Party
@@ -761,14 +904,14 @@ slots:
     multivalued: true
   addr-lines:
     name: addr-lines
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/addr_lines
+    definition_uri: https://w3id.org/lmodel/nist-catalog/addr_lines
     description: Address lines
     in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
     aliases:
     - addr_lines
-    slot_uri: nist_csf_v2:addr_lines
+    slot_uri: nist_catalog:addr_lines
     owner: Address
     domain_of:
     - Address
@@ -776,112 +919,123 @@ slots:
     multivalued: true
   city:
     name: city
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/city
+    definition_uri: https://w3id.org/lmodel/nist-catalog/city
     description: City name
     in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:city
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
+    slot_uri: nist_catalog:city
     owner: Address
     domain_of:
     - Address
     range: string
   state:
     name: state
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/state
+    definition_uri: https://w3id.org/lmodel/nist-catalog/state
     description: State or region
     in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:state
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
+    slot_uri: nist_catalog:state
     owner: Address
     domain_of:
     - Address
     range: string
   postal-code:
     name: postal-code
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/postal_code
+    definition_uri: https://w3id.org/lmodel/nist-catalog/postal_code
     description: Postal code
     in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
     aliases:
     - postal_code
-    slot_uri: nist_csf_v2:postal_code
+    slot_uri: nist_catalog:postal_code
     owner: Address
     domain_of:
     - Address
     range: string
-  role-id:
-    name: role-id
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/role_id
-    description: Assigned role identifier
-    in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    aliases:
-    - role_id
-    slot_uri: nist_csf_v2:role_id
-    owner: ResponsibleParty
-    domain_of:
-    - ResponsibleParty
-    range: string
-  party-uuids:
-    name: party-uuids
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/party_uuids
-    description: Referenced party UUIDs
-    in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    aliases:
-    - party_uuids
-    slot_uri: nist_csf_v2:party_uuids
-    owner: ResponsibleParty
-    domain_of:
-    - ResponsibleParty
-    range: string
-    multivalued: true
   media-type:
     name: media-type
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/media_type
+    definition_uri: https://w3id.org/lmodel/nist-catalog/media_type
     description: Media type for a resource link
     in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
     aliases:
     - media_type
-    slot_uri: nist_csf_v2:media_type
+    slot_uri: nist_catalog:media_type
     owner: ResourceLink
     domain_of:
     - ResourceLink
     range: string
+  CSFCatalogBody_groups:
+    name: CSFCatalogBody_groups
+    definition_uri: https://w3id.org/lmodel/nist-catalog/groups
+    description: List of top-level groupings in the catalog
+    in_subset:
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
+    is_a: groups
+    domain: CSFCatalogBody
+    slot_uri: nist_catalog:groups
+    alias: groups
+    owner: CSFCatalogBody
+    domain_of:
+    - CSFCatalogBody
+    is_usage_slot: true
+    usage_slot_name: groups
+    range: CSFFunction
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
   CSFElement__class:
     name: CSFElement__class
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/_class
-    description: Classification of a CSF catalog element (function, category, subcategory)
+    definition_uri: https://w3id.org/lmodel/nist-catalog/_class
+    description: Classification of a catalog element
     in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
     is_a: _class
     domain: CSFElement
-    slot_uri: nist_csf_v2:class
-    alias: class
+    slot_uri: nist_catalog:_class
+    alias: _class
     owner: CSFElement
     domain_of:
     - CSFElement
     is_usage_slot: true
     usage_slot_name: _class
     range: CSFElementClassValue
+  CSFFunction_controls:
+    name: CSFFunction_controls
+    definition_uri: https://w3id.org/lmodel/nist-catalog/controls
+    description: List of controls, requirements, or practices in a group
+    in_subset:
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
+    is_a: controls
+    domain: CSFFunction
+    slot_uri: nist_catalog:controls
+    alias: controls
+    owner: CSFFunction
+    domain_of:
+    - CSFFunction
+    is_usage_slot: true
+    usage_slot_name: controls
+    range: CSFCategory
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
   CSFCategory_controls:
     name: CSFCategory_controls
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/controls
-    description: List of categories or subcategories within a function or category
+    definition_uri: https://w3id.org/lmodel/nist-catalog/controls
+    description: List of controls, requirements, or practices in a group
     in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
     is_a: controls
     domain: CSFCategory
-    slot_uri: nist_csf_v2:controls
+    slot_uri: nist_catalog:controls
     alias: controls
     owner: CSFCategory
     domain_of:
@@ -918,18 +1072,20 @@ classes:
     slots:
     - uuid
     - metadata
-    - groups
+    - CSFCatalogBody_groups
     - back-matter
+    slot_usage:
+      groups:
+        name: groups
+        range: CSFFunction
     class_uri: linkml:Any
   CSFMetadata:
     name: CSFMetadata
     definition_uri: https://w3id.org/lmodel/nist-csf-v2/CSFMetadata
-    description: OSCAL metadata section for the CSF catalog
     in_subset:
     - nist_csf_v2_catalog
     from_schema: https://w3id.org/lmodel/nist-csf-v2
-    mappings:
-    - linkml:Any
+    is_a: Metadata
     slots:
     - title
     - published
@@ -941,7 +1097,7 @@ classes:
     - roles
     - parties
     - responsible-parties
-    class_uri: linkml:Any
+    class_uri: nist_csf_v2:CSFMetadata
   CSFElement:
     name: CSFElement
     definition_uri: https://w3id.org/lmodel/nist-csf-v2/CSFElement
@@ -949,13 +1105,15 @@ classes:
     in_subset:
     - nist_csf_v2_catalog
     from_schema: https://w3id.org/lmodel/nist-csf-v2
+    is_a: CatalogElement
     abstract: true
     slots:
     - id
+    - props
+    - links
+    - parts
     - CSFElement__class
     - title
-    - props
-    - parts
     slot_usage:
       _class:
         name: _class
@@ -972,11 +1130,16 @@ classes:
     is_a: CSFElement
     slots:
     - id
+    - props
+    - links
+    - parts
     - CSFElement__class
     - title
-    - props
-    - parts
-    - controls
+    - CSFFunction_controls
+    slot_usage:
+      controls:
+        name: controls
+        range: CSFCategory
     class_uri: nist_csf_v2:CSFFunction
   CSFCategory:
     name: CSFCategory
@@ -989,10 +1152,11 @@ classes:
     is_a: CSFElement
     slots:
     - id
+    - props
+    - links
+    - parts
     - CSFElement__class
     - title
-    - props
-    - parts
     - CSFCategory_controls
     slot_usage:
       controls:
@@ -1010,10 +1174,11 @@ classes:
     is_a: CSFElement
     slots:
     - id
+    - props
+    - links
+    - parts
     - CSFElement__class
     - title
-    - props
-    - parts
     class_uri: nist_csf_v2:CSFSubcategory
   CSFPart:
     name: CSFPart
@@ -1037,41 +1202,68 @@ classes:
     in_subset:
     - nist_csf_v2_catalog
     from_schema: https://w3id.org/lmodel/nist-csf-v2
+    is_a: Property
     slots:
     - name
     - value
     - ns
+    - _class
     - remarks
     class_uri: nist_csf_v2:CSFProperty
-  Link:
-    name: Link
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/Link
-    description: Relationship link with href and optional rel attribute
+  CatalogBody:
+    name: CatalogBody
+    definition_uri: https://w3id.org/lmodel/nist-catalog/CatalogBody
+    description: Main catalog object (uuid + metadata + groups + back-matter)
     in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
+    mappings:
+    - linkml:Any
     slots:
-    - href
-    - rel
-    class_uri: nist_csf_v2:Link
+    - uuid
+    - metadata
+    - groups
+    - back-matter
+    class_uri: linkml:Any
+  Metadata:
+    name: Metadata
+    definition_uri: https://w3id.org/lmodel/nist-catalog/Metadata
+    description: OSCAL metadata section
+    in_subset:
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
+    mappings:
+    - linkml:Any
+    slots:
+    - title
+    - published
+    - last-modified
+    - version
+    - oscal-version
+    - props
+    - links
+    - roles
+    - parties
+    - responsible-parties
+    class_uri: linkml:Any
   Role:
     name: Role
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/Role
-    description: Role definition used in metadata
+    definition_uri: https://w3id.org/lmodel/nist-catalog/Role
+    description: Role definition
     in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
     slots:
     - id
     - title
-    class_uri: nist_csf_v2:Role
+    class_uri: nist_catalog:Role
   Party:
     name: Party
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/Party
+    definition_uri: https://w3id.org/lmodel/nist-catalog/Party
     description: Party definition (person or organization)
     in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
     mappings:
     - linkml:Any
     slots:
@@ -1084,11 +1276,11 @@ classes:
     class_uri: linkml:Any
   Address:
     name: Address
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/Address
+    definition_uri: https://w3id.org/lmodel/nist-catalog/Address
     description: Postal address
     in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
     mappings:
     - linkml:Any
     slots:
@@ -1099,11 +1291,11 @@ classes:
     class_uri: linkml:Any
   ResponsibleParty:
     name: ResponsibleParty
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/ResponsibleParty
+    definition_uri: https://w3id.org/lmodel/nist-catalog/ResponsibleParty
     description: Assignment of parties to a role
     in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
     mappings:
     - linkml:Any
     slots:
@@ -1112,11 +1304,11 @@ classes:
     class_uri: linkml:Any
   BackMatter:
     name: BackMatter
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/BackMatter
-    description: OSCAL back-matter section containing resource references
+    definition_uri: https://w3id.org/lmodel/nist-catalog/BackMatter
+    description: OSCAL back-matter section
     in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
     mappings:
     - linkml:Any
     slots:
@@ -1124,34 +1316,187 @@ classes:
     class_uri: linkml:Any
   Resource:
     name: Resource
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/Resource
+    definition_uri: https://w3id.org/lmodel/nist-catalog/Resource
     description: Referenced resource in back-matter
     in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
     mappings:
     - linkml:Any
     slots:
     - uuid
     - title
+    - description
+    - citation
     - rlinks
+    class_uri: linkml:Any
+  Citation:
+    name: Citation
+    definition_uri: https://w3id.org/lmodel/nist-catalog/Citation
+    description: Citation wrapper
+    in_subset:
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
+    mappings:
+    - linkml:Any
+    slots:
+    - text
     class_uri: linkml:Any
   ResourceLink:
     name: ResourceLink
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/ResourceLink
-    description: Reference link for a back-matter resource
+    definition_uri: https://w3id.org/lmodel/nist-catalog/ResourceLink
+    description: Reference link for a resource
     in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
     mappings:
     - linkml:Any
     slots:
     - href
     - media-type
     class_uri: linkml:Any
+  Link:
+    name: Link
+    definition_uri: https://w3id.org/lmodel/nist-catalog/Link
+    description: Relationship link with href and optional rel/text attributes
+    in_subset:
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
+    slots:
+    - href
+    - rel
+    - text
+    class_uri: nist_catalog:Link
+  Property:
+    name: Property
+    definition_uri: https://w3id.org/lmodel/nist-catalog/Property
+    description: A name-value property with optional namespace and class
+    in_subset:
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
+    slots:
+    - name
+    - value
+    - ns
+    - _class
+    class_uri: nist_catalog:Property
+  Guideline:
+    name: Guideline
+    definition_uri: https://w3id.org/lmodel/nist-catalog/Guideline
+    description: Additional prose guidance associated with a parameter
+    in_subset:
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
+    slots:
+    - prose
+    class_uri: nist_catalog:Guideline
+  CatalogElement:
+    name: CatalogElement
+    definition_uri: https://w3id.org/lmodel/nist-catalog/CatalogElement
+    description: Abstract base class for identifiable catalog elements
+    in_subset:
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
+    abstract: true
+    slots:
+    - id
+    - props
+    - links
+    - parts
+    class_uri: nist_catalog:CatalogElement
+  IdentifiedElement:
+    name: IdentifiedElement
+    definition_uri: https://w3id.org/lmodel/nist-catalog/IdentifiedElement
+    description: A catalog element with title, optional class/label, and inherited
+      id/props/links/parts
+    in_subset:
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
+    is_a: CatalogElement
+    slots:
+    - id
+    - props
+    - links
+    - parts
+    - title
+    - _class
+    - label
+    class_uri: nist_catalog:IdentifiedElement
+  ControlGroup:
+    name: ControlGroup
+    definition_uri: https://w3id.org/lmodel/nist-catalog/ControlGroup
+    description: A top-level control or requirement family group
+    in_subset:
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
+    is_a: IdentifiedElement
+    slots:
+    - id
+    - props
+    - links
+    - parts
+    - title
+    - _class
+    - label
+    - controls
+    class_uri: nist_catalog:ControlGroup
+  Control:
+    name: Control
+    definition_uri: https://w3id.org/lmodel/nist-catalog/Control
+    description: A control, requirement, or practice
+    in_subset:
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
+    is_a: IdentifiedElement
+    slots:
+    - id
+    - props
+    - links
+    - parts
+    - title
+    - _class
+    - label
+    - params
+    class_uri: nist_catalog:Control
+  Parameter:
+    name: Parameter
+    definition_uri: https://w3id.org/lmodel/nist-catalog/Parameter
+    description: A configurable or organization-defined parameter
+    in_subset:
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
+    is_a: IdentifiedElement
+    slots:
+    - id
+    - props
+    - links
+    - parts
+    - title
+    - _class
+    - label
+    - usage
+    - guidelines
+    class_uri: nist_catalog:Parameter
+  Part:
+    name: Part
+    definition_uri: https://w3id.org/lmodel/nist-catalog/Part
+    description: Structured narrative part containing prose and optional nested parts
+    in_subset:
+    - oscal_catalog_common
+    from_schema: https://w3id.org/lmodel/nist-catalog
+    is_a: CatalogElement
+    slots:
+    - id
+    - props
+    - links
+    - parts
+    - name
+    - _class
+    - prose
+    class_uri: nist_catalog:Part
 metamodel_version: 1.7.0
 source_file: nist_csf_v2.yaml
-source_file_date: '2026-03-20T17:53:02'
-source_file_size: 10007
-generation_date: '2026-03-20T17:53:12'
+source_file_date: '2026-03-20T19:08:50'
+source_file_size: 3222
+generation_date: '2026-03-20T19:08:59'
 

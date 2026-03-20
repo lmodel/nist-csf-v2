@@ -497,7 +497,7 @@
 
 
 <h1 id="slot-groups">Slot: groups</h1>
-<p><em>List of CSF functions (top-level groupings) in the catalog</em></p>
+<p><em>List of top-level groupings in the catalog</em></p>
 <p>URI: <a href="https://w3id.org/lmodel/nist-csf-v2/groups">nist_csf_v2:groups</a>
 Alias: groups</p>
 <!-- no inheritance hierarchy -->
@@ -515,6 +515,11 @@ Alias: groups</p>
 <tr>
 <td><a href="../CSFCatalogBody/">CSFCatalogBody</a></td>
 <td>Main CSF catalog object</td>
+<td>yes</td>
+</tr>
+<tr>
+<td><a href="../CatalogBody/">CatalogBody</a></td>
+<td>Main catalog object (uuid + metadata + groups + back-matter)</td>
 <td>no</td>
 </tr>
 </tbody>
@@ -531,11 +536,11 @@ Alias: groups</p>
 <tbody>
 <tr>
 <td>Range</td>
-<td><a href="../CSFFunction/">CSFFunction</a></td>
+<td><a href="../ControlGroup/">ControlGroup</a></td>
 </tr>
 <tr>
 <td>Domain Of</td>
-<td><a href="../CSFCatalogBody/">CSFCatalogBody</a></td>
+<td><a href="../CSFCatalogBody/">CSFCatalogBody</a>, <a href="../CatalogBody/">CatalogBody</a></td>
 </tr>
 </tbody>
 </table>
@@ -556,7 +561,7 @@ Alias: groups</p>
 </table>
 <h2 id="in-subsets">In Subsets</h2>
 <ul>
-<li><a href="../NistCsfV2Catalog/">NistCsfV2Catalog</a></li>
+<li><a href="../OscalCatalogCommon/">OscalCatalogCommon</a></li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
@@ -585,15 +590,16 @@ Alias: groups</p>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">groups</span>
-<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">List of CSF functions (top-level groupings) in the catalog</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">List of top-level groupings in the catalog</span>
 <span class="nt">in_subset</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nist_csf_v2_catalog</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">oscal_catalog_common</span>
 <span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/lmodel/nist-csf-v2</span>
 <span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">groups</span>
 <span class="nt">domain_of</span><span class="p">:</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CSFCatalogBody</span>
-<span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CSFFunction</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CatalogBody</span>
+<span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ControlGroup</span>
 <span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="nt">inlined</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="nt">inlined_as_list</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>

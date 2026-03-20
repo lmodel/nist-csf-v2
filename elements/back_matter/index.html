@@ -528,6 +528,11 @@ Alias: back_matter</p>
 <td>Main CSF catalog object</td>
 <td>no</td>
 </tr>
+<tr>
+<td><a href="../CatalogBody/">CatalogBody</a></td>
+<td>Main catalog object (uuid + metadata + groups + back-matter)</td>
+<td>no</td>
+</tr>
 </tbody>
 </table>
 <h2 id="properties">Properties</h2>
@@ -546,7 +551,7 @@ Alias: back_matter</p>
 </tr>
 <tr>
 <td>Domain Of</td>
-<td><a href="../CSFCatalogBody/">CSFCatalogBody</a></td>
+<td><a href="../CSFCatalogBody/">CSFCatalogBody</a>, <a href="../CatalogBody/">CatalogBody</a></td>
 </tr>
 </tbody>
 </table>
@@ -567,7 +572,7 @@ Alias: back_matter</p>
 </table>
 <h2 id="in-subsets">In Subsets</h2>
 <ul>
-<li><a href="../NistCsfV2Catalog/">NistCsfV2Catalog</a></li>
+<li><a href="../OscalCatalogCommon/">OscalCatalogCommon</a></li>
 </ul>
 <h2 id="aliases">Aliases</h2>
 <ul>
@@ -602,7 +607,7 @@ Alias: back_matter</p>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">back-matter</span>
 <span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Back-matter references and resources</span>
 <span class="nt">in_subset</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nist_csf_v2_catalog</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">oscal_catalog_common</span>
 <span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/lmodel/nist-csf-v2</span>
 <span class="nt">aliases</span><span class="p">:</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">back_matter</span>
@@ -610,6 +615,7 @@ Alias: back_matter</p>
 <span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">back_matter</span>
 <span class="nt">domain_of</span><span class="p">:</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CSFCatalogBody</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CatalogBody</span>
 <span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">BackMatter</span>
 <span class="nt">inlined</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </code></pre></div>

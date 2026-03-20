@@ -514,12 +514,22 @@ Alias: title</p>
 <tbody>
 <tr>
 <td><a href="../Role/">Role</a></td>
-<td>Role definition used in metadata</td>
+<td>Role definition</td>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../CSFCategory/">CSFCategory</a></td>
-<td>A CSF category - second-level grouping within a function (e</td>
+<td><a href="../Control/">Control</a></td>
+<td>A control, requirement, or practice</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../ControlGroup/">ControlGroup</a></td>
+<td>A top-level control or requirement family group</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../CSFMetadata/">CSFMetadata</a></td>
+<td></td>
 <td>no</td>
 </tr>
 <tr>
@@ -528,23 +538,38 @@ Alias: title</p>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../CSFSubcategory/">CSFSubcategory</a></td>
-<td>A CSF subcategory - specific cybersecurity outcome (e</td>
-<td>no</td>
-</tr>
-<tr>
 <td><a href="../Resource/">Resource</a></td>
 <td>Referenced resource in back-matter</td>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../CSFMetadata/">CSFMetadata</a></td>
-<td>OSCAL metadata section for the CSF catalog</td>
+<td><a href="../CSFCategory/">CSFCategory</a></td>
+<td>A CSF category - second-level grouping within a function (e</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../Metadata/">Metadata</a></td>
+<td>OSCAL metadata section</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../CSFSubcategory/">CSFSubcategory</a></td>
+<td>A CSF subcategory - specific cybersecurity outcome (e</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../Parameter/">Parameter</a></td>
+<td>A configurable or organization-defined parameter</td>
 <td>no</td>
 </tr>
 <tr>
 <td><a href="../CSFFunction/">CSFFunction</a></td>
 <td>A CSF function - top-level grouping (e</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../IdentifiedElement/">IdentifiedElement</a></td>
+<td>A catalog element with title, optional class/label, and inherited id/props/li...</td>
 <td>no</td>
 </tr>
 </tbody>
@@ -565,7 +590,7 @@ Alias: title</p>
 </tr>
 <tr>
 <td>Domain Of</td>
-<td><a href="../CSFMetadata/">CSFMetadata</a>, <a href="../CSFElement/">CSFElement</a>, <a href="../Role/">Role</a>, <a href="../Resource/">Resource</a></td>
+<td><a href="../CSFElement/">CSFElement</a>, <a href="../Metadata/">Metadata</a>, <a href="../Role/">Role</a>, <a href="../Resource/">Resource</a>, <a href="../IdentifiedElement/">IdentifiedElement</a></td>
 </tr>
 </tbody>
 </table>
@@ -586,7 +611,7 @@ Alias: title</p>
 </table>
 <h2 id="in-subsets">In Subsets</h2>
 <ul>
-<li><a href="../NistCsfV2Catalog/">NistCsfV2Catalog</a></li>
+<li><a href="../OscalCatalogCommon/">OscalCatalogCommon</a></li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
@@ -617,15 +642,16 @@ Alias: title</p>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">title</span>
 <span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Human-readable title</span>
 <span class="nt">in_subset</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nist_csf_v2_catalog</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">oscal_catalog_common</span>
 <span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/lmodel/nist-csf-v2</span>
 <span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">title</span>
 <span class="nt">domain_of</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CSFMetadata</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CSFElement</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Metadata</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Role</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Resource</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">IdentifiedElement</span>
 <span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
 </code></pre></div>
 </details>

@@ -497,7 +497,7 @@
 
 
 <h1 id="slot-href">Slot: href</h1>
-<p><em>Link or resource reference</em></p>
+<p><em>Link or resource reference URI</em></p>
 <p>URI: <a href="https://w3id.org/lmodel/nist-csf-v2/href">nist_csf_v2:href</a>
 Alias: href</p>
 <!-- no inheritance hierarchy -->
@@ -514,12 +514,12 @@ Alias: href</p>
 <tbody>
 <tr>
 <td><a href="../ResourceLink/">ResourceLink</a></td>
-<td>Reference link for a back-matter resource</td>
+<td>Reference link for a resource</td>
 <td>no</td>
 </tr>
 <tr>
 <td><a href="../Link/">Link</a></td>
-<td>Relationship link with href and optional rel attribute</td>
+<td>Relationship link with href and optional rel/text attributes</td>
 <td>no</td>
 </tr>
 </tbody>
@@ -540,7 +540,7 @@ Alias: href</p>
 </tr>
 <tr>
 <td>Domain Of</td>
-<td><a href="../Link/">Link</a>, <a href="../ResourceLink/">ResourceLink</a></td>
+<td><a href="../ResourceLink/">ResourceLink</a>, <a href="../Link/">Link</a></td>
 </tr>
 </tbody>
 </table>
@@ -561,7 +561,7 @@ Alias: href</p>
 </table>
 <h2 id="in-subsets">In Subsets</h2>
 <ul>
-<li><a href="../NistCsfV2Catalog/">NistCsfV2Catalog</a></li>
+<li><a href="../OscalCatalogCommon/">OscalCatalogCommon</a></li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
@@ -590,15 +590,15 @@ Alias: href</p>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">href</span>
-<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Link or resource reference</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Link or resource reference URI</span>
 <span class="nt">in_subset</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nist_csf_v2_catalog</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">oscal_catalog_common</span>
 <span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/lmodel/nist-csf-v2</span>
 <span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">href</span>
 <span class="nt">domain_of</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Link</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ResourceLink</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Link</span>
 <span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
 </code></pre></div>
 </details>
