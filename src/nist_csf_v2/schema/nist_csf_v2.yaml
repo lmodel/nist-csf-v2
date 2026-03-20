@@ -190,6 +190,7 @@ slots:
 
   _class:
     description: Classification of a CSF catalog element (function, category, subcategory)
+    alias: class
     in_subset:
       - nist_csf_v2_catalog
 
