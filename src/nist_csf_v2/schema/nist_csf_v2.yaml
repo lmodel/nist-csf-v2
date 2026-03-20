@@ -1,0 +1,488 @@
+---
+id: https://w3id.org/lmodel/nist-csf-v2
+name: nist-csf-v2
+title: nist-csf-v2
+description: |-
+  NIST Cybersecurity Framework 2.0
+version: 2.0.0
+license: Apache-2.0
+source: https://doi.org/10.6028/NIST.CSWP.29
+see_also:
+  - https://lmodel.github.io/nist-csf-v2
+
+prefixes:
+  nist_csf_v2: https://w3id.org/lmodel/nist-csf-v2/
+  linkml: https://w3id.org/linkml/
+default_prefix: nist_csf_v2
+default_range: string
+
+imports:
+  - linkml:types
+
+subsets:
+  nist_csf_v2_catalog:
+    description: >-
+      NIST CSF 2.0 Catalog subset for functions, categories, and subcategories
+
+slots:
+  catalog:
+    description: Root catalog payload
+    range: CSFCatalogBody
+    inlined: true
+    in_subset:
+      - nist_csf_v2_catalog
+
+  metadata:
+    description: Catalog metadata
+    range: CSFMetadata
+    inlined: true
+    in_subset:
+      - nist_csf_v2_catalog
+
+  groups:
+    description: List of CSF functions (top-level groupings) in the catalog
+    range: CSFFunction
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    in_subset:
+      - nist_csf_v2_catalog
+
+  controls:
+    description: List of categories or subcategories within a function or category
+    range: CSFCategory
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    in_subset:
+      - nist_csf_v2_catalog
+
+  props:
+    description: List of properties
+    range: CSFProperty
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    in_subset:
+      - nist_csf_v2_catalog
+
+  links:
+    description: List of links and relationships
+    range: Link
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    in_subset:
+      - nist_csf_v2_catalog
+
+  parts:
+    description: Structured narrative parts (e.g., statement, overview, example)
+    range: CSFPart
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    in_subset:
+      - nist_csf_v2_catalog
+
+  roles:
+    description: Roles used in metadata
+    range: Role
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    in_subset:
+      - nist_csf_v2_catalog
+
+  parties:
+    description: Parties used in metadata
+    range: Party
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    in_subset:
+      - nist_csf_v2_catalog
+
+  "responsible-parties":
+    description: Responsible party assignments
+    aliases:
+      - responsible_parties
+    range: ResponsibleParty
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    in_subset:
+      - nist_csf_v2_catalog
+
+  "back-matter":
+    description: Back-matter references and resources
+    aliases:
+      - back_matter
+    range: BackMatter
+    inlined: true
+    in_subset:
+      - nist_csf_v2_catalog
+
+  resources:
+    description: Back-matter resources
+    range: Resource
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    in_subset:
+      - nist_csf_v2_catalog
+
+  rlinks:
+    description: Resource links
+    range: ResourceLink
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    in_subset:
+      - nist_csf_v2_catalog
+
+  addresses:
+    description: Postal addresses
+    range: Address
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    in_subset:
+      - nist_csf_v2_catalog
+
+  id:
+    description: Unique identifier for a catalog element
+    in_subset:
+      - nist_csf_v2_catalog
+
+  uuid:
+    description: UUID for catalog or resource element
+    in_subset:
+      - nist_csf_v2_catalog
+
+  title:
+    description: Human-readable title
+    in_subset:
+      - nist_csf_v2_catalog
+
+  published:
+    description: Publication timestamp
+    in_subset:
+      - nist_csf_v2_catalog
+
+  "last-modified":
+    description: Last modification timestamp
+    aliases:
+      - last_modified
+    in_subset:
+      - nist_csf_v2_catalog
+
+  version:
+    description: Version identifier
+    in_subset:
+      - nist_csf_v2_catalog
+
+  "oscal-version":
+    description: OSCAL version identifier
+    aliases:
+      - oscal_version
+    in_subset:
+      - nist_csf_v2_catalog
+
+  _class:
+    description: Classification of a CSF catalog element (function, category, subcategory)
+    in_subset:
+      - nist_csf_v2_catalog
+
+  name:
+    description: Name of a property or part
+    in_subset:
+      - nist_csf_v2_catalog
+
+  value:
+    description: Property value
+    in_subset:
+      - nist_csf_v2_catalog
+
+  ns:
+    description: Namespace URI for a property or part
+    in_subset:
+      - nist_csf_v2_catalog
+
+  prose:
+    description: Free-text prose content
+    in_subset:
+      - nist_csf_v2_catalog
+
+  remarks:
+    description: Supplemental remarks on a property
+    in_subset:
+      - nist_csf_v2_catalog
+
+  href:
+    description: Link or resource reference
+    in_subset:
+      - nist_csf_v2_catalog
+
+  rel:
+    description: Relationship type for a link
+    in_subset:
+      - nist_csf_v2_catalog
+
+  type:
+    description: Party type (e.g., organization, person)
+    in_subset:
+      - nist_csf_v2_catalog
+
+  "short-name":
+    description: Short display name for a party
+    aliases:
+      - short_name
+    in_subset:
+      - nist_csf_v2_catalog
+
+  "email-addresses":
+    description: Party email addresses
+    aliases:
+      - email_addresses
+    multivalued: true
+    in_subset:
+      - nist_csf_v2_catalog
+
+  "addr-lines":
+    description: Address lines
+    aliases:
+      - addr_lines
+    multivalued: true
+    in_subset:
+      - nist_csf_v2_catalog
+
+  city:
+    description: City name
+    in_subset:
+      - nist_csf_v2_catalog
+
+  state:
+    description: State or region
+    in_subset:
+      - nist_csf_v2_catalog
+
+  "postal-code":
+    description: Postal code
+    aliases:
+      - postal_code
+    in_subset:
+      - nist_csf_v2_catalog
+
+  "role-id":
+    description: Assigned role identifier
+    aliases:
+      - role_id
+    in_subset:
+      - nist_csf_v2_catalog
+
+  "party-uuids":
+    description: Referenced party UUIDs
+    aliases:
+      - party_uuids
+    multivalued: true
+    in_subset:
+      - nist_csf_v2_catalog
+
+  "media-type":
+    description: Media type for a resource link
+    aliases:
+      - media_type
+    in_subset:
+      - nist_csf_v2_catalog
+
+enums:
+  CSFElementClassValue:
+    description: Allowed class values for CSF catalog elements
+    permissible_values:
+      function:
+      category:
+      subcategory:
+    in_subset:
+      - nist_csf_v2_catalog
+
+classes:
+  CSFDocument:
+    description: Root wrapper for CSF catalog content
+    tree_root: true
+    class_uri: linkml:Any
+    slots:
+      - catalog
+    in_subset:
+      - nist_csf_v2_catalog
+
+  CSFCatalogBody:
+    description: Main CSF catalog object
+    class_uri: linkml:Any
+    slots:
+      - uuid
+      - metadata
+      - groups
+      - "back-matter"
+    in_subset:
+      - nist_csf_v2_catalog
+
+  CSFMetadata:
+    description: OSCAL metadata section for the CSF catalog
+    class_uri: linkml:Any
+    slots:
+      - title
+      - published
+      - "last-modified"
+      - version
+      - "oscal-version"
+      - props
+      - links
+      - roles
+      - parties
+      - "responsible-parties"
+    in_subset:
+      - nist_csf_v2_catalog
+
+  CSFElement:
+    description: Abstract base class for CSF catalog elements
+    abstract: true
+    slots:
+      - id
+      - _class
+      - title
+      - props
+      - parts
+    slot_usage:
+      _class:
+        range: CSFElementClassValue
+    in_subset:
+      - nist_csf_v2_catalog
+
+  CSFFunction:
+    description: >-
+      A CSF function - top-level grouping (e.g. GOVERN, IDENTIFY, PROTECT,
+      DETECT, RESPOND, RECOVER)
+    is_a: CSFElement
+    slots:
+      - controls
+    in_subset:
+      - nist_csf_v2_catalog
+
+  CSFCategory:
+    description: >-
+      A CSF category - second-level grouping within a function
+      (e.g. GV.OC Organizational Context, ID.AM Asset Management)
+    is_a: CSFElement
+    slots:
+      - controls
+    slot_usage:
+      controls:
+        range: CSFSubcategory
+    in_subset:
+      - nist_csf_v2_catalog
+
+  CSFSubcategory:
+    description: >-
+      A CSF subcategory - specific cybersecurity outcome
+      (e.g. GV.OC-01, ID.AM-01)
+    is_a: CSFElement
+    in_subset:
+      - nist_csf_v2_catalog
+
+  CSFPart:
+    description: Structured narrative part (statement, overview, or example)
+    class_uri: linkml:Any
+    slots:
+      - id
+      - name
+      - ns
+      - prose
+    in_subset:
+      - nist_csf_v2_catalog
+
+  CSFProperty:
+    description: >-
+      A name-value property with optional namespace and supplemental remarks
+    slots:
+      - name
+      - value
+      - ns
+      - remarks
+    in_subset:
+      - nist_csf_v2_catalog
+
+  Link:
+    description: Relationship link with href and optional rel attribute
+    slots:
+      - href
+      - rel
+    in_subset:
+      - nist_csf_v2_catalog
+
+  Role:
+    description: Role definition used in metadata
+    slots:
+      - id
+      - title
+    in_subset:
+      - nist_csf_v2_catalog
+
+  Party:
+    description: Party definition (person or organization)
+    class_uri: linkml:Any
+    slots:
+      - uuid
+      - type
+      - name
+      - "short-name"
+      - "email-addresses"
+      - addresses
+    in_subset:
+      - nist_csf_v2_catalog
+
+  Address:
+    description: Postal address
+    class_uri: linkml:Any
+    slots:
+      - "addr-lines"
+      - city
+      - state
+      - "postal-code"
+    in_subset:
+      - nist_csf_v2_catalog
+
+  ResponsibleParty:
+    description: Assignment of parties to a role
+    class_uri: linkml:Any
+    slots:
+      - "role-id"
+      - "party-uuids"
+    in_subset:
+      - nist_csf_v2_catalog
+
+  BackMatter:
+    description: OSCAL back-matter section containing resource references
+    class_uri: linkml:Any
+    slots:
+      - resources
+    in_subset:
+      - nist_csf_v2_catalog
+
+  Resource:
+    description: Referenced resource in back-matter
+    class_uri: linkml:Any
+    slots:
+      - uuid
+      - title
+      - rlinks
+    in_subset:
+      - nist_csf_v2_catalog
+
+  ResourceLink:
+    description: Reference link for a back-matter resource
+    class_uri: linkml:Any
+    slots:
+      - href
+      - "media-type"
+    in_subset:
+      - nist_csf_v2_catalog

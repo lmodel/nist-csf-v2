@@ -1,0 +1,756 @@
+id: https://w3id.org/lmodel/nist-sp-800-53
+name: NIST-SP-800-53
+description: >-
+  Electronic (LinkML) Version of NIST SP 800-53 Rev 5 Controls and SP 800-53A Rev 5 Assessment Procedures 
+version: 5.2.0
+source: https://doi.org/10.6028/NIST.SP.800-53r5
+
+default_prefix: nist_sp_800_53
+default_range: string
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  nist_sp_800_53: https://w3id.org/lmodel/nist-sp-800-53/
+
+imports:
+  - linkml:types
+
+subsets:
+  nist_sp_800_53r5_catalog:
+    description: >-
+      NIST SP 800-53 Catalog subset for controls and assessment procedures
+  nist_sp_800_53r5_profile:
+    description: >-
+      NIST SP 800-53 Profile subset for baselines and overlays
+
+slots:
+  catalog:
+    description: Root catalog payload
+    range: CatalogBody
+    inlined: true
+    in_subset:
+      - nist_sp_800_53r5_catalog
+
+  profile:
+    description: Root profile payload
+    range: ProfileBody
+    inlined: true
+    in_subset:
+      - nist_sp_800_53r5_profile
+
+  metadata:
+    description: Profile and Catalog metadata
+    range: Metadata
+    inlined: true
+    in_subset:
+      - nist_sp_800_53r5_catalog
+      - nist_sp_800_53r5_profile
+
+  groups:
+    description: List of control groups in the catalog
+    range: ControlGroup
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    in_subset:
+      - nist_sp_800_53r5_catalog
+
+  controls:
+    description: List of controls in a group
+    range: Control
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    in_subset:
+      - nist_sp_800_53r5_catalog
+
+  params:
+    description: List of parameters for a control
+    range: Parameter
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    in_subset:
+      - nist_sp_800_53r5_catalog
+
+  props:
+    description: List of properties
+    range: Property
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    in_subset:
+      - nist_sp_800_53r5_catalog
+
+  guidelines:
+    description: List of guidelines
+    range: Guideline
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    in_subset:
+      - nist_sp_800_53r5_catalog
+
+  links:
+    description: List of links and relationships
+    range: Link
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    in_subset:
+      - nist_sp_800_53r5_catalog
+
+  parts:
+    description: Nested parts that provide prose and structure
+    range: Part
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    in_subset:
+      - nist_sp_800_53r5_catalog
+
+  select:
+    description: Selection parameters for a parameter definition
+    range: Selection
+    inlined: true
+    in_subset:
+      - nist_sp_800_53r5_catalog
+
+  id:
+    description: Unique identifier for an element
+    in_subset:
+      - nist_sp_800_53r5_catalog
+      - nist_sp_800_53r5_profile
+
+  uuid:
+    description: UUID for profile, metadata, or resource element
+    in_subset:
+      - nist_sp_800_53r5_catalog
+      - nist_sp_800_53r5_profile
+
+  title:
+    description: Human-readable title
+    in_subset:
+      - nist_sp_800_53r5_catalog
+      - nist_sp_800_53r5_profile
+
+  version:
+    description: Version identifier
+    in_subset:
+      - nist_sp_800_53r5_catalog
+      - nist_sp_800_53r5_profile
+
+  "last-modified":
+    description: Last modification timestamp
+    aliases:
+      - last_modified
+    in_subset:
+      - nist_sp_800_53r5_catalog
+      - nist_sp_800_53r5_profile
+
+  "oscal-version":
+    description: OSCAL version identifier
+    aliases:
+      - oscal_version
+    in_subset:
+      - nist_sp_800_53r5_catalog
+      - nist_sp_800_53r5_profile
+
+  _class:
+    description: Classification of a catalog element or property
+    in_subset:
+      - nist_sp_800_53r5_catalog
+
+  label:
+    description: Human-readable label
+    in_subset:
+      - nist_sp_800_53r5_catalog
+
+  name:
+    description: Name of a property, part, or party
+    in_subset:
+      - nist_sp_800_53r5_catalog
+      - nist_sp_800_53r5_profile
+
+  value:
+    description: Property value
+    in_subset:
+      - nist_sp_800_53r5_catalog
+
+  ns:
+    description: Namespace URI for a property
+    in_subset:
+      - nist_sp_800_53r5_catalog
+
+  prose:
+    description: Free-text prose content
+    in_subset:
+      - nist_sp_800_53r5_catalog
+
+  remarks:
+    description: Supplemental remarks
+    in_subset:
+      - nist_sp_800_53r5_catalog
+
+  revisions:
+    description: Metadata revisions
+    range: Revision
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    in_subset:
+      - nist_sp_800_53r5_catalog
+
+  roles:
+    description: Roles used in metadata
+    range: Role
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    in_subset:
+      - nist_sp_800_53r5_catalog
+      - nist_sp_800_53r5_profile
+
+  parties:
+    description: Parties used in metadata
+    range: Party
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    in_subset:
+      - nist_sp_800_53r5_catalog
+      - nist_sp_800_53r5_profile
+
+  "responsible-parties":
+    description: Responsible party assignments
+    aliases:
+      - responsible_parties
+    range: ResponsibleParty
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    in_subset:
+      - nist_sp_800_53r5_catalog
+      - nist_sp_800_53r5_profile
+
+  "role-id":
+    description: Assigned role identifier
+    aliases:
+      - role_id
+    in_subset:
+      - nist_sp_800_53r5_catalog
+      - nist_sp_800_53r5_profile
+
+  "party-uuids":
+    description: Referenced party UUIDs
+    aliases:
+      - party_uuids
+    multivalued: true
+    in_subset:
+      - nist_sp_800_53r5_catalog
+      - nist_sp_800_53r5_profile
+
+  type:
+    description: Party type
+    in_subset:
+      - nist_sp_800_53r5_catalog
+      - nist_sp_800_53r5_profile
+
+  "short-name":
+    description: Short display name
+    aliases:
+      - short_name
+    in_subset:
+      - nist_sp_800_53r5_catalog
+      - nist_sp_800_53r5_profile
+
+  "email-addresses":
+    description: Party email addresses
+    aliases:
+      - email_addresses
+    multivalued: true
+    in_subset:
+      - nist_sp_800_53r5_catalog
+      - nist_sp_800_53r5_profile
+
+  addresses:
+    description: Postal addresses
+    range: Address
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    in_subset:
+      - nist_sp_800_53r5_catalog
+      - nist_sp_800_53r5_profile
+
+  "addr-lines":
+    description: Address lines
+    aliases:
+      - addr_lines
+    multivalued: true
+    in_subset:
+      - nist_sp_800_53r5_catalog
+      - nist_sp_800_53r5_profile
+
+  city:
+    description: City name
+    in_subset:
+      - nist_sp_800_53r5_catalog
+      - nist_sp_800_53r5_profile
+
+  state:
+    description: State or region
+    in_subset:
+      - nist_sp_800_53r5_catalog
+      - nist_sp_800_53r5_profile
+
+  "postal-code":
+    description: Postal code
+    aliases:
+      - postal_code
+    in_subset:
+      - nist_sp_800_53r5_catalog
+      - nist_sp_800_53r5_profile
+
+  imports:
+    description: Imported catalogs or profiles
+    range: ImportResource
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    in_subset:
+      - nist_sp_800_53r5_profile
+
+  merge:
+    description: Merge behavior settings
+    range: MergeRules
+    inlined: true
+    in_subset:
+      - nist_sp_800_53r5_profile
+
+  "back-matter":
+    description: Back-matter references and resources
+    aliases:
+      - back_matter
+    range: BackMatter
+    inlined: true
+    in_subset:
+      - nist_sp_800_53r5_catalog
+      - nist_sp_800_53r5_profile
+
+  resources:
+    description: Back-matter resources
+    range: Resource
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    in_subset:
+      - nist_sp_800_53r5_catalog
+      - nist_sp_800_53r5_profile
+
+  citation:
+    description: Citation details for a resource
+    range: Citation
+    inlined: true
+    in_subset:
+      - nist_sp_800_53r5_catalog
+
+  text:
+    description: Citation text
+    in_subset:
+      - nist_sp_800_53r5_catalog
+
+  description:
+    description: Resource description
+    in_subset:
+      - nist_sp_800_53r5_profile
+
+  rlinks:
+    description: Resource links
+    range: ResourceLink
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    in_subset:
+      - nist_sp_800_53r5_catalog
+      - nist_sp_800_53r5_profile
+
+  "media-type":
+    description: Media type for a resource link
+    aliases:
+      - media_type
+    in_subset:
+      - nist_sp_800_53r5_catalog
+      - nist_sp_800_53r5_profile
+
+  href:
+    description: Link or resource reference
+    in_subset:
+      - nist_sp_800_53r5_catalog
+      - nist_sp_800_53r5_profile
+
+  rel:
+    description: Relationship type for a link
+    in_subset:
+      - nist_sp_800_53r5_catalog
+
+  "include-controls":
+    description: Include-controls selectors
+    aliases:
+      - include_controls
+    range: IncludeControlsSelection
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    in_subset:
+      - nist_sp_800_53r5_profile
+
+  "with-ids":
+    description: Explicit control identifiers to include
+    aliases:
+      - with_ids
+    multivalued: true
+    in_subset:
+      - nist_sp_800_53r5_profile
+
+  "as-is":
+    description: Keep source order and content during merge
+    aliases:
+      - as_is
+    range: boolean
+    in_subset:
+      - nist_sp_800_53r5_profile
+
+  "how-many":
+    description: How many selections are allowed
+    aliases:
+      - how_many
+    in_subset:
+      - nist_sp_800_53r5_catalog
+
+  choice:
+    description: List of selection options
+    multivalued: true
+    in_subset:
+      - nist_sp_800_53r5_catalog
+
+enums:
+  CatalogElementClassValue:
+    description: Allowed values for element-level class values
+    permissible_values:
+      family:
+      SP800-53:
+      SP800-53-enhancement:
+    in_subset:
+      - nist_sp_800_53r5_catalog
+
+  CatalogPropertyClassValue:
+    description: Allowed values for property-level class values
+    permissible_values:
+      sp800-53:
+      sp800-53a:
+      zero-padded:
+    in_subset:
+      - nist_sp_800_53r5_catalog
+
+classes:
+  SP80053Document:
+    description: Unified root wrapper for catalog or profile content
+    tree_root: true
+    class_uri: linkml:Any
+    slots:
+      - catalog
+      - profile
+    in_subset:
+      - nist_sp_800_53r5_catalog
+      - nist_sp_800_53r5_profile
+
+  Catalog:
+    description: Top-level wrapper that mirrors OSCAL catalog shape
+    slots:
+      - catalog
+    in_subset:
+      - nist_sp_800_53r5_catalog
+
+  ProfileDocument:
+    description: Top-level wrapper for OSCAL profile files
+    slots:
+      - profile
+    in_subset:
+      - nist_sp_800_53r5_profile
+
+  CatalogBody:
+    description: Main catalog object
+    class_uri: linkml:Any
+    slots:
+      - uuid
+      - metadata
+      - groups
+      - "back-matter"
+    in_subset:
+      - nist_sp_800_53r5_catalog
+
+  ProfileBody:
+    description: OSCAL profile body
+    class_uri: linkml:Any
+    slots:
+      - uuid
+      - metadata
+      - imports
+      - merge
+      - "back-matter"
+    in_subset:
+      - nist_sp_800_53r5_profile
+
+  Metadata:
+    description: OSCAL metadata section used in catalogs and profiles
+    class_uri: linkml:Any
+    slots:
+      - title
+      - "last-modified"
+      - version
+      - "oscal-version"
+      - revisions
+      - props
+      - links
+      - roles
+      - parties
+      - "responsible-parties"
+      - remarks
+    in_subset:
+      - nist_sp_800_53r5_catalog
+      - nist_sp_800_53r5_profile
+
+  Revision:
+    description: Metadata revision entry
+    class_uri: linkml:Any
+    slots:
+      - title
+      - "last-modified"
+      - version
+      - "oscal-version"
+      - links
+      - remarks
+    in_subset:
+      - nist_sp_800_53r5_catalog
+
+  Role:
+    description: Role definition
+    slots:
+      - id
+      - title
+    in_subset:
+      - nist_sp_800_53r5_catalog
+      - nist_sp_800_53r5_profile
+
+  Party:
+    description: Party definition
+    class_uri: linkml:Any
+    slots:
+      - uuid
+      - type
+      - name
+      - "short-name"
+      - "email-addresses"
+      - addresses
+    in_subset:
+      - nist_sp_800_53r5_catalog
+      - nist_sp_800_53r5_profile
+
+  Address:
+    description: Postal address
+    class_uri: linkml:Any
+    slots:
+      - "addr-lines"
+      - city
+      - state
+      - "postal-code"
+    in_subset:
+      - nist_sp_800_53r5_catalog
+      - nist_sp_800_53r5_profile
+
+  ResponsibleParty:
+    description: Assignment of parties to a role
+    class_uri: linkml:Any
+    slots:
+      - "role-id"
+      - "party-uuids"
+    in_subset:
+      - nist_sp_800_53r5_catalog
+      - nist_sp_800_53r5_profile
+
+  BackMatter:
+    description: OSCAL back-matter section
+    class_uri: linkml:Any
+    slots:
+      - resources
+    in_subset:
+      - nist_sp_800_53r5_catalog
+      - nist_sp_800_53r5_profile
+
+  Resource:
+    description: Referenced resource
+    class_uri: linkml:Any
+    slots:
+      - uuid
+      - title
+      - description
+      - citation
+      - rlinks
+    in_subset:
+      - nist_sp_800_53r5_catalog
+      - nist_sp_800_53r5_profile
+
+  Citation:
+    description: Citation wrapper
+    class_uri: linkml:Any
+    slots:
+      - text
+    in_subset:
+      - nist_sp_800_53r5_catalog
+
+  ResourceLink:
+    description: Reference link for a resource
+    class_uri: linkml:Any
+    slots:
+      - href
+      - "media-type"
+    in_subset:
+      - nist_sp_800_53r5_catalog
+      - nist_sp_800_53r5_profile
+
+  CatalogElement:
+    description: Base class for catalog elements
+    abstract: true
+    slots:
+      - id
+      - props
+      - links
+      - parts
+    in_subset:
+      - nist_sp_800_53r5_catalog
+
+  IdentifiedElement:
+    description: A catalog element with required id and optional title/class
+    is_a: CatalogElement
+    slots:
+      - title
+      - _class
+      - label
+    slot_usage:
+      _class:
+        range: CatalogElementClassValue
+    in_subset:
+      - nist_sp_800_53r5_catalog
+
+  ControlGroup:
+    description: A group of controls (family)
+    is_a: IdentifiedElement
+    slots:
+      - controls
+    in_subset:
+      - nist_sp_800_53r5_catalog
+
+  Control:
+    description: A security control
+    is_a: IdentifiedElement
+    slots:
+      - params
+      - controls
+    slot_usage:
+      controls:
+        range: ControlEnhancement
+    in_subset:
+      - nist_sp_800_53r5_catalog
+
+  ControlEnhancement:
+    description: An enhancement to a control
+    is_a: IdentifiedElement
+    slots:
+      - params
+      - controls
+    slot_usage:
+      controls:
+        range: ControlEnhancement
+    in_subset:
+      - nist_sp_800_53r5_catalog
+
+  Parameter:
+    description: A configurable parameter used by a control
+    is_a: IdentifiedElement
+    slots:
+      - guidelines
+      - select
+    in_subset:
+      - nist_sp_800_53r5_catalog
+
+  Guideline:
+    description: Additional prose guidance associated with a parameter
+    slots:
+      - prose
+    in_subset:
+      - nist_sp_800_53r5_catalog
+
+  Property:
+    description: A name-value property with optional namespace and class attributes
+    slots:
+      - name
+      - value
+      - ns
+      - _class
+    slot_usage:
+      _class:
+        range: CatalogPropertyClassValue
+    in_subset:
+      - nist_sp_800_53r5_catalog
+
+  Selection:
+    description: Selection criteria for a parameter
+    class_uri: linkml:Any
+    slots:
+      - "how-many"
+      - choice
+    in_subset:
+      - nist_sp_800_53r5_catalog
+
+  Link:
+    description: Relationship link
+    slots:
+      - href
+      - rel
+    in_subset:
+      - nist_sp_800_53r5_catalog
+
+  Part:
+    description: Structured narrative part that can contain nested parts
+    is_a: IdentifiedElement
+    slots:
+      - name
+      - prose
+    in_subset:
+      - nist_sp_800_53r5_catalog
+
+  ImportResource:
+    description: Imported profile or catalog reference
+    class_uri: linkml:Any
+    slots:
+      - href
+      - "include-controls"
+    in_subset:
+      - nist_sp_800_53r5_profile
+
+  IncludeControlsSelection:
+    description: Control inclusion selector
+    class_uri: linkml:Any
+    slots:
+      - "with-ids"
+    in_subset:
+      - nist_sp_800_53r5_profile
+
+  MergeRules:
+    description: Merge configuration
+    class_uri: linkml:Any
+    slots:
+      - "as-is"
+    in_subset:
+      - nist_sp_800_53r5_profile
