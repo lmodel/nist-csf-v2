@@ -497,7 +497,7 @@
 
 
 <h1 id="slot-id">Slot: id</h1>
-<p><em>Unique identifier for an element</em></p>
+<p><em>Unique identifier for a catalog element</em></p>
 <p>URI: <a href="https://w3id.org/lmodel/nist-csf-v2/id">nist_csf_v2:id</a>
 Alias: id</p>
 <!-- no inheritance hierarchy -->
@@ -513,33 +513,8 @@ Alias: id</p>
 </thead>
 <tbody>
 <tr>
-<td><a href="../Role/">Role</a></td>
-<td>Role definition</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../Control/">Control</a></td>
-<td>A control, requirement, or practice</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../ControlGroup/">ControlGroup</a></td>
-<td>A top-level control or requirement family group</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../CatalogElement/">CatalogElement</a></td>
-<td>Abstract base class for identifiable catalog elements</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../CSFElement/">CSFElement</a></td>
-<td>Abstract base class for CSF catalog elements</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../CSFCategory/">CSFCategory</a></td>
-<td>A CSF category - second-level grouping within a function (e</td>
+<td><a href="../CSFFunction/">CSFFunction</a></td>
+<td>A CSF function - top-level grouping (e</td>
 <td>no</td>
 </tr>
 <tr>
@@ -548,18 +523,13 @@ Alias: id</p>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../Part/">Part</a></td>
-<td>Structured narrative part containing prose and optional nested parts</td>
+<td><a href="../Role/">Role</a></td>
+<td>Role definition used in metadata</td>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../Parameter/">Parameter</a></td>
-<td>A configurable or organization-defined parameter</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../CSFFunction/">CSFFunction</a></td>
-<td>A CSF function - top-level grouping (e</td>
+<td><a href="../CSFCategory/">CSFCategory</a></td>
+<td>A CSF category - second-level grouping within a function (e</td>
 <td>no</td>
 </tr>
 <tr>
@@ -568,8 +538,8 @@ Alias: id</p>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../IdentifiedElement/">IdentifiedElement</a></td>
-<td>A catalog element with title, optional class/label, and inherited id/props/li...</td>
+<td><a href="../CSFElement/">CSFElement</a></td>
+<td>Abstract base class for CSF catalog elements</td>
 <td>no</td>
 </tr>
 </tbody>
@@ -590,7 +560,7 @@ Alias: id</p>
 </tr>
 <tr>
 <td>Domain Of</td>
-<td><a href="../CSFPart/">CSFPart</a>, <a href="../Role/">Role</a>, <a href="../CatalogElement/">CatalogElement</a></td>
+<td><a href="../CSFElement/">CSFElement</a>, <a href="../CSFPart/">CSFPart</a>, <a href="../Role/">Role</a></td>
 </tr>
 </tbody>
 </table>
@@ -611,7 +581,7 @@ Alias: id</p>
 </table>
 <h2 id="in-subsets">In Subsets</h2>
 <ul>
-<li><a href="../OscalCatalogCommon/">OscalCatalogCommon</a></li>
+<li><a href="../NistCsfV2Catalog/">NistCsfV2Catalog</a></li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
@@ -640,16 +610,16 @@ Alias: id</p>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">id</span>
-<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Unique identifier for an element</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Unique identifier for a catalog element</span>
 <span class="nt">in_subset</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">oscal_catalog_common</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nist_csf_v2_catalog</span>
 <span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/lmodel/nist-csf-v2</span>
 <span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">id</span>
 <span class="nt">domain_of</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CSFElement</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CSFPart</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Role</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CatalogElement</span>
 <span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
 </code></pre></div>
 </details>
