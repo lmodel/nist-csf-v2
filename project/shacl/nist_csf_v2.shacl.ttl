@@ -1,0 +1,449 @@
+@prefix linkml: <https://w3id.org/linkml/> .
+@prefix nist_csf_v2: <https://w3id.org/lmodel/nist-csf-v2/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+nist_csf_v2:CSFElement a sh:NodeShape ;
+    rdfs:comment "Abstract base class for CSF catalog elements" ;
+    sh:closed false ;
+    sh:ignoredProperties ( rdf:type nist_csf_v2:controls ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Unique identifier for a catalog element" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path nist_csf_v2:id ],
+        [ sh:class linkml:Any ;
+            sh:description "Structured narrative parts (e.g., statement, overview, example)" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 4 ;
+            sh:path nist_csf_v2:parts ],
+        [ sh:datatype xsd:string ;
+            sh:description "Human-readable title" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path nist_csf_v2:title ],
+        [ sh:description "Classification of a CSF catalog element (function, category, subcategory)" ;
+            sh:in ( "function" "category" "subcategory" ) ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path nist_csf_v2:_class ],
+        [ sh:class nist_csf_v2:CSFProperty ;
+            sh:description "List of properties" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 3 ;
+            sh:path nist_csf_v2:props ] ;
+    sh:targetClass nist_csf_v2:CSFElement .
+
+nist_csf_v2:CSFCategory a sh:NodeShape ;
+    rdfs:comment "A CSF category - second-level grouping within a function (e.g. GV.OC Organizational Context, ID.AM Asset Management)" ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Human-readable title" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path nist_csf_v2:title ],
+        [ sh:class nist_csf_v2:CSFSubcategory ;
+            sh:description "List of categories or subcategories within a function or category" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 0 ;
+            sh:path nist_csf_v2:controls ],
+        [ sh:description "Classification of a CSF catalog element (function, category, subcategory)" ;
+            sh:in ( "function" "category" "subcategory" ) ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path nist_csf_v2:_class ],
+        [ sh:class nist_csf_v2:CSFProperty ;
+            sh:description "List of properties" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 4 ;
+            sh:path nist_csf_v2:props ],
+        [ sh:datatype xsd:string ;
+            sh:description "Unique identifier for a catalog element" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path nist_csf_v2:id ],
+        [ sh:class linkml:Any ;
+            sh:description "Structured narrative parts (e.g., statement, overview, example)" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 5 ;
+            sh:path nist_csf_v2:parts ] ;
+    sh:targetClass nist_csf_v2:CSFCategory .
+
+nist_csf_v2:CSFFunction a sh:NodeShape ;
+    rdfs:comment "A CSF function - top-level grouping (e.g. GOVERN, IDENTIFY, PROTECT, DETECT, RESPOND, RECOVER)" ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:description "Classification of a CSF catalog element (function, category, subcategory)" ;
+            sh:in ( "function" "category" "subcategory" ) ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path nist_csf_v2:_class ],
+        [ sh:datatype xsd:string ;
+            sh:description "Human-readable title" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path nist_csf_v2:title ],
+        [ sh:class linkml:Any ;
+            sh:description "Structured narrative parts (e.g., statement, overview, example)" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 5 ;
+            sh:path nist_csf_v2:parts ],
+        [ sh:class nist_csf_v2:CSFCategory ;
+            sh:description "List of categories or subcategories within a function or category" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 0 ;
+            sh:path nist_csf_v2:controls ],
+        [ sh:datatype xsd:string ;
+            sh:description "Unique identifier for a catalog element" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path nist_csf_v2:id ],
+        [ sh:class nist_csf_v2:CSFProperty ;
+            sh:description "List of properties" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 4 ;
+            sh:path nist_csf_v2:props ] ;
+    sh:targetClass nist_csf_v2:CSFFunction .
+
+nist_csf_v2:CSFSubcategory a sh:NodeShape ;
+    rdfs:comment "A CSF subcategory - specific cybersecurity outcome (e.g. GV.OC-01, ID.AM-01)" ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class nist_csf_v2:CSFProperty ;
+            sh:description "List of properties" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 3 ;
+            sh:path nist_csf_v2:props ],
+        [ sh:datatype xsd:string ;
+            sh:description "Human-readable title" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path nist_csf_v2:title ],
+        [ sh:datatype xsd:string ;
+            sh:description "Unique identifier for a catalog element" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path nist_csf_v2:id ],
+        [ sh:description "Classification of a CSF catalog element (function, category, subcategory)" ;
+            sh:in ( "function" "category" "subcategory" ) ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path nist_csf_v2:_class ],
+        [ sh:class linkml:Any ;
+            sh:description "Structured narrative parts (e.g., statement, overview, example)" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 4 ;
+            sh:path nist_csf_v2:parts ] ;
+    sh:targetClass nist_csf_v2:CSFSubcategory .
+
+nist_csf_v2:Link a sh:NodeShape ;
+    rdfs:comment "Relationship link with href and optional rel attribute" ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Relationship type for a link" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path nist_csf_v2:rel ],
+        [ sh:datatype xsd:string ;
+            sh:description "Link or resource reference" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path nist_csf_v2:href ] ;
+    sh:targetClass nist_csf_v2:Link .
+
+nist_csf_v2:Role a sh:NodeShape ;
+    rdfs:comment "Role definition used in metadata" ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Unique identifier for a catalog element" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path nist_csf_v2:id ],
+        [ sh:datatype xsd:string ;
+            sh:description "Human-readable title" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path nist_csf_v2:title ] ;
+    sh:targetClass nist_csf_v2:Role .
+
+nist_csf_v2:CSFProperty a sh:NodeShape ;
+    rdfs:comment "A name-value property with optional namespace and supplemental remarks" ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Supplemental remarks on a property" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path nist_csf_v2:remarks ],
+        [ sh:datatype xsd:string ;
+            sh:description "Namespace URI for a property or part" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path nist_csf_v2:ns ],
+        [ sh:datatype xsd:string ;
+            sh:description "Name of a property or part" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path nist_csf_v2:name ],
+        [ sh:datatype xsd:string ;
+            sh:description "Property value" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path nist_csf_v2:value ] ;
+    sh:targetClass nist_csf_v2:CSFProperty .
+
+linkml:Any a sh:NodeShape ;
+    rdfs:comment "Assignment of parties to a role",
+        "Main CSF catalog object",
+        "OSCAL back-matter section containing resource references",
+        "OSCAL metadata section for the CSF catalog",
+        "Party definition (person or organization)",
+        "Postal address",
+        "Reference link for a back-matter resource",
+        "Referenced resource in back-matter",
+        "Root wrapper for CSF catalog content",
+        "Structured narrative part (statement, overview, or example)" ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ),
+        ( rdf:type ),
+        ( rdf:type ),
+        ( rdf:type ),
+        ( rdf:type ),
+        ( rdf:type ),
+        ( rdf:type ),
+        ( rdf:type ),
+        ( rdf:type ),
+        ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Party type (e.g., organization, person)" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path nist_csf_v2:type ],
+        [ sh:class nist_csf_v2:CSFFunction ;
+            sh:description "List of CSF functions (top-level groupings) in the catalog" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 2 ;
+            sh:path nist_csf_v2:groups ],
+        [ sh:datatype xsd:string ;
+            sh:description "UUID for catalog or resource element" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path nist_csf_v2:uuid ],
+        [ sh:datatype xsd:string ;
+            sh:description "Last modification timestamp" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path nist_csf_v2:last_modified ],
+        [ sh:class linkml:Any ;
+            sh:description "Parties used in metadata" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 8 ;
+            sh:path nist_csf_v2:parties ],
+        [ sh:datatype xsd:string ;
+            sh:description "Link or resource reference" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path nist_csf_v2:href ],
+        [ sh:class nist_csf_v2:CSFProperty ;
+            sh:description "List of properties" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 5 ;
+            sh:path nist_csf_v2:props ],
+        [ sh:class linkml:Any ;
+            sh:description "Root catalog payload" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 0 ;
+            sh:path nist_csf_v2:catalog ],
+        [ sh:class linkml:Any ;
+            sh:description "Back-matter references and resources" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 3 ;
+            sh:path nist_csf_v2:back_matter ],
+        [ sh:datatype xsd:string ;
+            sh:description "Free-text prose content" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path nist_csf_v2:prose ],
+        [ sh:datatype xsd:string ;
+            sh:description "Referenced party UUIDs" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path nist_csf_v2:party_uuids ],
+        [ sh:class linkml:Any ;
+            sh:description "Back-matter resources" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 0 ;
+            sh:path nist_csf_v2:resources ],
+        [ sh:class linkml:Any ;
+            sh:description "Responsible party assignments" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 9 ;
+            sh:path nist_csf_v2:responsible_parties ],
+        [ sh:datatype xsd:string ;
+            sh:description "Party email addresses" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path nist_csf_v2:email_addresses ],
+        [ sh:datatype xsd:string ;
+            sh:description "Unique identifier for a catalog element" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path nist_csf_v2:id ],
+        [ sh:datatype xsd:string ;
+            sh:description "Short display name for a party" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path nist_csf_v2:short_name ],
+        [ sh:datatype xsd:string ;
+            sh:description "Version identifier" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path nist_csf_v2:version ],
+        [ sh:class linkml:Any ;
+            sh:description "Postal addresses" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 5 ;
+            sh:path nist_csf_v2:addresses ],
+        [ sh:class linkml:Any ;
+            sh:description "Resource links" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 2 ;
+            sh:path nist_csf_v2:rlinks ],
+        [ sh:datatype xsd:string ;
+            sh:description "Assigned role identifier" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path nist_csf_v2:role_id ],
+        [ sh:datatype xsd:string ;
+            sh:description "OSCAL version identifier" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path nist_csf_v2:oscal_version ],
+        [ sh:datatype xsd:string ;
+            sh:description "Address lines" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path nist_csf_v2:addr_lines ],
+        [ sh:datatype xsd:string ;
+            sh:description "Postal code" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path nist_csf_v2:postal_code ],
+        [ sh:datatype xsd:string ;
+            sh:description "Publication timestamp" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path nist_csf_v2:published ],
+        [ sh:datatype xsd:string ;
+            sh:description "Name of a property or part" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path nist_csf_v2:name ],
+        [ sh:datatype xsd:string ;
+            sh:description "Namespace URI for a property or part" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path nist_csf_v2:ns ],
+        [ sh:datatype xsd:string ;
+            sh:description "Media type for a resource link" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path nist_csf_v2:media_type ],
+        [ sh:datatype xsd:string ;
+            sh:description "Name of a property or part" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path nist_csf_v2:name ],
+        [ sh:datatype xsd:string ;
+            sh:description "City name" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path nist_csf_v2:city ],
+        [ sh:class nist_csf_v2:Role ;
+            sh:description "Roles used in metadata" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 7 ;
+            sh:path nist_csf_v2:roles ],
+        [ sh:class linkml:Any ;
+            sh:description "Catalog metadata" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 1 ;
+            sh:path nist_csf_v2:metadata ],
+        [ sh:datatype xsd:string ;
+            sh:description "UUID for catalog or resource element" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path nist_csf_v2:uuid ],
+        [ sh:datatype xsd:string ;
+            sh:description "Human-readable title" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path nist_csf_v2:title ],
+        [ sh:datatype xsd:string ;
+            sh:description "Human-readable title" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path nist_csf_v2:title ],
+        [ sh:datatype xsd:string ;
+            sh:description "State or region" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path nist_csf_v2:state ],
+        [ sh:class nist_csf_v2:Link ;
+            sh:description "List of links and relationships" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 6 ;
+            sh:path nist_csf_v2:links ],
+        [ sh:datatype xsd:string ;
+            sh:description "UUID for catalog or resource element" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path nist_csf_v2:uuid ] ;
+    sh:targetClass linkml:Any .
+
