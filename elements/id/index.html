@@ -513,23 +513,8 @@ Alias: id</p>
 </thead>
 <tbody>
 <tr>
-<td><a href="../CSFFunction/">CSFFunction</a></td>
-<td>A CSF function - top-level grouping (e</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../CSFSubcategory/">CSFSubcategory</a></td>
-<td>A CSF subcategory - specific cybersecurity outcome (e</td>
-<td>no</td>
-</tr>
-<tr>
 <td><a href="../Role/">Role</a></td>
 <td>Role definition used in metadata</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../CSFCategory/">CSFCategory</a></td>
-<td>A CSF category - second-level grouping within a function (e</td>
 <td>no</td>
 </tr>
 <tr>
@@ -538,8 +523,23 @@ Alias: id</p>
 <td>no</td>
 </tr>
 <tr>
+<td><a href="../CSFFunction/">CSFFunction</a></td>
+<td>A CSF function - top-level grouping (e</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../CSFCategory/">CSFCategory</a></td>
+<td>A CSF category - second-level grouping within a function (e</td>
+<td>no</td>
+</tr>
+<tr>
 <td><a href="../CSFElement/">CSFElement</a></td>
 <td>Abstract base class for CSF catalog elements</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../CSFSubcategory/">CSFSubcategory</a></td>
+<td>A CSF subcategory - specific cybersecurity outcome (e</td>
 <td>no</td>
 </tr>
 </tbody>
@@ -605,6 +605,10 @@ Alias: id</p>
 <td>native</td>
 <td>nist_csf_v2:id</td>
 </tr>
+<tr>
+<td>exact</td>
+<td>cis_controls:id</td>
+</tr>
 </tbody>
 </table>
 <h2 id="linkml-source">LinkML Source</h2>
@@ -614,6 +618,8 @@ Alias: id</p>
 <span class="nt">in_subset</span><span class="p">:</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nist_csf_v2_catalog</span>
 <span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/lmodel/nist-csf-v2</span>
+<span class="nt">exact_mappings</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cis_controls:id</span>
 <span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">id</span>
 <span class="nt">domain_of</span><span class="p">:</span>
