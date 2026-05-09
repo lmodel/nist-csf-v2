@@ -1177,7 +1177,7 @@ classes:
     class_uri: linkml:Any
 metamodel_version: 1.7.0
 source_file: nist_csf_v2.yaml
-source_file_date: '2026-04-15T22:35:36'
+source_file_date: '2026-05-09T00:16:56'
 source_file_size: 10548
-generation_date: '2026-04-15T22:35:47'
+generation_date: '2026-05-09T00:17:08'
 
