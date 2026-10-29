@@ -21,6 +21,20 @@ says that a NIST Technical Series publication is a work of the United
 States Government, not subject to copyright protection in the United
 States, but may be subject to copyright in other countries.
 
+NIST's CSF catalog in OSCAL
+---------------------------
+
+src/nist_csf_v2/schema/oscal-content/ holds a copy of the catalog of
+CSF 2.0 that NIST publishes in the Open Security Controls Assessment
+Language (OSCAL), retrieved from
+https://github.com/usnistgov/oscal-content/tree/f0de6d8d8c059d374f15e0ae07508d82e370fc1d/nist.gov/CSF/v2.0/json
+(the v1.6.0 release), beside NIST's LICENSE.md from the root of the same
+commit. Both files are identical to their counterparts there, and
+scripts/check_upstream_release.py checks that they stay so. NIST's work
+is in the public domain within the United States, and NIST dedicates it
+to the worldwide public domain under CC0 1.0. The tests read the catalog
+to check the schema against it; nothing in this repository changes it.
+
 linkml-project-copier
 ---------------------
 

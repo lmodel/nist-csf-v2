@@ -15,8 +15,9 @@ fix-python-keywords:
 		{{pymodel}}/{{schema_name}}.py
 
 # Validate a representative catalog document with the catalog schema.
+# https://github.com/usnistgov/oscal-content/tree/v1.6.0/nist.gov/CSF
 validate-catalog:
         uv run linkml validate \
                 -s src/nist_csf_v2/schema/nist_csf_v2.yaml \
-                tests/data/nist/NIST_CSF_v2.0_catalog.yaml
+                src/nist_csf_v2/schema/oscal-content/NIST_CSF_v2.0_catalog.json
 
