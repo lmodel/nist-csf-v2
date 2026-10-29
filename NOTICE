@@ -1,0 +1,51 @@
+NIST CSF 2.0 LinkML Schema (nist-csf-v2)
+Copyright 2026 Noel McLoughlin
+
+The code in this repository is licensed under the Apache License,
+Version 2.0 (see LICENSE). Some of the content it carries is third-party
+work under its own terms, listed below.
+
+src/nist_csf_v2/schema/*.yaml, src/nist_csf_v2/datamodel/ and project/
+model the Cybersecurity Framework (CSF) 2.0, which the National
+Institute of Standards and Technology (NIST) publishes as Cybersecurity
+White Paper (CSWP) 29, https://doi.org/10.6028/NIST.CSWP.29 (February
+26, 2024). They are this project's rendering, written in its own words
+with NIST as the source of the definitions; they are not NIST's, and
+their use does not imply endorsement by NIST.
+
+CSWP 29 carries no licence statement of its own and refers readers to
+NIST's Technical Series policies. NIST's statement on its works, read
+on 2026-10-29 at
+https://www.nist.gov/open/copyright-fair-use-and-licensing-statements-srd-data-software-and-technical-series-publications,
+says that a NIST Technical Series publication is a work of the United
+States Government, not subject to copyright protection in the United
+States, but may be subject to copyright in other countries.
+
+linkml-project-copier
+---------------------
+
+This project was generated from linkml-project-copier
+(https://github.com/linkml/linkml-project-copier), and its justfile,
+configuration and documentation scaffolding derive from that template:
+
+  The MIT License (MIT)
+  Copyright (c) 2025 David Linke
+
+  Permission is hereby granted, free of charge, to any person obtaining a
+  copy of this software and associated documentation files (the
+  "Software"), to deal in the Software without restriction, including
+  without limitation the rights to use, copy, modify, merge, publish,
+  distribute, sublicense, and/or sell copies of the Software, and to permit
+  persons to whom the Software is furnished to do so, subject to the
+  following conditions:
+
+  The above copyright notice and this permission notice shall be included
+  in all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+  OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+  NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+  DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+  OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+  USE OR OTHER DEALINGS IN THE SOFTWARE.

@@ -1663,7 +1663,7 @@ wheels = [
 ]
 
 [[package]]
-name = "nist-csf-v2"
+name = "nist-csf-v2-linkml"
 source = { editable = "." }
 dependencies = [
     { name = "linkml-runtime" },
