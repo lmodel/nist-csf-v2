@@ -1,0 +1,7 @@
+# linkml-lint reads this file from the directory `just lint` runs in.
+# The recommended rules apply unchanged. Nothing is relaxed: the classes
+# and types carry the rule's usual forms, the slots are snake_case, and
+# the one enum's value, withdrawn, is the lower-case word the catalog uses,
+# so standard_naming's default case for permissible values holds as it is.
+# `just lint` ignores warnings, so a missing title is reported, not fatal.
+extends: recommended

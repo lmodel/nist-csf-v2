@@ -1,7 +1,7 @@
-@prefix cis_controls: <https://w3id.org/lmodel/cis-controls/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix linkml: <https://w3id.org/linkml/> .
 @prefix nist_csf_v2: <https://w3id.org/lmodel/nist-csf-v2/> .
+@prefix oscal: <https://w3id.org/lmodel/oscal/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix pav: <http://purl.org/pav/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -10,373 +10,92 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <https://w3id.org/lmodel/nist-csf-v2.owl.ttl> a owl:Ontology ;
-    rdfs:label "nist-csf-v2" ;
+    rdfs:label "nist_csf_v2" ;
     dcterms:license "Apache-2.0" ;
     dcterms:source <https://doi.org/10.6028/NIST.CSWP.29> ;
-    dcterms:title "nist-csf-v2" ;
+    dcterms:title "The NIST Cybersecurity Framework (CSF) 2.0" ;
     pav:version "2.0.0" ;
-    rdfs:seeAlso <https://lmodel.github.io/nist-csf-v2> ;
-    skos:definition "NIST Cybersecurity Framework 2.0" .
+    rdfs:seeAlso <https://csrc.nist.gov/pubs/cswp/29/the-nist-cybersecurity-framework-csf-20/final>,
+        <https://github.com/usnistgov/oscal-content/tree/v1.6.0/nist.gov/CSF/v2.0>,
+        <https://lmodel.github.io/nist-csf-v2>,
+        <https://www.nist.gov/cyberframework> ;
+    skos:definition "A LinkML model of the Cybersecurity Framework (CSF) 2.0, which NIST publishes as Cybersecurity White Paper (CSWP) 29: its six functions, their categories and subcategories, the implementation examples NIST publishes with the subcategories, and the CSF 1.1 categories and subcategories that CSF 2.0 withdrew, each with its status and, where NIST recorded it, where it moved or what incorporated it." ;
+    skos:note "CSWP 29 is a work of the United States Government and is not subject to copyright in the United States. The descriptions here are this project's own words; NIST's text of each function, category, subcategory and example stays in the catalog copy.",
+        "NIST's catalog renders each function as an OSCAL group, each category and subcategory as an OSCAL control and each implementation example as a part. The broad_mappings name those lmodel/oscal classes. A withdrawn category or subcategory is a control with a status property and links to where it moved or what incorporated it; the schema carries those as the element's status and identifiers.",
+        "The catalog also marks most CSF 2.0 subcategories as first-party risk, third-party risk or both, in a marking property of class risk-party. CSWP 29 carries no such marking, so it is the reference tool's and the schema leaves it out.",
+        "The version is the CSF edition that CSWP 29 defines, and source is the publication's digital object identifier. NIST's Cybersecurity and Privacy Reference Tool names the same edition CSF_2_0_0, and the catalog NIST publishes for it in usnistgov/oscal-content is copied to src/nist_csf_v2/schema/oscal-content/ at the tag and commit in the annotations. That catalog carries a version number of its own, 1.2.1, which numbers the catalog and not the framework. The release tags are the schema's own versions, and scripts/check_upstream_release.py reads the same pins and reports when NIST publishes another edition or changes the catalog." ;
+    nist_csf_v2:cprt_framework_version "CSF_2_0_0" ;
+    nist_csf_v2:oscal_content_commit "f0de6d8d8c059d374f15e0ae07508d82e370fc1d" ;
+    nist_csf_v2:oscal_content_tag "v1.6.0" ;
+    nist_csf_v2:publication_date "2024-02" .
 
-nist_csf_v2:CSFDocument a owl:Class ;
-    rdfs:label "CSFDocument" ;
+nist_csf_v2:CsfFramework a owl:Class ;
+    rdfs:label "CsfFramework" ;
+    rdfs:seeAlso <https://csrc.nist.gov/pubs/cswp/29/the-nist-cybersecurity-framework-csf-20/final> ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_csf_v2:catalog ],
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:onDatatype xsd:string ;
+                    owl:withRestrictions ( [ xsd:pattern "^[0-9]+\\.[0-9]+$" ] ) ] ;
+            owl:onProperty nist_csf_v2:csf_version ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty nist_csf_v2:catalog ],
+            owl:onProperty nist_csf_v2:csf_version ],
         [ a owl:Restriction ;
-            owl:allValuesFrom nist_csf_v2:CSFCatalogBody ;
-            owl:onProperty nist_csf_v2:catalog ] ;
-    skos:closeMatch cis_controls:CISControlsDocument ;
-    skos:definition "Root wrapper for CSF catalog content" ;
-    skos:exactMatch linkml:Any ;
+            owl:allValuesFrom nist_csf_v2:CsfFunction ;
+            owl:onProperty nist_csf_v2:functions ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty nist_csf_v2:functions ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty nist_csf_v2:csf_version ] ;
+    skos:broadMatch oscal:Catalog ;
+    skos:definition "One edition of the CSF as a whole: its functions, each holding its categories and their subcategories." ;
+    skos:exactMatch nist_csf_v2:Framework ;
     skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
 
-nist_csf_v2:CSFSubcategory a owl:Class ;
-    rdfs:label "CSFSubcategory" ;
-    rdfs:subClassOf nist_csf_v2:CSFElement ;
-    skos:closeMatch cis_controls:Safeguard ;
-    skos:definition "A CSF subcategory - specific cybersecurity outcome (e.g. GV.OC-01, ID.AM-01)" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
-
-nist_csf_v2:Address a owl:Class ;
-    rdfs:label "Address" ;
+nist_csf_v2:CsfCategory a owl:Class ;
+    rdfs:label "CsfCategory" ;
+    rdfs:seeAlso <https://www.nist.gov/cyberframework> ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty nist_csf_v2:category_status ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty nist_csf_v2:description ],
+        [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty nist_csf_v2:postal_code ],
+            owl:onProperty nist_csf_v2:category_moved_to ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom nist_csf_v2:CsfElementStatus ;
+            owl:onProperty nist_csf_v2:category_status ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom nist_csf_v2:CsfSubcategory ;
+            owl:onProperty nist_csf_v2:category_subcategories ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty nist_csf_v2:category_subcategories ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty nist_csf_v2:description ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_csf_v2:city ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_csf_v2:state ],
+            owl:onProperty nist_csf_v2:category_incorporated_into ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty nist_csf_v2:state ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_csf_v2:postal_code ],
+            owl:onProperty nist_csf_v2:category_id ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_csf_v2:state ],
+            owl:onProperty nist_csf_v2:category_moved_to ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty nist_csf_v2:category_id ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty nist_csf_v2:addr_lines ],
+            owl:onProperty nist_csf_v2:category_incorporated_into ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_csf_v2:city ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_csf_v2:addr_lines ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_csf_v2:postal_code ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_csf_v2:city ] ;
-    skos:definition "Postal address" ;
-    skos:exactMatch linkml:Any ;
-    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
-
-nist_csf_v2:BackMatter a owl:Class ;
-    rdfs:label "BackMatter" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_csf_v2:resources ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom nist_csf_v2:Resource ;
-            owl:onProperty nist_csf_v2:resources ] ;
-    skos:definition "OSCAL back-matter section containing resource references" ;
-    skos:exactMatch linkml:Any ;
-    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
-
-nist_csf_v2:CSFCatalogBody a owl:Class ;
-    rdfs:label "CSFCatalogBody" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_csf_v2:groups ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_csf_v2:back_matter ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom nist_csf_v2:CSFFunction ;
-            owl:onProperty nist_csf_v2:groups ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom nist_csf_v2:CSFMetadata ;
-            owl:onProperty nist_csf_v2:metadata ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_csf_v2:metadata ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_csf_v2:metadata ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_csf_v2:back_matter ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_csf_v2:uuid ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom nist_csf_v2:BackMatter ;
-            owl:onProperty nist_csf_v2:back_matter ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_csf_v2:uuid ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_csf_v2:uuid ] ;
-    skos:definition "Main CSF catalog object" ;
-    skos:exactMatch linkml:Any ;
-    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
-
-nist_csf_v2:CSFCategory a owl:Class ;
-    rdfs:label "CSFCategory" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_csf_v2:controls ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom nist_csf_v2:CSFSubcategory ;
-            owl:onProperty nist_csf_v2:controls ],
-        nist_csf_v2:CSFElement ;
-    skos:closeMatch cis_controls:CISControl ;
-    skos:definition "A CSF category - second-level grouping within a function (e.g. GV.OC Organizational Context, ID.AM Asset Management)" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
-
-<https://w3id.org/lmodel/nist-csf-v2/CSFElementClassValue#category> a owl:Class ;
-    rdfs:label "category" ;
-    rdfs:subClassOf nist_csf_v2:CSFElementClassValue .
-
-<https://w3id.org/lmodel/nist-csf-v2/CSFElementClassValue#function> a owl:Class ;
-    rdfs:label "function" ;
-    rdfs:subClassOf nist_csf_v2:CSFElementClassValue .
-
-<https://w3id.org/lmodel/nist-csf-v2/CSFElementClassValue#subcategory> a owl:Class ;
-    rdfs:label "subcategory" ;
-    rdfs:subClassOf nist_csf_v2:CSFElementClassValue .
-
-nist_csf_v2:CSFFunction a owl:Class ;
-    rdfs:label "CSFFunction" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_csf_v2:controls ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom nist_csf_v2:CSFCategory ;
-            owl:onProperty nist_csf_v2:controls ],
-        nist_csf_v2:CSFElement ;
-    skos:closeMatch cis_controls:SecurityFunction ;
-    skos:definition "A CSF function - top-level grouping (e.g. GOVERN, IDENTIFY, PROTECT, DETECT, RESPOND, RECOVER)" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
-
-nist_csf_v2:CSFMetadata a owl:Class ;
-    rdfs:label "CSFMetadata" ;
-    rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty nist_csf_v2:title ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom nist_csf_v2:Link ;
-            owl:onProperty nist_csf_v2:links ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_csf_v2:last_modified ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_csf_v2:version ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_csf_v2:published ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom nist_csf_v2:ResponsibleParty ;
-            owl:onProperty nist_csf_v2:responsible_parties ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_csf_v2:published ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_csf_v2:title ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom nist_csf_v2:Party ;
-            owl:onProperty nist_csf_v2:parties ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_csf_v2:roles ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_csf_v2:last_modified ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_csf_v2:oscal_version ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom nist_csf_v2:Role ;
-            owl:onProperty nist_csf_v2:roles ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_csf_v2:oscal_version ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_csf_v2:last_modified ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_csf_v2:links ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_csf_v2:published ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_csf_v2:version ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_csf_v2:responsible_parties ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_csf_v2:parties ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_csf_v2:version ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_csf_v2:title ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_csf_v2:oscal_version ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom nist_csf_v2:CSFProperty ;
-            owl:onProperty nist_csf_v2:props ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_csf_v2:props ] ;
-    skos:definition "OSCAL metadata section for the CSF catalog" ;
-    skos:exactMatch linkml:Any ;
-    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
-
-nist_csf_v2:CSFPart a owl:Class ;
-    rdfs:label "CSFPart" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_csf_v2:ns ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_csf_v2:name ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_csf_v2:prose ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_csf_v2:id ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_csf_v2:prose ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_csf_v2:ns ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_csf_v2:name ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_csf_v2:id ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_csf_v2:id ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_csf_v2:ns ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_csf_v2:prose ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_csf_v2:name ] ;
-    skos:definition "Structured narrative part (statement, overview, or example)" ;
-    skos:exactMatch linkml:Any ;
-    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
-
-nist_csf_v2:Link a owl:Class ;
-    rdfs:label "Link" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_csf_v2:href ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_csf_v2:href ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_csf_v2:rel ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_csf_v2:href ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_csf_v2:rel ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_csf_v2:rel ] ;
-    skos:definition "Relationship link with href and optional rel attribute" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
-
-nist_csf_v2:Party a owl:Class ;
-    rdfs:label "Party" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_csf_v2:email_addresses ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_csf_v2:short_name ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_csf_v2:name ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_csf_v2:short_name ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_csf_v2:email_addresses ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_csf_v2:type ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_csf_v2:uuid ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_csf_v2:type ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_csf_v2:addresses ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_csf_v2:name ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom nist_csf_v2:Address ;
-            owl:onProperty nist_csf_v2:addresses ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_csf_v2:type ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_csf_v2:short_name ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_csf_v2:uuid ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_csf_v2:name ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_csf_v2:uuid ] ;
-    skos:definition "Party definition (person or organization)" ;
-    skos:exactMatch linkml:Any ;
-    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
-
-nist_csf_v2:Resource a owl:Class ;
-    rdfs:label "Resource" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_csf_v2:uuid ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_csf_v2:uuid ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty nist_csf_v2:title ],
@@ -385,408 +104,254 @@ nist_csf_v2:Resource a owl:Class ;
             owl:onProperty nist_csf_v2:title ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty nist_csf_v2:rlinks ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom nist_csf_v2:ResourceLink ;
-            owl:onProperty nist_csf_v2:rlinks ],
+            owl:onProperty nist_csf_v2:category_status ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_csf_v2:uuid ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_csf_v2:title ] ;
-    skos:definition "Referenced resource in back-matter" ;
-    skos:exactMatch linkml:Any ;
-    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
-
-nist_csf_v2:ResourceLink a owl:Class ;
-    rdfs:label "ResourceLink" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_csf_v2:href ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_csf_v2:media_type ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_csf_v2:media_type ],
+            owl:onProperty nist_csf_v2:description ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_csf_v2:media_type ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_csf_v2:href ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_csf_v2:href ] ;
-    skos:definition "Reference link for a back-matter resource" ;
-    skos:exactMatch linkml:Any ;
-    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
-
-nist_csf_v2:ResponsibleParty a owl:Class ;
-    rdfs:label "ResponsibleParty" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_csf_v2:party_uuids ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_csf_v2:role_id ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_csf_v2:role_id ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_csf_v2:role_id ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_csf_v2:party_uuids ] ;
-    skos:definition "Assignment of parties to a role" ;
-    skos:exactMatch linkml:Any ;
-    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
-
-nist_csf_v2:Role a owl:Class ;
-    rdfs:label "Role" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_csf_v2:title ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_csf_v2:id ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_csf_v2:title ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_csf_v2:id ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_csf_v2:title ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_csf_v2:id ] ;
-    skos:definition "Role definition used in metadata" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
-
-nist_csf_v2:addr_lines a owl:DatatypeProperty ;
-    rdfs:label "addr-lines" ;
-    skos:altLabel "addr_lines" ;
-    skos:definition "Address lines" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
-
-nist_csf_v2:addresses a owl:ObjectProperty ;
-    rdfs:label "addresses" ;
-    rdfs:range nist_csf_v2:Address ;
-    skos:definition "Postal addresses" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
-
-nist_csf_v2:email_addresses a owl:DatatypeProperty ;
-    rdfs:label "email-addresses" ;
-    skos:altLabel "email_addresses" ;
-    skos:definition "Party email addresses" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
-
-nist_csf_v2:groups a owl:ObjectProperty ;
-    rdfs:label "groups" ;
-    rdfs:range nist_csf_v2:CSFFunction ;
-    skos:closeMatch cis_controls:controls ;
-    skos:definition "List of CSF functions (top-level groupings) in the catalog" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
-
-nist_csf_v2:links a owl:ObjectProperty ;
-    rdfs:label "links" ;
-    rdfs:range nist_csf_v2:Link ;
-    skos:definition "List of links and relationships" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
-
-nist_csf_v2:parties a owl:ObjectProperty ;
-    rdfs:label "parties" ;
-    rdfs:range nist_csf_v2:Party ;
-    skos:definition "Parties used in metadata" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
-
-nist_csf_v2:parts a owl:ObjectProperty ;
-    rdfs:label "parts" ;
-    rdfs:range nist_csf_v2:CSFPart ;
-    skos:definition "Structured narrative parts (e.g., statement, overview, example)" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
-
-nist_csf_v2:party_uuids a owl:DatatypeProperty ;
-    rdfs:label "party-uuids" ;
-    skos:altLabel "party_uuids" ;
-    skos:definition "Referenced party UUIDs" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
-
-nist_csf_v2:resources a owl:ObjectProperty ;
-    rdfs:label "resources" ;
-    rdfs:range nist_csf_v2:Resource ;
-    skos:definition "Back-matter resources" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
-
-nist_csf_v2:responsible_parties a owl:ObjectProperty ;
-    rdfs:label "responsible-parties" ;
-    rdfs:range nist_csf_v2:ResponsibleParty ;
-    skos:altLabel "responsible_parties" ;
-    skos:definition "Responsible party assignments" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
-
-nist_csf_v2:rlinks a owl:ObjectProperty ;
-    rdfs:label "rlinks" ;
-    rdfs:range nist_csf_v2:ResourceLink ;
-    skos:definition "Resource links" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
-
-nist_csf_v2:roles a owl:ObjectProperty ;
-    rdfs:label "roles" ;
-    rdfs:range nist_csf_v2:Role ;
-    skos:definition "Roles used in metadata" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
-
-nist_csf_v2:CSFElement a owl:Class ;
-    rdfs:label "CSFElement" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_csf_v2:parts ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_csf_v2:id ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_csf_v2:props ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom nist_csf_v2:CSFElementClassValue ;
-            owl:onProperty nist_csf_v2:_class ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_csf_v2:title ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_csf_v2:_class ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom nist_csf_v2:CSFPart ;
-            owl:onProperty nist_csf_v2:parts ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_csf_v2:title ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_csf_v2:id ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_csf_v2:_class ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_csf_v2:id ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_csf_v2:title ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom nist_csf_v2:CSFProperty ;
-            owl:onProperty nist_csf_v2:props ] ;
-    skos:definition "Abstract base class for CSF catalog elements" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
-
-nist_csf_v2:CSFProperty a owl:Class ;
-    rdfs:label "CSFProperty" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_csf_v2:remarks ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_csf_v2:name ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_csf_v2:ns ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_csf_v2:name ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_csf_v2:remarks ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_csf_v2:ns ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_csf_v2:value ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_csf_v2:ns ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_csf_v2:value ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_csf_v2:name ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_csf_v2:remarks ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_csf_v2:value ] ;
-    skos:definition "A name-value property with optional namespace and supplemental remarks" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
-
-nist_csf_v2:_class a owl:DatatypeProperty ;
-    rdfs:label "_class" ;
-    skos:definition "Classification of a CSF catalog element (function, category, subcategory)" ;
+            owl:onProperty nist_csf_v2:category_id ] ;
+    skos:broadMatch oscal:Control ;
+    skos:definition "A group of related cybersecurity outcomes within a function, such as Organizational Context (GV.OC), or a CSF 1.1 category that CSF 2.0 withdrew, which the catalog keeps with its status and, where NIST recorded it, where it moved or what incorporated it." ;
+    skos:exactMatch nist_csf_v2:Category ;
     skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> ;
-    skos:prefLabel "class" .
+    skos:note "A withdrawn category keeps its CSF 1.1 subcategories, each withdrawn too, and the catalog gives it no statement, so it has no description." .
 
-nist_csf_v2:back_matter a owl:ObjectProperty ;
-    rdfs:label "back-matter" ;
-    rdfs:range nist_csf_v2:BackMatter ;
-    skos:altLabel "back_matter" ;
-    skos:definition "Back-matter references and resources" ;
+<https://w3id.org/lmodel/nist-csf-v2/CsfElementStatus#withdrawn> a owl:Class ;
+    rdfs:label "withdrawn" ;
+    rdfs:subClassOf nist_csf_v2:CsfElementStatus ;
+    skos:definition "The element was in CSF 1.1 and CSF 2.0 withdrew it. The catalog keeps it, and names where it moved or what incorporated it where NIST recorded that." .
+
+nist_csf_v2:CsfFunction a owl:Class ;
+    rdfs:label "CsfFunction" ;
+    rdfs:seeAlso <https://www.nist.gov/cyberframework> ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty nist_csf_v2:function_id ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty nist_csf_v2:description ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty nist_csf_v2:description ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom nist_csf_v2:CsfCategory ;
+            owl:onProperty nist_csf_v2:function_categories ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty nist_csf_v2:description ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty nist_csf_v2:title ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty nist_csf_v2:function_categories ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty nist_csf_v2:title ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty nist_csf_v2:function_id ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty nist_csf_v2:title ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty nist_csf_v2:function_id ] ;
+    skos:broadMatch oscal:Group ;
+    skos:definition "One of the six functions that sort the CSF's outcomes at the highest level: GOVERN, IDENTIFY, PROTECT, DETECT, RESPOND and RECOVER. Each is named by two letters and described in a sentence." ;
+    skos:exactMatch nist_csf_v2:Function ;
     skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
 
-nist_csf_v2:catalog a owl:ObjectProperty ;
-    rdfs:label "catalog" ;
-    rdfs:range nist_csf_v2:CSFCatalogBody ;
-    skos:definition "Root catalog payload" ;
+nist_csf_v2:CsfImplementationExample a owl:Class ;
+    rdfs:label "CsfImplementationExample" ;
+    rdfs:seeAlso <https://www.nist.gov/cyberframework> ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty nist_csf_v2:implementation_example_id ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty nist_csf_v2:description ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty nist_csf_v2:description ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty nist_csf_v2:implementation_example_id ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty nist_csf_v2:implementation_example_id ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty nist_csf_v2:description ] ;
+    skos:broadMatch oscal:Part ;
+    skos:definition "An implementation example: one concise, action-oriented step that could help achieve a subcategory's outcome. NIST publishes the examples beside the Core, in its reference tool and its catalog, not in CSWP 29 itself." ;
+    skos:exactMatch nist_csf_v2:ImplementationExample ;
     skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
 
-nist_csf_v2:city a owl:DatatypeProperty ;
-    rdfs:label "city" ;
-    skos:definition "City name" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
-
-nist_csf_v2:last_modified a owl:DatatypeProperty ;
-    rdfs:label "last-modified" ;
-    skos:altLabel "last_modified" ;
-    skos:definition "Last modification timestamp" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
-
-nist_csf_v2:media_type a owl:DatatypeProperty ;
-    rdfs:label "media-type" ;
-    skos:altLabel "media_type" ;
-    skos:definition "Media type for a resource link" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
-
-nist_csf_v2:metadata a owl:ObjectProperty ;
-    rdfs:label "metadata" ;
-    rdfs:range nist_csf_v2:CSFMetadata ;
-    skos:definition "Catalog metadata" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
-
-nist_csf_v2:oscal_version a owl:DatatypeProperty ;
-    rdfs:label "oscal-version" ;
-    skos:altLabel "oscal_version" ;
-    skos:definition "OSCAL version identifier" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
-
-nist_csf_v2:postal_code a owl:DatatypeProperty ;
-    rdfs:label "postal-code" ;
-    skos:altLabel "postal_code" ;
-    skos:definition "Postal code" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
-
-nist_csf_v2:prose a owl:DatatypeProperty ;
-    rdfs:label "prose" ;
-    skos:closeMatch cis_controls:description,
-        cis_controls:overview ;
-    skos:definition "Free-text prose content" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
-
-nist_csf_v2:published a owl:DatatypeProperty ;
-    rdfs:label "published" ;
-    skos:definition "Publication timestamp" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
-
-nist_csf_v2:rel a owl:DatatypeProperty ;
-    rdfs:label "rel" ;
-    skos:definition "Relationship type for a link" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
-
-nist_csf_v2:remarks a owl:DatatypeProperty ;
-    rdfs:label "remarks" ;
-    skos:definition "Supplemental remarks on a property" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
-
-nist_csf_v2:role_id a owl:DatatypeProperty ;
-    rdfs:label "role-id" ;
-    skos:altLabel "role_id" ;
-    skos:definition "Assigned role identifier" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
-
-nist_csf_v2:short_name a owl:DatatypeProperty ;
-    rdfs:label "short-name" ;
-    skos:altLabel "short_name" ;
-    skos:definition "Short display name for a party" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
-
-nist_csf_v2:state a owl:DatatypeProperty ;
-    rdfs:label "state" ;
-    skos:definition "State or region" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
-
-nist_csf_v2:type a owl:DatatypeProperty ;
-    rdfs:label "type" ;
-    skos:definition "Party type (e.g., organization, person)" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
-
-nist_csf_v2:value a owl:DatatypeProperty ;
-    rdfs:label "value" ;
-    skos:definition "Property value" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
-
-nist_csf_v2:version a owl:DatatypeProperty ;
-    rdfs:label "version" ;
-    skos:definition "Version identifier" ;
-    skos:exactMatch cis_controls:version ;
-    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
-
-nist_csf_v2:CSFElementClassValue a owl:Class ;
-    rdfs:label "CSFElementClassValue" ;
-    owl:unionOf ( <https://w3id.org/lmodel/nist-csf-v2/CSFElementClassValue#function> <https://w3id.org/lmodel/nist-csf-v2/CSFElementClassValue#category> <https://w3id.org/lmodel/nist-csf-v2/CSFElementClassValue#subcategory> ) ;
-    skos:definition "Allowed class values for CSF catalog elements" ;
+nist_csf_v2:CsfSubcategory a owl:Class ;
+    rdfs:label "CsfSubcategory" ;
+    rdfs:seeAlso <https://www.nist.gov/cyberframework> ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom nist_csf_v2:CsfElementStatus ;
+            owl:onProperty nist_csf_v2:subcategory_status ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty nist_csf_v2:subcategory_id ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty nist_csf_v2:subcategory_moved_to ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty nist_csf_v2:subcategory_status ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty nist_csf_v2:subcategory_id ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty nist_csf_v2:subcategory_incorporated_into ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty nist_csf_v2:description ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty nist_csf_v2:description ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty nist_csf_v2:subcategory_moved_to ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty nist_csf_v2:subcategory_incorporated_into ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty nist_csf_v2:subcategory_id ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty nist_csf_v2:subcategory_examples ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom nist_csf_v2:CsfImplementationExample ;
+            owl:onProperty nist_csf_v2:subcategory_examples ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty nist_csf_v2:subcategory_status ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty nist_csf_v2:description ] ;
+    skos:broadMatch oscal:Control ;
+    skos:definition "A cybersecurity outcome: one statement of a result within a category, such as GV.OC-01, or a CSF 1.1 subcategory that CSF 2.0 withdrew, which the catalog keeps with its statement, its status and where it moved or what incorporated it." ;
+    skos:exactMatch nist_csf_v2:Subcategory ;
     skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> ;
-    linkml:permissible_values <https://w3id.org/lmodel/nist-csf-v2/CSFElementClassValue#category>,
-        <https://w3id.org/lmodel/nist-csf-v2/CSFElementClassValue#function>,
-        <https://w3id.org/lmodel/nist-csf-v2/CSFElementClassValue#subcategory> .
+    skos:note "A subcategory has no title of its own: its identifier names it and its statement is its description, which is why the description is required here." .
 
-nist_csf_v2:controls a owl:ObjectProperty ;
-    rdfs:label "controls" ;
-    rdfs:range nist_csf_v2:CSFCategory ;
-    skos:closeMatch cis_controls:safeguards ;
-    skos:definition "List of categories or subcategories within a function or category" ;
+nist_csf_v2:category_incorporated_into a owl:DatatypeProperty ;
+    rdfs:label "category_incorporated_into" ;
+    skos:definition "The function, category or subcategory of CSF 2.0 that took in a withdrawn category's outcomes, as the catalog states it, such as GV.OC for ID.BE. The catalog names none for some withdrawn categories." ;
     skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
 
-nist_csf_v2:props a owl:ObjectProperty ;
-    rdfs:label "props" ;
-    rdfs:range nist_csf_v2:CSFProperty ;
-    skos:definition "List of properties" ;
+nist_csf_v2:category_moved_to a owl:DatatypeProperty ;
+    rdfs:label "category_moved_to" ;
+    skos:definition "The CSF 2.0 category a withdrawn category moved to, as the catalog states it, such as PR.AA for PR.AC." ;
     skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
 
-nist_csf_v2:href a owl:DatatypeProperty ;
-    rdfs:label "href" ;
-    skos:definition "Link or resource reference" ;
+nist_csf_v2:category_subcategories a owl:ObjectProperty ;
+    rdfs:label "category_subcategories" ;
+    skos:definition "The subcategories of the category. A knowledge bundle relates a subcategory to its category with isPartOf instead." ;
     skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
 
-nist_csf_v2:ns a owl:DatatypeProperty ;
-    rdfs:label "ns" ;
-    skos:definition "Namespace URI for a property or part" ;
+nist_csf_v2:function_categories a owl:ObjectProperty ;
+    rdfs:label "function_categories" ;
+    skos:definition "The categories of the function. A knowledge bundle relates a category to its function with isPartOf instead." ;
     skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
 
-nist_csf_v2:id a owl:DatatypeProperty ;
-    rdfs:label "id" ;
-    skos:definition "Unique identifier for a catalog element" ;
-    skos:exactMatch cis_controls:id ;
+nist_csf_v2:functions a owl:ObjectProperty ;
+    rdfs:label "functions" ;
+    skos:definition "The six functions, in the order CSWP 29 gives them." ;
     skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
 
-nist_csf_v2:name a owl:DatatypeProperty ;
-    rdfs:label "name" ;
-    skos:definition "Name of a property or part" ;
+nist_csf_v2:subcategory_examples a owl:ObjectProperty ;
+    rdfs:label "subcategory_examples" ;
+    skos:definition "The implementation examples NIST publishes for the subcategory. CSWP 29 says they are notional, that none is required, and that they are not a complete list of what could be done." ;
     skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
 
-nist_csf_v2:uuid a owl:DatatypeProperty ;
-    rdfs:label "uuid" ;
-    skos:definition "UUID for catalog or resource element" ;
+nist_csf_v2:subcategory_incorporated_into a owl:DatatypeProperty ;
+    rdfs:label "subcategory_incorporated_into" ;
+    skos:definition "The CSF 2.0 category or subcategory that took in a withdrawn subcategory's outcome, as the catalog states it, such as GV.OC-01 for ID.BE-02." ;
+    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
+
+nist_csf_v2:subcategory_moved_to a owl:DatatypeProperty ;
+    rdfs:label "subcategory_moved_to" ;
+    skos:definition "The CSF 2.0 subcategory a withdrawn subcategory moved to, as the catalog states it, such as GV.OC-03 for ID.GV-03. The catalog names two for a few." ;
+    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
+
+nist_csf_v2:CsfElementStatus a owl:Class ;
+    rdfs:label "CsfElementStatus" ;
+    rdfs:seeAlso <https://doi.org/10.6028/NIST.CSWP.29> ;
+    skos:definition "The state the catalog gives a category or subcategory that CSF 2.0 no longer carries. A category or subcategory of CSF 2.0 has no status." ;
+    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> ;
+    linkml:permissible_values <https://w3id.org/lmodel/nist-csf-v2/CsfElementStatus#withdrawn> .
+
+nist_csf_v2:category_id a owl:DatatypeProperty ;
+    rdfs:label "category_id" ;
+    skos:definition "The category's identifier, such as GV.OC." ;
+    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
+
+nist_csf_v2:category_status a owl:ObjectProperty ;
+    rdfs:label "category_status" ;
+    skos:definition "withdrawn for a CSF 1.1 category that CSF 2.0 withdrew. A category of CSF 2.0 has no status." ;
+    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
+
+nist_csf_v2:csf_version a owl:DatatypeProperty ;
+    rdfs:label "csf_version" ;
+    skos:definition "The CSF edition, as NIST numbers it in the publication's title, such as 2.0." ;
+    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
+
+nist_csf_v2:function_id a owl:DatatypeProperty ;
+    rdfs:label "function_id" ;
+    skos:definition "The function's two letters, such as GV for GOVERN." ;
+    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
+
+nist_csf_v2:implementation_example_id a owl:DatatypeProperty ;
+    rdfs:label "implementation_example_id" ;
+    skos:definition "The example's identifier in NIST's reference data, such as GV.OC-01.001 for the first example of subcategory GV.OC-01." ;
+    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
+
+nist_csf_v2:subcategory_id a owl:DatatypeProperty ;
+    rdfs:label "subcategory_id" ;
+    skos:definition "The subcategory's identifier, such as GV.OC-01." ;
+    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
+
+nist_csf_v2:subcategory_status a owl:ObjectProperty ;
+    rdfs:label "subcategory_status" ;
+    skos:definition "withdrawn for a CSF 1.1 subcategory that CSF 2.0 withdrew. A subcategory of CSF 2.0 has no status." ;
     skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
 
 nist_csf_v2:title a owl:DatatypeProperty ;
     rdfs:label "title" ;
-    skos:definition "Human-readable title" ;
-    skos:exactMatch cis_controls:title ;
-    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
+    skos:definition "The name CSWP 29 gives the function or category." ;
+    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> ;
+    skos:note "It means what LOKF's title means and carries the same IRI, so lokf adapt folds it into LOKF's slot and a knowledge bundle reads one title key." .
+
+nist_csf_v2:description a owl:DatatypeProperty ;
+    rdfs:label "description" ;
+    skos:definition "What the function, category, subcategory or example says, in the words of whoever records it." ;
+    skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> ;
+    skos:note "It means what LOKF's description means and carries the same IRI, so lokf adapt folds it into LOKF's slot and a knowledge bundle reads one description key." .
+
+xsd:string a rdfs:Datatype ;
+    owl:equivalentClass [ a rdfs:Datatype ;
+            owl:onDatatype xsd:string ;
+            owl:withRestrictions ( [ xsd:pattern "^(GV|ID|PR|DE|RS|RC)\\.[A-Z]{2}$" ] ) ],
+        [ a rdfs:Datatype ;
+            owl:onDatatype xsd:string ;
+            owl:withRestrictions ( [ xsd:pattern "^(GV|ID|PR|DE|RS|RC)\\.[A-Z]{2}-[0-9]{2}$" ] ) ],
+        [ a rdfs:Datatype ;
+            owl:onDatatype xsd:string ;
+            owl:withRestrictions ( [ xsd:pattern "^(GV|ID|PR|DE|RS|RC)\\.[A-Z]{2}-[0-9]{2}\\.[0-9]{3}$" ] ) ],
+        [ a rdfs:Datatype ;
+            owl:onDatatype xsd:string ;
+            owl:withRestrictions ( [ xsd:pattern "^(GV|ID|PR|DE|RS|RC)(\\.[A-Z]{2}(-[0-9]{2})?)?$" ] ) ],
+        [ a rdfs:Datatype ;
+            owl:onDatatype xsd:string ;
+            owl:withRestrictions ( [ xsd:pattern "^(GV|ID|PR|DE|RS|RC)$" ] ) ] .
 
 

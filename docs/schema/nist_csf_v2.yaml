@@ -1,33 +1,125 @@
-name: nist-csf-v2
-description: NIST Cybersecurity Framework 2.0
-title: nist-csf-v2
+name: nist_csf_v2
+annotations:
+  cprt_framework_version:
+    tag: cprt_framework_version
+    value: CSF_2_0_0
+  publication_date:
+    tag: publication_date
+    value: 2024-02
+  oscal_content_tag:
+    tag: oscal_content_tag
+    value: v1.6.0
+  oscal_content_commit:
+    tag: oscal_content_commit
+    value: f0de6d8d8c059d374f15e0ae07508d82e370fc1d
+description: 'A LinkML model of the Cybersecurity Framework (CSF) 2.0, which NIST
+  publishes as Cybersecurity White Paper (CSWP) 29: its six functions, their categories
+  and subcategories, the implementation examples NIST publishes with the subcategories,
+  and the CSF 1.1 categories and subcategories that CSF 2.0 withdrew, each with its
+  status and, where NIST recorded it, where it moved or what incorporated it.'
+title: The NIST Cybersecurity Framework (CSF) 2.0
+comments:
+- The version is the CSF edition that CSWP 29 defines, and source is the publication's
+  digital object identifier. NIST's Cybersecurity and Privacy Reference Tool names
+  the same edition CSF_2_0_0, and the catalog NIST publishes for it in usnistgov/oscal-content
+  is copied to src/nist_csf_v2/schema/oscal-content/ at the tag and commit in the
+  annotations. That catalog carries a version number of its own, 1.2.1, which numbers
+  the catalog and not the framework. The release tags are the schema's own versions,
+  and scripts/check_upstream_release.py reads the same pins and reports when NIST
+  publishes another edition or changes the catalog.
+- CSWP 29 is a work of the United States Government and is not subject to copyright
+  in the United States. The descriptions here are this project's own words; NIST's
+  text of each function, category, subcategory and example stays in the catalog copy.
+- NIST's catalog renders each function as an OSCAL group, each category and subcategory
+  as an OSCAL control and each implementation example as a part. The broad_mappings
+  name those lmodel/oscal classes. A withdrawn category or subcategory is a control
+  with a status property and links to where it moved or what incorporated it; the
+  schema carries those as the element's status and identifiers.
+- The catalog also marks most CSF 2.0 subcategories as first-party risk, third-party
+  risk or both, in a marking property of class risk-party. CSWP 29 carries no such
+  marking, so it is the reference tool's and the schema leaves it out.
 source: https://doi.org/10.6028/NIST.CSWP.29
 see_also:
 - https://lmodel.github.io/nist-csf-v2
+- https://csrc.nist.gov/pubs/cswp/29/the-nist-cybersecurity-framework-csf-20/final
+- https://www.nist.gov/cyberframework
+- https://github.com/usnistgov/oscal-content/tree/v1.6.0/nist.gov/CSF/v2.0
 id: https://w3id.org/lmodel/nist-csf-v2
 version: 2.0.0
 imports:
 - linkml:types
 license: Apache-2.0
 prefixes:
-  nist_csf_v2:
-    prefix_prefix: nist_csf_v2
-    prefix_reference: https://w3id.org/lmodel/nist-csf-v2/
   linkml:
     prefix_prefix: linkml
     prefix_reference: https://w3id.org/linkml/
-  cis_controls:
-    prefix_prefix: cis_controls
-    prefix_reference: https://w3id.org/lmodel/cis-controls/
+  nist_csf_v2:
+    prefix_prefix: nist_csf_v2
+    prefix_reference: https://w3id.org/lmodel/nist-csf-v2/
+  oscal:
+    prefix_prefix: oscal
+    prefix_reference: https://w3id.org/lmodel/oscal/
+  schema:
+    prefix_prefix: schema
+    prefix_reference: http://schema.org/
+  xsd:
+    prefix_prefix: xsd
+    prefix_reference: http://www.w3.org/2001/XMLSchema#
 default_prefix: nist_csf_v2
 default_range: string
-subsets:
-  nist_csf_v2_catalog:
-    name: nist_csf_v2_catalog
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/NistCsfV2Catalog
-    description: NIST CSF 2.0 Catalog subset for functions, categories, and subcategories
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
 types:
+  csf_function_identifier:
+    name: csf_function_identifier
+    definition_uri: https://w3id.org/lmodel/nist-csf-v2/CsfFunctionIdentifier
+    description: The two letters that name one of the six functions, such as GV for
+      GOVERN.
+    from_schema: https://w3id.org/lmodel/nist-csf-v2
+    typeof: string
+    base: str
+    uri: xsd:string
+    pattern: ^(GV|ID|PR|DE|RS|RC)$
+  csf_category_identifier:
+    name: csf_category_identifier
+    definition_uri: https://w3id.org/lmodel/nist-csf-v2/CsfCategoryIdentifier
+    description: 'A category''s identifier: its function''s letters, a dot and two
+      letters for the category, such as GV.OC for Organizational Context.'
+    from_schema: https://w3id.org/lmodel/nist-csf-v2
+    typeof: string
+    base: str
+    uri: xsd:string
+    pattern: ^(GV|ID|PR|DE|RS|RC)\.[A-Z]{2}$
+  csf_subcategory_identifier:
+    name: csf_subcategory_identifier
+    definition_uri: https://w3id.org/lmodel/nist-csf-v2/CsfSubcategoryIdentifier
+    description: 'A subcategory''s identifier: its category''s identifier, a hyphen
+      and a two-digit number, such as GV.OC-01. CSWP 29 says the numbers are not sequential
+      on purpose: a gap marks a CSF 1.1 subcategory that CSF 2.0 moved elsewhere.'
+    from_schema: https://w3id.org/lmodel/nist-csf-v2
+    typeof: string
+    base: str
+    uri: xsd:string
+    pattern: ^(GV|ID|PR|DE|RS|RC)\.[A-Z]{2}-[0-9]{2}$
+  csf_implementation_example_identifier:
+    name: csf_implementation_example_identifier
+    definition_uri: https://w3id.org/lmodel/nist-csf-v2/CsfImplementationExampleIdentifier
+    description: 'The identifier NIST''s reference data gives an implementation example:
+      its subcategory''s identifier, a dot and a three-digit number, such as GV.OC-01.001.
+      The numbers run once through the whole Core, so no two examples share one.'
+    from_schema: https://w3id.org/lmodel/nist-csf-v2
+    typeof: string
+    base: str
+    uri: xsd:string
+    pattern: ^(GV|ID|PR|DE|RS|RC)\.[A-Z]{2}-[0-9]{2}\.[0-9]{3}$
+  csf_element_identifier:
+    name: csf_element_identifier
+    definition_uri: https://w3id.org/lmodel/nist-csf-v2/CsfElementIdentifier
+    description: The identifier of a function, a category or a subcategory, whichever
+      of the three a withdrawn element names as what incorporated it.
+    from_schema: https://w3id.org/lmodel/nist-csf-v2
+    typeof: string
+    base: str
+    uri: xsd:string
+    pattern: ^(GV|ID|PR|DE|RS|RC)(\.[A-Z]{2}(-[0-9]{2})?)?$
   string:
     name: string
     definition_uri: https://w3id.org/linkml/String
@@ -297,887 +389,504 @@ types:
     uri: xsd:string
     repr: str
 enums:
-  CSFElementClassValue:
-    name: CSFElementClassValue
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/CSFElementClassValue
-    description: Allowed class values for CSF catalog elements
-    in_subset:
-    - nist_csf_v2_catalog
+  CsfElementStatus:
+    name: CsfElementStatus
+    definition_uri: https://w3id.org/lmodel/nist-csf-v2/CsfElementStatus
+    description: The state the catalog gives a category or subcategory that CSF 2.0
+      no longer carries. A category or subcategory of CSF 2.0 has no status.
     from_schema: https://w3id.org/lmodel/nist-csf-v2
+    see_also:
+    - https://doi.org/10.6028/NIST.CSWP.29
     permissible_values:
-      function:
-        text: function
-      category:
-        text: category
-      subcategory:
-        text: subcategory
+      withdrawn:
+        text: withdrawn
+        description: The element was in CSF 1.1 and CSF 2.0 withdrew it. The catalog
+          keeps it, and names where it moved or what incorporated it where NIST recorded
+          that.
 slots:
-  catalog:
-    name: catalog
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/catalog
-    description: Root catalog payload
-    in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:catalog
-    owner: CSFDocument
-    domain_of:
-    - CSFDocument
-    range: CSFCatalogBody
-    inlined: true
-    inlined_as_list: true
-  metadata:
-    name: metadata
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/metadata
-    description: Catalog metadata
-    in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:metadata
-    owner: CSFCatalogBody
-    domain_of:
-    - CSFCatalogBody
-    range: CSFMetadata
-    inlined: true
-    inlined_as_list: true
-  groups:
-    name: groups
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/groups
-    description: List of CSF functions (top-level groupings) in the catalog
-    in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    close_mappings:
-    - cis_controls:controls
-    slot_uri: nist_csf_v2:groups
-    owner: CSFCatalogBody
-    domain_of:
-    - CSFCatalogBody
-    range: CSFFunction
-    multivalued: true
-    inlined: true
-    inlined_as_list: true
-  controls:
-    name: controls
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/controls
-    description: List of categories or subcategories within a function or category
-    in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    close_mappings:
-    - cis_controls:safeguards
-    slot_uri: nist_csf_v2:controls
-    owner: CSFCategory
-    domain_of:
-    - CSFFunction
-    - CSFCategory
-    range: CSFCategory
-    multivalued: true
-    inlined: true
-    inlined_as_list: true
-  props:
-    name: props
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/props
-    description: List of properties
-    in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:props
-    owner: CSFElement
-    domain_of:
-    - CSFMetadata
-    - CSFElement
-    range: CSFProperty
-    multivalued: true
-    inlined: true
-    inlined_as_list: true
-  links:
-    name: links
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/links
-    description: List of links and relationships
-    in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:links
-    owner: CSFMetadata
-    domain_of:
-    - CSFMetadata
-    range: Link
-    multivalued: true
-    inlined: true
-    inlined_as_list: true
-  parts:
-    name: parts
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/parts
-    description: Structured narrative parts (e.g., statement, overview, example)
-    in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:parts
-    owner: CSFElement
-    domain_of:
-    - CSFElement
-    range: CSFPart
-    multivalued: true
-    inlined: true
-    inlined_as_list: true
-  roles:
-    name: roles
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/roles
-    description: Roles used in metadata
-    in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:roles
-    owner: CSFMetadata
-    domain_of:
-    - CSFMetadata
-    range: Role
-    multivalued: true
-    inlined: true
-    inlined_as_list: true
-  parties:
-    name: parties
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/parties
-    description: Parties used in metadata
-    in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:parties
-    owner: CSFMetadata
-    domain_of:
-    - CSFMetadata
-    range: Party
-    multivalued: true
-    inlined: true
-    inlined_as_list: true
-  responsible-parties:
-    name: responsible-parties
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/responsible_parties
-    description: Responsible party assignments
-    in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    aliases:
-    - responsible_parties
-    slot_uri: nist_csf_v2:responsible_parties
-    owner: CSFMetadata
-    domain_of:
-    - CSFMetadata
-    range: ResponsibleParty
-    multivalued: true
-    inlined: true
-    inlined_as_list: true
-  back-matter:
-    name: back-matter
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/back_matter
-    description: Back-matter references and resources
-    in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    aliases:
-    - back_matter
-    slot_uri: nist_csf_v2:back_matter
-    owner: CSFCatalogBody
-    domain_of:
-    - CSFCatalogBody
-    range: BackMatter
-    inlined: true
-    inlined_as_list: true
-  resources:
-    name: resources
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/resources
-    description: Back-matter resources
-    in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:resources
-    owner: BackMatter
-    domain_of:
-    - BackMatter
-    range: Resource
-    multivalued: true
-    inlined: true
-    inlined_as_list: true
-  rlinks:
-    name: rlinks
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/rlinks
-    description: Resource links
-    in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:rlinks
-    owner: Resource
-    domain_of:
-    - Resource
-    range: ResourceLink
-    multivalued: true
-    inlined: true
-    inlined_as_list: true
-  addresses:
-    name: addresses
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/addresses
-    description: Postal addresses
-    in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:addresses
-    owner: Party
-    domain_of:
-    - Party
-    range: Address
-    multivalued: true
-    inlined: true
-    inlined_as_list: true
-  id:
-    name: id
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/id
-    description: Unique identifier for a catalog element
-    in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    exact_mappings:
-    - cis_controls:id
-    slot_uri: nist_csf_v2:id
-    owner: Role
-    domain_of:
-    - CSFElement
-    - CSFPart
-    - Role
-    range: string
-  uuid:
-    name: uuid
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/uuid
-    description: UUID for catalog or resource element
-    in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:uuid
-    owner: Resource
-    domain_of:
-    - CSFCatalogBody
-    - Party
-    - Resource
-    range: string
   title:
     name: title
     definition_uri: https://w3id.org/lmodel/nist-csf-v2/title
-    description: Human-readable title
-    in_subset:
-    - nist_csf_v2_catalog
+    description: The name CSWP 29 gives the function or category.
+    comments:
+    - It means what LOKF's title means and carries the same IRI, so lokf adapt folds
+      it into LOKF's slot and a knowledge bundle reads one title key.
     from_schema: https://w3id.org/lmodel/nist-csf-v2
-    exact_mappings:
-    - cis_controls:title
-    slot_uri: nist_csf_v2:title
-    owner: Resource
+    mappings:
+    - schema:name
+    slot_uri: schema:name
+    owner: CsfCategory
     domain_of:
-    - CSFMetadata
-    - CSFElement
-    - Role
-    - Resource
+    - CsfFunction
+    - CsfCategory
     range: string
-  published:
-    name: published
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/published
-    description: Publication timestamp
-    in_subset:
-    - nist_csf_v2_catalog
+  description:
+    name: description
+    definition_uri: https://w3id.org/lmodel/nist-csf-v2/description
+    description: What the function, category, subcategory or example says, in the
+      words of whoever records it.
+    comments:
+    - It means what LOKF's description means and carries the same IRI, so lokf adapt
+      folds it into LOKF's slot and a knowledge bundle reads one description key.
     from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:published
-    owner: CSFMetadata
+    mappings:
+    - schema:description
+    slot_uri: schema:description
+    owner: CsfImplementationExample
     domain_of:
-    - CSFMetadata
+    - CsfFunction
+    - CsfCategory
+    - CsfSubcategory
+    - CsfImplementationExample
     range: string
-  last-modified:
-    name: last-modified
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/last_modified
-    description: Last modification timestamp
-    in_subset:
-    - nist_csf_v2_catalog
+  csfFramework__csf_version:
+    name: csfFramework__csf_version
+    description: The CSF edition, as NIST numbers it in the publication's title, such
+      as 2.0.
     from_schema: https://w3id.org/lmodel/nist-csf-v2
-    aliases:
-    - last_modified
-    slot_uri: nist_csf_v2:last_modified
-    owner: CSFMetadata
+    slot_uri: nist_csf_v2:csf_version
+    alias: csf_version
+    owner: CsfFramework
     domain_of:
-    - CSFMetadata
+    - CsfFramework
     range: string
-  version:
-    name: version
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/version
-    description: Version identifier
-    in_subset:
-    - nist_csf_v2_catalog
+    required: true
+    pattern: ^[0-9]+\.[0-9]+$
+  csfFramework__functions:
+    name: csfFramework__functions
+    description: The six functions, in the order CSWP 29 gives them.
     from_schema: https://w3id.org/lmodel/nist-csf-v2
-    exact_mappings:
-    - cis_controls:version
-    slot_uri: nist_csf_v2:version
-    owner: CSFMetadata
+    slot_uri: nist_csf_v2:functions
+    alias: functions
+    owner: CsfFramework
     domain_of:
-    - CSFMetadata
-    range: string
-  oscal-version:
-    name: oscal-version
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/oscal_version
-    description: OSCAL version identifier
-    in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    aliases:
-    - oscal_version
-    slot_uri: nist_csf_v2:oscal_version
-    owner: CSFMetadata
-    domain_of:
-    - CSFMetadata
-    range: string
-  _class:
-    name: _class
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/_class
-    description: Classification of a CSF catalog element (function, category, subcategory)
-    in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:class
-    alias: class
-    owner: CSFElement
-    domain_of:
-    - CSFElement
-    range: string
-  name:
-    name: name
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/name
-    description: Name of a property or part
-    in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:name
-    owner: Party
-    domain_of:
-    - CSFPart
-    - CSFProperty
-    - Party
-    range: string
-  value:
-    name: value
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/value
-    description: Property value
-    in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:value
-    owner: CSFProperty
-    domain_of:
-    - CSFProperty
-    range: string
-  ns:
-    name: ns
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/ns
-    description: Namespace URI for a property or part
-    in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:ns
-    owner: CSFProperty
-    domain_of:
-    - CSFPart
-    - CSFProperty
-    range: string
-  prose:
-    name: prose
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/prose
-    description: Free-text prose content
-    in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    close_mappings:
-    - cis_controls:description
-    - cis_controls:overview
-    slot_uri: nist_csf_v2:prose
-    owner: CSFPart
-    domain_of:
-    - CSFPart
-    range: string
-  remarks:
-    name: remarks
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/remarks
-    description: Supplemental remarks on a property
-    in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:remarks
-    owner: CSFProperty
-    domain_of:
-    - CSFProperty
-    range: string
-  href:
-    name: href
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/href
-    description: Link or resource reference
-    in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:href
-    owner: ResourceLink
-    domain_of:
-    - Link
-    - ResourceLink
-    range: string
-  rel:
-    name: rel
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/rel
-    description: Relationship type for a link
-    in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:rel
-    owner: Link
-    domain_of:
-    - Link
-    range: string
-  type:
-    name: type
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/type
-    description: Party type (e.g., organization, person)
-    in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:type
-    owner: Party
-    domain_of:
-    - Party
-    range: string
-  short-name:
-    name: short-name
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/short_name
-    description: Short display name for a party
-    in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    aliases:
-    - short_name
-    slot_uri: nist_csf_v2:short_name
-    owner: Party
-    domain_of:
-    - Party
-    range: string
-  email-addresses:
-    name: email-addresses
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/email_addresses
-    description: Party email addresses
-    in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    aliases:
-    - email_addresses
-    slot_uri: nist_csf_v2:email_addresses
-    owner: Party
-    domain_of:
-    - Party
-    range: string
-    multivalued: true
-  addr-lines:
-    name: addr-lines
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/addr_lines
-    description: Address lines
-    in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    aliases:
-    - addr_lines
-    slot_uri: nist_csf_v2:addr_lines
-    owner: Address
-    domain_of:
-    - Address
-    range: string
-    multivalued: true
-  city:
-    name: city
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/city
-    description: City name
-    in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:city
-    owner: Address
-    domain_of:
-    - Address
-    range: string
-  state:
-    name: state
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/state
-    description: State or region
-    in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:state
-    owner: Address
-    domain_of:
-    - Address
-    range: string
-  postal-code:
-    name: postal-code
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/postal_code
-    description: Postal code
-    in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    aliases:
-    - postal_code
-    slot_uri: nist_csf_v2:postal_code
-    owner: Address
-    domain_of:
-    - Address
-    range: string
-  role-id:
-    name: role-id
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/role_id
-    description: Assigned role identifier
-    in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    aliases:
-    - role_id
-    slot_uri: nist_csf_v2:role_id
-    owner: ResponsibleParty
-    domain_of:
-    - ResponsibleParty
-    range: string
-  party-uuids:
-    name: party-uuids
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/party_uuids
-    description: Referenced party UUIDs
-    in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    aliases:
-    - party_uuids
-    slot_uri: nist_csf_v2:party_uuids
-    owner: ResponsibleParty
-    domain_of:
-    - ResponsibleParty
-    range: string
-    multivalued: true
-  media-type:
-    name: media-type
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/media_type
-    description: Media type for a resource link
-    in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    aliases:
-    - media_type
-    slot_uri: nist_csf_v2:media_type
-    owner: ResourceLink
-    domain_of:
-    - ResourceLink
-    range: string
-  CSFElement__class:
-    name: CSFElement__class
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/_class
-    description: Classification of a CSF catalog element (function, category, subcategory)
-    in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    is_a: _class
-    domain: CSFElement
-    slot_uri: nist_csf_v2:class
-    alias: class
-    owner: CSFElement
-    domain_of:
-    - CSFElement
-    is_usage_slot: true
-    usage_slot_name: _class
-    range: CSFElementClassValue
-  CSFCategory_controls:
-    name: CSFCategory_controls
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/controls
-    description: List of categories or subcategories within a function or category
-    in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    close_mappings:
-    - cis_controls:safeguards
-    is_a: controls
-    domain: CSFCategory
-    slot_uri: nist_csf_v2:controls
-    alias: controls
-    owner: CSFCategory
-    domain_of:
-    - CSFCategory
-    is_usage_slot: true
-    usage_slot_name: controls
-    range: CSFSubcategory
+    - CsfFramework
+    range: CsfFunction
+    required: true
     multivalued: true
     inlined: true
     inlined_as_list: true
+  csfFunction__function_id:
+    name: csfFunction__function_id
+    description: The function's two letters, such as GV for GOVERN.
+    from_schema: https://w3id.org/lmodel/nist-csf-v2
+    slot_uri: nist_csf_v2:function_id
+    alias: function_id
+    owner: CsfFunction
+    domain_of:
+    - CsfFunction
+    range: csf_function_identifier
+    required: true
+  csfFunction__function_categories:
+    name: csfFunction__function_categories
+    description: The categories of the function. A knowledge bundle relates a category
+      to its function with isPartOf instead.
+    from_schema: https://w3id.org/lmodel/nist-csf-v2
+    slot_uri: nist_csf_v2:function_categories
+    alias: function_categories
+    owner: CsfFunction
+    domain_of:
+    - CsfFunction
+    range: CsfCategory
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  csfCategory__category_id:
+    name: csfCategory__category_id
+    description: The category's identifier, such as GV.OC.
+    from_schema: https://w3id.org/lmodel/nist-csf-v2
+    slot_uri: nist_csf_v2:category_id
+    alias: category_id
+    owner: CsfCategory
+    domain_of:
+    - CsfCategory
+    range: csf_category_identifier
+    required: true
+  csfCategory__category_subcategories:
+    name: csfCategory__category_subcategories
+    description: The subcategories of the category. A knowledge bundle relates a subcategory
+      to its category with isPartOf instead.
+    from_schema: https://w3id.org/lmodel/nist-csf-v2
+    slot_uri: nist_csf_v2:category_subcategories
+    alias: category_subcategories
+    owner: CsfCategory
+    domain_of:
+    - CsfCategory
+    range: CsfSubcategory
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  csfCategory__category_status:
+    name: csfCategory__category_status
+    description: withdrawn for a CSF 1.1 category that CSF 2.0 withdrew. A category
+      of CSF 2.0 has no status.
+    from_schema: https://w3id.org/lmodel/nist-csf-v2
+    slot_uri: nist_csf_v2:category_status
+    alias: category_status
+    owner: CsfCategory
+    domain_of:
+    - CsfCategory
+    range: CsfElementStatus
+  csfCategory__category_moved_to:
+    name: csfCategory__category_moved_to
+    description: The CSF 2.0 category a withdrawn category moved to, as the catalog
+      states it, such as PR.AA for PR.AC.
+    from_schema: https://w3id.org/lmodel/nist-csf-v2
+    slot_uri: nist_csf_v2:category_moved_to
+    alias: category_moved_to
+    owner: CsfCategory
+    domain_of:
+    - CsfCategory
+    range: csf_category_identifier
+    multivalued: true
+  csfCategory__category_incorporated_into:
+    name: csfCategory__category_incorporated_into
+    description: The function, category or subcategory of CSF 2.0 that took in a withdrawn
+      category's outcomes, as the catalog states it, such as GV.OC for ID.BE. The
+      catalog names none for some withdrawn categories.
+    from_schema: https://w3id.org/lmodel/nist-csf-v2
+    slot_uri: nist_csf_v2:category_incorporated_into
+    alias: category_incorporated_into
+    owner: CsfCategory
+    domain_of:
+    - CsfCategory
+    range: csf_element_identifier
+    multivalued: true
+  csfSubcategory__subcategory_id:
+    name: csfSubcategory__subcategory_id
+    description: The subcategory's identifier, such as GV.OC-01.
+    from_schema: https://w3id.org/lmodel/nist-csf-v2
+    slot_uri: nist_csf_v2:subcategory_id
+    alias: subcategory_id
+    owner: CsfSubcategory
+    domain_of:
+    - CsfSubcategory
+    range: csf_subcategory_identifier
+    required: true
+  csfSubcategory__subcategory_examples:
+    name: csfSubcategory__subcategory_examples
+    description: The implementation examples NIST publishes for the subcategory. CSWP
+      29 says they are notional, that none is required, and that they are not a complete
+      list of what could be done.
+    from_schema: https://w3id.org/lmodel/nist-csf-v2
+    slot_uri: nist_csf_v2:subcategory_examples
+    alias: subcategory_examples
+    owner: CsfSubcategory
+    domain_of:
+    - CsfSubcategory
+    range: CsfImplementationExample
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  csfSubcategory__subcategory_status:
+    name: csfSubcategory__subcategory_status
+    description: withdrawn for a CSF 1.1 subcategory that CSF 2.0 withdrew. A subcategory
+      of CSF 2.0 has no status.
+    from_schema: https://w3id.org/lmodel/nist-csf-v2
+    slot_uri: nist_csf_v2:subcategory_status
+    alias: subcategory_status
+    owner: CsfSubcategory
+    domain_of:
+    - CsfSubcategory
+    range: CsfElementStatus
+  csfSubcategory__subcategory_moved_to:
+    name: csfSubcategory__subcategory_moved_to
+    description: The CSF 2.0 subcategory a withdrawn subcategory moved to, as the
+      catalog states it, such as GV.OC-03 for ID.GV-03. The catalog names two for
+      a few.
+    from_schema: https://w3id.org/lmodel/nist-csf-v2
+    slot_uri: nist_csf_v2:subcategory_moved_to
+    alias: subcategory_moved_to
+    owner: CsfSubcategory
+    domain_of:
+    - CsfSubcategory
+    range: csf_subcategory_identifier
+    multivalued: true
+  csfSubcategory__subcategory_incorporated_into:
+    name: csfSubcategory__subcategory_incorporated_into
+    description: The CSF 2.0 category or subcategory that took in a withdrawn subcategory's
+      outcome, as the catalog states it, such as GV.OC-01 for ID.BE-02.
+    from_schema: https://w3id.org/lmodel/nist-csf-v2
+    slot_uri: nist_csf_v2:subcategory_incorporated_into
+    alias: subcategory_incorporated_into
+    owner: CsfSubcategory
+    domain_of:
+    - CsfSubcategory
+    range: csf_element_identifier
+    multivalued: true
+  csfImplementationExample__implementation_example_id:
+    name: csfImplementationExample__implementation_example_id
+    description: The example's identifier in NIST's reference data, such as GV.OC-01.001
+      for the first example of subcategory GV.OC-01.
+    from_schema: https://w3id.org/lmodel/nist-csf-v2
+    slot_uri: nist_csf_v2:implementation_example_id
+    alias: implementation_example_id
+    owner: CsfImplementationExample
+    domain_of:
+    - CsfImplementationExample
+    range: csf_implementation_example_identifier
+    required: true
+  CsfSubcategory_description:
+    name: CsfSubcategory_description
+    definition_uri: https://w3id.org/lmodel/nist-csf-v2/description
+    description: What the function, category, subcategory or example says, in the
+      words of whoever records it.
+    comments:
+    - It means what LOKF's description means and carries the same IRI, so lokf adapt
+      folds it into LOKF's slot and a knowledge bundle reads one description key.
+    from_schema: https://w3id.org/lmodel/nist-csf-v2
+    mappings:
+    - schema:description
+    is_a: description
+    domain: CsfSubcategory
+    slot_uri: schema:description
+    alias: description
+    owner: CsfSubcategory
+    domain_of:
+    - CsfSubcategory
+    is_usage_slot: true
+    usage_slot_name: description
+    range: string
+    required: true
+  CsfImplementationExample_description:
+    name: CsfImplementationExample_description
+    definition_uri: https://w3id.org/lmodel/nist-csf-v2/description
+    description: What the function, category, subcategory or example says, in the
+      words of whoever records it.
+    comments:
+    - It means what LOKF's description means and carries the same IRI, so lokf adapt
+      folds it into LOKF's slot and a knowledge bundle reads one description key.
+    from_schema: https://w3id.org/lmodel/nist-csf-v2
+    mappings:
+    - schema:description
+    is_a: description
+    domain: CsfImplementationExample
+    slot_uri: schema:description
+    alias: description
+    owner: CsfImplementationExample
+    domain_of:
+    - CsfImplementationExample
+    is_usage_slot: true
+    usage_slot_name: description
+    range: string
+    required: true
 classes:
-  CSFDocument:
-    name: CSFDocument
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/CSFDocument
-    description: Root wrapper for CSF catalog content
-    in_subset:
-    - nist_csf_v2_catalog
+  CsfFramework:
+    name: CsfFramework
+    definition_uri: https://w3id.org/lmodel/nist-csf-v2/CsfFramework
+    description: 'One edition of the CSF as a whole: its functions, each holding its
+      categories and their subcategories.'
     from_schema: https://w3id.org/lmodel/nist-csf-v2
+    see_also:
+    - https://csrc.nist.gov/pubs/cswp/29/the-nist-cybersecurity-framework-csf-20/final
     mappings:
-    - linkml:Any
-    close_mappings:
-    - cis_controls:CISControlsDocument
+    - nist_csf_v2:Framework
+    broad_mappings:
+    - oscal:Catalog
     slots:
-    - catalog
-    class_uri: linkml:Any
+    - csfFramework__csf_version
+    - csfFramework__functions
+    attributes:
+      csf_version:
+        name: csf_version
+        description: The CSF edition, as NIST numbers it in the publication's title,
+          such as 2.0.
+        required: true
+        pattern: ^[0-9]+\.[0-9]+$
+      functions:
+        name: functions
+        description: The six functions, in the order CSWP 29 gives them.
+        range: CsfFunction
+        required: true
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+    class_uri: nist_csf_v2:Framework
     tree_root: true
-  CSFCatalogBody:
-    name: CSFCatalogBody
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/CSFCatalogBody
-    description: Main CSF catalog object
-    in_subset:
-    - nist_csf_v2_catalog
+  CsfFunction:
+    name: CsfFunction
+    definition_uri: https://w3id.org/lmodel/nist-csf-v2/CsfFunction
+    description: 'One of the six functions that sort the CSF''s outcomes at the highest
+      level: GOVERN, IDENTIFY, PROTECT, DETECT, RESPOND and RECOVER. Each is named
+      by two letters and described in a sentence.'
     from_schema: https://w3id.org/lmodel/nist-csf-v2
+    see_also:
+    - https://www.nist.gov/cyberframework
     mappings:
-    - linkml:Any
-    slots:
-    - uuid
-    - metadata
-    - groups
-    - back-matter
-    class_uri: linkml:Any
-  CSFMetadata:
-    name: CSFMetadata
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/CSFMetadata
-    description: OSCAL metadata section for the CSF catalog
-    in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    mappings:
-    - linkml:Any
+    - nist_csf_v2:Function
+    broad_mappings:
+    - oscal:Group
     slots:
     - title
-    - published
-    - last-modified
-    - version
-    - oscal-version
-    - props
-    - links
-    - roles
-    - parties
-    - responsible-parties
-    class_uri: linkml:Any
-  CSFElement:
-    name: CSFElement
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/CSFElement
-    description: Abstract base class for CSF catalog elements
-    in_subset:
-    - nist_csf_v2_catalog
+    - description
+    - csfFunction__function_id
+    - csfFunction__function_categories
+    attributes:
+      function_id:
+        name: function_id
+        description: The function's two letters, such as GV for GOVERN.
+        range: csf_function_identifier
+        required: true
+      function_categories:
+        name: function_categories
+        description: The categories of the function. A knowledge bundle relates a
+          category to its function with isPartOf instead.
+        range: CsfCategory
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+    class_uri: nist_csf_v2:Function
+  CsfCategory:
+    name: CsfCategory
+    definition_uri: https://w3id.org/lmodel/nist-csf-v2/CsfCategory
+    description: A group of related cybersecurity outcomes within a function, such
+      as Organizational Context (GV.OC), or a CSF 1.1 category that CSF 2.0 withdrew,
+      which the catalog keeps with its status and, where NIST recorded it, where it
+      moved or what incorporated it.
+    comments:
+    - A withdrawn category keeps its CSF 1.1 subcategories, each withdrawn too, and
+      the catalog gives it no statement, so it has no description.
     from_schema: https://w3id.org/lmodel/nist-csf-v2
-    abstract: true
+    see_also:
+    - https://www.nist.gov/cyberframework
+    mappings:
+    - nist_csf_v2:Category
+    broad_mappings:
+    - oscal:Control
     slots:
-    - id
-    - CSFElement__class
     - title
-    - props
-    - parts
+    - description
+    - csfCategory__category_id
+    - csfCategory__category_subcategories
+    - csfCategory__category_status
+    - csfCategory__category_moved_to
+    - csfCategory__category_incorporated_into
+    attributes:
+      category_id:
+        name: category_id
+        description: The category's identifier, such as GV.OC.
+        range: csf_category_identifier
+        required: true
+      category_subcategories:
+        name: category_subcategories
+        description: The subcategories of the category. A knowledge bundle relates
+          a subcategory to its category with isPartOf instead.
+        range: CsfSubcategory
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+      category_status:
+        name: category_status
+        description: withdrawn for a CSF 1.1 category that CSF 2.0 withdrew. A category
+          of CSF 2.0 has no status.
+        range: CsfElementStatus
+      category_moved_to:
+        name: category_moved_to
+        description: The CSF 2.0 category a withdrawn category moved to, as the catalog
+          states it, such as PR.AA for PR.AC.
+        range: csf_category_identifier
+        multivalued: true
+      category_incorporated_into:
+        name: category_incorporated_into
+        description: The function, category or subcategory of CSF 2.0 that took in
+          a withdrawn category's outcomes, as the catalog states it, such as GV.OC
+          for ID.BE. The catalog names none for some withdrawn categories.
+        range: csf_element_identifier
+        multivalued: true
+    class_uri: nist_csf_v2:Category
+  CsfSubcategory:
+    name: CsfSubcategory
+    definition_uri: https://w3id.org/lmodel/nist-csf-v2/CsfSubcategory
+    description: 'A cybersecurity outcome: one statement of a result within a category,
+      such as GV.OC-01, or a CSF 1.1 subcategory that CSF 2.0 withdrew, which the
+      catalog keeps with its statement, its status and where it moved or what incorporated
+      it.'
+    comments:
+    - 'A subcategory has no title of its own: its identifier names it and its statement
+      is its description, which is why the description is required here.'
+    from_schema: https://w3id.org/lmodel/nist-csf-v2
+    see_also:
+    - https://www.nist.gov/cyberframework
+    mappings:
+    - nist_csf_v2:Subcategory
+    broad_mappings:
+    - oscal:Control
+    slots:
+    - CsfSubcategory_description
+    - csfSubcategory__subcategory_id
+    - csfSubcategory__subcategory_examples
+    - csfSubcategory__subcategory_status
+    - csfSubcategory__subcategory_moved_to
+    - csfSubcategory__subcategory_incorporated_into
     slot_usage:
-      _class:
-        name: _class
-        range: CSFElementClassValue
-    class_uri: nist_csf_v2:CSFElement
-  CSFFunction:
-    name: CSFFunction
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/CSFFunction
-    description: A CSF function - top-level grouping (e.g. GOVERN, IDENTIFY, PROTECT,
-      DETECT, RESPOND, RECOVER)
-    in_subset:
-    - nist_csf_v2_catalog
+      description:
+        name: description
+        required: true
+    attributes:
+      subcategory_id:
+        name: subcategory_id
+        description: The subcategory's identifier, such as GV.OC-01.
+        range: csf_subcategory_identifier
+        required: true
+      subcategory_examples:
+        name: subcategory_examples
+        description: The implementation examples NIST publishes for the subcategory.
+          CSWP 29 says they are notional, that none is required, and that they are
+          not a complete list of what could be done.
+        range: CsfImplementationExample
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+      subcategory_status:
+        name: subcategory_status
+        description: withdrawn for a CSF 1.1 subcategory that CSF 2.0 withdrew. A
+          subcategory of CSF 2.0 has no status.
+        range: CsfElementStatus
+      subcategory_moved_to:
+        name: subcategory_moved_to
+        description: The CSF 2.0 subcategory a withdrawn subcategory moved to, as
+          the catalog states it, such as GV.OC-03 for ID.GV-03. The catalog names
+          two for a few.
+        range: csf_subcategory_identifier
+        multivalued: true
+      subcategory_incorporated_into:
+        name: subcategory_incorporated_into
+        description: The CSF 2.0 category or subcategory that took in a withdrawn
+          subcategory's outcome, as the catalog states it, such as GV.OC-01 for ID.BE-02.
+        range: csf_element_identifier
+        multivalued: true
+    class_uri: nist_csf_v2:Subcategory
+  CsfImplementationExample:
+    name: CsfImplementationExample
+    definition_uri: https://w3id.org/lmodel/nist-csf-v2/CsfImplementationExample
+    description: 'An implementation example: one concise, action-oriented step that
+      could help achieve a subcategory''s outcome. NIST publishes the examples beside
+      the Core, in its reference tool and its catalog, not in CSWP 29 itself.'
     from_schema: https://w3id.org/lmodel/nist-csf-v2
-    close_mappings:
-    - cis_controls:SecurityFunction
-    is_a: CSFElement
+    see_also:
+    - https://www.nist.gov/cyberframework
+    mappings:
+    - nist_csf_v2:ImplementationExample
+    broad_mappings:
+    - oscal:Part
     slots:
-    - id
-    - CSFElement__class
-    - title
-    - props
-    - parts
-    - controls
-    class_uri: nist_csf_v2:CSFFunction
-  CSFCategory:
-    name: CSFCategory
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/CSFCategory
-    description: A CSF category - second-level grouping within a function (e.g. GV.OC
-      Organizational Context, ID.AM Asset Management)
-    in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    close_mappings:
-    - cis_controls:CISControl
-    is_a: CSFElement
-    slots:
-    - id
-    - CSFElement__class
-    - title
-    - props
-    - parts
-    - CSFCategory_controls
+    - CsfImplementationExample_description
+    - csfImplementationExample__implementation_example_id
     slot_usage:
-      controls:
-        name: controls
-        range: CSFSubcategory
-    class_uri: nist_csf_v2:CSFCategory
-  CSFSubcategory:
-    name: CSFSubcategory
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/CSFSubcategory
-    description: A CSF subcategory - specific cybersecurity outcome (e.g. GV.OC-01,
-      ID.AM-01)
-    in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    close_mappings:
-    - cis_controls:Safeguard
-    is_a: CSFElement
-    slots:
-    - id
-    - CSFElement__class
-    - title
-    - props
-    - parts
-    class_uri: nist_csf_v2:CSFSubcategory
-  CSFPart:
-    name: CSFPart
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/CSFPart
-    description: Structured narrative part (statement, overview, or example)
-    in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    mappings:
-    - linkml:Any
-    slots:
-    - id
-    - name
-    - ns
-    - prose
-    class_uri: linkml:Any
-  CSFProperty:
-    name: CSFProperty
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/CSFProperty
-    description: A name-value property with optional namespace and supplemental remarks
-    in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slots:
-    - name
-    - value
-    - ns
-    - remarks
-    class_uri: nist_csf_v2:CSFProperty
-  Link:
-    name: Link
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/Link
-    description: Relationship link with href and optional rel attribute
-    in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slots:
-    - href
-    - rel
-    class_uri: nist_csf_v2:Link
-  Role:
-    name: Role
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/Role
-    description: Role definition used in metadata
-    in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slots:
-    - id
-    - title
-    class_uri: nist_csf_v2:Role
-  Party:
-    name: Party
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/Party
-    description: Party definition (person or organization)
-    in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    mappings:
-    - linkml:Any
-    slots:
-    - uuid
-    - type
-    - name
-    - short-name
-    - email-addresses
-    - addresses
-    class_uri: linkml:Any
-  Address:
-    name: Address
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/Address
-    description: Postal address
-    in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    mappings:
-    - linkml:Any
-    slots:
-    - addr-lines
-    - city
-    - state
-    - postal-code
-    class_uri: linkml:Any
-  ResponsibleParty:
-    name: ResponsibleParty
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/ResponsibleParty
-    description: Assignment of parties to a role
-    in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    mappings:
-    - linkml:Any
-    slots:
-    - role-id
-    - party-uuids
-    class_uri: linkml:Any
-  BackMatter:
-    name: BackMatter
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/BackMatter
-    description: OSCAL back-matter section containing resource references
-    in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    mappings:
-    - linkml:Any
-    slots:
-    - resources
-    class_uri: linkml:Any
-  Resource:
-    name: Resource
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/Resource
-    description: Referenced resource in back-matter
-    in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    mappings:
-    - linkml:Any
-    slots:
-    - uuid
-    - title
-    - rlinks
-    class_uri: linkml:Any
-  ResourceLink:
-    name: ResourceLink
-    definition_uri: https://w3id.org/lmodel/nist-csf-v2/ResourceLink
-    description: Reference link for a back-matter resource
-    in_subset:
-    - nist_csf_v2_catalog
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    mappings:
-    - linkml:Any
-    slots:
-    - href
-    - media-type
-    class_uri: linkml:Any
+      description:
+        name: description
+        required: true
+    attributes:
+      implementation_example_id:
+        name: implementation_example_id
+        description: The example's identifier in NIST's reference data, such as GV.OC-01.001
+          for the first example of subcategory GV.OC-01.
+        range: csf_implementation_example_identifier
+        required: true
+    class_uri: nist_csf_v2:ImplementationExample
 metamodel_version: 1.7.0
 source_file: nist_csf_v2.yaml
-source_file_date: '2026-04-15T20:46:42'
-source_file_size: 10548
-generation_date: '2026-04-15T23:33:05'
+source_file_date: '2026-10-29T21:21:20'
+source_file_size: 12306
+generation_date: '2026-10-29T21:21:47'
 

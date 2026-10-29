@@ -1,234 +1,87 @@
 /**
-* Allowed class values for CSF catalog elements
+* The state the catalog gives a category or subcategory that CSF 2.0 no longer carries. A category or subcategory of CSF 2.0 has no status.
 */
-export enum CSFElementClassValue {
+export enum CsfElementStatus {
     
-    function = "function",
-    category = "category",
-    subcategory = "subcategory",
+    /** The element was in CSF 1.1 and CSF 2.0 withdrew it. The catalog keeps it, and names where it moved or what incorporated it where NIST recorded that. */
+    withdrawn = "withdrawn",
 };
 
 
 /**
- * Root wrapper for CSF catalog content
+ * One edition of the CSF as a whole: its functions, each holding its categories and their subcategories.
  */
-export interface CSFDocument {
-    /** Root catalog payload */
-    catalog?: CSFCatalogBody,
+export interface CsfFramework {
+    /** The CSF edition, as NIST numbers it in the publication's title, such as 2.0. */
+    csf_version: string,
+    /** The six functions, in the order CSWP 29 gives them. */
+    functions: CsfFunction[],
 }
 
 
 /**
- * Main CSF catalog object
+ * One of the six functions that sort the CSF's outcomes at the highest level: GOVERN, IDENTIFY, PROTECT, DETECT, RESPOND and RECOVER. Each is named by two letters and described in a sentence.
  */
-export interface CSFCatalogBody {
-    /** UUID for catalog or resource element */
-    uuid?: string,
-    /** Catalog metadata */
-    metadata?: CSFMetadata,
-    /** List of CSF functions (top-level groupings) in the catalog */
-    groups?: CSFFunction[],
-    /** Back-matter references and resources */
-    back_matter?: BackMatter,
-}
-
-
-/**
- * OSCAL metadata section for the CSF catalog
- */
-export interface CSFMetadata {
-    /** Human-readable title */
+export interface CsfFunction {
+    /** The name CSWP 29 gives the function or category. */
     title?: string,
-    /** Publication timestamp */
-    published?: string,
-    /** Last modification timestamp */
-    last_modified?: string,
-    /** Version identifier */
-    version?: string,
-    /** OSCAL version identifier */
-    oscal_version?: string,
-    /** List of properties */
-    props?: CSFProperty[],
-    /** List of links and relationships */
-    links?: Link[],
-    /** Roles used in metadata */
-    roles?: Role[],
-    /** Parties used in metadata */
-    parties?: Party[],
-    /** Responsible party assignments */
-    responsible_parties?: ResponsibleParty[],
+    /** What the function, category, subcategory or example says, in the words of whoever records it. */
+    description?: string,
+    /** The function's two letters, such as GV for GOVERN. */
+    function_id: string,
+    /** The categories of the function. A knowledge bundle relates a category to its function with isPartOf instead. */
+    function_categories?: CsfCategory[],
 }
 
 
 /**
- * Abstract base class for CSF catalog elements
+ * A group of related cybersecurity outcomes within a function, such as Organizational Context (GV.OC), or a CSF 1.1 category that CSF 2.0 withdrew, which the catalog keeps with its status and, where NIST recorded it, where it moved or what incorporated it.
  */
-export interface CSFElement {
-    /** Unique identifier for a catalog element */
-    id?: string,
-    /** Classification of a CSF catalog element (function, category, subcategory) */
-    class?: string,
-    /** Human-readable title */
+export interface CsfCategory {
+    /** The name CSWP 29 gives the function or category. */
     title?: string,
-    /** List of properties */
-    props?: CSFProperty[],
-    /** Structured narrative parts (e.g., statement, overview, example) */
-    parts?: CSFPart[],
+    /** What the function, category, subcategory or example says, in the words of whoever records it. */
+    description?: string,
+    /** The category's identifier, such as GV.OC. */
+    category_id: string,
+    /** The subcategories of the category. A knowledge bundle relates a subcategory to its category with isPartOf instead. */
+    category_subcategories?: CsfSubcategory[],
+    /** withdrawn for a CSF 1.1 category that CSF 2.0 withdrew. A category of CSF 2.0 has no status. */
+    category_status?: string,
+    /** The CSF 2.0 category a withdrawn category moved to, as the catalog states it, such as PR.AA for PR.AC. */
+    category_moved_to?: string[],
+    /** The function, category or subcategory of CSF 2.0 that took in a withdrawn category's outcomes, as the catalog states it, such as GV.OC for ID.BE. The catalog names none for some withdrawn categories. */
+    category_incorporated_into?: string[],
 }
 
 
 /**
- * A CSF function - top-level grouping (e.g. GOVERN, IDENTIFY, PROTECT, DETECT, RESPOND, RECOVER)
+ * A cybersecurity outcome: one statement of a result within a category, such as GV.OC-01, or a CSF 1.1 subcategory that CSF 2.0 withdrew, which the catalog keeps with its statement, its status and where it moved or what incorporated it.
  */
-export interface CSFFunction extends CSFElement {
-    /** List of categories or subcategories within a function or category */
-    controls?: CSFCategory[],
+export interface CsfSubcategory {
+    /** What the function, category, subcategory or example says, in the words of whoever records it. */
+    description: string,
+    /** The subcategory's identifier, such as GV.OC-01. */
+    subcategory_id: string,
+    /** The implementation examples NIST publishes for the subcategory. CSWP 29 says they are notional, that none is required, and that they are not a complete list of what could be done. */
+    subcategory_examples?: CsfImplementationExample[],
+    /** withdrawn for a CSF 1.1 subcategory that CSF 2.0 withdrew. A subcategory of CSF 2.0 has no status. */
+    subcategory_status?: string,
+    /** The CSF 2.0 subcategory a withdrawn subcategory moved to, as the catalog states it, such as GV.OC-03 for ID.GV-03. The catalog names two for a few. */
+    subcategory_moved_to?: string[],
+    /** The CSF 2.0 category or subcategory that took in a withdrawn subcategory's outcome, as the catalog states it, such as GV.OC-01 for ID.BE-02. */
+    subcategory_incorporated_into?: string[],
 }
 
 
 /**
- * A CSF category - second-level grouping within a function (e.g. GV.OC Organizational Context, ID.AM Asset Management)
+ * An implementation example: one concise, action-oriented step that could help achieve a subcategory's outcome. NIST publishes the examples beside the Core, in its reference tool and its catalog, not in CSWP 29 itself.
  */
-export interface CSFCategory extends CSFElement {
-    /** List of categories or subcategories within a function or category */
-    controls?: CSFSubcategory[],
-}
-
-
-/**
- * A CSF subcategory - specific cybersecurity outcome (e.g. GV.OC-01, ID.AM-01)
- */
-export interface CSFSubcategory extends CSFElement {
-}
-
-
-/**
- * Structured narrative part (statement, overview, or example)
- */
-export interface CSFPart {
-    /** Unique identifier for a catalog element */
-    id?: string,
-    /** Name of a property or part */
-    name?: string,
-    /** Namespace URI for a property or part */
-    ns?: string,
-    /** Free-text prose content */
-    prose?: string,
-}
-
-
-/**
- * A name-value property with optional namespace and supplemental remarks
- */
-export interface CSFProperty {
-    /** Name of a property or part */
-    name?: string,
-    /** Property value */
-    value?: string,
-    /** Namespace URI for a property or part */
-    ns?: string,
-    /** Supplemental remarks on a property */
-    remarks?: string,
-}
-
-
-/**
- * Relationship link with href and optional rel attribute
- */
-export interface Link {
-    /** Link or resource reference */
-    href?: string,
-    /** Relationship type for a link */
-    rel?: string,
-}
-
-
-/**
- * Role definition used in metadata
- */
-export interface Role {
-    /** Unique identifier for a catalog element */
-    id?: string,
-    /** Human-readable title */
-    title?: string,
-}
-
-
-/**
- * Party definition (person or organization)
- */
-export interface Party {
-    /** UUID for catalog or resource element */
-    uuid?: string,
-    /** Party type (e.g., organization, person) */
-    type?: string,
-    /** Name of a property or part */
-    name?: string,
-    /** Short display name for a party */
-    short_name?: string,
-    /** Party email addresses */
-    email_addresses?: string[],
-    /** Postal addresses */
-    addresses?: Address[],
-}
-
-
-/**
- * Postal address
- */
-export interface Address {
-    /** Address lines */
-    addr_lines?: string[],
-    /** City name */
-    city?: string,
-    /** State or region */
-    state?: string,
-    /** Postal code */
-    postal_code?: string,
-}
-
-
-/**
- * Assignment of parties to a role
- */
-export interface ResponsibleParty {
-    /** Assigned role identifier */
-    role_id?: string,
-    /** Referenced party UUIDs */
-    party_uuids?: string[],
-}
-
-
-/**
- * OSCAL back-matter section containing resource references
- */
-export interface BackMatter {
-    /** Back-matter resources */
-    resources?: Resource[],
-}
-
-
-/**
- * Referenced resource in back-matter
- */
-export interface Resource {
-    /** UUID for catalog or resource element */
-    uuid?: string,
-    /** Human-readable title */
-    title?: string,
-    /** Resource links */
-    rlinks?: ResourceLink[],
-}
-
-
-/**
- * Reference link for a back-matter resource
- */
-export interface ResourceLink {
-    /** Link or resource reference */
-    href?: string,
-    /** Media type for a resource link */
-    media_type?: string,
+export interface CsfImplementationExample {
+    /** What the function, category, subcategory or example says, in the words of whoever records it. */
+    description: string,
+    /** The example's identifier in NIST's reference data, such as GV.OC-01.001 for the first example of subcategory GV.OC-01. */
+    implementation_example_id: string,
 }
 
 

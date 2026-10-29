@@ -1,500 +1,333 @@
 ---
 id: https://w3id.org/lmodel/nist-csf-v2
-name: nist-csf-v2
-title: nist-csf-v2
-description: |-
-  NIST Cybersecurity Framework 2.0
+name: nist_csf_v2
+title: The NIST Cybersecurity Framework (CSF) 2.0
+description: >-
+  A LinkML model of the Cybersecurity Framework (CSF) 2.0, which NIST
+  publishes as Cybersecurity White Paper (CSWP) 29: its six functions, their
+  categories and subcategories, the implementation examples NIST publishes
+  with the subcategories, and the CSF 1.1 categories and subcategories that
+  CSF 2.0 withdrew, each with its status and, where NIST recorded it, where
+  it moved or what incorporated it.
 version: 2.0.0
-license: Apache-2.0
 source: https://doi.org/10.6028/NIST.CSWP.29
+license: Apache-2.0
 see_also:
   - https://lmodel.github.io/nist-csf-v2
+  - https://csrc.nist.gov/pubs/cswp/29/the-nist-cybersecurity-framework-csf-20/final
+  - https://www.nist.gov/cyberframework
+  - https://github.com/usnistgov/oscal-content/tree/v1.6.0/nist.gov/CSF/v2.0
+annotations:
+  cprt_framework_version: CSF_2_0_0
+  publication_date: "2024-02"
+  oscal_content_tag: v1.6.0
+  oscal_content_commit: f0de6d8d8c059d374f15e0ae07508d82e370fc1d
+comments:
+  - >-
+    The version is the CSF edition that CSWP 29 defines, and source is the
+    publication's digital object identifier. NIST's Cybersecurity and Privacy
+    Reference Tool names the same edition CSF_2_0_0, and the catalog NIST
+    publishes for it in usnistgov/oscal-content is copied to
+    src/nist_csf_v2/schema/oscal-content/ at the tag and commit in the
+    annotations. That catalog carries a version number of its own, 1.2.1,
+    which numbers the catalog and not the framework. The release tags are the
+    schema's own versions, and scripts/check_upstream_release.py reads the
+    same pins and reports when NIST publishes another edition or changes the
+    catalog.
+  - >-
+    CSWP 29 is a work of the United States Government and is not subject to
+    copyright in the United States. The descriptions here are this project's
+    own words; NIST's text of each function, category, subcategory and example
+    stays in the catalog copy.
+  - >-
+    NIST's catalog renders each function as an OSCAL group, each category and
+    subcategory as an OSCAL control and each implementation example as a part.
+    The broad_mappings name those lmodel/oscal classes. A withdrawn category or
+    subcategory is a control with a status property and links to where it
+    moved or what incorporated it; the schema carries those as the element's
+    status and identifiers.
+  - >-
+    The catalog also marks most CSF 2.0 subcategories as first-party risk,
+    third-party risk or both, in a marking property of class risk-party.
+    CSWP 29 carries no such marking, so it is the reference tool's and the
+    schema leaves it out.
 
-prefixes:
-  nist_csf_v2:  https://w3id.org/lmodel/nist-csf-v2/
-  linkml:       https://w3id.org/linkml/
-  cis_controls: https://w3id.org/lmodel/cis-controls/
 default_prefix: nist_csf_v2
 default_range: string
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  nist_csf_v2: https://w3id.org/lmodel/nist-csf-v2/
+  oscal: https://w3id.org/lmodel/oscal/
+  schema: http://schema.org/
+  xsd: http://www.w3.org/2001/XMLSchema#
 
 imports:
   - linkml:types
 
-subsets:
-  nist_csf_v2_catalog:
+types:
+  csf_function_identifier:
+    typeof: string
+    base: str
+    uri: xsd:string
     description: >-
-      NIST CSF 2.0 Catalog subset for functions, categories, and subcategories
+      The two letters that name one of the six functions, such as GV for
+      GOVERN.
+    pattern: "^(GV|ID|PR|DE|RS|RC)$"
+
+  csf_category_identifier:
+    typeof: string
+    base: str
+    uri: xsd:string
+    description: >-
+      A category's identifier: its function's letters, a dot and two letters
+      for the category, such as GV.OC for Organizational Context.
+    pattern: "^(GV|ID|PR|DE|RS|RC)\\.[A-Z]{2}$"
+
+  csf_subcategory_identifier:
+    typeof: string
+    base: str
+    uri: xsd:string
+    description: >-
+      A subcategory's identifier: its category's identifier, a hyphen and a
+      two-digit number, such as GV.OC-01. CSWP 29 says the numbers are not
+      sequential on purpose: a gap marks a CSF 1.1 subcategory that CSF 2.0
+      moved elsewhere.
+    pattern: "^(GV|ID|PR|DE|RS|RC)\\.[A-Z]{2}-[0-9]{2}$"
+
+  csf_implementation_example_identifier:
+    typeof: string
+    base: str
+    uri: xsd:string
+    description: >-
+      The identifier NIST's reference data gives an implementation example:
+      its subcategory's identifier, a dot and a three-digit number, such as
+      GV.OC-01.001. The numbers run once through the whole Core, so no two
+      examples share one.
+    pattern: "^(GV|ID|PR|DE|RS|RC)\\.[A-Z]{2}-[0-9]{2}\\.[0-9]{3}$"
+
+  csf_element_identifier:
+    typeof: string
+    base: str
+    uri: xsd:string
+    description: >-
+      The identifier of a function, a category or a subcategory, whichever
+      of the three a withdrawn element names as what incorporated it.
+    pattern: "^(GV|ID|PR|DE|RS|RC)(\\.[A-Z]{2}(-[0-9]{2})?)?$"
 
 slots:
-  catalog:
-    description: Root catalog payload
-    range: CSFCatalogBody
-    inlined: true
-    in_subset:
-      - nist_csf_v2_catalog
-
-  metadata:
-    description: Catalog metadata
-    range: CSFMetadata
-    inlined: true
-    in_subset:
-      - nist_csf_v2_catalog
-
-  groups:
-    description: List of CSF functions (top-level groupings) in the catalog
-    range: CSFFunction
-    multivalued: true
-    inlined: true
-    inlined_as_list: true
-    close_mappings: [cis_controls:controls]
-    in_subset:
-      - nist_csf_v2_catalog
-
-  controls:
-    description: List of categories or subcategories within a function or category
-    range: CSFCategory
-    multivalued: true
-    inlined: true
-    inlined_as_list: true
-    close_mappings: [cis_controls:safeguards]
-    in_subset:
-      - nist_csf_v2_catalog
-
-  props:
-    description: List of properties
-    range: CSFProperty
-    multivalued: true
-    inlined: true
-    inlined_as_list: true
-    in_subset:
-      - nist_csf_v2_catalog
-
-  links:
-    description: List of links and relationships
-    range: Link
-    multivalued: true
-    inlined: true
-    inlined_as_list: true
-    in_subset:
-      - nist_csf_v2_catalog
-
-  parts:
-    description: Structured narrative parts (e.g., statement, overview, example)
-    range: CSFPart
-    multivalued: true
-    inlined: true
-    inlined_as_list: true
-    in_subset:
-      - nist_csf_v2_catalog
-
-  roles:
-    description: Roles used in metadata
-    range: Role
-    multivalued: true
-    inlined: true
-    inlined_as_list: true
-    in_subset:
-      - nist_csf_v2_catalog
-
-  parties:
-    description: Parties used in metadata
-    range: Party
-    multivalued: true
-    inlined: true
-    inlined_as_list: true
-    in_subset:
-      - nist_csf_v2_catalog
-
-  "responsible-parties":
-    description: Responsible party assignments
-    aliases:
-      - responsible_parties
-    range: ResponsibleParty
-    multivalued: true
-    inlined: true
-    inlined_as_list: true
-    in_subset:
-      - nist_csf_v2_catalog
-
-  "back-matter":
-    description: Back-matter references and resources
-    aliases:
-      - back_matter
-    range: BackMatter
-    inlined: true
-    in_subset:
-      - nist_csf_v2_catalog
-
-  resources:
-    description: Back-matter resources
-    range: Resource
-    multivalued: true
-    inlined: true
-    inlined_as_list: true
-    in_subset:
-      - nist_csf_v2_catalog
-
-  rlinks:
-    description: Resource links
-    range: ResourceLink
-    multivalued: true
-    inlined: true
-    inlined_as_list: true
-    in_subset:
-      - nist_csf_v2_catalog
-
-  addresses:
-    description: Postal addresses
-    range: Address
-    multivalued: true
-    inlined: true
-    inlined_as_list: true
-    in_subset:
-      - nist_csf_v2_catalog
-
-  id:
-    description: Unique identifier for a catalog element
-    exact_mappings: [cis_controls:id]
-    in_subset:
-      - nist_csf_v2_catalog
-
-  uuid:
-    description: UUID for catalog or resource element
-    in_subset:
-      - nist_csf_v2_catalog
-
   title:
-    description: Human-readable title
-    exact_mappings: [cis_controls:title]
-    in_subset:
-      - nist_csf_v2_catalog
+    description: The name CSWP 29 gives the function or category.
+    slot_uri: schema:name
+    comments:
+      - >-
+        It means what LOKF's title means and carries the same IRI, so lokf
+        adapt folds it into LOKF's slot and a knowledge bundle reads one title
+        key.
 
-  published:
-    description: Publication timestamp
-    in_subset:
-      - nist_csf_v2_catalog
-
-  "last-modified":
-    description: Last modification timestamp
-    aliases:
-      - last_modified
-    in_subset:
-      - nist_csf_v2_catalog
-
-  version:
-    description: Version identifier
-    exact_mappings: [cis_controls:version]
-    in_subset:
-      - nist_csf_v2_catalog
-
-  "oscal-version":
-    description: OSCAL version identifier
-    aliases:
-      - oscal_version
-    in_subset:
-      - nist_csf_v2_catalog
-
-  _class:
-    description: Classification of a CSF catalog element (function, category, subcategory)
-    alias: class
-    in_subset:
-      - nist_csf_v2_catalog
-
-  name:
-    description: Name of a property or part
-    in_subset:
-      - nist_csf_v2_catalog
-
-  value:
-    description: Property value
-    in_subset:
-      - nist_csf_v2_catalog
-
-  ns:
-    description: Namespace URI for a property or part
-    in_subset:
-      - nist_csf_v2_catalog
-
-  prose:
-    description: Free-text prose content
-    close_mappings: [cis_controls:description, cis_controls:overview]
-    in_subset:
-      - nist_csf_v2_catalog
-
-  remarks:
-    description: Supplemental remarks on a property
-    in_subset:
-      - nist_csf_v2_catalog
-
-  href:
-    description: Link or resource reference
-    in_subset:
-      - nist_csf_v2_catalog
-
-  rel:
-    description: Relationship type for a link
-    in_subset:
-      - nist_csf_v2_catalog
-
-  type:
-    description: Party type (e.g., organization, person)
-    in_subset:
-      - nist_csf_v2_catalog
-
-  "short-name":
-    description: Short display name for a party
-    aliases:
-      - short_name
-    in_subset:
-      - nist_csf_v2_catalog
-
-  "email-addresses":
-    description: Party email addresses
-    aliases:
-      - email_addresses
-    multivalued: true
-    in_subset:
-      - nist_csf_v2_catalog
-
-  "addr-lines":
-    description: Address lines
-    aliases:
-      - addr_lines
-    multivalued: true
-    in_subset:
-      - nist_csf_v2_catalog
-
-  city:
-    description: City name
-    in_subset:
-      - nist_csf_v2_catalog
-
-  state:
-    description: State or region
-    in_subset:
-      - nist_csf_v2_catalog
-
-  "postal-code":
-    description: Postal code
-    aliases:
-      - postal_code
-    in_subset:
-      - nist_csf_v2_catalog
-
-  "role-id":
-    description: Assigned role identifier
-    aliases:
-      - role_id
-    in_subset:
-      - nist_csf_v2_catalog
-
-  "party-uuids":
-    description: Referenced party UUIDs
-    aliases:
-      - party_uuids
-    multivalued: true
-    in_subset:
-      - nist_csf_v2_catalog
-
-  "media-type":
-    description: Media type for a resource link
-    aliases:
-      - media_type
-    in_subset:
-      - nist_csf_v2_catalog
-
-enums:
-  CSFElementClassValue:
-    description: Allowed class values for CSF catalog elements
-    permissible_values:
-      function:
-      category:
-      subcategory:
-    in_subset:
-      - nist_csf_v2_catalog
+  description:
+    description: >-
+      What the function, category, subcategory or example says, in the words
+      of whoever records it.
+    slot_uri: schema:description
+    comments:
+      - >-
+        It means what LOKF's description means and carries the same IRI, so
+        lokf adapt folds it into LOKF's slot and a knowledge bundle reads one
+        description key.
 
 classes:
-  CSFDocument:
-    description: Root wrapper for CSF catalog content
+  CsfFramework:
     tree_root: true
-    class_uri: linkml:Any
-    slots:
-      - catalog
-    close_mappings: [cis_controls:CISControlsDocument]
-    in_subset:
-      - nist_csf_v2_catalog
+    class_uri: nist_csf_v2:Framework
+    description: >-
+      One edition of the CSF as a whole: its functions, each holding its
+      categories and their subcategories.
+    see_also:
+      - https://csrc.nist.gov/pubs/cswp/29/the-nist-cybersecurity-framework-csf-20/final
+    broad_mappings:
+      - oscal:Catalog
+    attributes:
+      csf_version:
+        description: >-
+          The CSF edition, as NIST numbers it in the publication's title,
+          such as 2.0.
+        required: true
+        pattern: "^[0-9]+\\.[0-9]+$"
+      functions:
+        description: The six functions, in the order CSWP 29 gives them.
+        range: CsfFunction
+        required: true
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
 
-  CSFCatalogBody:
-    description: Main CSF catalog object
-    class_uri: linkml:Any
-    slots:
-      - uuid
-      - metadata
-      - groups
-      - "back-matter"
-    in_subset:
-      - nist_csf_v2_catalog
-
-  CSFMetadata:
-    description: OSCAL metadata section for the CSF catalog
-    class_uri: linkml:Any
+  CsfFunction:
+    class_uri: nist_csf_v2:Function
+    description: >-
+      One of the six functions that sort the CSF's outcomes at the highest
+      level: GOVERN, IDENTIFY, PROTECT, DETECT, RESPOND and RECOVER. Each is
+      named by two letters and described in a sentence.
+    see_also:
+      - https://www.nist.gov/cyberframework
+    broad_mappings:
+      - oscal:Group
     slots:
       - title
-      - published
-      - "last-modified"
-      - version
-      - "oscal-version"
-      - props
-      - links
-      - roles
-      - parties
-      - "responsible-parties"
-    in_subset:
-      - nist_csf_v2_catalog
+      - description
+    attributes:
+      function_id:
+        description: The function's two letters, such as GV for GOVERN.
+        range: csf_function_identifier
+        required: true
+      function_categories:
+        description: >-
+          The categories of the function. A knowledge bundle relates a
+          category to its function with isPartOf instead.
+        range: CsfCategory
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
 
-  CSFElement:
-    description: Abstract base class for CSF catalog elements
-    abstract: true
+  CsfCategory:
+    class_uri: nist_csf_v2:Category
+    description: >-
+      A group of related cybersecurity outcomes within a function, such as
+      Organizational Context (GV.OC), or a CSF 1.1 category that CSF 2.0
+      withdrew, which the catalog keeps with its status and, where NIST
+      recorded it, where it moved or what incorporated it.
+    see_also:
+      - https://www.nist.gov/cyberframework
+    broad_mappings:
+      - oscal:Control
+    comments:
+      - >-
+        A withdrawn category keeps its CSF 1.1 subcategories, each withdrawn
+        too, and the catalog gives it no statement, so it has no description.
     slots:
-      - id
-      - _class
       - title
-      - props
-      - parts
+      - description
+    attributes:
+      category_id:
+        description: The category's identifier, such as GV.OC.
+        range: csf_category_identifier
+        required: true
+      category_subcategories:
+        description: >-
+          The subcategories of the category. A knowledge bundle relates a
+          subcategory to its category with isPartOf instead.
+        range: CsfSubcategory
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+      category_status:
+        description: >-
+          withdrawn for a CSF 1.1 category that CSF 2.0 withdrew. A category
+          of CSF 2.0 has no status.
+        range: CsfElementStatus
+      category_moved_to:
+        description: >-
+          The CSF 2.0 category a withdrawn category moved to, as the catalog
+          states it, such as PR.AA for PR.AC.
+        range: csf_category_identifier
+        multivalued: true
+      category_incorporated_into:
+        description: >-
+          The function, category or subcategory of CSF 2.0 that took in a
+          withdrawn category's outcomes, as the catalog states it, such as
+          GV.OC for ID.BE. The catalog names none for some withdrawn
+          categories.
+        range: csf_element_identifier
+        multivalued: true
+
+  CsfSubcategory:
+    class_uri: nist_csf_v2:Subcategory
+    description: >-
+      A cybersecurity outcome: one statement of a result within a category,
+      such as GV.OC-01, or a CSF 1.1 subcategory that CSF 2.0 withdrew, which
+      the catalog keeps with its statement, its status and where it moved or
+      what incorporated it.
+    see_also:
+      - https://www.nist.gov/cyberframework
+    broad_mappings:
+      - oscal:Control
+    comments:
+      - >-
+        A subcategory has no title of its own: its identifier names it and
+        its statement is its description, which is why the description is
+        required here.
+    slots:
+      - description
     slot_usage:
-      _class:
-        range: CSFElementClassValue
-    in_subset:
-      - nist_csf_v2_catalog
+      description:
+        required: true
+    attributes:
+      subcategory_id:
+        description: The subcategory's identifier, such as GV.OC-01.
+        range: csf_subcategory_identifier
+        required: true
+      subcategory_examples:
+        description: >-
+          The implementation examples NIST publishes for the subcategory.
+          CSWP 29 says they are notional, that none is required, and that they
+          are not a complete list of what could be done.
+        range: CsfImplementationExample
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+      subcategory_status:
+        description: >-
+          withdrawn for a CSF 1.1 subcategory that CSF 2.0 withdrew. A
+          subcategory of CSF 2.0 has no status.
+        range: CsfElementStatus
+      subcategory_moved_to:
+        description: >-
+          The CSF 2.0 subcategory a withdrawn subcategory moved to, as the
+          catalog states it, such as GV.OC-03 for ID.GV-03. The catalog names
+          two for a few.
+        range: csf_subcategory_identifier
+        multivalued: true
+      subcategory_incorporated_into:
+        description: >-
+          The CSF 2.0 category or subcategory that took in a withdrawn
+          subcategory's outcome, as the catalog states it, such as GV.OC-01
+          for ID.BE-02.
+        range: csf_element_identifier
+        multivalued: true
 
-  CSFFunction:
+  CsfImplementationExample:
+    class_uri: nist_csf_v2:ImplementationExample
     description: >-
-      A CSF function - top-level grouping (e.g. GOVERN, IDENTIFY, PROTECT,
-      DETECT, RESPOND, RECOVER)
-    is_a: CSFElement
+      An implementation example: one concise, action-oriented step that could
+      help achieve a subcategory's outcome. NIST publishes the examples beside
+      the Core, in its reference tool and its catalog, not in CSWP 29 itself.
+    see_also:
+      - https://www.nist.gov/cyberframework
+    broad_mappings:
+      - oscal:Part
     slots:
-      - controls
-    close_mappings: [cis_controls:SecurityFunction]
-    in_subset:
-      - nist_csf_v2_catalog
-
-  CSFCategory:
-    description: >-
-      A CSF category - second-level grouping within a function
-      (e.g. GV.OC Organizational Context, ID.AM Asset Management)
-    is_a: CSFElement
-    slots:
-      - controls
+      - description
     slot_usage:
-      controls:
-        range: CSFSubcategory
-    close_mappings: [cis_controls:CISControl]
-    in_subset:
-      - nist_csf_v2_catalog
+      description:
+        required: true
+    attributes:
+      implementation_example_id:
+        description: >-
+          The example's identifier in NIST's reference data, such as
+          GV.OC-01.001 for the first example of subcategory GV.OC-01.
+        range: csf_implementation_example_identifier
+        required: true
 
-  CSFSubcategory:
+enums:
+  CsfElementStatus:
     description: >-
-      A CSF subcategory - specific cybersecurity outcome
-      (e.g. GV.OC-01, ID.AM-01)
-    is_a: CSFElement
-    close_mappings: [cis_controls:Safeguard]
-    in_subset:
-      - nist_csf_v2_catalog
-
-  CSFPart:
-    description: Structured narrative part (statement, overview, or example)
-    class_uri: linkml:Any
-    slots:
-      - id
-      - name
-      - ns
-      - prose
-    in_subset:
-      - nist_csf_v2_catalog
-
-  CSFProperty:
-    description: >-
-      A name-value property with optional namespace and supplemental remarks
-    slots:
-      - name
-      - value
-      - ns
-      - remarks
-    in_subset:
-      - nist_csf_v2_catalog
-
-  Link:
-    description: Relationship link with href and optional rel attribute
-    slots:
-      - href
-      - rel
-    in_subset:
-      - nist_csf_v2_catalog
-
-  Role:
-    description: Role definition used in metadata
-    slots:
-      - id
-      - title
-    in_subset:
-      - nist_csf_v2_catalog
-
-  Party:
-    description: Party definition (person or organization)
-    class_uri: linkml:Any
-    slots:
-      - uuid
-      - type
-      - name
-      - "short-name"
-      - "email-addresses"
-      - addresses
-    in_subset:
-      - nist_csf_v2_catalog
-
-  Address:
-    description: Postal address
-    class_uri: linkml:Any
-    slots:
-      - "addr-lines"
-      - city
-      - state
-      - "postal-code"
-    in_subset:
-      - nist_csf_v2_catalog
-
-  ResponsibleParty:
-    description: Assignment of parties to a role
-    class_uri: linkml:Any
-    slots:
-      - "role-id"
-      - "party-uuids"
-    in_subset:
-      - nist_csf_v2_catalog
-
-  BackMatter:
-    description: OSCAL back-matter section containing resource references
-    class_uri: linkml:Any
-    slots:
-      - resources
-    in_subset:
-      - nist_csf_v2_catalog
-
-  Resource:
-    description: Referenced resource in back-matter
-    class_uri: linkml:Any
-    slots:
-      - uuid
-      - title
-      - rlinks
-    in_subset:
-      - nist_csf_v2_catalog
-
-  ResourceLink:
-    description: Reference link for a back-matter resource
-    class_uri: linkml:Any
-    slots:
-      - href
-      - "media-type"
-    in_subset:
-      - nist_csf_v2_catalog
+      The state the catalog gives a category or subcategory that CSF 2.0 no
+      longer carries. A category or subcategory of CSF 2.0 has no status.
+    see_also:
+      - https://doi.org/10.6028/NIST.CSWP.29
+    permissible_values:
+      withdrawn:
+        description: >-
+          The element was in CSF 1.1 and CSF 2.0 withdrew it. The catalog keeps
+          it, and names where it moved or what incorporated it where NIST
+          recorded that.

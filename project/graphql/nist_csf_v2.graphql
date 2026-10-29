@@ -1,123 +1,47 @@
 # metamodel_version: 1.7.0
 # version: 2.0.0
-enum CSFElementClassValue
+enum CsfElementStatus
   {
-    function
-    category
-    subcategory
+    withdrawn
   }
 
-scalar Address
-    addr-lines: [String]
-    city: String
-    state: String
-    postal-code: String
-
-scalar BackMatter
-    resources: [Resource]
-
-scalar CSFCatalogBody
-    uuid: String
-    metadata: CSFMetadata
-    groups: [CSFFunction]
-    back-matter: BackMatter
-
-type CSFCategory
+type CsfCategory
   {
-    id: String
-    class: CSFElementClassValue
     title: String
-    props: [CSFProperty]
-    parts: [CSFPart]
-    controls: [CSFSubcategory]
+    description: String
+    categoryId: CsfCategoryIdentifier!
+    categorySubcategories: [CsfSubcategory]
+    categoryStatus: CsfElementStatus
+    categoryMovedTo: [CsfCategoryIdentifier]
+    categoryIncorporatedInto: [CsfElementIdentifier]
   }
 
-scalar CSFDocument
-    catalog: CSFCatalogBody
-
-interface CSFElement
+type CsfFramework
   {
-    id: String
-    class: CSFElementClassValue
-    title: String
-    props: [CSFProperty]
-    parts: [CSFPart]
+    csfVersion: String!
+    functions: [CsfFunction]!
   }
 
-type CSFFunction
+type CsfFunction
   {
-    id: String
-    class: CSFElementClassValue
     title: String
-    props: [CSFProperty]
-    parts: [CSFPart]
-    controls: [CSFCategory]
+    description: String
+    functionId: CsfFunctionIdentifier!
+    functionCategories: [CsfCategory]
   }
 
-scalar CSFMetadata
-    title: String
-    published: String
-    last-modified: String
-    version: String
-    oscal-version: String
-    props: [CSFProperty]
-    links: [Link]
-    roles: [Role]
-    parties: [Party]
-    responsible-parties: [ResponsibleParty]
-
-scalar CSFPart
-    id: String
-    name: String
-    ns: String
-    prose: String
-
-type CSFProperty
+type CsfImplementationExample
   {
-    name: String
-    value: String
-    ns: String
-    remarks: String
+    description: String!
+    implementationExampleId: CsfImplementationExampleIdentifier!
   }
 
-type CSFSubcategory
+type CsfSubcategory
   {
-    id: String
-    class: CSFElementClassValue
-    title: String
-    props: [CSFProperty]
-    parts: [CSFPart]
-  }
-
-type Link
-  {
-    href: String
-    rel: String
-  }
-
-scalar Party
-    uuid: String
-    type: String
-    name: String
-    short-name: String
-    email-addresses: [String]
-    addresses: [Address]
-
-scalar Resource
-    uuid: String
-    title: String
-    rlinks: [ResourceLink]
-
-scalar ResourceLink
-    href: String
-    media-type: String
-
-scalar ResponsibleParty
-    role-id: String
-    party-uuids: [String]
-
-type Role
-  {
-    id: String
-    title: String
+    description: String!
+    subcategoryId: CsfSubcategoryIdentifier!
+    subcategoryExamples: [CsfImplementationExample]
+    subcategoryStatus: CsfElementStatus
+    subcategoryMovedTo: [CsfSubcategoryIdentifier]
+    subcategoryIncorporatedInto: [CsfElementIdentifier]
   }

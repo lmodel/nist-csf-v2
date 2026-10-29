@@ -2,129 +2,44 @@
  package
 // metamodel_version: 1.7.0
 // version: 2.0.0
-// Postal address
-message Address
- {
- repeated  string addr-lines = 0
-  string city = 0
-  string state = 0
-  string postal-code = 0
- }
-// OSCAL back-matter section containing resource references
-message BackMatter
- {
- repeated  resource resources = 0
- }
-// Main CSF catalog object
-message CSFCatalogBody
- {
-  string uuid = 0
-  cSFMetadata metadata = 0
- repeated  cSFFunction groups = 0
-  backMatter back-matter = 0
- }
-// A CSF category - second-level grouping within a function (e.g. GV.OC Organizational Context, ID.AM Asset Management)
-message CSFCategory
- {
-  string id = 0
-  cSFElementClassValue class = 0
-  string title = 0
- repeated  cSFProperty props = 0
- repeated  cSFPart parts = 0
- repeated  cSFSubcategory controls = 0
- }
-// Root wrapper for CSF catalog content
-message CSFDocument
- {
-  cSFCatalogBody catalog = 0
- }
-// A CSF function - top-level grouping (e.g. GOVERN, IDENTIFY, PROTECT, DETECT, RESPOND, RECOVER)
-message CSFFunction
- {
-  string id = 0
-  cSFElementClassValue class = 0
-  string title = 0
- repeated  cSFProperty props = 0
- repeated  cSFPart parts = 0
- repeated  cSFCategory controls = 0
- }
-// OSCAL metadata section for the CSF catalog
-message CSFMetadata
+// A group of related cybersecurity outcomes within a function, such as Organizational Context (GV.OC), or a CSF 1.1 category that CSF 2.0 withdrew, which the catalog keeps with its status and, where NIST recorded it, where it moved or what incorporated it.
+message CsfCategory
  {
   string title = 0
-  string published = 0
-  string last-modified = 0
-  string version = 0
-  string oscal-version = 0
- repeated  cSFProperty props = 0
- repeated  link links = 0
- repeated  role roles = 0
- repeated  party parties = 0
- repeated  responsibleParty responsible-parties = 0
+  string description = 0
+  csfCategoryIdentifier categoryId = 0
+ repeated  csfSubcategory categorySubcategories = 0
+  csfElementStatus categoryStatus = 0
+ repeated  csfCategoryIdentifier categoryMovedTo = 0
+ repeated  csfElementIdentifier categoryIncorporatedInto = 0
  }
-// Structured narrative part (statement, overview, or example)
-message CSFPart
+// One edition of the CSF as a whole: its functions, each holding its categories and their subcategories.
+message CsfFramework
  {
-  string id = 0
-  string name = 0
-  string ns = 0
-  string prose = 0
+  string csfVersion = 0
+ repeated  csfFunction functions = 0
  }
-// A name-value property with optional namespace and supplemental remarks
-message CSFProperty
+// One of the six functions that sort the CSF's outcomes at the highest level: GOVERN, IDENTIFY, PROTECT, DETECT, RESPOND and RECOVER. Each is named by two letters and described in a sentence.
+message CsfFunction
  {
-  string name = 0
-  string value = 0
-  string ns = 0
-  string remarks = 0
- }
-// A CSF subcategory - specific cybersecurity outcome (e.g. GV.OC-01, ID.AM-01)
-message CSFSubcategory
- {
-  string id = 0
-  cSFElementClassValue class = 0
   string title = 0
- repeated  cSFProperty props = 0
- repeated  cSFPart parts = 0
+  string description = 0
+  csfFunctionIdentifier functionId = 0
+ repeated  csfCategory functionCategories = 0
  }
-// Relationship link with href and optional rel attribute
-message Link
+// An implementation example: one concise, action-oriented step that could help achieve a subcategory's outcome. NIST publishes the examples beside the Core, in its reference tool and its catalog, not in CSWP 29 itself.
+message CsfImplementationExample
  {
-  string href = 0
-  string rel = 0
+  string description = 0
+  csfImplementationExampleIdentifier implementationExampleId = 0
  }
-// Party definition (person or organization)
-message Party
+// A cybersecurity outcome: one statement of a result within a category, such as GV.OC-01, or a CSF 1.1 subcategory that CSF 2.0 withdrew, which the catalog keeps with its statement, its status and where it moved or what incorporated it.
+message CsfSubcategory
  {
-  string uuid = 0
-  string type = 0
-  string name = 0
-  string short-name = 0
- repeated  string email-addresses = 0
- repeated  address addresses = 0
- }
-// Referenced resource in back-matter
-message Resource
- {
-  string uuid = 0
-  string title = 0
- repeated  resourceLink rlinks = 0
- }
-// Reference link for a back-matter resource
-message ResourceLink
- {
-  string href = 0
-  string media-type = 0
- }
-// Assignment of parties to a role
-message ResponsibleParty
- {
-  string role-id = 0
- repeated  string party-uuids = 0
- }
-// Role definition used in metadata
-message Role
- {
-  string id = 0
-  string title = 0
+  string description = 0
+  csfSubcategoryIdentifier subcategoryId = 0
+ repeated  csfImplementationExample subcategoryExamples = 0
+  csfElementStatus subcategoryStatus = 0
+ repeated  csfSubcategoryIdentifier subcategoryMovedTo = 0
+ repeated  csfElementIdentifier subcategoryIncorporatedInto = 0
  }
