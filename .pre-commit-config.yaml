@@ -1,5 +1,20 @@
 ---
 # https://pre-commit.com/
+# No hook may rewrite a file this repository does not write by hand: NIST's
+# catalog, kept byte for byte so scripts/check_upstream_release.py can match
+# it by git object hash; what the LinkML generators and `lokf adapt` write,
+# which the next run would rewrite back; the neighbours' released copies;
+# and the KTL sidecar's scripts, which the weekly sync replaces.
+exclude: >-
+  (?x)^(
+    src/nist_csf_v2/schema/oscal-content/|
+    src/nist_csf_v2/datamodel/|
+    project/|
+    docs/schema/|
+    \.lokf/(scripts|m365)/|
+    \.lokf/(lokf|nist-csf-v2)\.yaml$|
+    tests/neighbours/
+  )
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0
