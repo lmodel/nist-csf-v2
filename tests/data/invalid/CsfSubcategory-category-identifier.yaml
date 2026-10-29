@@ -1,0 +1,3 @@
+# Invalid: GV.OC is a category's identifier, not a subcategory's.
+subcategory_id: GV.OC
+description: The organization understands its mission.

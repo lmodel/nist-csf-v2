@@ -1,0 +1,8 @@
+# The GOVERN function as a knowledge bundle might record it, with no
+# categories inlined: a bundle relates a category to its function with
+# isPartOf.
+function_id: GV
+title: GOVERN
+description: >-
+  The organization sets, communicates and monitors its strategy,
+  expectations and policy for managing cybersecurity risk.

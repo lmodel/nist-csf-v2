@@ -1,0 +1,30 @@
+# A framework document cut down to one function, one category and one
+# subcategory. The descriptions paraphrase CSWP 29. tests/test_upstream.py
+# derives the whole of CSF 2.0 from NIST's catalog and validates it as one
+# of these.
+csf_version: "2.0"
+functions:
+  - function_id: GV
+    title: GOVERN
+    description: >-
+      The organization sets, communicates and monitors its strategy,
+      expectations and policy for managing cybersecurity risk.
+    function_categories:
+      - category_id: GV.OC
+        title: Organizational Context
+        description: >-
+          The organization understands the circumstances that surround its
+          cybersecurity risk decisions: its mission, what its stakeholders
+          expect, what it depends on, and the legal, regulatory and
+          contractual requirements it is under.
+        category_subcategories:
+          - subcategory_id: GV.OC-01
+            description: >-
+              The organization understands its mission, and that
+              understanding informs how it manages cybersecurity risk.
+            subcategory_examples:
+              - implementation_example_id: GV.OC-01.001
+                description: >-
+                  Share the mission, for example through mission statements
+                  and service strategies, so that risks to it can be
+                  identified.

@@ -1,0 +1,3 @@
+# Invalid: a framework document names the CSF edition it holds.
+functions:
+  - function_id: GV
