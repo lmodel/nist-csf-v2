@@ -27,7 +27,14 @@
                     ]
                 },
                 "category_status": {
-                    "$ref": "#/$defs/CsfElementStatus",
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/CsfElementStatus"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
                     "description": "withdrawn for a CSF 1.1 category that CSF 2.0 withdrew. A category of CSF 2.0 has no status."
                 },
                 "category_subcategories": {
@@ -204,7 +211,14 @@
                     ]
                 },
                 "subcategory_status": {
-                    "$ref": "#/$defs/CsfElementStatus",
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/CsfElementStatus"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
                     "description": "withdrawn for a CSF 1.1 subcategory that CSF 2.0 withdrew. A subcategory of CSF 2.0 has no status."
                 }
             },
@@ -218,9 +232,9 @@
     },
     "$id": "https://w3id.org/lmodel/nist-csf-v2",
     "$schema": "https://json-schema.org/draft/2019-09/schema",
-    "additionalProperties": true,
+    "additionalProperties": false,
     "description": "One edition of the CSF as a whole: its functions, each holding its categories and their subcategories.",
-    "metamodel_version": "1.7.0",
+    "metamodel_version": "1.12.0",
     "properties": {
         "csf_functions": {
             "description": "The six functions, in the order CSWP 29 gives them.",

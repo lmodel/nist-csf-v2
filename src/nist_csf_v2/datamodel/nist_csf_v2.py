@@ -1,5 +1,4 @@
 # Auto generated from nist_csf_v2.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-10-30T08:19:18
 # Schema: nist_csf_v2
 #
 # id: https://w3id.org/lmodel/nist-csf-v2
@@ -58,7 +57,7 @@ from rdflib import (
 
 from linkml_runtime.linkml_model.types import String
 
-metamodel_version = "1.7.0"
+metamodel_version = "1.12.0"
 version = "2.0.0"
 
 # Namespaces

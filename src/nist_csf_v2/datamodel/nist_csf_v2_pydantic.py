@@ -29,7 +29,7 @@ from pydantic import (
 )
 
 
-metamodel_version = "1.7.0"
+metamodel_version = "1.12.0"
 version = "2.0.0"
 
 
@@ -270,10 +270,10 @@ class CsfFramework(ConfiguredBaseModel):
         pattern=re.compile(r"^[0-9]+\.[0-9]+$")
         if isinstance(v, list):
             for element in v:
-                if isinstance(element, str) and not pattern.match(element):
+                if isinstance(element, str) and not pattern.search(element):
                     err_msg = f"Invalid csf_version format: {element}"
                     raise ValueError(err_msg)
-        elif isinstance(v, str) and not pattern.match(v):
+        elif isinstance(v, str) and not pattern.search(v):
             err_msg = f"Invalid csf_version format: {v}"
             raise ValueError(err_msg)
         return v
@@ -373,10 +373,10 @@ class CsfSubcategory(ConfiguredBaseModel):
         pattern=re.compile(r"^\s*\S")
         if isinstance(v, list):
             for element in v:
-                if isinstance(element, str) and not pattern.match(element):
+                if isinstance(element, str) and not pattern.search(element):
                     err_msg = f"Invalid description format: {element}"
                     raise ValueError(err_msg)
-        elif isinstance(v, str) and not pattern.match(v):
+        elif isinstance(v, str) and not pattern.search(v):
             err_msg = f"Invalid description format: {v}"
             raise ValueError(err_msg)
         return v
@@ -409,10 +409,10 @@ class CsfImplementationExample(ConfiguredBaseModel):
         pattern=re.compile(r"^\s*\S")
         if isinstance(v, list):
             for element in v:
-                if isinstance(element, str) and not pattern.match(element):
+                if isinstance(element, str) and not pattern.search(element):
                     err_msg = f"Invalid description format: {element}"
                     raise ValueError(err_msg)
-        elif isinstance(v, str) and not pattern.match(v):
+        elif isinstance(v, str) and not pattern.search(v):
             err_msg = f"Invalid description format: {v}"
             raise ValueError(err_msg)
         return v

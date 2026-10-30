@@ -18,7 +18,7 @@ checks a file against the JSON Schema generated from the schema, and
 `tests/test_data.py` holds every example to it.
 
 Validate a file before loading it into either model in
-`src/nist_csf_v2/datamodel/`. LinkML 1.10.0 generates models that check
+`src/nist_csf_v2/datamodel/`. LinkML 1.12.1 generates models that check
 less:
 
 - The dataclasses check required fields and enum values, but no pattern.

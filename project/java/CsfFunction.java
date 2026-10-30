@@ -1,7 +1,11 @@
-package None;
+package example;
 
-/* metamodel_version: 1.7.0 */
+/* metamodel_version: 1.12.0 */
 /* version: 2.0.0 */
+import java.net.URI;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZonedDateTime;
 import java.util.List;
 import lombok.*;
 
@@ -16,5 +20,6 @@ public class CsfFunction  {
   private String description;
   private String csfFunctionId;
   private List<CsfCategory> functionCategories;
+
 
 }
