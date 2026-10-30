@@ -31,6 +31,9 @@ generated:
   by: process:ktl-librarian
   at: "2026-10-30T08:31:58Z"
 status: draft
+verified:
+  - by: process:ktl-librarian
+    at: "2026-10-30T08:54:28Z"
 ---
 
 # nist-csf-v2 LinkML schema

@@ -29,7 +29,7 @@ generated:
 status: draft
 verified:
   - by: process:ktl-librarian
-    at: "2026-10-30T08:31:58Z"
+    at: "2026-10-30T08:54:28Z"
 ---
 
 # NIST's CSF 2.0 catalog copy
