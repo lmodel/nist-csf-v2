@@ -2,7 +2,7 @@
 
 scripts/check_upstream_release.py asks the GitHub API about
 usnistgov/oscal-content. These tests replace its one network call, `_get`,
-with a table of answers, so they run offline and show what the report says
+with a table of answers, so they run offline. They show what the report says
 when a release drops a folder, the network fails, NIST adds a file or the
 pinned tag moves.
 """

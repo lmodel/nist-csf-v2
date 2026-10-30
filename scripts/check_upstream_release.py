@@ -21,10 +21,10 @@ holds a pinned folder, or a check could not finish. A file NIST adds beside
 the pinned ones is reported for information only.
 
 It asks doi.org nothing. NIST publishes the CSF as a Cybersecurity White
-Paper (CSWP), and CSWP numbers are assigned paper by paper, so the digital
+Paper (CSWP), and CSWP numbers are assigned paper by paper. So the digital
 object identifier (DOI) of the next edition cannot be predicted from the
-pinned one the way a Special Publication's revision can. A new edition shows
-up instead as a new folder beside ``nist.gov/CSF/v2.0`` in oscal-content,
+pinned one the way a Special Publication's revision can. A new edition
+appears instead as a new folder beside ``nist.gov/CSF/v2.0`` in oscal-content,
 which the editions check below reports.
 
 Set ``GITHUB_TOKEN`` to raise the API rate limit. Usage::
