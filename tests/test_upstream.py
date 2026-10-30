@@ -8,10 +8,9 @@ describes, and hold that framework to the validator and to the counts of the
 publication's Core.
 """
 
-import hashlib
 import importlib.util
 import json
-from functools import lru_cache
+from functools import cache, lru_cache
 from pathlib import Path
 
 import pytest
@@ -71,18 +70,15 @@ CHILD_KEYS = (
 )
 
 
+@cache
 def _watch():
+    """The upstream watch script, loaded once as a module."""
     spec = importlib.util.spec_from_file_location(
         "watch", ROOT / "scripts" / "check_upstream_release.py"
     )
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
-
-
-def _blob_sha(path):
-    data = path.read_bytes()
-    return hashlib.sha1(b"blob %d\0" % len(data) + data).hexdigest()
 
 
 @lru_cache(maxsize=1)
@@ -218,7 +214,7 @@ def test_copy_matches_the_pinned_blobs():
     pinned = _watch().PINNED_BLOBS
     assert {p.name for p in COPY.iterdir()} == set(pinned)
     for name, (_source, sha) in pinned.items():
-        assert _blob_sha(COPY / name) == sha, name
+        assert _watch()._blob_sha(COPY / name) == sha, name
 
 
 def test_header_pins_match_the_watch():
