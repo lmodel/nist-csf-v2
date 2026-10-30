@@ -19,7 +19,7 @@ sources:
     title: the pin and edition tests
 generated:
   by: process:ktl-librarian
-  at: "2026-10-30T08:31:58Z"
+  at: "2026-10-30T08:42:52Z"
 status: draft
 ---
 
@@ -36,7 +36,7 @@ status: draft
 
 A file NIST adds to the pinned folder, beside the copied catalog and the minified copy the script leaves out on purpose, is reported for information and does not fail the run. `tests/test_watch.py` checks each of these reports against stubbed answers.
 
-To replace the copy, take both files from one release: the catalog from `nist.gov/CSF/v2.0/json/`, or the new edition's folder, and `LICENSE.md` from the root. Never edit them.[^contributing.md] Then move `PINNED_TAG`, `PINNED_COMMIT` and `PINNED_BLOBS` in the script, and the `oscal_content_tag` and `oscal_content_commit` annotations and the `see_also` tree in the schema header, and update NOTICE. Run `just test`. `tests/test_upstream.py` checks that the header and the script name the same pins, that each file has its pinned hash, and that the derived framework still validates with the publication's counts.[^test_upstream.py] A new edition also moves the header's `version`, its `source` and the `cprt_framework_version` annotation, and `PINNED_DOI` and `PINNED_EDITIONS` in the script.
+To replace the copy, take both files from one release: the catalog from `nist.gov/CSF/v2.0/json/`, or the new edition's folder, and `LICENSE.md` from the root. Never edit them.[^contributing.md] Then move `PINNED_TAG`, `PINNED_COMMIT` and `PINNED_BLOBS` in the script, and the `oscal_content_tag` and `oscal_content_commit` annotations and the `see_also` tree in the schema header, and update NOTICE. Run `just gen-project`, `just gen-doc` and `just lokf-adapt`, since the header's values reach the generated files and the adapt copy, and `just lokf-adapt-check` in CI fails on a stale copy. Then run `just test`. `tests/test_upstream.py` checks that the header and the script name the same pins, that each file has its pinned hash, and that the derived framework still validates with the publication's counts.[^test_upstream.py] A new edition also moves the header's `version`, its `source` and the `cprt_framework_version` annotation, and `PINNED_DOI` and `PINNED_EDITIONS` in the script.
 
 [^check_upstream_release.py]: scripts/check_upstream_release.py, the docstring, check_editions, check_catalog and main
 [^contributing.md]: CONTRIBUTING.md, the item on the catalog copy

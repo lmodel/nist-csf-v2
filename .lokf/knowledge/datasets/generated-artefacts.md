@@ -26,7 +26,7 @@ sources:
     title: the exclude pattern
 generated:
   by: process:ktl-librarian
-  at: "2026-10-30T08:31:58Z"
+  at: "2026-10-30T08:42:52Z"
 status: draft
 ---
 
@@ -36,7 +36,7 @@ Every file here is generated from `src/nist_csf_v2/schema/nist_csf_v2.yaml`, so 
 
 `just gen-project` runs `gen-project` with `.linkml/generators.yaml` into `project/`, moves the Python dataclasses into `src/nist_csf_v2/datamodel/`, and writes the Pydantic models beside them. It then runs `gen-java`, `gen-typescript` and `gen-owl` separately, because some generators ignore the configuration or cannot create their folders, as its comment says.[^justfile] `.linkml/generators.yaml` leaves out the Markdown generator and merges imports for the others.[^generators.yaml] `project/` holds a folder each for Excel, GraphQL, Java, JSON-LD, JSON Schema, OWL, the prefix map, protobuf, SHACL, ShEx, SQL and TypeScript.[^project] The Java folder holds one class per schema class, five in all.
 
-`just gen-doc` writes `docs/schema/nist_csf_v2.yaml` and the element pages under `docs/elements/`, which git ignores and the website builds. `just lokf-adapt` writes `.lokf/nist-csf-v2.yaml`. `just test` regenerates the dataclasses too, and the only change it then leaves is the generation date in their header.
+`just gen-doc` writes `docs/schema/nist_csf_v2.yaml` and the element pages under `docs/elements/`, which git ignores and the website builds. `just lokf-adapt` writes `.lokf/nist-csf-v2.yaml`. `just test` regenerates the dataclasses too, and under LinkML 1.12.1 it leaves no change, because the generated files carry no generation date.
 
 The pre-commit hooks leave these folders alone, with NIST's catalog copy, the neighbours' copies and the sidecar's scripts, because no hook may rewrite a file the repository does not write by hand.[^pre-commit-config.yaml]
 
