@@ -6,6 +6,8 @@ The `v0.0.0` tag is a baseline, not a release: it marks where versioning starts 
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-10-30
+
 ### Added
 
 - **A LinkML schema of the Cybersecurity Framework (CSF) 2.0**, which the National Institute of Standards and Technology (NIST) publishes as Cybersecurity White Paper (CSWP) 29. It holds the six functions, their categories and subcategories, the implementation examples NIST publishes with the subcategories, and the CSF 1.1 categories and subcategories that CSF 2.0 withdrew, each with its status and where it moved or what incorporated it.
