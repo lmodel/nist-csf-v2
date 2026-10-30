@@ -1,3 +1,4 @@
+# Fails at: /category_status
 # Invalid: the catalog's one status is withdrawn.
 csf_category_id: ID.BE
 title: Business Environment

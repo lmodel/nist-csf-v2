@@ -1,3 +1,4 @@
+# Fails at: /csf_version
 # Invalid: NIST numbers CSF editions with two numbers, such as 2.0.
 csf_version: "2.0.0"
 csf_functions:

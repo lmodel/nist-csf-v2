@@ -1,3 +1,4 @@
+# Fails at: /subcategory_status
 # Invalid: the catalog's one status is withdrawn.
 csf_subcategory_id: ID.BE-02
 description: The organization identifies its place in critical infrastructure.

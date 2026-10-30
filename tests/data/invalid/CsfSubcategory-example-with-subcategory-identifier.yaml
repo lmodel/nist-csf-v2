@@ -1,3 +1,4 @@
+# Fails at: /subcategory_examples/0/csf_implementation_example_id
 # Invalid: GV.OC-01 is a subcategory's identifier; its first example is
 # GV.OC-01.001.
 csf_subcategory_id: GV.OC-01

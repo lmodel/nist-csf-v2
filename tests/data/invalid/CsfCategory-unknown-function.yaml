@@ -1,3 +1,4 @@
+# Fails at: /csf_category_id
 # Invalid: a category's identifier starts with one of the six functions'
 # letters, and CSF 2.0 has no function MG.
 csf_category_id: MG.OC

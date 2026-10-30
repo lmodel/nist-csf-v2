@@ -1,3 +1,4 @@
+# Fails at: /category_incorporated_into/0
 # Invalid: a category is incorporated into a function, a category or a
 # subcategory, never an implementation example.
 csf_category_id: ID.BE

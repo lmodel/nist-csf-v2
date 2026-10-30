@@ -1,3 +1,4 @@
+# Fails at: /subcategory_incorporated_into/0
 # Invalid: a withdrawn subcategory is incorporated into a category or a
 # subcategory, such as ID.BE-02 into GV.OC-01, never a whole function.
 csf_subcategory_id: ID.BE-02

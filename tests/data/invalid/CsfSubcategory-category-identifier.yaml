@@ -1,3 +1,4 @@
+# Fails at: /csf_subcategory_id
 # Invalid: GV.OC is a category's identifier, not a subcategory's.
 csf_subcategory_id: GV.OC
 description: The organization understands its mission.
