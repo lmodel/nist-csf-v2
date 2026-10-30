@@ -90,6 +90,8 @@ A host imports the copy beside LOKF's schema, `lokf.yaml`, and beside other adap
 
 The schema and the code are under the Apache License 2.0 ([LICENSE](LICENSE)).
 
+The knowledge bundle in `.lokf/knowledge/` is under the Creative Commons Attribution 4.0 International licence (CC BY 4.0), as its `index.md` declares.
+
 CSWP 29 is a work of the United States Government and is not subject to copyright in the United States. The schema's descriptions are this project's own words. NIST's catalog in [src/nist_csf_v2/schema/oscal-content/](src/nist_csf_v2/schema/oscal-content) keeps NIST's licence beside it: see [NOTICE](NOTICE).
 
 This is not an official NIST project, and its use implies no endorsement by NIST.
