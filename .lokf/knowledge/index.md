@@ -66,7 +66,7 @@ A [LOKF](https://lokf.nolan-nichols.com) knowledge base for nist-csf-v2. Every M
 
 * [AI covenant](policies/ai-covenant.md) - The repository's rules for work done with artificial intelligence (AI): you own what you submit, an element under the schema renders CSWP 29 in the project's own words and cites it, NIST's catalog copy is never edited, and the scheduled librarian proposes changes only through reviewed pull requests.
 * [License and attribution](policies/license-and-attribution.md) - The repository's licences: Apache 2.0 for the schema and the code, NIST's public-domain and CC0 terms for the CSF catalog copy, NIST's statement that its Technical Series publications are not subject to copyright in the United States, MIT for the copier template's scaffolding, and Apache 2.0 for the KTL sidecar and website templates.
-* [Security policy](policies/security-policy.md) - How to report a vulnerability (GitHub's private vulnerability reporting), which release receives fixes (the latest), what executes in the repository and what holds each surface, and the three repository settings that are not yet in force.
+* [Security policy](policies/security-policy.md) - How to report a vulnerability (GitHub's private vulnerability reporting), which release receives fixes (the latest), what executes in the repository and what holds each surface, the ruleset on `main`, and the two repository settings that are not yet in force.
 
 # Workflows
 

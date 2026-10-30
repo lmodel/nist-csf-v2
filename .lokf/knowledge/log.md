@@ -1,5 +1,9 @@
 # Change Log
 
+## 2026-10-30
+
+* **Changed**: Security policy now says that a ruleset on `main` blocks deletion and force-pushes, as `SECURITY.md` does since the repository's settings were read; two settings remain not in force.
+
 ## 2026-10-29
 
 * **Added**: nist-csf-v2 LinkML schema, from `src/nist_csf_v2/schema/nist_csf_v2.yaml`, its adapt copy and the lokf-adapt recipes.
