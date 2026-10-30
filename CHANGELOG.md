@@ -13,6 +13,7 @@ The `v0.0.0` tag is a baseline, not a release: it marks where versioning starts 
 - **`.lokf/nist-csf-v2.yaml`, the schema's `lokf adapt` copy, rooted on the function, the category and the subcategory.** The knowledge release attaches it as `schema-<tag>-nist-csf-v2.yaml`, and tests hold its names apart from those of the Linked Open Knowledge Format (LOKF) and of the slsa, github-actions, oscal, spdx and nist-sp-800-218 copies, with which it shares no key.
 - **An example of each class and a counter-example for each constraint**, held to the validator by `just test`.
 - **The repository's Knowledge Trust Ladder (KTL) knowledge bundle and its sidecar automation**, from the KTL v0.59.0 templates with the lokf floor at 0.9.0, and a knowledge website that replaces the mkdocs site.
+- **`.github/release/package-lock.json`, which pins semantic-release and every package it pulls in.** The release job installs from it with `npm ci`, and Dependabot keeps it current.
 
 ### Changed
 

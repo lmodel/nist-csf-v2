@@ -4,7 +4,8 @@
 # catalog, kept byte for byte so scripts/check_upstream_release.py can match
 # it by git object hash; what the LinkML generators and `lokf adapt` write,
 # which the next run would rewrite back; the neighbours' released copies;
-# and the KTL sidecar's scripts, which the weekly sync replaces.
+# npm's lockfile for the release tools; and the KTL sidecar's scripts, which
+# the weekly sync replaces.
 exclude: >-
   (?x)^(
     src/nist_csf_v2/schema/oscal-content/|
@@ -13,6 +14,7 @@ exclude: >-
     docs/schema/|
     \.lokf/(scripts|m365)/|
     \.lokf/(lokf|nist-csf-v2)\.yaml$|
+    \.github/release/package-lock\.json$|
     tests/neighbours/
   )
 repos:
