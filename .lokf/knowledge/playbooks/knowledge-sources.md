@@ -22,7 +22,7 @@ sources:
   - resource: .github/workflows
   - resource: .github/dependabot.yml
   - resource: justfile
-  - resource: config.yaml
+  - resource: .linkml/generators.yaml
   - resource: .linkmllint.yaml
   - resource: .pre-commit-config.yaml
   - resource: project
@@ -98,7 +98,7 @@ exclusions:
     reason: The sidecar's git settings.
 generated:
   by: process:ktl-librarian
-  at: "2026-10-29T21:41:10Z"
+  at: "2026-10-30T08:31:58Z"
 status: draft
 ---
 
@@ -115,8 +115,8 @@ Each concept derived from a file or folder of this repository names it by its pa
 | `src/nist_csf_v2/schema/oscal-content/`, the NIST sections of `NOTICE` | `datasets/csf-catalog-copy`, the six `functions/`, `glossary/withdrawn-element` | re-read the catalog's metadata, its groups and their categories and subcategories, the status properties and the links; the upstream watch compares the blobs weekly |
 | `scripts/check_upstream_release.py`, `.github/scripts/` | `playbooks/update-upstream-pins`, `workflows/upstream-watch`, the pin paragraph of `references/cswp-29` | re-read the pins, the docstring and the issue title |
 | `README.md` (What it models, Influences, Mappings, Not modelled here), `docs/about.md`, `.linkmllint.yaml`, `CHANGELOG.md` | `explanations/scope-and-influences`, `explanations/element-names` | re-read each section and the lint comment |
-| `justfile`, `config.yaml`, `project/`, `src/nist_csf_v2/datamodel/`, `docs/schema/`, `docs/elements/`, `.pre-commit-config.yaml` | `datasets/generated-artefacts` | re-read the `gen-project`, `gen-doc` and `test` recipes and the `excludes`; re-list `project/*/` |
-| `tests/` | `datasets/test-data` | re-count `valid/` and `invalid/`; re-read the tests and the neighbours' checksums |
+| `justfile`, `.linkml/generators.yaml`, `project/`, `src/nist_csf_v2/datamodel/`, `docs/schema/`, `docs/elements/`, `.pre-commit-config.yaml` | `datasets/generated-artefacts` | re-read the `gen-project`, `gen-doc` and `test` recipes and the `excludes`; re-list `project/*/` |
+| `tests/` | `datasets/test-data` | re-count `valid/` and `invalid/`; re-read the tests, the stubbed watch tests and the neighbours' checksums |
 | the Validating data section of `docs/index.md` | `playbooks/validate-data` | re-read the section |
 | `CONTRIBUTING.md`, the `lint`, `gen-project`, `gen-doc` and `test` recipes | `playbooks/regenerate-and-test` | confirm the setup, the checklist and the recipes |
 | `.releaserc.json`, `.github/scripts/changelog-release.mjs`, `CHANGELOG.md`, the Releasing section of `CONTRIBUTING.md` | `playbooks/release` | re-read the release rules, the commands and the baseline paragraph |

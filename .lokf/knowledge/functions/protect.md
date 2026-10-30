@@ -3,7 +3,7 @@ type: CsfFunction
 id: https://w3id.org/lmodel/nist-csf-v2/knowledge/functions/protect
 title: PROTECT
 description: "The CSF 2.0 function PR, PROTECT: the organization uses safeguards to manage its cybersecurity risks. It holds 5 categories, 22 subcategories and 77 implementation examples."
-function_id: PR
+csf_function_id: PR
 resource: src/nist_csf_v2/schema/oscal-content/NIST_CSF_v2.0_catalog.json
 definedBy:
   - https://w3id.org/lmodel/nist-csf-v2/knowledge/references/cswp-29
@@ -15,7 +15,7 @@ sources:
     title: the group PR
 generated:
   by: process:ktl-librarian
-  at: "2026-10-29T21:41:10Z"
+  at: "2026-10-30T08:31:58Z"
 status: draft
 ---
 

@@ -3,7 +3,7 @@ type: Playbook
 id: https://w3id.org/lmodel/nist-csf-v2/knowledge/playbooks/update-upstream-pins
 genre: how-to
 title: Update the upstream pins
-description: "What to do when the weekly upstream watch reports that usnistgov/oscal-content holds another edition of the CSF, released a changed CSF 2.0 catalog, or that the copy drifted: replace the copy whole from one release, move the pins in `scripts/check_upstream_release.py` and the schema header, and run the tests."
+description: "What to do when the weekly upstream watch reports that usnistgov/oscal-content holds another edition of the CSF, changed or dropped a pinned file or folder, or moved the pinned tag, that the copy drifted, or that a check could not finish: replace the copy whole from one release, move the pins in `scripts/check_upstream_release.py` and the schema header, and run the tests."
 resource: scripts/check_upstream_release.py
 about:
   - https://w3id.org/lmodel/nist-csf-v2/knowledge/datasets/csf-catalog-copy
@@ -19,20 +19,25 @@ sources:
     title: the pin and edition tests
 generated:
   by: process:ktl-librarian
-  at: "2026-10-29T21:41:10Z"
+  at: "2026-10-30T08:31:58Z"
 status: draft
 ---
 
 # Update the upstream pins
 
-`scripts/check_upstream_release.py` runs every Monday in [Upstream watch](../workflows/upstream-watch.md) with the standard library alone. It asks doi.org nothing, because a Cybersecurity White Paper number is assigned paper by paper and the next edition's identifier cannot be predicted. It reports three kinds of finding.[^check_upstream_release.py]
+`scripts/check_upstream_release.py` runs every Monday in [Upstream watch](../workflows/upstream-watch.md) with the standard library alone. It asks doi.org nothing, because a Cybersecurity White Paper number is assigned paper by paper and the next edition's identifier cannot be predicted. It exits 1, and the workflow opens or updates an issue, on each of these findings.[^check_upstream_release.py]
 
 - **A newer release of usnistgov/oscal-content holds another edition folder** beside `nist.gov/CSF/v2.0/`. Read NIST's publication of that edition, decide whether the schema moves to it, and replace the copy from that release.
-- **A newer release changes the catalog** of the pinned edition. A release that leaves the catalog's blob as it was is reported and needs nothing.
+- **A newer release changes a pinned file**, the catalog of the pinned edition or the licence. A release that leaves every pinned blob as it was is reported and needs nothing.
+- **A newer release no longer holds a pinned folder or file**, such as `nist.gov/CSF/` or `nist.gov/CSF/v2.0/json/`. Find where NIST now publishes it, and move the pins.
+- **The pinned tag names another commit** than the one pinned. Find out why NIST moved it before trusting either.
 - **A copied file differs from its pinned blob**, or the folder holds a file the script does not pin.
+- **A check could not finish**, for example on a network error. The report names the check and the error, and the other check still runs.
+
+A file NIST adds to the pinned folder, beside the copied catalog and the minified copy the script leaves out on purpose, is reported for information and does not fail the run. `tests/test_watch.py` checks each of these reports against stubbed answers.
 
 To replace the copy, take both files from one release: the catalog from `nist.gov/CSF/v2.0/json/`, or the new edition's folder, and `LICENSE.md` from the root. Never edit them.[^contributing.md] Then move `PINNED_TAG`, `PINNED_COMMIT` and `PINNED_BLOBS` in the script, and the `oscal_content_tag` and `oscal_content_commit` annotations and the `see_also` tree in the schema header, and update NOTICE. Run `just test`: `tests/test_upstream.py` checks that the header and the script name the same pins, that each file has its pinned hash, and that the derived framework still validates with the publication's counts.[^test_upstream.py] A new edition also moves the header's `version`, its `source` and the `cprt_framework_version` annotation, and `PINNED_DOI` and `PINNED_EDITIONS` in the script.
 
-[^check_upstream_release.py]: scripts/check_upstream_release.py, the docstring and check_catalog
+[^check_upstream_release.py]: scripts/check_upstream_release.py, the docstring, check_editions, check_catalog and main
 [^contributing.md]: CONTRIBUTING.md, the item on the catalog copy
 [^test_upstream.py]: tests/test_upstream.py, the pin, hash and edition tests

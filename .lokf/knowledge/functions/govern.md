@@ -3,7 +3,7 @@ type: CsfFunction
 id: https://w3id.org/lmodel/nist-csf-v2/knowledge/functions/govern
 title: GOVERN
 description: "The CSF 2.0 function GV, GOVERN: the organization sets, communicates and monitors its strategy, expectations and policy for managing cybersecurity risk. It holds 6 categories, 31 subcategories and 119 implementation examples."
-function_id: GV
+csf_function_id: GV
 resource: src/nist_csf_v2/schema/oscal-content/NIST_CSF_v2.0_catalog.json
 definedBy:
   - https://w3id.org/lmodel/nist-csf-v2/knowledge/references/cswp-29
@@ -15,7 +15,7 @@ sources:
     title: the group GV
 generated:
   by: process:ktl-librarian
-  at: "2026-10-29T21:41:10Z"
+  at: "2026-10-30T08:31:58Z"
 status: draft
 ---
 

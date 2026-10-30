@@ -3,7 +3,7 @@ type: Dataset
 id: https://w3id.org/lmodel/nist-csf-v2/knowledge/datasets/nist-csf-v2-linkml-schema
 genre: reference
 title: nist-csf-v2 LinkML schema
-description: "The LinkML schema of the Cybersecurity Framework (CSF) 2.0, `src/nist_csf_v2/schema/nist_csf_v2.yaml` (schema id `https://w3id.org/lmodel/nist-csf-v2`, version 2.0.0): five classes, one enum with the value `withdrawn` and five identifier types. Its `lokf adapt` copy `.lokf/nist-csf-v2.yaml`, rooted on the function, the category and the subcategory, is the bundle's domain schema."
+description: "The LinkML schema of the Cybersecurity Framework (CSF) 2.0, `src/nist_csf_v2/schema/nist_csf_v2.yaml` (schema id `https://w3id.org/lmodel/nist-csf-v2`, version 2.0.0): five classes, one enum with the value `withdrawn` and six identifier types. Its `lokf adapt` copy `.lokf/nist-csf-v2.yaml`, rooted on the function, the category and the subcategory, is the bundle's domain schema."
 resource: src/nist_csf_v2/schema/nist_csf_v2.yaml
 version: 2.0.0
 license: Apache-2.0
@@ -29,7 +29,7 @@ sources:
     title: the tool.lokf table
 generated:
   by: process:ktl-librarian
-  at: "2026-10-29T21:41:10Z"
+  at: "2026-10-30T08:31:58Z"
 status: draft
 ---
 
@@ -39,13 +39,13 @@ status: draft
 
 ## Classes
 
-- **`CsfFramework`** is the tree root: one edition of the CSF as a whole. It requires `csf_version`, two numbers such as `2.0`, and `functions`.
-- **`CsfFunction`** is one of the six functions. It requires `function_id`, two letters out of `GV`, `ID`, `PR`, `DE`, `RS` and `RC`, and it may hold its categories in `function_categories`.
-- **`CsfCategory`** is a category, or a CSF 1.1 category that CSF 2.0 withdrew. It requires `category_id`, such as `GV.OC`, and it may hold `category_subcategories`, `category_status`, `category_moved_to` and `category_incorporated_into`.
-- **`CsfSubcategory`** is a subcategory, or a withdrawn one. It requires `subcategory_id`, such as `GV.OC-01`, and a `description`, its statement, and it may hold `subcategory_examples`, `subcategory_status`, `subcategory_moved_to` and `subcategory_incorporated_into`.
-- **`CsfImplementationExample`** is an implementation example. It requires `implementation_example_id`, such as `GV.OC-01.001`, and a `description`.
+- **`CsfFramework`** is the tree root: one edition of the CSF as a whole. It requires `csf_version`, two numbers such as `2.0`, and `csf_functions`, which holds at least one function.
+- **`CsfFunction`** is one of the six functions. It requires `csf_function_id`, two letters out of `GV`, `ID`, `PR`, `DE`, `RS` and `RC`, and a `title`, and it may hold its categories in `function_categories`.
+- **`CsfCategory`** is a category, or a CSF 1.1 category that CSF 2.0 withdrew. It requires `csf_category_id`, such as `GV.OC`, and a `title`, and it may hold `category_subcategories`, `category_status`, `category_moved_to` and `category_incorporated_into`.
+- **`CsfSubcategory`** is a subcategory, or a withdrawn one. It requires `csf_subcategory_id`, such as `GV.OC-01`, and a `description` that is not blank, its statement, and it may hold `subcategory_examples`, `subcategory_status`, `subcategory_moved_to` and `subcategory_incorporated_into`.
+- **`CsfImplementationExample`** is an implementation example. It requires `csf_implementation_example_id`, such as `GV.OC-01.001`, and a `description` that is not blank.
 
-The enum `CsfElementStatus` has one value, `withdrawn`, the status the catalog gives a CSF 1.1 category or subcategory that CSF 2.0 withdrew. Five types hold the forms of the identifiers: `csf_function_identifier`, `csf_category_identifier`, `csf_subcategory_identifier`, `csf_implementation_example_identifier` and `csf_element_identifier`, the last for a function, category or subcategory that incorporated a withdrawn element. The schema's slots `title` and `description` carry the IRIs `schema:name` and `schema:description`.
+The enum `CsfElementStatus` has one value, `withdrawn`, the status the catalog gives a CSF 1.1 category or subcategory that CSF 2.0 withdrew. Six types hold the forms of the identifiers: `csf_function_identifier`, `csf_category_identifier`, `csf_subcategory_identifier`, `csf_implementation_example_identifier`, `csf_element_identifier`, for a function, category or subcategory that incorporated a withdrawn category, and `csf_category_or_subcategory_identifier`, for a category or subcategory that incorporated a withdrawn subcategory. The schema's slots `title` and `description` carry the IRIs `schema:name` and `schema:description`.
 
 ## Mappings
 

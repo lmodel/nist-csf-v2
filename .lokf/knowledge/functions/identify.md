@@ -3,7 +3,7 @@ type: CsfFunction
 id: https://w3id.org/lmodel/nist-csf-v2/knowledge/functions/identify
 title: IDENTIFY
 description: "The CSF 2.0 function ID, IDENTIFY: the organization understands its current cybersecurity risks. It holds 3 categories, 21 subcategories and 74 implementation examples."
-function_id: ID
+csf_function_id: ID
 resource: src/nist_csf_v2/schema/oscal-content/NIST_CSF_v2.0_catalog.json
 definedBy:
   - https://w3id.org/lmodel/nist-csf-v2/knowledge/references/cswp-29
@@ -15,7 +15,7 @@ sources:
     title: the group ID
 generated:
   by: process:ktl-librarian
-  at: "2026-10-29T21:41:10Z"
+  at: "2026-10-30T08:31:58Z"
 status: draft
 ---
 

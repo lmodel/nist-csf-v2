@@ -2,6 +2,17 @@
 
 ## 2026-10-30
 
+* **Changed**: the six function concepts carry their two letters in `csf_function_id`, the key the schema now names; the pen removed and wrote each again, since it can set a key but not rename one.
+* **Changed**: the generators' settings moved from `config.yaml` to `.linkml/generators.yaml`.
+* **Changed**: Test data and tests now counts 29 counter-examples, each naming where it fails, and describes the test that holds the valid examples to NIST's catalog, the stubbed watch tests and the check on oscal mappings.
+* **Changed**: nist-csf-v2 LinkML schema now names the `csf_` identifier keys, the required titles and non-blank descriptions, the one function a framework must hold, and the sixth identifier type.
+* **Changed**: Element names and the shared namespace now says that the keys holding the functions and the identifiers carry a `csf_` prefix, as `docs/about.md` does.
+* **Changed**: the glossary terms name the identifier keys the schema now uses, `csf_function_id`, `csf_category_id`, `csf_subcategory_id` and `csf_implementation_example_id`.
+* **Changed**: Withdrawn element cites Appendix A's opening paragraph, where CSWP 29 says the gaps in the subcategory numbering mark relocated CSF 1.1 subcategories, in place of the glossary.
+* **Changed**: Validate data against the schema now names LinkML 1.12.1 and six identifier types, as `docs/index.md` does.
+* **Changed**: Update the upstream pins now lists the watch's findings for a dropped folder, a changed licence, a moved tag and an unfinished check, and the file NIST adds that it reports for information.
+* **Changed**: Security policy now counts the website's npm packages among what Dependabot keeps current, as `.github/dependabot.yml` does.
+* **Changed**: Documentation site now says that the retired schema's class pages redirect to their successors' pages or to the schema's index, as `website/site.config.mjs` does.
 * **Changed**: Security policy now says that a ruleset on `main` blocks deletion and force-pushes, as `SECURITY.md` does since the repository's settings were read; two settings remain not in force.
 
 ## 2026-10-29

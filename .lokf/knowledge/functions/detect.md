@@ -3,7 +3,7 @@ type: CsfFunction
 id: https://w3id.org/lmodel/nist-csf-v2/knowledge/functions/detect
 title: DETECT
 description: "The CSF 2.0 function DE, DETECT: the organization finds and analyzes possible cybersecurity attacks and compromises. It holds 2 categories, 11 subcategories and 37 implementation examples."
-function_id: DE
+csf_function_id: DE
 resource: src/nist_csf_v2/schema/oscal-content/NIST_CSF_v2.0_catalog.json
 definedBy:
   - https://w3id.org/lmodel/nist-csf-v2/knowledge/references/cswp-29
@@ -15,7 +15,7 @@ sources:
     title: the group DE
 generated:
   by: process:ktl-librarian
-  at: "2026-10-29T21:41:10Z"
+  at: "2026-10-30T08:31:58Z"
 status: draft
 ---
 

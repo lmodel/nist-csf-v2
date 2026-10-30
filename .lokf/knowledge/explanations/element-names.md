@@ -3,7 +3,7 @@ type: Explanation
 id: https://w3id.org/lmodel/nist-csf-v2/knowledge/explanations/element-names
 genre: explanation
 title: Element names and the shared namespace
-description: "How the schema names its elements so that its adapt copy can sit beside LOKF's schema and the slsa, github-actions, oscal, spdx and nist-sp-800-218 copies: classes with the `Csf` prefix, NIST's identifiers kept as written, every other key qualified with the CSF's own nouns, `title` and `description` carrying LOKF's IRIs, and no other key shared, which `tests/test_schema_rules.py` checks."
+description: "How the schema names its elements so that its adapt copy can sit beside LOKF's schema and the slsa, github-actions, oscal, spdx and nist-sp-800-218 copies: classes with the `Csf` prefix, NIST's identifiers kept as written, the identifier keys prefixed with `csf_`, every other key qualified with the CSF's own nouns, `title` and `description` carrying LOKF's IRIs, and no other key shared, which `tests/test_schema_rules.py` checks."
 resource: docs/about.md
 about:
   - https://w3id.org/lmodel/nist-csf-v2/knowledge/datasets/nist-csf-v2-linkml-schema
@@ -22,13 +22,13 @@ sources:
     title: the comment
 generated:
   by: process:ktl-librarian
-  at: "2026-10-29T21:41:10Z"
+  at: "2026-10-30T08:31:58Z"
 status: draft
 ---
 
 # Element names and the shared namespace
 
-Element names are the schema's own. Classes carry the `Csf` prefix, such as `CsfSubcategory`, so that they can be imported beside other vocabularies. Slots are snake_case, and the identifiers keep the form NIST gives them, such as `GV.OC-01`, and the example identifiers the form of NIST's reference data, such as `GV.OC-01.001`.[^about.md] Every element is in the `nist_csf_v2:` namespace, `https://w3id.org/lmodel/nist-csf-v2/`. Every key but `title` and `description` is qualified with the CSF's own noun, such as `category_status` and `subcategory_moved_to`, so that a sibling schema's `status` or `moved_to` never meets it.
+Element names are the schema's own. Classes carry the `Csf` prefix, such as `CsfSubcategory`, so that they can be imported beside other vocabularies. Slots are snake_case, and the identifiers keep the form NIST gives them, such as `GV.OC-01`, and the example identifiers the form of NIST's reference data, such as `GV.OC-01.001`.[^about.md] Every element is in the `nist_csf_v2:` namespace, `https://w3id.org/lmodel/nist-csf-v2/`. Every key but `title` and `description` is qualified with the CSF's own noun, such as `category_status` and `subcategory_moved_to`, so that a sibling schema's `status` or `moved_to` never meets it. `docs/about.md` says that the keys that hold the functions and the identifiers carry a `csf_` prefix, such as `csf_functions` and `csf_category_id`, because other NIST frameworks also have functions, categories and subcategories.
 
 `.linkmllint.yaml` applies the recommended rules unchanged, and its comment says why nothing is relaxed: the one enum's value, `withdrawn`, is already the lower-case word the catalog uses.[^linkmllint.yaml]
 
