@@ -1,0 +1,8 @@
+# Fails at: /subcategory_examples/0/csf_implementation_example_id
+# Invalid: GV.OC-01 is a subcategory's identifier; its first example is
+# GV.OC-01.001.
+csf_subcategory_id: GV.OC-01
+description: The organization understands its mission.
+subcategory_examples:
+  - csf_implementation_example_id: GV.OC-01
+    description: Share the mission so that risks to it can be identified.

@@ -1,0 +1,4 @@
+# Fails at: /csf_function_id
+# Invalid: CSF 2.0 has six functions, GV, ID, PR, DE, RS and RC.
+csf_function_id: MG
+title: MANAGE

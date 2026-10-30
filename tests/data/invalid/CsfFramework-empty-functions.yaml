@@ -1,0 +1,5 @@
+# Fails at: /csf_functions
+# Invalid: a framework document holds at least one function, so an empty
+# list fails as a missing one does.
+csf_version: "2.0"
+csf_functions: []

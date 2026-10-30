@@ -1,0 +1,4 @@
+# Fails at: /csf_subcategory_id
+# Invalid: NIST numbers subcategories with two digits, such as GV.OC-01.
+csf_subcategory_id: GV.OC-1
+description: The organization understands its mission.

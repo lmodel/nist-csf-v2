@@ -1,449 +1,187 @@
-@prefix linkml: <https://w3id.org/linkml/> .
-@prefix nist_csf_v2: <https://w3id.org/lmodel/nist-csf-v2/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix nist_csf_v2: <https://w3id.org/lmodel/nist-csf-v2/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-
-nist_csf_v2:CSFElement a sh:NodeShape ;
-    rdfs:comment "Abstract base class for CSF catalog elements" ;
-    sh:closed false ;
-    sh:ignoredProperties ( nist_csf_v2:controls rdf:type ) ;
-    sh:property [ sh:class nist_csf_v2:CSFProperty ;
-            sh:description "List of properties" ;
-            sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 3 ;
-            sh:path nist_csf_v2:props ],
-        [ sh:datatype xsd:string ;
-            sh:description "Human-readable title" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 2 ;
-            sh:path nist_csf_v2:title ],
-        [ sh:class linkml:Any ;
-            sh:description "Structured narrative parts (e.g., statement, overview, example)" ;
-            sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 4 ;
-            sh:path nist_csf_v2:parts ],
-        [ sh:description "Classification of a CSF catalog element (function, category, subcategory)" ;
-            sh:in ( "function" "category" "subcategory" ) ;
-            sh:maxCount 1 ;
-            sh:order 1 ;
-            sh:path nist_csf_v2:_class ],
-        [ sh:datatype xsd:string ;
-            sh:description "Unique identifier for a catalog element" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 0 ;
-            sh:path nist_csf_v2:id ] ;
-    sh:targetClass nist_csf_v2:CSFElement .
-
-nist_csf_v2:CSFCategory a sh:NodeShape ;
-    rdfs:comment "A CSF category - second-level grouping within a function (e.g. GV.OC Organizational Context, ID.AM Asset Management)" ;
-    sh:closed true ;
-    sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:class nist_csf_v2:CSFProperty ;
-            sh:description "List of properties" ;
-            sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 4 ;
-            sh:path nist_csf_v2:props ],
-        [ sh:datatype xsd:string ;
-            sh:description "Unique identifier for a catalog element" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 1 ;
-            sh:path nist_csf_v2:id ],
-        [ sh:datatype xsd:string ;
-            sh:description "Human-readable title" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 3 ;
-            sh:path nist_csf_v2:title ],
-        [ sh:class linkml:Any ;
-            sh:description "Structured narrative parts (e.g., statement, overview, example)" ;
-            sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 5 ;
-            sh:path nist_csf_v2:parts ],
-        [ sh:class nist_csf_v2:CSFSubcategory ;
-            sh:description "List of categories or subcategories within a function or category" ;
-            sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 0 ;
-            sh:path nist_csf_v2:controls ],
-        [ sh:description "Classification of a CSF catalog element (function, category, subcategory)" ;
-            sh:in ( "function" "category" "subcategory" ) ;
-            sh:maxCount 1 ;
-            sh:order 2 ;
-            sh:path nist_csf_v2:_class ] ;
-    sh:targetClass nist_csf_v2:CSFCategory .
-
-nist_csf_v2:CSFFunction a sh:NodeShape ;
-    rdfs:comment "A CSF function - top-level grouping (e.g. GOVERN, IDENTIFY, PROTECT, DETECT, RESPOND, RECOVER)" ;
-    sh:closed true ;
-    sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:class nist_csf_v2:CSFCategory ;
-            sh:description "List of categories or subcategories within a function or category" ;
-            sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 0 ;
-            sh:path nist_csf_v2:controls ],
-        [ sh:class linkml:Any ;
-            sh:description "Structured narrative parts (e.g., statement, overview, example)" ;
-            sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 5 ;
-            sh:path nist_csf_v2:parts ],
-        [ sh:class nist_csf_v2:CSFProperty ;
-            sh:description "List of properties" ;
-            sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 4 ;
-            sh:path nist_csf_v2:props ],
-        [ sh:description "Classification of a CSF catalog element (function, category, subcategory)" ;
-            sh:in ( "function" "category" "subcategory" ) ;
-            sh:maxCount 1 ;
-            sh:order 2 ;
-            sh:path nist_csf_v2:_class ],
-        [ sh:datatype xsd:string ;
-            sh:description "Unique identifier for a catalog element" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 1 ;
-            sh:path nist_csf_v2:id ],
-        [ sh:datatype xsd:string ;
-            sh:description "Human-readable title" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 3 ;
-            sh:path nist_csf_v2:title ] ;
-    sh:targetClass nist_csf_v2:CSFFunction .
-
-nist_csf_v2:CSFSubcategory a sh:NodeShape ;
-    rdfs:comment "A CSF subcategory - specific cybersecurity outcome (e.g. GV.OC-01, ID.AM-01)" ;
-    sh:closed true ;
-    sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:class linkml:Any ;
-            sh:description "Structured narrative parts (e.g., statement, overview, example)" ;
-            sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 4 ;
-            sh:path nist_csf_v2:parts ],
-        [ sh:description "Classification of a CSF catalog element (function, category, subcategory)" ;
-            sh:in ( "function" "category" "subcategory" ) ;
-            sh:maxCount 1 ;
-            sh:order 1 ;
-            sh:path nist_csf_v2:_class ],
-        [ sh:datatype xsd:string ;
-            sh:description "Unique identifier for a catalog element" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 0 ;
-            sh:path nist_csf_v2:id ],
-        [ sh:datatype xsd:string ;
-            sh:description "Human-readable title" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 2 ;
-            sh:path nist_csf_v2:title ],
-        [ sh:class nist_csf_v2:CSFProperty ;
-            sh:description "List of properties" ;
-            sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 3 ;
-            sh:path nist_csf_v2:props ] ;
-    sh:targetClass nist_csf_v2:CSFSubcategory .
-
-nist_csf_v2:Link a sh:NodeShape ;
-    rdfs:comment "Relationship link with href and optional rel attribute" ;
-    sh:closed true ;
-    sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:datatype xsd:string ;
-            sh:description "Link or resource reference" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 0 ;
-            sh:path nist_csf_v2:href ],
-        [ sh:datatype xsd:string ;
-            sh:description "Relationship type for a link" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 1 ;
-            sh:path nist_csf_v2:rel ] ;
-    sh:targetClass nist_csf_v2:Link .
-
-nist_csf_v2:Role a sh:NodeShape ;
-    rdfs:comment "Role definition used in metadata" ;
-    sh:closed true ;
-    sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:datatype xsd:string ;
-            sh:description "Unique identifier for a catalog element" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 0 ;
-            sh:path nist_csf_v2:id ],
-        [ sh:datatype xsd:string ;
-            sh:description "Human-readable title" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 1 ;
-            sh:path nist_csf_v2:title ] ;
-    sh:targetClass nist_csf_v2:Role .
-
-nist_csf_v2:CSFProperty a sh:NodeShape ;
-    rdfs:comment "A name-value property with optional namespace and supplemental remarks" ;
-    sh:closed true ;
-    sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:datatype xsd:string ;
-            sh:description "Property value" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 1 ;
-            sh:path nist_csf_v2:value ],
-        [ sh:datatype xsd:string ;
-            sh:description "Name of a property or part" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 0 ;
-            sh:path nist_csf_v2:name ],
-        [ sh:datatype xsd:string ;
-            sh:description "Namespace URI for a property or part" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 2 ;
-            sh:path nist_csf_v2:ns ],
-        [ sh:datatype xsd:string ;
-            sh:description "Supplemental remarks on a property" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 3 ;
-            sh:path nist_csf_v2:remarks ] ;
-    sh:targetClass nist_csf_v2:CSFProperty .
-
-linkml:Any a sh:NodeShape ;
-    rdfs:comment "Assignment of parties to a role",
-        "Main CSF catalog object",
-        "OSCAL back-matter section containing resource references",
-        "OSCAL metadata section for the CSF catalog",
-        "Party definition (person or organization)",
-        "Postal address",
-        "Reference link for a back-matter resource",
-        "Referenced resource in back-matter",
-        "Root wrapper for CSF catalog content",
-        "Structured narrative part (statement, overview, or example)" ;
-    sh:closed true ;
-    sh:ignoredProperties ( rdf:type ),
-        ( rdf:type ),
-        ( rdf:type ),
-        ( rdf:type ),
-        ( rdf:type ),
-        ( rdf:type ),
-        ( rdf:type ),
-        ( rdf:type ),
-        ( rdf:type ),
-        ( rdf:type ) ;
-    sh:property [ sh:class linkml:Any ;
-            sh:description "Parties used in metadata" ;
-            sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 8 ;
-            sh:path nist_csf_v2:parties ],
-        [ sh:datatype xsd:string ;
-            sh:description "Name of a property or part" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 1 ;
-            sh:path nist_csf_v2:name ],
-        [ sh:datatype xsd:string ;
-            sh:description "Referenced party UUIDs" ;
-            sh:nodeKind sh:Literal ;
-            sh:order 1 ;
-            sh:path nist_csf_v2:party_uuids ],
-        [ sh:datatype xsd:string ;
-            sh:description "State or region" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 2 ;
-            sh:path nist_csf_v2:state ],
-        [ sh:class linkml:Any ;
-            sh:description "Back-matter references and resources" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 3 ;
-            sh:path nist_csf_v2:back_matter ],
-        [ sh:class linkml:Any ;
-            sh:description "Postal addresses" ;
-            sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 5 ;
-            sh:path nist_csf_v2:addresses ],
-        [ sh:datatype xsd:string ;
-            sh:description "Version identifier" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 3 ;
-            sh:path nist_csf_v2:version ],
-        [ sh:datatype xsd:string ;
-            sh:description "Unique identifier for a catalog element" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 0 ;
-            sh:path nist_csf_v2:id ],
-        [ sh:datatype xsd:string ;
-            sh:description "City name" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 1 ;
-            sh:path nist_csf_v2:city ],
-        [ sh:datatype xsd:string ;
-            sh:description "UUID for catalog or resource element" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 0 ;
-            sh:path nist_csf_v2:uuid ],
-        [ sh:datatype xsd:string ;
-            sh:description "Party email addresses" ;
-            sh:nodeKind sh:Literal ;
-            sh:order 4 ;
-            sh:path nist_csf_v2:email_addresses ],
-        [ sh:datatype xsd:string ;
-            sh:description "Last modification timestamp" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 2 ;
-            sh:path nist_csf_v2:last_modified ],
-        [ sh:class nist_csf_v2:CSFProperty ;
-            sh:description "List of properties" ;
-            sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 5 ;
-            sh:path nist_csf_v2:props ],
-        [ sh:class nist_csf_v2:CSFFunction ;
-            sh:description "List of CSF functions (top-level groupings) in the catalog" ;
-            sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 2 ;
-            sh:path nist_csf_v2:groups ],
-        [ sh:datatype xsd:string ;
-            sh:description "Namespace URI for a property or part" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 2 ;
-            sh:path nist_csf_v2:ns ],
-        [ sh:datatype xsd:string ;
-            sh:description "Media type for a resource link" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 1 ;
-            sh:path nist_csf_v2:media_type ],
-        [ sh:class nist_csf_v2:Role ;
-            sh:description "Roles used in metadata" ;
-            sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 7 ;
-            sh:path nist_csf_v2:roles ],
-        [ sh:datatype xsd:string ;
-            sh:description "Human-readable title" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 1 ;
-            sh:path nist_csf_v2:title ],
-        [ sh:class linkml:Any ;
-            sh:description "Responsible party assignments" ;
-            sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 9 ;
-            sh:path nist_csf_v2:responsible_parties ],
-        [ sh:datatype xsd:string ;
-            sh:description "Address lines" ;
-            sh:nodeKind sh:Literal ;
-            sh:order 0 ;
-            sh:path nist_csf_v2:addr_lines ],
-        [ sh:class nist_csf_v2:Link ;
-            sh:description "List of links and relationships" ;
-            sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 6 ;
-            sh:path nist_csf_v2:links ],
-        [ sh:class linkml:Any ;
-            sh:description "Back-matter resources" ;
-            sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 0 ;
-            sh:path nist_csf_v2:resources ],
-        [ sh:datatype xsd:string ;
-            sh:description "Human-readable title" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 0 ;
-            sh:path nist_csf_v2:title ],
-        [ sh:datatype xsd:string ;
-            sh:description "Publication timestamp" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 1 ;
-            sh:path nist_csf_v2:published ],
-        [ sh:datatype xsd:string ;
-            sh:description "OSCAL version identifier" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 4 ;
-            sh:path nist_csf_v2:oscal_version ],
-        [ sh:datatype xsd:string ;
-            sh:description "Free-text prose content" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 3 ;
-            sh:path nist_csf_v2:prose ],
-        [ sh:datatype xsd:string ;
-            sh:description "Short display name for a party" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 3 ;
-            sh:path nist_csf_v2:short_name ],
-        [ sh:datatype xsd:string ;
-            sh:description "UUID for catalog or resource element" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 0 ;
-            sh:path nist_csf_v2:uuid ],
-        [ sh:datatype xsd:string ;
-            sh:description "UUID for catalog or resource element" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 0 ;
-            sh:path nist_csf_v2:uuid ],
-        [ sh:datatype xsd:string ;
-            sh:description "Name of a property or part" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 2 ;
-            sh:path nist_csf_v2:name ],
-        [ sh:datatype xsd:string ;
-            sh:description "Assigned role identifier" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 0 ;
-            sh:path nist_csf_v2:role_id ],
-        [ sh:class linkml:Any ;
-            sh:description "Catalog metadata" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 1 ;
-            sh:path nist_csf_v2:metadata ],
-        [ sh:datatype xsd:string ;
-            sh:description "Link or resource reference" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 0 ;
-            sh:path nist_csf_v2:href ],
-        [ sh:datatype xsd:string ;
-            sh:description "Party type (e.g., organization, person)" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 1 ;
-            sh:path nist_csf_v2:type ],
-        [ sh:class linkml:Any ;
-            sh:description "Root catalog payload" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 0 ;
-            sh:path nist_csf_v2:catalog ],
-        [ sh:datatype xsd:string ;
-            sh:description "Postal code" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 3 ;
-            sh:path nist_csf_v2:postal_code ],
-        [ sh:class linkml:Any ;
-            sh:description "Resource links" ;
-            sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 2 ;
-            sh:path nist_csf_v2:rlinks ] ;
-    sh:targetClass linkml:Any .
-
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix schema1: <http://schema.org/> .
+nist_csf_v2:Category a sh:NodeShape ;
+	rdfs:comment "A group of related cybersecurity outcomes within a function, such as Organizational Context (GV.OC), or a CSF 1.1 category that CSF 2.0 withdrew, which the catalog keeps with its status and, where NIST recorded it, where it moved or what incorporated it." ;
+	sh:closed true ;
+	sh:ignoredProperties _:c14n11 ;
+	sh:property _:c14n1 , _:c14n19 , _:c14n2 , _:c14n23 , _:c14n3 , _:c14n7 , _:c14n9 ;
+	sh:targetClass nist_csf_v2:Category .
+nist_csf_v2:Framework a sh:NodeShape ;
+	rdfs:comment "One edition of the CSF as a whole: its functions, each holding its categories and their subcategories." ;
+	sh:closed true ;
+	sh:ignoredProperties _:c14n21 ;
+	sh:property _:c14n17 , _:c14n24 ;
+	sh:targetClass nist_csf_v2:Framework .
+nist_csf_v2:Function a sh:NodeShape ;
+	rdfs:comment "One of the six functions that sort the CSF's outcomes at the highest level: GOVERN, IDENTIFY, PROTECT, DETECT, RESPOND and RECOVER. Each is named by two letters and described in a sentence." ;
+	sh:closed true ;
+	sh:ignoredProperties _:c14n14 ;
+	sh:property _:c14n18 , _:c14n20 , _:c14n22 , _:c14n25 ;
+	sh:targetClass nist_csf_v2:Function .
+nist_csf_v2:ImplementationExample a sh:NodeShape ;
+	rdfs:comment "An implementation example: one concise, action-oriented step that could help achieve a subcategory's outcome. NIST publishes the examples beside the Core, in its reference tool and its catalog, not in CSWP 29 itself." ;
+	sh:closed true ;
+	sh:ignoredProperties _:c14n4 ;
+	sh:property _:c14n12 , _:c14n6 ;
+	sh:targetClass nist_csf_v2:ImplementationExample .
+nist_csf_v2:Subcategory a sh:NodeShape ;
+	rdfs:comment "A cybersecurity outcome: one statement of a result within a category, such as GV.OC-01, or a CSF 1.1 subcategory that CSF 2.0 withdrew, which the catalog keeps with its statement, its status and where it moved or what incorporated it." ;
+	sh:closed true ;
+	sh:ignoredProperties _:c14n0 ;
+	sh:property _:c14n10 , _:c14n13 , _:c14n15 , _:c14n16 , _:c14n5 , _:c14n8 ;
+	sh:targetClass nist_csf_v2:Subcategory .
+_:c14n0 rdf:first rdf:type ;
+	rdf:rest rdf:nil .
+_:c14n1 sh:description "withdrawn for a CSF 1.1 category that CSF 2.0 withdrew. A category of CSF 2.0 has no status." ;
+	sh:in _:c14n26 ;
+	sh:maxCount 1 ;
+	sh:order 4 ;
+	sh:path nist_csf_v2:category_status .
+_:c14n10 sh:datatype xsd:string ;
+	sh:description "The CSF 2.0 subcategory a withdrawn subcategory moved to, as the catalog states it, such as GV.OC-03 for ID.GV-03. The catalog names two for a few." ;
+	sh:nodeKind sh:Literal ;
+	sh:order 4 ;
+	sh:path nist_csf_v2:subcategory_moved_to ;
+	sh:pattern "^(GV|ID|PR|DE|RS|RC)\\.[A-Z]{2}-[0-9]{2}$" .
+_:c14n11 rdf:first rdf:type ;
+	rdf:rest rdf:nil .
+_:c14n12 sh:datatype xsd:string ;
+	sh:description "What the function, category, subcategory or example says, in the words of whoever records it." ;
+	sh:maxCount 1 ;
+	sh:minCount 1 ;
+	sh:nodeKind sh:Literal ;
+	sh:order 1 ;
+	sh:path schema1:description ;
+	sh:pattern "^\\s*\\S" .
+_:c14n13 sh:description "withdrawn for a CSF 1.1 subcategory that CSF 2.0 withdrew. A subcategory of CSF 2.0 has no status." ;
+	sh:in _:c14n27 ;
+	sh:maxCount 1 ;
+	sh:order 3 ;
+	sh:path nist_csf_v2:subcategory_status .
+_:c14n14 rdf:first rdf:type ;
+	rdf:rest rdf:nil .
+_:c14n15 sh:datatype xsd:string ;
+	sh:description "What the function, category, subcategory or example says, in the words of whoever records it." ;
+	sh:maxCount 1 ;
+	sh:minCount 1 ;
+	sh:nodeKind sh:Literal ;
+	sh:order 1 ;
+	sh:path schema1:description ;
+	sh:pattern "^\\s*\\S" .
+_:c14n16 sh:datatype xsd:string ;
+	sh:description "The subcategory's identifier, such as GV.OC-01." ;
+	sh:maxCount 1 ;
+	sh:minCount 1 ;
+	sh:nodeKind sh:Literal ;
+	sh:order 0 ;
+	sh:path nist_csf_v2:csf_subcategory_id ;
+	sh:pattern "^(GV|ID|PR|DE|RS|RC)\\.[A-Z]{2}-[0-9]{2}$" .
+_:c14n17 sh:datatype xsd:string ;
+	sh:description "The CSF edition, as NIST numbers it in the publication's title, such as 2.0." ;
+	sh:maxCount 1 ;
+	sh:minCount 1 ;
+	sh:nodeKind sh:Literal ;
+	sh:order 0 ;
+	sh:path nist_csf_v2:csf_version ;
+	sh:pattern "^[0-9]+\\.[0-9]+$" .
+_:c14n18 sh:class nist_csf_v2:Category ;
+	sh:description "The categories of the function. A knowledge bundle relates a category to its function with isPartOf instead." ;
+	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:order 3 ;
+	sh:path nist_csf_v2:function_categories .
+_:c14n19 sh:datatype xsd:string ;
+	sh:description "The function, category or subcategory of CSF 2.0 that took in a withdrawn category's outcomes, as the catalog states it, such as GV.OC for ID.BE. The catalog names none for some withdrawn categories." ;
+	sh:nodeKind sh:Literal ;
+	sh:order 6 ;
+	sh:path nist_csf_v2:category_incorporated_into ;
+	sh:pattern "^(GV|ID|PR|DE|RS|RC)(\\.[A-Z]{2}(-[0-9]{2})?)?$" .
+_:c14n2 sh:class nist_csf_v2:Subcategory ;
+	sh:description "The subcategories of the category. A knowledge bundle relates a subcategory to its category with isPartOf instead." ;
+	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:order 3 ;
+	sh:path nist_csf_v2:category_subcategories .
+_:c14n20 sh:datatype xsd:string ;
+	sh:description "The function's two letters, such as GV for GOVERN." ;
+	sh:maxCount 1 ;
+	sh:minCount 1 ;
+	sh:nodeKind sh:Literal ;
+	sh:order 0 ;
+	sh:path nist_csf_v2:csf_function_id ;
+	sh:pattern "^(GV|ID|PR|DE|RS|RC)$" .
+_:c14n21 rdf:first rdf:type ;
+	rdf:rest rdf:nil .
+_:c14n22 sh:datatype xsd:string ;
+	sh:description "The name CSWP 29 gives the function or category." ;
+	sh:maxCount 1 ;
+	sh:minCount 1 ;
+	sh:nodeKind sh:Literal ;
+	sh:order 1 ;
+	sh:path schema1:name .
+_:c14n23 sh:datatype xsd:string ;
+	sh:description "What the function, category, subcategory or example says, in the words of whoever records it." ;
+	sh:maxCount 1 ;
+	sh:nodeKind sh:Literal ;
+	sh:order 2 ;
+	sh:path schema1:description .
+_:c14n24 sh:class nist_csf_v2:Function ;
+	sh:description "The six functions, in the order CSWP 29 gives them." ;
+	sh:minCount 1 ;
+	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:order 1 ;
+	sh:path nist_csf_v2:csf_functions .
+_:c14n25 sh:datatype xsd:string ;
+	sh:description "What the function, category, subcategory or example says, in the words of whoever records it." ;
+	sh:maxCount 1 ;
+	sh:nodeKind sh:Literal ;
+	sh:order 2 ;
+	sh:path schema1:description .
+_:c14n26 rdf:first "withdrawn" ;
+	rdf:rest rdf:nil .
+_:c14n27 rdf:first "withdrawn" ;
+	rdf:rest rdf:nil .
+_:c14n3 sh:datatype xsd:string ;
+	sh:description "The category's identifier, such as GV.OC." ;
+	sh:maxCount 1 ;
+	sh:minCount 1 ;
+	sh:nodeKind sh:Literal ;
+	sh:order 0 ;
+	sh:path nist_csf_v2:csf_category_id ;
+	sh:pattern "^(GV|ID|PR|DE|RS|RC)\\.[A-Z]{2}$" .
+_:c14n4 rdf:first rdf:type ;
+	rdf:rest rdf:nil .
+_:c14n5 sh:class nist_csf_v2:ImplementationExample ;
+	sh:description "The implementation examples NIST publishes for the subcategory. CSWP 29 says they are notional, that none is required, and that they are not a complete list of what could be done." ;
+	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:order 2 ;
+	sh:path nist_csf_v2:subcategory_examples .
+_:c14n6 sh:datatype xsd:string ;
+	sh:description "The example's identifier in NIST's reference data, such as GV.OC-01.001 for the first example of subcategory GV.OC-01." ;
+	sh:maxCount 1 ;
+	sh:minCount 1 ;
+	sh:nodeKind sh:Literal ;
+	sh:order 0 ;
+	sh:path nist_csf_v2:csf_implementation_example_id ;
+	sh:pattern "^(GV|ID|PR|DE|RS|RC)\\.[A-Z]{2}-[0-9]{2}\\.[0-9]{3}$" .
+_:c14n7 sh:datatype xsd:string ;
+	sh:description "The CSF 2.0 category a withdrawn category moved to, as the catalog states it, such as PR.AA for PR.AC." ;
+	sh:nodeKind sh:Literal ;
+	sh:order 5 ;
+	sh:path nist_csf_v2:category_moved_to ;
+	sh:pattern "^(GV|ID|PR|DE|RS|RC)\\.[A-Z]{2}$" .
+_:c14n8 sh:datatype xsd:string ;
+	sh:description "The CSF 2.0 category or subcategory that took in a withdrawn subcategory's outcome, as the catalog states it, such as GV.OC-01 for ID.BE-02." ;
+	sh:nodeKind sh:Literal ;
+	sh:order 5 ;
+	sh:path nist_csf_v2:subcategory_incorporated_into ;
+	sh:pattern "^(GV|ID|PR|DE|RS|RC)\\.[A-Z]{2}(-[0-9]{2})?$" .
+_:c14n9 sh:datatype xsd:string ;
+	sh:description "The name CSWP 29 gives the function or category." ;
+	sh:maxCount 1 ;
+	sh:minCount 1 ;
+	sh:nodeKind sh:Literal ;
+	sh:order 1 ;
+	sh:path schema1:name .

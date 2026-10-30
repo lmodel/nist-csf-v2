@@ -1,0 +1,4 @@
+# Fails at: /csf_implementation_example_id
+# Invalid: NIST numbers the examples with three digits, such as GV.OC-01.001.
+csf_implementation_example_id: GV.OC-01.01
+description: Share the mission so that risks to it can be identified.

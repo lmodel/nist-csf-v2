@@ -1,3 +1,8 @@
+"""nist-csf-v2.
+
+NIST Cybersecurity Framework 2.0
+"""
+
 try:
     from nist_csf_v2._version import __version__, __version_tuple__
 except ImportError:  # pragma: no cover

@@ -1,0 +1,85 @@
+NIST CSF 2.0 LinkML Schema (nist-csf-v2)
+Copyright 2026 Noel McLoughlin
+
+The code in this repository is licensed under the Apache License,
+Version 2.0 (see LICENSE). Some of the content it carries is third-party
+work under its own terms, listed below.
+
+src/nist_csf_v2/schema/*.yaml, src/nist_csf_v2/datamodel/ and project/
+model the Cybersecurity Framework (CSF) 2.0, which the National
+Institute of Standards and Technology (NIST) publishes as Cybersecurity
+White Paper (CSWP) 29, https://doi.org/10.6028/NIST.CSWP.29 (February
+26, 2024). They are this project's rendering, written in its own words
+with NIST as the source of the definitions; they are not NIST's, and
+their use does not imply endorsement by NIST.
+
+CSWP 29 carries no licence statement of its own and refers readers to
+NIST's Technical Series policies. NIST's statement on its works, read
+on 2026-10-29 at
+https://www.nist.gov/open/copyright-fair-use-and-licensing-statements-srd-data-software-and-technical-series-publications,
+says that a NIST Technical Series publication is a work of the United
+States Government, not subject to copyright protection in the United
+States, but may be subject to copyright in other countries.
+
+NIST's CSF catalog in OSCAL
+---------------------------
+
+src/nist_csf_v2/schema/oscal-content/ holds a copy of the catalog of
+CSF 2.0 that NIST publishes in the Open Security Controls Assessment
+Language (OSCAL), retrieved from
+https://github.com/usnistgov/oscal-content/tree/f0de6d8d8c059d374f15e0ae07508d82e370fc1d/nist.gov/CSF/v2.0/json
+(the v1.6.0 release), beside NIST's LICENSE.md from the root of the same
+commit. Both files are identical to their counterparts there, and
+scripts/check_upstream_release.py checks that they stay so. NIST's work
+is in the public domain within the United States, and NIST dedicates it
+to the worldwide public domain under CC0 1.0. The tests read the catalog
+to check the schema against it; nothing in this repository changes it.
+
+linkml-project-copier
+---------------------
+
+This project was generated from linkml-project-copier
+(https://github.com/linkml/linkml-project-copier), and its justfile,
+configuration and documentation scaffolding derive from that template:
+
+  The MIT License (MIT)
+  Copyright (c) 2025 David Linke
+
+  Permission is hereby granted, free of charge, to any person obtaining a
+  copy of this software and associated documentation files (the
+  "Software"), to deal in the Software without restriction, including
+  without limitation the rights to use, copy, modify, merge, publish,
+  distribute, sublicense, and/or sell copies of the Software, and to permit
+  persons to whom the Software is furnished to do so, subject to the
+  following conditions:
+
+  The above copyright notice and this permission notice shall be included
+  in all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+  OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+  NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+  DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+  OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+  USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+Knowledge bundle
+----------------
+
+This product maintains its documentation as a Linked Open Knowledge Format
+(LOKF) bundle under .lokf/: https://lokf.nolan-nichols.com/specification/
+
+LOKF is a semantic profile of the Open Knowledge Format (OKF) specification
+by Google Cloud Platform:
+https://github.com/GoogleCloudPlatform/open-knowledge-format/blob/main/SPEC.md
+
+The scripts under .lokf/scripts/ and .lokf/m365/ and the
+knowledge-librarian, knowledge-registrar, knowledge-release and
+knowledge-sync workflows under .github/workflows/ are copies of the
+ktl-sidecar templates in knowledge-trust-ladder
+(https://github.com/noelmcloughlin/knowledge-trust-ladder). The site under
+website/ and the knowledge-website workflow derive from the ktl-website
+templates in the same repository, and website/NOTICE lists the part
+adapted from the LOKF toolkit's site. All of them are licensed under the
+Apache License, Version 2.0.

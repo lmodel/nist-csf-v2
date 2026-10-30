@@ -1,12 +1,13 @@
 {
     "$defs": {
-        "Address": {
-            "additionalProperties": true,
-            "description": "Postal address",
+        "CsfCategory": {
+            "additionalProperties": false,
+            "description": "A group of related cybersecurity outcomes within a function, such as Organizational Context (GV.OC), or a CSF 1.1 category that CSF 2.0 withdrew, which the catalog keeps with its status and, where NIST recorded it, where it moved or what incorporated it.",
             "properties": {
-                "addr_lines": {
-                    "description": "Address lines",
+                "category_incorporated_into": {
+                    "description": "The function, category or subcategory of CSF 2.0 that took in a withdrawn category's outcomes, as the catalog states it, such as GV.OC for ID.BE. The catalog names none for some withdrawn categories.",
                     "items": {
+                        "pattern": "^(GV|ID|PR|DE|RS|RC)(\\.[A-Z]{2}(-[0-9]{2})?)?$",
                         "type": "string"
                     },
                     "type": [
@@ -14,244 +15,115 @@
                         "null"
                     ]
                 },
-                "city": {
-                    "description": "City name",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "postal_code": {
-                    "description": "Postal code",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "state": {
-                    "description": "State or region",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                }
-            },
-            "title": "Address",
-            "type": [
-                "null",
-                "boolean",
-                "object",
-                "number",
-                "string"
-            ]
-        },
-        "BackMatter": {
-            "additionalProperties": true,
-            "description": "OSCAL back-matter section containing resource references",
-            "properties": {
-                "resources": {
-                    "description": "Back-matter resources",
+                "category_moved_to": {
+                    "description": "The CSF 2.0 category a withdrawn category moved to, as the catalog states it, such as PR.AA for PR.AC.",
                     "items": {
-                        "$ref": "#/$defs/Resource"
+                        "pattern": "^(GV|ID|PR|DE|RS|RC)\\.[A-Z]{2}$",
+                        "type": "string"
                     },
                     "type": [
                         "array",
                         "null"
                     ]
-                }
-            },
-            "title": "BackMatter",
-            "type": [
-                "null",
-                "boolean",
-                "object",
-                "number",
-                "string"
-            ]
-        },
-        "CSFCatalogBody": {
-            "additionalProperties": true,
-            "description": "Main CSF catalog object",
-            "properties": {
-                "back_matter": {
+                },
+                "category_status": {
                     "anyOf": [
                         {
-                            "$ref": "#/$defs/BackMatter"
+                            "$ref": "#/$defs/CsfElementStatus"
                         },
                         {
                             "type": "null"
                         }
                     ],
-                    "description": "Back-matter references and resources"
+                    "description": "withdrawn for a CSF 1.1 category that CSF 2.0 withdrew. A category of CSF 2.0 has no status."
                 },
-                "groups": {
-                    "description": "List of CSF functions (top-level groupings) in the catalog",
+                "category_subcategories": {
+                    "description": "The subcategories of the category. A knowledge bundle relates a subcategory to its category with isPartOf instead.",
                     "items": {
-                        "$ref": "#/$defs/CSFFunction"
+                        "$ref": "#/$defs/CsfSubcategory"
                     },
                     "type": [
                         "array",
                         "null"
                     ]
                 },
-                "metadata": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/CSFMetadata"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "description": "Catalog metadata"
+                "csf_category_id": {
+                    "description": "The category's identifier, such as GV.OC.",
+                    "pattern": "^(GV|ID|PR|DE|RS|RC)\\.[A-Z]{2}$",
+                    "type": "string"
                 },
-                "uuid": {
-                    "description": "UUID for catalog or resource element",
+                "description": {
+                    "description": "What the function, category, subcategory or example says, in the words of whoever records it.",
                     "type": [
                         "string",
-                        "null"
-                    ]
-                }
-            },
-            "title": "CSFCatalogBody",
-            "type": [
-                "null",
-                "boolean",
-                "object",
-                "number",
-                "string"
-            ]
-        },
-        "CSFCategory": {
-            "additionalProperties": false,
-            "description": "A CSF category - second-level grouping within a function (e.g. GV.OC Organizational Context, ID.AM Asset Management)",
-            "properties": {
-                "class": {
-                    "$ref": "#/$defs/CSFElementClassValue",
-                    "description": "Classification of a CSF catalog element (function, category, subcategory)"
-                },
-                "controls": {
-                    "description": "List of categories or subcategories within a function or category",
-                    "items": {
-                        "$ref": "#/$defs/CSFSubcategory"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "id": {
-                    "description": "Unique identifier for a catalog element",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "parts": {
-                    "description": "Structured narrative parts (e.g., statement, overview, example)",
-                    "items": {
-                        "$ref": "#/$defs/CSFPart"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "props": {
-                    "description": "List of properties",
-                    "items": {
-                        "$ref": "#/$defs/CSFProperty"
-                    },
-                    "type": [
-                        "array",
                         "null"
                     ]
                 },
                 "title": {
-                    "description": "Human-readable title",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
+                    "description": "The name CSWP 29 gives the function or category.",
+                    "type": "string"
                 }
             },
-            "title": "CSFCategory",
+            "required": [
+                "csf_category_id",
+                "title"
+            ],
+            "title": "CsfCategory",
             "type": "object"
         },
-        "CSFDocument": {
-            "additionalProperties": true,
-            "description": "Root wrapper for CSF catalog content",
-            "properties": {
-                "catalog": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/CSFCatalogBody"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "description": "Root catalog payload"
-                }
-            },
-            "title": "CSFDocument",
-            "type": [
-                "null",
-                "boolean",
-                "object",
-                "number",
-                "string"
-            ]
-        },
-        "CSFElementClassValue": {
-            "description": "Allowed class values for CSF catalog elements",
+        "CsfElementStatus": {
+            "description": "The state the catalog gives a category or subcategory that CSF 2.0 no longer carries. A category or subcategory of CSF 2.0 has no status.",
             "enum": [
-                "function",
-                "category",
-                "subcategory"
+                "withdrawn"
             ],
-            "title": "CSFElementClassValue",
+            "title": "CsfElementStatus",
             "type": "string"
         },
-        "CSFFunction": {
+        "CsfFramework": {
             "additionalProperties": false,
-            "description": "A CSF function - top-level grouping (e.g. GOVERN, IDENTIFY, PROTECT, DETECT, RESPOND, RECOVER)",
+            "description": "One edition of the CSF as a whole: its functions, each holding its categories and their subcategories.",
             "properties": {
-                "class": {
-                    "$ref": "#/$defs/CSFElementClassValue",
-                    "description": "Classification of a CSF catalog element (function, category, subcategory)"
-                },
-                "controls": {
-                    "description": "List of categories or subcategories within a function or category",
+                "csf_functions": {
+                    "description": "The six functions, in the order CSWP 29 gives them.",
                     "items": {
-                        "$ref": "#/$defs/CSFCategory"
+                        "$ref": "#/$defs/CsfFunction"
                     },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
+                    "minItems": 1,
+                    "type": "array"
                 },
-                "id": {
-                    "description": "Unique identifier for a catalog element",
+                "csf_version": {
+                    "description": "The CSF edition, as NIST numbers it in the publication's title, such as 2.0.",
+                    "pattern": "^[0-9]+\\.[0-9]+$",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "csf_version",
+                "csf_functions"
+            ],
+            "title": "CsfFramework",
+            "type": "object"
+        },
+        "CsfFunction": {
+            "additionalProperties": false,
+            "description": "One of the six functions that sort the CSF's outcomes at the highest level: GOVERN, IDENTIFY, PROTECT, DETECT, RESPOND and RECOVER. Each is named by two letters and described in a sentence.",
+            "properties": {
+                "csf_function_id": {
+                    "description": "The function's two letters, such as GV for GOVERN.",
+                    "pattern": "^(GV|ID|PR|DE|RS|RC)$",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "What the function, category, subcategory or example says, in the words of whoever records it.",
                     "type": [
                         "string",
                         "null"
                     ]
                 },
-                "parts": {
-                    "description": "Structured narrative parts (e.g., statement, overview, example)",
+                "function_categories": {
+                    "description": "The categories of the function. A knowledge bundle relates a category to its function with isPartOf instead.",
                     "items": {
-                        "$ref": "#/$defs/CSFPart"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "props": {
-                    "description": "List of properties",
-                    "items": {
-                        "$ref": "#/$defs/CSFProperty"
+                        "$ref": "#/$defs/CsfCategory"
                     },
                     "type": [
                         "array",
@@ -259,278 +131,67 @@
                     ]
                 },
                 "title": {
-                    "description": "Human-readable title",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
+                    "description": "The name CSWP 29 gives the function or category.",
+                    "type": "string"
                 }
             },
-            "title": "CSFFunction",
+            "required": [
+                "csf_function_id",
+                "title"
+            ],
+            "title": "CsfFunction",
             "type": "object"
         },
-        "CSFMetadata": {
-            "additionalProperties": true,
-            "description": "OSCAL metadata section for the CSF catalog",
-            "properties": {
-                "last_modified": {
-                    "description": "Last modification timestamp",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "links": {
-                    "description": "List of links and relationships",
-                    "items": {
-                        "$ref": "#/$defs/Link"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "oscal_version": {
-                    "description": "OSCAL version identifier",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "parties": {
-                    "description": "Parties used in metadata",
-                    "items": {
-                        "$ref": "#/$defs/Party"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "props": {
-                    "description": "List of properties",
-                    "items": {
-                        "$ref": "#/$defs/CSFProperty"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "published": {
-                    "description": "Publication timestamp",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "responsible_parties": {
-                    "description": "Responsible party assignments",
-                    "items": {
-                        "$ref": "#/$defs/ResponsibleParty"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "roles": {
-                    "description": "Roles used in metadata",
-                    "items": {
-                        "$ref": "#/$defs/Role"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "title": {
-                    "description": "Human-readable title",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "version": {
-                    "description": "Version identifier",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                }
-            },
-            "title": "CSFMetadata",
-            "type": [
-                "null",
-                "boolean",
-                "object",
-                "number",
-                "string"
-            ]
-        },
-        "CSFPart": {
-            "additionalProperties": true,
-            "description": "Structured narrative part (statement, overview, or example)",
-            "properties": {
-                "id": {
-                    "description": "Unique identifier for a catalog element",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "name": {
-                    "description": "Name of a property or part",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "ns": {
-                    "description": "Namespace URI for a property or part",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "prose": {
-                    "description": "Free-text prose content",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                }
-            },
-            "title": "CSFPart",
-            "type": [
-                "null",
-                "boolean",
-                "object",
-                "number",
-                "string"
-            ]
-        },
-        "CSFProperty": {
+        "CsfImplementationExample": {
             "additionalProperties": false,
-            "description": "A name-value property with optional namespace and supplemental remarks",
+            "description": "An implementation example: one concise, action-oriented step that could help achieve a subcategory's outcome. NIST publishes the examples beside the Core, in its reference tool and its catalog, not in CSWP 29 itself.",
             "properties": {
-                "name": {
-                    "description": "Name of a property or part",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
+                "csf_implementation_example_id": {
+                    "description": "The example's identifier in NIST's reference data, such as GV.OC-01.001 for the first example of subcategory GV.OC-01.",
+                    "pattern": "^(GV|ID|PR|DE|RS|RC)\\.[A-Z]{2}-[0-9]{2}\\.[0-9]{3}$",
+                    "type": "string"
                 },
-                "ns": {
-                    "description": "Namespace URI for a property or part",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "remarks": {
-                    "description": "Supplemental remarks on a property",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "value": {
-                    "description": "Property value",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
+                "description": {
+                    "description": "What the function, category, subcategory or example says, in the words of whoever records it.",
+                    "pattern": "^\\s*\\S",
+                    "type": "string"
                 }
             },
-            "title": "CSFProperty",
+            "required": [
+                "csf_implementation_example_id",
+                "description"
+            ],
+            "title": "CsfImplementationExample",
             "type": "object"
         },
-        "CSFSubcategory": {
+        "CsfSubcategory": {
             "additionalProperties": false,
-            "description": "A CSF subcategory - specific cybersecurity outcome (e.g. GV.OC-01, ID.AM-01)",
+            "description": "A cybersecurity outcome: one statement of a result within a category, such as GV.OC-01, or a CSF 1.1 subcategory that CSF 2.0 withdrew, which the catalog keeps with its statement, its status and where it moved or what incorporated it.",
             "properties": {
-                "class": {
-                    "$ref": "#/$defs/CSFElementClassValue",
-                    "description": "Classification of a CSF catalog element (function, category, subcategory)"
+                "csf_subcategory_id": {
+                    "description": "The subcategory's identifier, such as GV.OC-01.",
+                    "pattern": "^(GV|ID|PR|DE|RS|RC)\\.[A-Z]{2}-[0-9]{2}$",
+                    "type": "string"
                 },
-                "id": {
-                    "description": "Unique identifier for a catalog element",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
+                "description": {
+                    "description": "What the function, category, subcategory or example says, in the words of whoever records it.",
+                    "pattern": "^\\s*\\S",
+                    "type": "string"
                 },
-                "parts": {
-                    "description": "Structured narrative parts (e.g., statement, overview, example)",
+                "subcategory_examples": {
+                    "description": "The implementation examples NIST publishes for the subcategory. CSWP 29 says they are notional, that none is required, and that they are not a complete list of what could be done.",
                     "items": {
-                        "$ref": "#/$defs/CSFPart"
+                        "$ref": "#/$defs/CsfImplementationExample"
                     },
                     "type": [
                         "array",
                         "null"
                     ]
                 },
-                "props": {
-                    "description": "List of properties",
+                "subcategory_incorporated_into": {
+                    "description": "The CSF 2.0 category or subcategory that took in a withdrawn subcategory's outcome, as the catalog states it, such as GV.OC-01 for ID.BE-02.",
                     "items": {
-                        "$ref": "#/$defs/CSFProperty"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "title": {
-                    "description": "Human-readable title",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                }
-            },
-            "title": "CSFSubcategory",
-            "type": "object"
-        },
-        "Link": {
-            "additionalProperties": false,
-            "description": "Relationship link with href and optional rel attribute",
-            "properties": {
-                "href": {
-                    "description": "Link or resource reference",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "rel": {
-                    "description": "Relationship type for a link",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                }
-            },
-            "title": "Link",
-            "type": "object"
-        },
-        "Party": {
-            "additionalProperties": true,
-            "description": "Party definition (person or organization)",
-            "properties": {
-                "addresses": {
-                    "description": "Postal addresses",
-                    "items": {
-                        "$ref": "#/$defs/Address"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "email_addresses": {
-                    "description": "Party email addresses",
-                    "items": {
+                        "pattern": "^(GV|ID|PR|DE|RS|RC)\\.[A-Z]{2}(-[0-9]{2})?$",
                         "type": "string"
                     },
                     "type": [
@@ -538,117 +199,10 @@
                         "null"
                     ]
                 },
-                "name": {
-                    "description": "Name of a property or part",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "short_name": {
-                    "description": "Short display name for a party",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "type": {
-                    "description": "Party type (e.g., organization, person)",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "uuid": {
-                    "description": "UUID for catalog or resource element",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                }
-            },
-            "title": "Party",
-            "type": [
-                "null",
-                "boolean",
-                "object",
-                "number",
-                "string"
-            ]
-        },
-        "Resource": {
-            "additionalProperties": true,
-            "description": "Referenced resource in back-matter",
-            "properties": {
-                "rlinks": {
-                    "description": "Resource links",
+                "subcategory_moved_to": {
+                    "description": "The CSF 2.0 subcategory a withdrawn subcategory moved to, as the catalog states it, such as GV.OC-03 for ID.GV-03. The catalog names two for a few.",
                     "items": {
-                        "$ref": "#/$defs/ResourceLink"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "title": {
-                    "description": "Human-readable title",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "uuid": {
-                    "description": "UUID for catalog or resource element",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                }
-            },
-            "title": "Resource",
-            "type": [
-                "null",
-                "boolean",
-                "object",
-                "number",
-                "string"
-            ]
-        },
-        "ResourceLink": {
-            "additionalProperties": true,
-            "description": "Reference link for a back-matter resource",
-            "properties": {
-                "href": {
-                    "description": "Link or resource reference",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "media_type": {
-                    "description": "Media type for a resource link",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                }
-            },
-            "title": "ResourceLink",
-            "type": [
-                "null",
-                "boolean",
-                "object",
-                "number",
-                "string"
-            ]
-        },
-        "ResponsibleParty": {
-            "additionalProperties": true,
-            "description": "Assignment of parties to a role",
-            "properties": {
-                "party_uuids": {
-                    "description": "Referenced party UUIDs",
-                    "items": {
+                        "pattern": "^(GV|ID|PR|DE|RS|RC)\\.[A-Z]{2}-[0-9]{2}$",
                         "type": "string"
                     },
                     "type": [
@@ -656,65 +210,51 @@
                         "null"
                     ]
                 },
-                "role_id": {
-                    "description": "Assigned role identifier",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
+                "subcategory_status": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/CsfElementStatus"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "withdrawn for a CSF 1.1 subcategory that CSF 2.0 withdrew. A subcategory of CSF 2.0 has no status."
                 }
             },
-            "title": "ResponsibleParty",
-            "type": [
-                "null",
-                "boolean",
-                "object",
-                "number",
-                "string"
-            ]
-        },
-        "Role": {
-            "additionalProperties": false,
-            "description": "Role definition used in metadata",
-            "properties": {
-                "id": {
-                    "description": "Unique identifier for a catalog element",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "title": {
-                    "description": "Human-readable title",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                }
-            },
-            "title": "Role",
+            "required": [
+                "csf_subcategory_id",
+                "description"
+            ],
+            "title": "CsfSubcategory",
             "type": "object"
         }
     },
     "$id": "https://w3id.org/lmodel/nist-csf-v2",
     "$schema": "https://json-schema.org/draft/2019-09/schema",
-    "additionalProperties": true,
-    "description": "Root wrapper for CSF catalog content",
-    "metamodel_version": "1.7.0",
+    "additionalProperties": false,
+    "description": "One edition of the CSF as a whole: its functions, each holding its categories and their subcategories.",
+    "metamodel_version": "1.12.0",
     "properties": {
-        "catalog": {
-            "anyOf": [
-                {
-                    "$ref": "#/$defs/CSFCatalogBody"
-                },
-                {
-                    "type": "null"
-                }
-            ],
-            "description": "Root catalog payload"
+        "csf_functions": {
+            "description": "The six functions, in the order CSWP 29 gives them.",
+            "items": {
+                "$ref": "#/$defs/CsfFunction"
+            },
+            "minItems": 1,
+            "type": "array"
+        },
+        "csf_version": {
+            "description": "The CSF edition, as NIST numbers it in the publication's title, such as 2.0.",
+            "pattern": "^[0-9]+\\.[0-9]+$",
+            "type": "string"
         }
     },
-    "title": "nist-csf-v2",
+    "required": [
+        "csf_version",
+        "csf_functions"
+    ],
+    "title": "nist_csf_v2",
     "type": "object",
     "version": "2.0.0"
 }

@@ -1,0 +1,9 @@
+# PR.IP-10, a CSF 1.1 subcategory that CSF 2.0 withdrew and that the catalog
+# says moved to two CSF 2.0 subcategories. A withdrawn subcategory keeps
+# its CSF 1.1 statement and has no implementation examples.
+csf_subcategory_id: PR.IP-10
+description: Response and recovery plans are tested.
+subcategory_status: withdrawn
+subcategory_moved_to:
+  - ID.IM-02
+  - ID.IM-04

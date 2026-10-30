@@ -1,130 +1,67 @@
- syntax="proto3";
- package
-// metamodel_version: 1.7.0
+syntax = "proto3";
+package nist_csf_v2;
+// metamodel_version: 1.12.0
 // version: 2.0.0
-// Postal address
-message Address
- {
- repeated  string addr-lines = 0
-  string city = 0
-  string state = 0
-  string postal-code = 0
- }
-// OSCAL back-matter section containing resource references
-message BackMatter
- {
- repeated  resource resources = 0
- }
-// Main CSF catalog object
-message CSFCatalogBody
- {
-  string uuid = 0
-  cSFMetadata metadata = 0
- repeated  cSFFunction groups = 0
-  backMatter back-matter = 0
- }
-// A CSF category - second-level grouping within a function (e.g. GV.OC Organizational Context, ID.AM Asset Management)
-message CSFCategory
- {
-  string id = 0
-  cSFElementClassValue class = 0
-  string title = 0
- repeated  cSFProperty props = 0
- repeated  cSFPart parts = 0
- repeated  cSFSubcategory controls = 0
- }
-// Root wrapper for CSF catalog content
-message CSFDocument
- {
-  cSFCatalogBody catalog = 0
- }
-// A CSF function - top-level grouping (e.g. GOVERN, IDENTIFY, PROTECT, DETECT, RESPOND, RECOVER)
-message CSFFunction
- {
-  string id = 0
-  cSFElementClassValue class = 0
-  string title = 0
- repeated  cSFProperty props = 0
- repeated  cSFPart parts = 0
- repeated  cSFCategory controls = 0
- }
-// OSCAL metadata section for the CSF catalog
-message CSFMetadata
- {
-  string title = 0
-  string published = 0
-  string last-modified = 0
-  string version = 0
-  string oscal-version = 0
- repeated  cSFProperty props = 0
- repeated  link links = 0
- repeated  role roles = 0
- repeated  party parties = 0
- repeated  responsibleParty responsible-parties = 0
- }
-// Structured narrative part (statement, overview, or example)
-message CSFPart
- {
-  string id = 0
-  string name = 0
-  string ns = 0
-  string prose = 0
- }
-// A name-value property with optional namespace and supplemental remarks
-message CSFProperty
- {
-  string name = 0
-  string value = 0
-  string ns = 0
-  string remarks = 0
- }
-// A CSF subcategory - specific cybersecurity outcome (e.g. GV.OC-01, ID.AM-01)
-message CSFSubcategory
- {
-  string id = 0
-  cSFElementClassValue class = 0
-  string title = 0
- repeated  cSFProperty props = 0
- repeated  cSFPart parts = 0
- }
-// Relationship link with href and optional rel attribute
-message Link
- {
-  string href = 0
-  string rel = 0
- }
-// Party definition (person or organization)
-message Party
- {
-  string uuid = 0
-  string type = 0
-  string name = 0
-  string short-name = 0
- repeated  string email-addresses = 0
- repeated  address addresses = 0
- }
-// Referenced resource in back-matter
-message Resource
- {
-  string uuid = 0
-  string title = 0
- repeated  resourceLink rlinks = 0
- }
-// Reference link for a back-matter resource
-message ResourceLink
- {
-  string href = 0
-  string media-type = 0
- }
-// Assignment of parties to a role
-message ResponsibleParty
- {
-  string role-id = 0
- repeated  string party-uuids = 0
- }
-// Role definition used in metadata
-message Role
- {
-  string id = 0
-  string title = 0
- }
+// A group of related cybersecurity outcomes within a function, such as Organizational Context (GV.OC), or a CSF 1.1 category that CSF 2.0 withdrew, which the catalog keeps with its status and, where NIST recorded it, where it moved or what incorporated it.
+message CsfCategory {
+  // The category's identifier, such as GV.OC.
+  string csf_category_id = 1;
+  // The name CSWP 29 gives the function or category.
+  string title = 2;
+  // What the function, category, subcategory or example says, in the words of whoever records it.
+  string description = 3;
+  // The subcategories of the category. A knowledge bundle relates a subcategory to its category with isPartOf instead.
+  repeated CsfSubcategory category_subcategories = 4;
+  // withdrawn for a CSF 1.1 category that CSF 2.0 withdrew. A category of CSF 2.0 has no status.
+  CsfElementStatus category_status = 5;
+  // The CSF 2.0 category a withdrawn category moved to, as the catalog states it, such as PR.AA for PR.AC.
+  repeated string category_moved_to = 6;
+  // The function, category or subcategory of CSF 2.0 that took in a withdrawn category's outcomes, as the catalog states it, such as GV.OC for ID.BE. The catalog names none for some withdrawn categories.
+  repeated string category_incorporated_into = 7;
+}
+// One edition of the CSF as a whole: its functions, each holding its categories and their subcategories.
+message CsfFramework {
+  // The CSF edition, as NIST numbers it in the publication's title, such as 2.0.
+  string csf_version = 1;
+  // The six functions, in the order CSWP 29 gives them.
+  repeated CsfFunction csf_functions = 2;
+}
+// One of the six functions that sort the CSF's outcomes at the highest level: GOVERN, IDENTIFY, PROTECT, DETECT, RESPOND and RECOVER. Each is named by two letters and described in a sentence.
+message CsfFunction {
+  // The function's two letters, such as GV for GOVERN.
+  string csf_function_id = 1;
+  // The name CSWP 29 gives the function or category.
+  string title = 2;
+  // What the function, category, subcategory or example says, in the words of whoever records it.
+  string description = 3;
+  // The categories of the function. A knowledge bundle relates a category to its function with isPartOf instead.
+  repeated CsfCategory function_categories = 4;
+}
+// An implementation example: one concise, action-oriented step that could help achieve a subcategory's outcome. NIST publishes the examples beside the Core, in its reference tool and its catalog, not in CSWP 29 itself.
+message CsfImplementationExample {
+  // The example's identifier in NIST's reference data, such as GV.OC-01.001 for the first example of subcategory GV.OC-01.
+  string csf_implementation_example_id = 1;
+  // What the function, category, subcategory or example says, in the words of whoever records it.
+  string description = 2;
+}
+// A cybersecurity outcome: one statement of a result within a category, such as GV.OC-01, or a CSF 1.1 subcategory that CSF 2.0 withdrew, which the catalog keeps with its statement, its status and where it moved or what incorporated it.
+message CsfSubcategory {
+  // The subcategory's identifier, such as GV.OC-01.
+  string csf_subcategory_id = 1;
+  // What the function, category, subcategory or example says, in the words of whoever records it.
+  string description = 2;
+  // The implementation examples NIST publishes for the subcategory. CSWP 29 says they are notional, that none is required, and that they are not a complete list of what could be done.
+  repeated CsfImplementationExample subcategory_examples = 3;
+  // withdrawn for a CSF 1.1 subcategory that CSF 2.0 withdrew. A subcategory of CSF 2.0 has no status.
+  CsfElementStatus subcategory_status = 4;
+  // The CSF 2.0 subcategory a withdrawn subcategory moved to, as the catalog states it, such as GV.OC-03 for ID.GV-03. The catalog names two for a few.
+  repeated string subcategory_moved_to = 5;
+  // The CSF 2.0 category or subcategory that took in a withdrawn subcategory's outcome, as the catalog states it, such as GV.OC-01 for ID.BE-02.
+  repeated string subcategory_incorporated_into = 6;
+}
+
+// The state the catalog gives a category or subcategory that CSF 2.0 no longer carries. A category or subcategory of CSF 2.0 has no status.
+enum CsfElementStatus {
+  CSF_ELEMENT_STATUS_UNSPECIFIED = 0;
+  CSF_ELEMENT_STATUS_WITHDRAWN = 1;
+}
