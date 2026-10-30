@@ -2,6 +2,7 @@
 
 ## 2026-10-30
 
+* **Changed**: nist-csf-v2 LinkML schema now says that the four identifier keys are top-level slots, each listed first in its class so that the generated dataclasses key each inlined list by its identifier.
 * **Changed**: Generated artefacts no longer says `just test` leaves a generation date; LinkML 1.12.1 writes none.
 * **Changed**: Update the upstream pins now regenerates the project, the docs and the adapt copy before `just test`.
 * **Prose**: reworded 32 concept bodies in plain English. No fact, link, number or frontmatter changed.

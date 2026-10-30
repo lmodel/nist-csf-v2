@@ -13,7 +13,7 @@ derivedFrom:
 sources:
   - id: nist_csf_v2.yaml
     resource: src/nist_csf_v2/schema/nist_csf_v2.yaml
-    title: the header, the classes, the enum and the types
+    title: the header, the slots, the classes, the enum and the types
   - id: readme.md
     resource: README.md
     title: the What it models and Knowledge Trust Ladder (KTL) sections
@@ -29,7 +29,7 @@ sources:
     title: the tool.lokf table
 generated:
   by: process:ktl-librarian
-  at: "2026-10-30T08:31:58Z"
+  at: "2026-10-30T09:04:34Z"
 status: draft
 verified:
   - by: process:ktl-librarian
@@ -54,7 +54,7 @@ The enum `CsfElementStatus` has one value, `withdrawn`, the status the catalog g
 - `csf_element_identifier`, for a function, category or subcategory that incorporated a withdrawn category;
 - `csf_category_or_subcategory_identifier`, for a category or subcategory that incorporated a withdrawn subcategory.
 
-The schema's slots `title` and `description` carry the IRIs `schema:name` and `schema:description`.
+The schema has six top-level slots: the four identifier keys, `csf_function_id`, `csf_category_id`, `csf_subcategory_id` and `csf_implementation_example_id`, and `title` and `description`. Each class lists its identifier key first. The schema's comment says why: the generated Python dataclasses then key each inlined list by the identifier, not by the title or the description. `title` and `description` carry the IRIs `schema:name` and `schema:description`.
 
 ## Mappings
 
