@@ -25,7 +25,7 @@ status: draft
 
 # Category
 
-CSWP 29's glossary defines a CSF Category as a group of related cybersecurity outcomes that collectively comprise a function.[^nist.cswp.29.pdf] The schema renders a category as `CsfCategory`, with its identifier in `csf_category_id`, such as `GV.OC`, and may hold its subcategories in `category_subcategories`. A CSF 1.1 category that CSF 2.0 withdrew carries `withdrawn` in `category_status` and, where the catalog gives it, the category it moved to in `category_moved_to` or the function, category or subcategory that incorporated it in `category_incorporated_into`.[^nist_csf_v2.yaml] In a knowledge bundle a subcategory names its category with `isPartOf` instead.
+CSWP 29's glossary defines a CSF Category as a group of related cybersecurity outcomes that collectively comprise a function.[^nist.cswp.29.pdf] The schema renders a category as `CsfCategory`, with its identifier in `csf_category_id`, such as `GV.OC`. A category may hold its subcategories in `category_subcategories`. A CSF 1.1 category that CSF 2.0 withdrew carries `withdrawn` in `category_status`. Where the catalog gives one, it names the category it moved to in `category_moved_to`, or the function, category or subcategory that incorporated it in `category_incorporated_into`.[^nist_csf_v2.yaml] In a knowledge bundle a subcategory names its category with `isPartOf` instead.
 
 [^nist.cswp.29.pdf]: <https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf>, Appendix C, the glossary
 [^nist_csf_v2.yaml]: src/nist_csf_v2/schema/nist_csf_v2.yaml, the class CsfCategory

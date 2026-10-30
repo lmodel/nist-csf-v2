@@ -29,7 +29,7 @@ verified:
 # Regenerate and test after a schema change
 
 1. Install the toolchain once: Python 3.10 or later, `uv` and `just`, then `uv sync --group dev` in the clone.[^contributing.md]
-2. Edit `src/nist_csf_v2/schema/nist_csf_v2.yaml`. It is the one file to write by hand; `project/`, `src/nist_csf_v2/datamodel/`, `docs/schema/` and `.lokf/nist-csf-v2.yaml` are generated from it. Say in the pull request which part of CSWP 29 a new or changed element renders.
+2. Edit `src/nist_csf_v2/schema/nist_csf_v2.yaml`. It is the one file to write by hand. `project/`, `src/nist_csf_v2/datamodel/`, `docs/schema/` and `.lokf/nist-csf-v2.yaml` are generated from it. Say in the pull request which part of CSWP 29 a new or changed element renders.
 3. Run `just lint`, which runs `linkml-lint --ignore-warnings` under `.linkmllint.yaml`.[^justfile]
 4. Run `just gen-project` and `just gen-doc`, then `just lokf-adapt`, which rewrites the adapt copy with the three roots.[^project.justfile] Commit the output.
 5. Add an example under `tests/data/valid/` for a new class and a counter-example under `tests/data/invalid/` for a new constraint, named `ClassName-suffix.yaml`, then run `just test`.

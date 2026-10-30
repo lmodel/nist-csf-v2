@@ -21,7 +21,7 @@ status: draft
 
 # PROTECT (PR)
 
-The catalog's overview of the function says, in this bundle's words, that the organization uses safeguards to manage its cybersecurity risks.[^nist_csf_v2.0_catalog.json] In CSF 2.0 the function holds 5 categories, 22 subcategories and 77 implementation examples, in its categories:
+In this bundle's words, the catalog's overview of the function says that the organization uses safeguards to manage its cybersecurity risks.[^nist_csf_v2.0_catalog.json] In CSF 2.0 the function holds 5 categories, 22 subcategories and 77 implementation examples, in its categories:
 
 - `PR.AA` Identity Management, Authentication, and Access Control: 6 subcategories
 - `PR.AT` Awareness and Training: 2 subcategories

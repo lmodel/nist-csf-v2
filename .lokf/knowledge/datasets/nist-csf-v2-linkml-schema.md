@@ -42,20 +42,26 @@ status: draft
 - **`CsfFramework`** is the tree root: one edition of the CSF as a whole. It requires `csf_version`, two numbers such as `2.0`, and `csf_functions`, which holds at least one function.
 - **`CsfFunction`** is one of the six functions. It requires `csf_function_id`, two letters out of `GV`, `ID`, `PR`, `DE`, `RS` and `RC`, and a `title`, and it may hold its categories in `function_categories`.
 - **`CsfCategory`** is a category, or a CSF 1.1 category that CSF 2.0 withdrew. It requires `csf_category_id`, such as `GV.OC`, and a `title`, and it may hold `category_subcategories`, `category_status`, `category_moved_to` and `category_incorporated_into`.
-- **`CsfSubcategory`** is a subcategory, or a withdrawn one. It requires `csf_subcategory_id`, such as `GV.OC-01`, and a `description` that is not blank, its statement, and it may hold `subcategory_examples`, `subcategory_status`, `subcategory_moved_to` and `subcategory_incorporated_into`.
+- **`CsfSubcategory`** is a subcategory, or a withdrawn one. It requires `csf_subcategory_id`, such as `GV.OC-01`, and a `description`, its statement, which may not be blank. It may hold `subcategory_examples`, `subcategory_status`, `subcategory_moved_to` and `subcategory_incorporated_into`.
 - **`CsfImplementationExample`** is an implementation example. It requires `csf_implementation_example_id`, such as `GV.OC-01.001`, and a `description` that is not blank.
 
-The enum `CsfElementStatus` has one value, `withdrawn`, the status the catalog gives a CSF 1.1 category or subcategory that CSF 2.0 withdrew. Six types hold the forms of the identifiers: `csf_function_identifier`, `csf_category_identifier`, `csf_subcategory_identifier`, `csf_implementation_example_identifier`, `csf_element_identifier`, for a function, category or subcategory that incorporated a withdrawn category, and `csf_category_or_subcategory_identifier`, for a category or subcategory that incorporated a withdrawn subcategory. The schema's slots `title` and `description` carry the IRIs `schema:name` and `schema:description`.
+The enum `CsfElementStatus` has one value, `withdrawn`, the status the catalog gives a CSF 1.1 category or subcategory that CSF 2.0 withdrew. Six types hold the forms of the identifiers:
+
+- `csf_function_identifier`, `csf_category_identifier`, `csf_subcategory_identifier` and `csf_implementation_example_identifier`;
+- `csf_element_identifier`, for a function, category or subcategory that incorporated a withdrawn category;
+- `csf_category_or_subcategory_identifier`, for a category or subcategory that incorporated a withdrawn subcategory.
+
+The schema's slots `title` and `description` carry the IRIs `schema:name` and `schema:description`.
 
 ## Mappings
 
-Each class names a class of lmodel/oscal in `broad_mappings`: `oscal:Catalog` for the framework, `oscal:Group` for the function, `oscal:Control` for the category and the subcategory, and `oscal:Part` for the example. A comment in the header says that NIST's catalog renders the elements that way, and another says that the catalog's first-party and third-party risk marking is the reference tool's, not CSWP 29's, so the schema leaves it out. [Scope, influences and mappings](../explanations/scope-and-influences.md) says more.
+Each class names a class of lmodel/oscal in `broad_mappings`: `oscal:Catalog` for the framework, `oscal:Group` for the function, `oscal:Control` for the category and the subcategory, and `oscal:Part` for the example. A comment in the header says that NIST's catalog renders the elements that way. Another says that the catalog's first-party and third-party risk marking is the reference tool's, not CSWP 29's, so the schema leaves it out. [Scope, influences and mappings](../explanations/scope-and-influences.md) says more.
 
 ## As the bundle's domain schema
 
-A LOKF domain schema is a LinkML schema that imports LOKF's own `lokf.yaml` and adds a host's classes and keys, so that `lokf validate` checks the concepts typed with them. The README says that this bundle's domain schema is `.lokf/nist-csf-v2.yaml`, which `lokf adapt` writes from the schema. Edit the source, never the copy.[^readme.md] The `schema :=` line of `.lokf/justfile` and the `[tool.lokf]` table of `.lokf/pyproject.toml` both name the copy.
+A LOKF domain schema is a LinkML schema that imports LOKF's `lokf.yaml` and adds a host's classes and keys, so that `lokf validate` checks the concepts typed with them. The README says that this bundle's domain schema is `.lokf/nist-csf-v2.yaml`, which `lokf adapt` writes from the schema. Edit the source, never the copy.[^readme.md] The `schema :=` line of `.lokf/justfile` and the `[tool.lokf]` table of `.lokf/pyproject.toml` both name the copy.
 
-`project.justfile` passes three roots to `lokf adapt`: `CsfFunction`, `CsfCategory` and `CsfSubcategory`. Its comment says that these are the three elements that CSWP 29 gives an identifier and that other documents cite, and that an implementation example stays inlined in its subcategory.[^project.justfile] The copy's notes say that `lokf adapt` re-rooted the three classes on `lokf:Concept` and folded `title` and `description` into LOKF's slots.[^nist-csf-v2.yaml] The copy renames nothing, and `CsfFramework` is no longer a tree root in it. The concepts under `functions/` in this bundle are typed `CsfFunction`.
+`project.justfile` passes three roots to `lokf adapt`: `CsfFunction`, `CsfCategory` and `CsfSubcategory`. Its comment says that these are the three elements that CSWP 29 gives an identifier and that other documents cite. It also says that an implementation example stays inlined in its subcategory.[^project.justfile] The copy's notes say that `lokf adapt` re-rooted the three classes on `lokf:Concept` and folded `title` and `description` into LOKF's slots.[^nist-csf-v2.yaml] The copy renames nothing, and `CsfFramework` is no longer a tree root in it. The concepts under `functions/` in this bundle are typed `CsfFunction`.
 
 The generated models, `project/` and the adapt copy come from this file: see [Generated artefacts](generated-artefacts.md). [Element names and the shared namespace](../explanations/element-names.md) says why no class, enum or type shares a name with LOKF's or a neighbour's.
 

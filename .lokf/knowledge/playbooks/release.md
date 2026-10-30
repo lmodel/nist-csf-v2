@@ -30,7 +30,7 @@ verified:
 # Cut a release
 
 1. Write the change under `## [Unreleased]` in `CHANGELOG.md` as you go. The release job refuses an empty section, through `.github/scripts/changelog-release.mjs check`.[^changelog-release.mjs]
-2. Type each commit with a Conventional Commits type. Only `feat:`, `fix:`, `security:` and a breaking `!` start a release, and a pull request that would release carries a releasing type in its title too, since a squash merge takes its subject from it.[^contributing.md]
+2. Type each commit with a Conventional Commits type. Only `feat:`, `fix:`, `security:` and a breaking `!` start a release. A pull request that would release carries a releasing type in its title too, since a squash merge takes its subject from it.[^contributing.md]
 3. Before the first releasing merge, push the `v0.0.0` baseline tag on `main`. Both release jobs refuse to run without a `v*` tag, because semantic-release would otherwise start at 1.0.0. The changelog says that the baseline is not a release and that the first release is 0.1.0.[^changelog.md]
 4. Merge. [Semantic release](../workflows/semantic-release.md) retitles the section with the version and the date, commits `CHANGELOG.md`, tags `vX.Y.Z` and publishes the GitHub release.
 

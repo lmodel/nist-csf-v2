@@ -17,6 +17,12 @@ status: draft
 
 # Knowledge Release (knowledge-release.yaml)
 
-`.github/workflows/knowledge-release.yaml` is the workflow named "Knowledge Release", a copy of the ktl-sidecar template. It runs when dispatched by hand with a tag, and on each published release once the repository variable `KNOWLEDGE_RELEASE_ENABLED` is `true`.[^knowledge-release.yaml] Its `release` job resolves the tag, its `pack` job validates the bundle against the domain schema, runs the conventions script, and builds the bundle zip, the schema copy named `schema-<tag>-nist-csf-v2.yaml` with its `.sha256`, and one Copilot skill zip per instructions file under `.lokf/m365/`, under a read-only token, and skips a release whose bundle and schema match the last one released unless `force` is set. Its `attach` job alone can write: it uploads the assets to the release. `KNOWLEDGE_RELEASE_NAME` names the assets when the repository's name is not wanted.
+`.github/workflows/knowledge-release.yaml` is the workflow named "Knowledge Release", a copy of the ktl-sidecar template. It runs when dispatched by hand with a tag, and on each published release once the repository variable `KNOWLEDGE_RELEASE_ENABLED` is `true`.[^knowledge-release.yaml] Its `release` job resolves the tag. Its `pack` job, under a read-only token, validates the bundle against the domain schema, runs the conventions script, and builds:
+
+- the bundle zip;
+- the schema copy named `schema-<tag>-nist-csf-v2.yaml`, with its `.sha256`;
+- one Copilot skill zip per instructions file under `.lokf/m365/`.
+
+The `pack` job skips a release whose bundle and schema match the last one released, unless `force` is set. Its `attach` job alone can write: it uploads the assets to the release. `KNOWLEDGE_RELEASE_NAME` names the assets when the repository's name is not wanted.
 
 [^knowledge-release.yaml]: .github/workflows/knowledge-release.yaml, the header comment, the on key and the jobs

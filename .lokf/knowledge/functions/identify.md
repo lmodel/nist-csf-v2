@@ -21,7 +21,7 @@ status: draft
 
 # IDENTIFY (ID)
 
-The catalog's overview of the function says, in this bundle's words, that the organization understands its current cybersecurity risks.[^nist_csf_v2.0_catalog.json] In CSF 2.0 the function holds 3 categories, 21 subcategories and 74 implementation examples, in its categories:
+In this bundle's words, the catalog's overview of the function says that the organization understands its current cybersecurity risks.[^nist_csf_v2.0_catalog.json] In CSF 2.0 the function holds 3 categories, 21 subcategories and 74 implementation examples, in its categories:
 
 - `ID.AM` Asset Management: 7 subcategories
 - `ID.RA` Risk Assessment: 10 subcategories

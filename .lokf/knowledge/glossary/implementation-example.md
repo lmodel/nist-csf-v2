@@ -25,7 +25,7 @@ status: draft
 
 # Implementation example
 
-CSWP 29's glossary defines a CSF Implementation Example as a concise, action-oriented, notional illustration of a way to help achieve a Core outcome, and its Section 4 says the examples are among the online resources published beside the publication.[^nist.cswp.29.pdf] The schema renders one as `CsfImplementationExample`, with the identifier NIST's reference data gives it in `csf_implementation_example_id`, such as `GV.OC-01.001`, and its text in `description`. The numbers run once through the whole Core, so no two examples share one. An example stays inlined in its subcategory and is not a type a knowledge concept names.[^nist_csf_v2.yaml]
+CSWP 29's glossary defines a CSF Implementation Example as a concise, action-oriented, notional illustration of a way to help achieve a Core outcome. Its Section 4 says the examples are among the online resources published beside the publication.[^nist.cswp.29.pdf] The schema renders one as `CsfImplementationExample`, with the identifier NIST's reference data gives it in `csf_implementation_example_id`, such as `GV.OC-01.001`, and its text in `description`. The numbers run once through the whole Core, so no two examples share one. An example stays inlined in its subcategory and is not a type a knowledge concept names.[^nist_csf_v2.yaml]
 
 [^nist.cswp.29.pdf]: <https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf>, Appendix C, the glossary
 [^nist_csf_v2.yaml]: src/nist_csf_v2/schema/nist_csf_v2.yaml, the class CsfImplementationExample

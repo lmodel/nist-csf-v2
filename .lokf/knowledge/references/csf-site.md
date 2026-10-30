@@ -17,7 +17,7 @@ status: draft
 
 # NIST's CSF website
 
-NIST's Cybersecurity Framework page describes the framework as helping organizations to better understand and improve their management of cybersecurity risk, and offers the CSF 2.0 document for industry, government and other organizations.[^cyberframework] It links the Quick Start Guides for users with common goals, templates and resources for CSF Profiles, the Informative References, which it calls Mappings and describes as showing how NIST's resources overlap and share themes, and videos. It also lists community profiles, among them one for federal agency Open Radio Access Network deployment.
+NIST's Cybersecurity Framework page describes the framework as helping organizations to better understand and improve their management of cybersecurity risk, and offers the CSF 2.0 document for industry, government and other organizations.[^cyberframework] It links the Quick Start Guides for users with common goals, templates and resources for CSF Profiles, and videos. It links the Informative References as well, which it calls Mappings and describes as showing how NIST's resources overlap and share themes. It also lists community profiles, among them one for federal agency Open Radio Access Network deployment.
 
 The schema models none of these resources: the README names the Informative References, the Profiles, the Quick Start Guides and the community profiles under what is not modelled here. The schema's `see_also` names this page beside the publication.
 

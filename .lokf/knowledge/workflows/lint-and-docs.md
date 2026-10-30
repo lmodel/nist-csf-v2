@@ -20,6 +20,11 @@ verified:
 
 # Lint & docs (lint-and-docs.yaml)
 
-`.github/workflows/lint-and-docs.yaml` is the workflow named "Lint & docs". It runs on a push to `main`, on every pull request, every Monday at 06:00 UTC to catch link rot, and by hand.[^lint-and-docs.yaml] Its four read-only jobs are `lint-scripts`, which runs ShellCheck over the tree, `lint-workflows`, which runs actionlint, `word-budgets`, which fails when `CONTRIBUTING.md` passes 1000 words or `SECURITY.md` 900, and `validate-markdown`, which runs markdownlint under `.markdownlint-cli2.jsonc`, lychee under `lychee.toml` with this repository's own links on `main` remapped to the checkout, and codespell over every tracked Markdown file.
+`.github/workflows/lint-and-docs.yaml` is the workflow named "Lint & docs". It runs on a push to `main`, on every pull request, every Monday at 06:00 UTC to catch link rot, and by hand.[^lint-and-docs.yaml] It has four read-only jobs:
+
+- `lint-scripts` runs ShellCheck over the tree;
+- `lint-workflows` runs actionlint;
+- `word-budgets` fails when `CONTRIBUTING.md` passes 1000 words or `SECURITY.md` 900;
+- `validate-markdown` runs markdownlint under `.markdownlint-cli2.jsonc`, lychee under `lychee.toml` with this repository's links on `main` remapped to the checkout, and codespell over every tracked Markdown file.
 
 [^lint-and-docs.yaml]: .github/workflows/lint-and-docs.yaml, the header comment, the on key and the jobs

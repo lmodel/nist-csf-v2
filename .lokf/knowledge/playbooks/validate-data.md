@@ -26,6 +26,13 @@ Validate a file before loading it into either model in `src/nist_csf_v2/datamode
 - the dataclasses check required fields and enum values, but no pattern;
 - the Pydantic models also check the patterns a field carries itself, such as the form of `csf_version`, but not the patterns of the six identifier types.
 
-No check covers four rules: that each identifier starts with the identifier of what holds it, that a list never repeats an identifier, that only a withdrawn element names a destination and that each destination is an element of CSF 2.0, and that a withdrawn category has no statement and only withdrawn subcategories while a withdrawn subcategory has no implementation examples. `tests/test_upstream.py` checks all four over NIST's catalog of CSF 2.0.
+No check covers four rules:
+
+- each identifier starts with the identifier of what holds it;
+- a list never repeats an identifier;
+- only a withdrawn element names a destination, and each destination is an element of CSF 2.0;
+- a withdrawn category has no statement and only withdrawn subcategories, and a withdrawn subcategory has no implementation examples.
+
+`tests/test_upstream.py` checks all four over NIST's catalog of CSF 2.0.
 
 [^docs-index.md]: docs/index.md, Validating data

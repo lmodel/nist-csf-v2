@@ -32,7 +32,7 @@ The schema renders one publication, CSWP 29, at one edition, the CSF 2.0. The RE
 
 ## Why the CSF's own elements
 
-The schema models the function, the category, the subcategory and the implementation example, which [the glossary](../glossary/index.md) defines, and keeps the CSF 1.1 categories and subcategories that CSF 2.0 withdrew as NIST's catalog states them: with a status, and where NIST recorded it, where each moved or what incorporated it. The changelog says that it replaced classes copied from the shape of an OSCAL catalog. Those classes shared names with LOKF's and lmodel/oscal's, and their `class_uri: linkml:Any` let a catalog with any keys validate.[^changelog.md] NIST's catalog in OSCAL stays in the repository as the upstream copy that the tests read.
+The schema models the function, the category, the subcategory and the implementation example, which [the glossary](../glossary/index.md) defines. It keeps the CSF 1.1 categories and subcategories that CSF 2.0 withdrew as NIST's catalog states them: with a status and, where NIST recorded it, where each moved or what incorporated it. The changelog says that it replaced classes copied from the shape of an OSCAL catalog. Those classes shared names with LOKF's and lmodel/oscal's, and their `class_uri: linkml:Any` let a catalog with any keys validate.[^changelog.md] NIST's catalog in OSCAL stays in the repository as the upstream copy that the tests read.
 
 ## Mappings
 

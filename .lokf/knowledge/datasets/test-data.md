@@ -33,7 +33,7 @@ status: draft
 
 # Test data and tests
 
-`tests/data/valid/` holds seven examples, one for each class and a second for `CsfCategory` and `CsfSubcategory` as withdrawn elements, and `tests/data/invalid/` holds 29 counter-examples, each invalid for one reason.[^data] A file's class is the part of its name before the first hyphen, such as `CsfSubcategory-withdrawn-moved.yaml`. A counter-example's first line names where it fails, as `# Fails at:` and a JSON pointer such as `/csf_category_id`. The counter-examples break each constraint the schema states:
+`tests/data/valid/` holds seven examples: one for each class, and a second for `CsfCategory` and `CsfSubcategory` as withdrawn elements. `tests/data/invalid/` holds 29 counter-examples, each invalid for one reason.[^data] A file's class is the part of its name before the first hyphen, such as `CsfSubcategory-withdrawn-moved.yaml`. A counter-example's first line names where it fails, as `# Fails at:` and a JSON pointer such as `/csf_category_id`. The counter-examples break each constraint the schema states:
 
 - a missing required field, a title among them;
 - an identifier of the wrong form or of the wrong level, such as a category identifier where a subcategory's belongs, or one that starts with letters no function has;
@@ -43,7 +43,14 @@ status: draft
 - an empty list of functions, and a blank description where a description is required;
 - a key the class does not declare.
 
-`tests/test_data.py` loads each valid example into the dataclasses and holds each to the validator. A valid example must pass, and a counter-example must fail at the place its first line names. The test also checks that every class has an example.[^test_data.py] `tests/test_upstream.py` derives the whole of CSF 2.0 from NIST's catalog copy and holds it to the validator and to the publication's counts, as [NIST's CSF 2.0 catalog copy](csf-catalog-copy.md) says.[^test_upstream.py] It also checks that the identifiers nest and never repeat, that the CSF 2.0 categories are the 22 of CSWP 29's Table 1, that a withdrawn element names a destination of CSF 2.0 or none, and that the risk-party markings stay out of the derived framework. It holds each valid example to the catalog too: an element an example names must have the parent, the title, the status and the destinations the catalog gives it.
+`tests/test_data.py` loads each valid example into the dataclasses and holds each to the validator. A valid example must pass, and a counter-example must fail at the place its first line names. The test also checks that every class has an example.[^test_data.py] `tests/test_upstream.py` derives the whole of CSF 2.0 from NIST's catalog copy and holds it to the validator and to the publication's counts, as [NIST's CSF 2.0 catalog copy](csf-catalog-copy.md) says.[^test_upstream.py] It also checks that:
+
+- the identifiers nest and never repeat;
+- the CSF 2.0 categories are the 22 of CSWP 29's Table 1;
+- a withdrawn element names a destination of CSF 2.0 or none;
+- the risk-party markings stay out of the derived framework.
+
+It holds each valid example to the catalog too: an element an example names must have the parent, the title, the status and the destinations the catalog gives it.
 
 `tests/test_watch.py` runs `scripts/check_upstream_release.py` against stubbed answers from the GitHub API, with no network. It checks what the report says when nothing changed, when a release drops the pinned folders, when a release changes the licence, when the network fails, when NIST adds a file and when the pinned tag moves.[^test_watch.py]
 

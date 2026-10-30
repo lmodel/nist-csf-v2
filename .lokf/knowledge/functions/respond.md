@@ -21,7 +21,7 @@ status: draft
 
 # RESPOND (RS)
 
-The catalog's overview of the function says, in this bundle's words, that the organization takes action on a detected cybersecurity incident.[^nist_csf_v2.0_catalog.json] In CSF 2.0 the function holds 4 categories, 13 subcategories and 38 implementation examples, in its categories:
+In this bundle's words, the catalog's overview of the function says that the organization takes action on a detected cybersecurity incident.[^nist_csf_v2.0_catalog.json] In CSF 2.0 the function holds 4 categories, 13 subcategories and 38 implementation examples, in its categories:
 
 - `RS.MA` Incident Management: 5 subcategories
 - `RS.AN` Incident Analysis: 4 subcategories

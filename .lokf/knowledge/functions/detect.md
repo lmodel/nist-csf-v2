@@ -21,7 +21,7 @@ status: draft
 
 # DETECT (DE)
 
-The catalog's overview of the function says, in this bundle's words, that the organization finds and analyzes possible cybersecurity attacks and compromises.[^nist_csf_v2.0_catalog.json] In CSF 2.0 the function holds 2 categories, 11 subcategories and 37 implementation examples, in its categories:
+In this bundle's words, the catalog's overview of the function says that the organization finds and analyzes possible cybersecurity attacks and compromises.[^nist_csf_v2.0_catalog.json] In CSF 2.0 the function holds 2 categories, 11 subcategories and 37 implementation examples, in its categories:
 
 - `DE.CM` Continuous Monitoring: 5 subcategories
 - `DE.AE` Adverse Event Analysis: 6 subcategories

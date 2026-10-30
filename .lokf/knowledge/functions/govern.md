@@ -21,7 +21,7 @@ status: draft
 
 # GOVERN (GV)
 
-The catalog's overview of the function says, in this bundle's words, that the organization sets, communicates and monitors its strategy, expectations and policy for managing cybersecurity risk.[^nist_csf_v2.0_catalog.json] In CSF 2.0 the function holds 6 categories, 31 subcategories and 119 implementation examples, in its categories:
+In this bundle's words, the catalog's overview of the function says that the organization sets, communicates and monitors its strategy, expectations and policy for managing cybersecurity risk.[^nist_csf_v2.0_catalog.json] In CSF 2.0 the function holds 6 categories, 31 subcategories and 119 implementation examples, in its categories:
 
 - `GV.OC` Organizational Context: 5 subcategories
 - `GV.RM` Risk Management Strategy: 7 subcategories
