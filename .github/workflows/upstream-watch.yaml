@@ -21,6 +21,7 @@ jobs:
   csf-catalog:
     name: CSF edition and catalog copy are current and intact
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     permissions:
       contents: read
       issues: write  # open or update the finding's issue

@@ -5,9 +5,9 @@ name: Semantic release
 # heading via .github/scripts/changelog-release.mjs. It then tags the commit
 # and publishes a GitHub Release built from that same text. Once
 # KNOWLEDGE_RELEASE_ENABLED is `true`, it dispatches the knowledge release,
-# which attaches the schema's adapt copy and the bundle when the bundle has
-# changed. No file carries the version, so CHANGELOG.md is the only file this
-# job commits.
+# which attaches the schema's adapt copy and the bundle when the bundle or the
+# schema has changed. No file carries the version, so CHANGELOG.md is the
+# only file this job commits.
 #
 # The schema stays below 1.0.0 until its shape settles. Two things keep it
 # there. The `v0.0.0` baseline tag stops semantic-release defaulting a
@@ -46,6 +46,7 @@ jobs:
   plan:
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     permissions:
       contents: read
     steps:
@@ -119,7 +120,7 @@ jobs:
       # no type. A typed `fix:` commit then reaches main as "Fix the thing
       # (#12)" and releases nothing, leaving its notes stranded in
       # "## [Unreleased]". So when the commits would release, the title must
-      # too: then either merge strategy releases. The title is read through
+      # too: then either squash or rebase releases. The title is read through
       # `env:`, never interpolated into the script, since anyone can open a
       # pull request.
       - name: Refuse a title that would lose the release on a squash merge
@@ -131,7 +132,7 @@ jobs:
             | grep -qE '^((feat|fix|security)(\([^)]*\))?!?:|[a-z]+(\([^)]*\))?!:)'; then
             echo "Title carries a releasing type, so a squash merge releases too."
           else
-            echo "::error::These commits would release, but the pull request title '$TITLE' has no releasing type (feat:, fix:, security:, or a breaking '!'). A squash merge uses the title as the commit subject and would release nothing - retitle the pull request, or use a merge commit."
+            echo "::error::These commits would release, but the pull request title '$TITLE' has no releasing type (feat:, fix:, security:, or a breaking '!'). A squash merge uses the title as the commit subject and would release nothing - retitle the pull request, or use rebase and merge."
             exit 1
           fi
 
@@ -143,6 +144,7 @@ jobs:
   release:
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     environment: release
     permissions:
       contents: write
