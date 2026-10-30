@@ -16,8 +16,8 @@ import lombok.*;
 @EqualsAndHashCode(callSuper=false)
 public class CsfImplementationExample  {
 
-  private String description;
   private String csfImplementationExampleId;
+  private String description;
 
 
 }

@@ -7,6 +7,18 @@
       "schema": "http://schema.org/",
       "skos": "http://www.w3.org/2004/02/skos/core#",
       "@vocab": "https://w3id.org/lmodel/nist-csf-v2/",
+      "csf_category_id": {
+         "@id": "csf_category_id"
+      },
+      "csf_function_id": {
+         "@id": "csf_function_id"
+      },
+      "csf_implementation_example_id": {
+         "@id": "csf_implementation_example_id"
+      },
+      "csf_subcategory_id": {
+         "@id": "csf_subcategory_id"
+      },
       "category_incorporated_into": {
          "@id": "category_incorporated_into"
       },
@@ -25,9 +37,6 @@
          "@type": "@id",
          "@id": "category_subcategories"
       },
-      "csf_category_id": {
-         "@id": "csf_category_id"
-      },
       "csf_functions": {
          "@type": "@id",
          "@id": "csf_functions"
@@ -35,18 +44,9 @@
       "csf_version": {
          "@id": "csf_version"
       },
-      "csf_function_id": {
-         "@id": "csf_function_id"
-      },
       "function_categories": {
          "@type": "@id",
          "@id": "function_categories"
-      },
-      "csf_implementation_example_id": {
-         "@id": "csf_implementation_example_id"
-      },
-      "csf_subcategory_id": {
-         "@id": "csf_subcategory_id"
       },
       "subcategory_examples": {
          "@type": "@id",

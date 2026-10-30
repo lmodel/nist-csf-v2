@@ -65,8 +65,8 @@
                 }
             },
             "required": [
-                "title",
-                "csf_category_id"
+                "csf_category_id",
+                "title"
             ],
             "title": "CsfCategory",
             "type": "object"
@@ -136,8 +136,8 @@
                 }
             },
             "required": [
-                "title",
-                "csf_function_id"
+                "csf_function_id",
+                "title"
             ],
             "title": "CsfFunction",
             "type": "object"
@@ -158,8 +158,8 @@
                 }
             },
             "required": [
-                "description",
-                "csf_implementation_example_id"
+                "csf_implementation_example_id",
+                "description"
             ],
             "title": "CsfImplementationExample",
             "type": "object"
@@ -223,8 +223,8 @@
                 }
             },
             "required": [
-                "description",
-                "csf_subcategory_id"
+                "csf_subcategory_id",
+                "description"
             ],
             "title": "CsfSubcategory",
             "type": "object"

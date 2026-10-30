@@ -93,10 +93,12 @@ nist_csf_v2:category_subcategories a owl:ObjectProperty ;
 	skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
 nist_csf_v2:csf_category_id a owl:DatatypeProperty ;
 	rdfs:label "csf_category_id" ;
+	rdfs:range xsd:string ;
 	skos:definition "The category's identifier, such as GV.OC." ;
 	skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
 nist_csf_v2:csf_function_id a owl:DatatypeProperty ;
 	rdfs:label "csf_function_id" ;
+	rdfs:range xsd:string ;
 	skos:definition "The function's two letters, such as GV for GOVERN." ;
 	skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
 nist_csf_v2:csf_functions a owl:ObjectProperty ;
@@ -105,10 +107,12 @@ nist_csf_v2:csf_functions a owl:ObjectProperty ;
 	skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
 nist_csf_v2:csf_implementation_example_id a owl:DatatypeProperty ;
 	rdfs:label "csf_implementation_example_id" ;
+	rdfs:range xsd:string ;
 	skos:definition "The example's identifier in NIST's reference data, such as GV.OC-01.001 for the first example of subcategory GV.OC-01." ;
 	skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
 nist_csf_v2:csf_subcategory_id a owl:DatatypeProperty ;
 	rdfs:label "csf_subcategory_id" ;
+	rdfs:range xsd:string ;
 	skos:definition "The subcategory's identifier, such as GV.OC-01." ;
 	skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
 nist_csf_v2:csf_version a owl:DatatypeProperty ;

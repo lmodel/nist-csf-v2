@@ -414,6 +414,51 @@ enums:
           keeps it, and names where it moved or what incorporated it where NIST recorded
           that.
 slots:
+  csf_function_id:
+    name: csf_function_id
+    definition_uri: https://w3id.org/lmodel/nist-csf-v2/csf_function_id
+    description: The function's two letters, such as GV for GOVERN.
+    from_schema: https://w3id.org/lmodel/nist-csf-v2
+    slot_uri: nist_csf_v2:csf_function_id
+    owner: CsfFunction
+    domain_of:
+    - CsfFunction
+    range: csf_function_identifier
+    required: true
+  csf_category_id:
+    name: csf_category_id
+    definition_uri: https://w3id.org/lmodel/nist-csf-v2/csf_category_id
+    description: The category's identifier, such as GV.OC.
+    from_schema: https://w3id.org/lmodel/nist-csf-v2
+    slot_uri: nist_csf_v2:csf_category_id
+    owner: CsfCategory
+    domain_of:
+    - CsfCategory
+    range: csf_category_identifier
+    required: true
+  csf_subcategory_id:
+    name: csf_subcategory_id
+    definition_uri: https://w3id.org/lmodel/nist-csf-v2/csf_subcategory_id
+    description: The subcategory's identifier, such as GV.OC-01.
+    from_schema: https://w3id.org/lmodel/nist-csf-v2
+    slot_uri: nist_csf_v2:csf_subcategory_id
+    owner: CsfSubcategory
+    domain_of:
+    - CsfSubcategory
+    range: csf_subcategory_identifier
+    required: true
+  csf_implementation_example_id:
+    name: csf_implementation_example_id
+    definition_uri: https://w3id.org/lmodel/nist-csf-v2/csf_implementation_example_id
+    description: The example's identifier in NIST's reference data, such as GV.OC-01.001
+      for the first example of subcategory GV.OC-01.
+    from_schema: https://w3id.org/lmodel/nist-csf-v2
+    slot_uri: nist_csf_v2:csf_implementation_example_id
+    owner: CsfImplementationExample
+    domain_of:
+    - CsfImplementationExample
+    range: csf_implementation_example_identifier
+    required: true
   title:
     name: title
     definition_uri: https://w3id.org/lmodel/nist-csf-v2/title
@@ -477,17 +522,6 @@ slots:
     inlined: true
     inlined_as_list: true
     minimum_cardinality: 1
-  csfFunction__csf_function_id:
-    name: csfFunction__csf_function_id
-    description: The function's two letters, such as GV for GOVERN.
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:csf_function_id
-    alias: csf_function_id
-    owner: CsfFunction
-    domain_of:
-    - CsfFunction
-    range: csf_function_identifier
-    required: true
   csfFunction__function_categories:
     name: csfFunction__function_categories
     description: The categories of the function. A knowledge bundle relates a category
@@ -502,17 +536,6 @@ slots:
     multivalued: true
     inlined: true
     inlined_as_list: true
-  csfCategory__csf_category_id:
-    name: csfCategory__csf_category_id
-    description: The category's identifier, such as GV.OC.
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:csf_category_id
-    alias: csf_category_id
-    owner: CsfCategory
-    domain_of:
-    - CsfCategory
-    range: csf_category_identifier
-    required: true
   csfCategory__category_subcategories:
     name: csfCategory__category_subcategories
     description: The subcategories of the category. A knowledge bundle relates a subcategory
@@ -563,17 +586,6 @@ slots:
     - CsfCategory
     range: csf_element_identifier
     multivalued: true
-  csfSubcategory__csf_subcategory_id:
-    name: csfSubcategory__csf_subcategory_id
-    description: The subcategory's identifier, such as GV.OC-01.
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:csf_subcategory_id
-    alias: csf_subcategory_id
-    owner: CsfSubcategory
-    domain_of:
-    - CsfSubcategory
-    range: csf_subcategory_identifier
-    required: true
   csfSubcategory__subcategory_examples:
     name: csfSubcategory__subcategory_examples
     description: The implementation examples NIST publishes for the subcategory. CSWP
@@ -625,18 +637,6 @@ slots:
     - CsfSubcategory
     range: csf_category_or_subcategory_identifier
     multivalued: true
-  csfImplementationExample__csf_implementation_example_id:
-    name: csfImplementationExample__csf_implementation_example_id
-    description: The example's identifier in NIST's reference data, such as GV.OC-01.001
-      for the first example of subcategory GV.OC-01.
-    from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:csf_implementation_example_id
-    alias: csf_implementation_example_id
-    owner: CsfImplementationExample
-    domain_of:
-    - CsfImplementationExample
-    range: csf_implementation_example_identifier
-    required: true
   CsfFunction_title:
     name: CsfFunction_title
     definition_uri: https://w3id.org/lmodel/nist-csf-v2/title
@@ -773,20 +773,15 @@ classes:
     broad_mappings:
     - oscal:Group
     slots:
+    - csf_function_id
     - CsfFunction_title
     - description
-    - csfFunction__csf_function_id
     - csfFunction__function_categories
     slot_usage:
       title:
         name: title
         required: true
     attributes:
-      csf_function_id:
-        name: csf_function_id
-        description: The function's two letters, such as GV for GOVERN.
-        range: csf_function_identifier
-        required: true
       function_categories:
         name: function_categories
         description: The categories of the function. A knowledge bundle relates a
@@ -814,9 +809,9 @@ classes:
     broad_mappings:
     - oscal:Control
     slots:
+    - csf_category_id
     - CsfCategory_title
     - description
-    - csfCategory__csf_category_id
     - csfCategory__category_subcategories
     - csfCategory__category_status
     - csfCategory__category_moved_to
@@ -826,11 +821,6 @@ classes:
         name: title
         required: true
     attributes:
-      csf_category_id:
-        name: csf_category_id
-        description: The category's identifier, such as GV.OC.
-        range: csf_category_identifier
-        required: true
       category_subcategories:
         name: category_subcategories
         description: The subcategories of the category. A knowledge bundle relates
@@ -876,8 +866,8 @@ classes:
     broad_mappings:
     - oscal:Control
     slots:
+    - csf_subcategory_id
     - CsfSubcategory_description
-    - csfSubcategory__csf_subcategory_id
     - csfSubcategory__subcategory_examples
     - csfSubcategory__subcategory_status
     - csfSubcategory__subcategory_moved_to
@@ -888,11 +878,6 @@ classes:
         required: true
         pattern: ^\s*\S
     attributes:
-      csf_subcategory_id:
-        name: csf_subcategory_id
-        description: The subcategory's identifier, such as GV.OC-01.
-        range: csf_subcategory_identifier
-        required: true
       subcategory_examples:
         name: subcategory_examples
         description: The implementation examples NIST publishes for the subcategory.
@@ -935,23 +920,16 @@ classes:
     broad_mappings:
     - oscal:Part
     slots:
+    - csf_implementation_example_id
     - CsfImplementationExample_description
-    - csfImplementationExample__csf_implementation_example_id
     slot_usage:
       description:
         name: description
         required: true
         pattern: ^\s*\S
-    attributes:
-      csf_implementation_example_id:
-        name: csf_implementation_example_id
-        description: The example's identifier in NIST's reference data, such as GV.OC-01.001
-          for the first example of subcategory GV.OC-01.
-        range: csf_implementation_example_identifier
-        required: true
     class_uri: nist_csf_v2:ImplementationExample
 metamodel_version: 1.12.0
 source_file: nist_csf_v2.yaml
-source_file_date: '2026-10-30T08:18:35'
-source_file_size: 12845
+source_file_date: '2026-10-30T09:02:11'
+source_file_size: 13379
 

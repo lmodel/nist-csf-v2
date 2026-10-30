@@ -16,9 +16,9 @@ import lombok.*;
 @EqualsAndHashCode(callSuper=false)
 public class CsfFunction  {
 
+  private String csfFunctionId;
   private String title;
   private String description;
-  private String csfFunctionId;
   private List<CsfCategory> functionCategories;
 
 

@@ -58,9 +58,9 @@ linkml:Jsonpath xsd:string
 linkml:Sparqlpath xsd:string
 
 <CsfCategory> CLOSED {
-    (  $<CsfCategory_tes> (  schema1:name @linkml:String ;
+    (  $<CsfCategory_tes> (  <csf_category_id> @<CsfCategoryIdentifier> ;
+          schema1:name @linkml:String ;
           schema1:description @linkml:String ? ;
-          <csf_category_id> @<CsfCategoryIdentifier> ;
           <category_subcategories> @<CsfSubcategory> * ;
           <category_status> [ <https://w3id.org/lmodel/nist-csf-v2/CsfElementStatus#withdrawn> ] ? ;
           <category_moved_to> @<CsfCategoryIdentifier> * ;
@@ -79,9 +79,9 @@ linkml:Sparqlpath xsd:string
 }
 
 <CsfFunction> CLOSED {
-    (  $<CsfFunction_tes> (  schema1:name @linkml:String ;
+    (  $<CsfFunction_tes> (  <csf_function_id> @<CsfFunctionIdentifier> ;
+          schema1:name @linkml:String ;
           schema1:description @linkml:String ? ;
-          <csf_function_id> @<CsfFunctionIdentifier> ;
           <function_categories> @<CsfCategory> *
        ) ;
        rdf:type [ <Function> ] ?
@@ -89,16 +89,16 @@ linkml:Sparqlpath xsd:string
 }
 
 <CsfImplementationExample> CLOSED {
-    (  $<CsfImplementationExample_tes> (  schema1:description @linkml:String ;
-          <csf_implementation_example_id> @<CsfImplementationExampleIdentifier>
+    (  $<CsfImplementationExample_tes> (  <csf_implementation_example_id> @<CsfImplementationExampleIdentifier> ;
+          schema1:description @linkml:String
        ) ;
        rdf:type [ <ImplementationExample> ] ?
     )
 }
 
 <CsfSubcategory> CLOSED {
-    (  $<CsfSubcategory_tes> (  schema1:description @linkml:String ;
-          <csf_subcategory_id> @<CsfSubcategoryIdentifier> ;
+    (  $<CsfSubcategory_tes> (  <csf_subcategory_id> @<CsfSubcategoryIdentifier> ;
+          schema1:description @linkml:String ;
           <subcategory_examples> @<CsfImplementationExample> * ;
           <subcategory_status> [ <https://w3id.org/lmodel/nist-csf-v2/CsfElementStatus#withdrawn> ] ? ;
           <subcategory_moved_to> @<CsfSubcategoryIdentifier> * ;

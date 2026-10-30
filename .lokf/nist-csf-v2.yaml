@@ -92,7 +92,24 @@ types:
     description: The identifier of a category or a subcategory, whichever of the two a withdrawn subcategory
       names as what incorporated it.
     pattern: ^(GV|ID|PR|DE|RS|RC)\.[A-Z]{2}(-[0-9]{2})?$
-slots: {}
+slots:
+  csf_function_id:
+    description: The function's two letters, such as GV for GOVERN.
+    range: csf_function_identifier
+    required: true
+  csf_category_id:
+    description: The category's identifier, such as GV.OC.
+    range: csf_category_identifier
+    required: true
+  csf_subcategory_id:
+    description: The subcategory's identifier, such as GV.OC-01.
+    range: csf_subcategory_identifier
+    required: true
+  csf_implementation_example_id:
+    description: The example's identifier in NIST's reference data, such as GV.OC-01.001 for the first
+      example of subcategory GV.OC-01.
+    range: csf_implementation_example_identifier
+    required: true
 classes:
   CsfFramework:
     class_uri: nist_csf_v2:Framework
@@ -125,6 +142,7 @@ classes:
     broad_mappings:
     - oscal:Group
     slots:
+    - csf_function_id
     - title
     - description
     slot_usage:
@@ -134,10 +152,6 @@ classes:
       description:
         range: string
     attributes:
-      csf_function_id:
-        description: The function's two letters, such as GV for GOVERN.
-        range: csf_function_identifier
-        required: true
       function_categories:
         description: The categories of the function. A knowledge bundle relates a category to its function
           with isPartOf instead.
@@ -159,6 +173,7 @@ classes:
     - A withdrawn category keeps its CSF 1.1 subcategories, each withdrawn too, and the catalog gives
       it no statement, so it has no description.
     slots:
+    - csf_category_id
     - title
     - description
     slot_usage:
@@ -168,10 +183,6 @@ classes:
       description:
         range: string
     attributes:
-      csf_category_id:
-        description: The category's identifier, such as GV.OC.
-        range: csf_category_identifier
-        required: true
       category_subcategories:
         description: The subcategories of the category. A knowledge bundle relates a subcategory to its
           category with isPartOf instead.
@@ -208,6 +219,7 @@ classes:
     - 'A subcategory has no title of its own: its identifier names it and its statement is its description,
       which is why the description is required here.'
     slots:
+    - csf_subcategory_id
     - description
     slot_usage:
       description:
@@ -215,10 +227,6 @@ classes:
         pattern: ^\s*\S
         range: string
     attributes:
-      csf_subcategory_id:
-        description: The subcategory's identifier, such as GV.OC-01.
-        range: csf_subcategory_identifier
-        required: true
       subcategory_examples:
         description: The implementation examples NIST publishes for the subcategory. CSWP 29 says they
           are notional, that none is required, and that they are not a complete list of what could be
@@ -252,18 +260,13 @@ classes:
     broad_mappings:
     - oscal:Part
     slots:
+    - csf_implementation_example_id
     - description
     slot_usage:
       description:
         required: true
         pattern: ^\s*\S
         range: string
-    attributes:
-      csf_implementation_example_id:
-        description: The example's identifier in NIST's reference data, such as GV.OC-01.001 for the first
-          example of subcategory GV.OC-01.
-        range: csf_implementation_example_identifier
-        required: true
 enums:
   CsfElementStatus:
     description: The state the catalog gives a category or subcategory that CSF 2.0 no longer carries.

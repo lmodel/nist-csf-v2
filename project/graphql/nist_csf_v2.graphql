@@ -7,9 +7,9 @@ enum CsfElementStatus
 
 type CsfCategory
   {
+    csfCategoryId: CsfCategoryIdentifier!
     title: String!
     description: String
-    csfCategoryId: CsfCategoryIdentifier!
     categorySubcategories: [CsfSubcategory]
     categoryStatus: CsfElementStatus
     categoryMovedTo: [CsfCategoryIdentifier]
@@ -24,22 +24,22 @@ type CsfFramework
 
 type CsfFunction
   {
+    csfFunctionId: CsfFunctionIdentifier!
     title: String!
     description: String
-    csfFunctionId: CsfFunctionIdentifier!
     functionCategories: [CsfCategory]
   }
 
 type CsfImplementationExample
   {
-    description: String!
     csfImplementationExampleId: CsfImplementationExampleIdentifier!
+    description: String!
   }
 
 type CsfSubcategory
   {
-    description: String!
     csfSubcategoryId: CsfSubcategoryIdentifier!
+    description: String!
     subcategoryExamples: [CsfImplementationExample]
     subcategoryStatus: CsfElementStatus
     subcategoryMovedTo: [CsfSubcategoryIdentifier]

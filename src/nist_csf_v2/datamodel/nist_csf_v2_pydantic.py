@@ -289,6 +289,7 @@ class CsfFunction(ConfiguredBaseModel):
          'see_also': ['https://www.nist.gov/cyberframework'],
          'slot_usage': {'title': {'name': 'title', 'required': True}}})
 
+    csf_function_id: str = Field(default=..., description="""The function's two letters, such as GV for GOVERN.""", json_schema_extra = { "linkml_meta": {'domain_of': ['CsfFunction']} })
     title: str = Field(default=..., description="""The name CSWP 29 gives the function or category.""", json_schema_extra = { "linkml_meta": {'comments': ["It means what LOKF's title means and carries the same IRI, so "
                       "lokf adapt folds it into LOKF's slot and a knowledge bundle "
                       'reads one title key.'],
@@ -302,7 +303,6 @@ class CsfFunction(ConfiguredBaseModel):
                        'CsfSubcategory',
                        'CsfImplementationExample'],
          'slot_uri': 'schema:description'} })
-    csf_function_id: str = Field(default=..., description="""The function's two letters, such as GV for GOVERN.""", json_schema_extra = { "linkml_meta": {'domain_of': ['CsfFunction']} })
     function_categories: Optional[list[CsfCategory]] = Field(default=None, description="""The categories of the function. A knowledge bundle relates a category to its function with isPartOf instead.""", json_schema_extra = { "linkml_meta": {'domain_of': ['CsfFunction']} })
 
 
@@ -319,6 +319,7 @@ class CsfCategory(ConfiguredBaseModel):
          'see_also': ['https://www.nist.gov/cyberframework'],
          'slot_usage': {'title': {'name': 'title', 'required': True}}})
 
+    csf_category_id: str = Field(default=..., description="""The category's identifier, such as GV.OC.""", json_schema_extra = { "linkml_meta": {'domain_of': ['CsfCategory']} })
     title: str = Field(default=..., description="""The name CSWP 29 gives the function or category.""", json_schema_extra = { "linkml_meta": {'comments': ["It means what LOKF's title means and carries the same IRI, so "
                       "lokf adapt folds it into LOKF's slot and a knowledge bundle "
                       'reads one title key.'],
@@ -332,7 +333,6 @@ class CsfCategory(ConfiguredBaseModel):
                        'CsfSubcategory',
                        'CsfImplementationExample'],
          'slot_uri': 'schema:description'} })
-    csf_category_id: str = Field(default=..., description="""The category's identifier, such as GV.OC.""", json_schema_extra = { "linkml_meta": {'domain_of': ['CsfCategory']} })
     category_subcategories: Optional[list[CsfSubcategory]] = Field(default=None, description="""The subcategories of the category. A knowledge bundle relates a subcategory to its category with isPartOf instead.""", json_schema_extra = { "linkml_meta": {'domain_of': ['CsfCategory']} })
     category_status: Optional[CsfElementStatus] = Field(default=None, description="""withdrawn for a CSF 1.1 category that CSF 2.0 withdrew. A category of CSF 2.0 has no status.""", json_schema_extra = { "linkml_meta": {'domain_of': ['CsfCategory']} })
     category_moved_to: Optional[list[str]] = Field(default=None, description="""The CSF 2.0 category a withdrawn category moved to, as the catalog states it, such as PR.AA for PR.AC.""", json_schema_extra = { "linkml_meta": {'domain_of': ['CsfCategory']} })
@@ -354,6 +354,7 @@ class CsfSubcategory(ConfiguredBaseModel):
                                         'pattern': '^\\s*\\S',
                                         'required': True}}})
 
+    csf_subcategory_id: str = Field(default=..., description="""The subcategory's identifier, such as GV.OC-01.""", json_schema_extra = { "linkml_meta": {'domain_of': ['CsfSubcategory']} })
     description: str = Field(default=..., description="""What the function, category, subcategory or example says, in the words of whoever records it.""", json_schema_extra = { "linkml_meta": {'comments': ["It means what LOKF's description means and carries the same "
                       "IRI, so lokf adapt folds it into LOKF's slot and a knowledge "
                       'bundle reads one description key.'],
@@ -362,7 +363,6 @@ class CsfSubcategory(ConfiguredBaseModel):
                        'CsfSubcategory',
                        'CsfImplementationExample'],
          'slot_uri': 'schema:description'} })
-    csf_subcategory_id: str = Field(default=..., description="""The subcategory's identifier, such as GV.OC-01.""", json_schema_extra = { "linkml_meta": {'domain_of': ['CsfSubcategory']} })
     subcategory_examples: Optional[list[CsfImplementationExample]] = Field(default=None, description="""The implementation examples NIST publishes for the subcategory. CSWP 29 says they are notional, that none is required, and that they are not a complete list of what could be done.""", json_schema_extra = { "linkml_meta": {'domain_of': ['CsfSubcategory']} })
     subcategory_status: Optional[CsfElementStatus] = Field(default=None, description="""withdrawn for a CSF 1.1 subcategory that CSF 2.0 withdrew. A subcategory of CSF 2.0 has no status.""", json_schema_extra = { "linkml_meta": {'domain_of': ['CsfSubcategory']} })
     subcategory_moved_to: Optional[list[str]] = Field(default=None, description="""The CSF 2.0 subcategory a withdrawn subcategory moved to, as the catalog states it, such as GV.OC-03 for ID.GV-03. The catalog names two for a few.""", json_schema_extra = { "linkml_meta": {'domain_of': ['CsfSubcategory']} })
@@ -394,6 +394,7 @@ class CsfImplementationExample(ConfiguredBaseModel):
                                         'pattern': '^\\s*\\S',
                                         'required': True}}})
 
+    csf_implementation_example_id: str = Field(default=..., description="""The example's identifier in NIST's reference data, such as GV.OC-01.001 for the first example of subcategory GV.OC-01.""", json_schema_extra = { "linkml_meta": {'domain_of': ['CsfImplementationExample']} })
     description: str = Field(default=..., description="""What the function, category, subcategory or example says, in the words of whoever records it.""", json_schema_extra = { "linkml_meta": {'comments': ["It means what LOKF's description means and carries the same "
                       "IRI, so lokf adapt folds it into LOKF's slot and a knowledge "
                       'bundle reads one description key.'],
@@ -402,7 +403,6 @@ class CsfImplementationExample(ConfiguredBaseModel):
                        'CsfSubcategory',
                        'CsfImplementationExample'],
          'slot_uri': 'schema:description'} })
-    csf_implementation_example_id: str = Field(default=..., description="""The example's identifier in NIST's reference data, such as GV.OC-01.001 for the first example of subcategory GV.OC-01.""", json_schema_extra = { "linkml_meta": {'domain_of': ['CsfImplementationExample']} })
 
     @field_validator('description')
     def pattern_description(cls, v):
