@@ -54,13 +54,11 @@
                 },
                 "title": {
                     "description": "The name CSWP 29 gives the function or category.",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
+                    "type": "string"
                 }
             },
             "required": [
+                "title",
                 "csf_category_id"
             ],
             "title": "CsfCategory",
@@ -83,6 +81,7 @@
                     "items": {
                         "$ref": "#/$defs/CsfFunction"
                     },
+                    "minItems": 1,
                     "type": "array"
                 },
                 "csf_version": {
@@ -126,13 +125,11 @@
                 },
                 "title": {
                     "description": "The name CSWP 29 gives the function or category.",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
+                    "type": "string"
                 }
             },
             "required": [
+                "title",
                 "csf_function_id"
             ],
             "title": "CsfFunction",
@@ -149,6 +146,7 @@
                 },
                 "description": {
                     "description": "What the function, category, subcategory or example says, in the words of whoever records it.",
+                    "pattern": "^\\s*\\S",
                     "type": "string"
                 }
             },
@@ -170,6 +168,7 @@
                 },
                 "description": {
                     "description": "What the function, category, subcategory or example says, in the words of whoever records it.",
+                    "pattern": "^\\s*\\S",
                     "type": "string"
                 },
                 "subcategory_examples": {
@@ -185,7 +184,7 @@
                 "subcategory_incorporated_into": {
                     "description": "The CSF 2.0 category or subcategory that took in a withdrawn subcategory's outcome, as the catalog states it, such as GV.OC-01 for ID.BE-02.",
                     "items": {
-                        "pattern": "^(GV|ID|PR|DE|RS|RC)(\\.[A-Z]{2}(-[0-9]{2})?)?$",
+                        "pattern": "^(GV|ID|PR|DE|RS|RC)\\.[A-Z]{2}(-[0-9]{2})?$",
                         "type": "string"
                     },
                     "type": [
@@ -228,6 +227,7 @@
             "items": {
                 "$ref": "#/$defs/CsfFunction"
             },
+            "minItems": 1,
             "type": "array"
         },
         "csf_version": {

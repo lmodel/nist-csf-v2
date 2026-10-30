@@ -23,7 +23,7 @@ less:
 
 - The dataclasses check required fields and enum values, but no pattern.
 - The Pydantic models also check the patterns a field carries itself, such as
-  the form of `csf_version`. They do not check the patterns of the five
+  the form of `csf_version`. They do not check the patterns of the six
   identifier types, so a function, category, subcategory or example
   identifier goes unchecked.
 

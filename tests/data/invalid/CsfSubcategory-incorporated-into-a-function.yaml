@@ -1,0 +1,9 @@
+# Invalid: a withdrawn subcategory is incorporated into a category or a
+# subcategory, such as ID.BE-02 into GV.OC-01, never a whole function.
+csf_subcategory_id: ID.BE-02
+description: >-
+  The organization identifies and communicates its place in critical
+  infrastructure and in its industry sector.
+subcategory_status: withdrawn
+subcategory_incorporated_into:
+  - GV

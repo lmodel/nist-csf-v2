@@ -1,0 +1,5 @@
+# Invalid: every function has a name, such as GOVERN.
+csf_function_id: GV
+description: >-
+  The organization sets, communicates and monitors its strategy,
+  expectations and policy for managing cybersecurity risk.

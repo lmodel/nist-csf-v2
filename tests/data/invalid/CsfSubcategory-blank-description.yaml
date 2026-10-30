@@ -1,0 +1,4 @@
+# Invalid: a subcategory is its statement, so a description of blanks fails
+# as a missing one does.
+csf_subcategory_id: GV.OC-01
+description: "   "

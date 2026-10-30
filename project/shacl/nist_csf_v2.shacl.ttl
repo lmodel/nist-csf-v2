@@ -9,20 +9,20 @@ nist_csf_v2:Framework a sh:NodeShape ;
     rdfs:comment "One edition of the CSF as a whole: its functions, each holding its categories and their subcategories." ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:class nist_csf_v2:Function ;
-            sh:description "The six functions, in the order CSWP 29 gives them." ;
-            sh:minCount 1 ;
-            sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 1 ;
-            sh:path nist_csf_v2:csf_functions ],
-        [ sh:datatype xsd:string ;
+    sh:property [ sh:datatype xsd:string ;
             sh:description "The CSF edition, as NIST numbers it in the publication's title, such as 2.0." ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 0 ;
             sh:path nist_csf_v2:csf_version ;
-            sh:pattern "^[0-9]+\\.[0-9]+$" ] ;
+            sh:pattern "^[0-9]+\\.[0-9]+$" ],
+        [ sh:class nist_csf_v2:Function ;
+            sh:description "The six functions, in the order CSWP 29 gives them." ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 1 ;
+            sh:path nist_csf_v2:csf_functions ] ;
     sh:targetClass nist_csf_v2:Framework .
 
 nist_csf_v2:Category a sh:NodeShape ;
@@ -30,6 +30,17 @@ nist_csf_v2:Category a sh:NodeShape ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
     sh:property [ sh:datatype xsd:string ;
+            sh:description "The function, category or subcategory of CSF 2.0 that took in a withdrawn category's outcomes, as the catalog states it, such as GV.OC for ID.BE. The catalog names none for some withdrawn categories." ;
+            sh:nodeKind sh:Literal ;
+            sh:order 6 ;
+            sh:path nist_csf_v2:category_incorporated_into ;
+            sh:pattern "^(GV|ID|PR|DE|RS|RC)(\\.[A-Z]{2}(-[0-9]{2})?)?$" ],
+        [ sh:description "withdrawn for a CSF 1.1 category that CSF 2.0 withdrew. A category of CSF 2.0 has no status." ;
+            sh:in ( "withdrawn" ) ;
+            sh:maxCount 1 ;
+            sh:order 4 ;
+            sh:path nist_csf_v2:category_status ],
+        [ sh:datatype xsd:string ;
             sh:description "The category's identifier, such as GV.OC." ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
@@ -38,33 +49,23 @@ nist_csf_v2:Category a sh:NodeShape ;
             sh:path nist_csf_v2:csf_category_id ;
             sh:pattern "^(GV|ID|PR|DE|RS|RC)\\.[A-Z]{2}$" ],
         [ sh:datatype xsd:string ;
-            sh:description "The function, category or subcategory of CSF 2.0 that took in a withdrawn category's outcomes, as the catalog states it, such as GV.OC for ID.BE. The catalog names none for some withdrawn categories." ;
+            sh:description "The name CSWP 29 gives the function or category." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
             sh:nodeKind sh:Literal ;
-            sh:order 6 ;
-            sh:path nist_csf_v2:category_incorporated_into ;
-            sh:pattern "^(GV|ID|PR|DE|RS|RC)(\\.[A-Z]{2}(-[0-9]{2})?)?$" ],
+            sh:order 0 ;
+            sh:path schema1:name ],
         [ sh:datatype xsd:string ;
             sh:description "What the function, category, subcategory or example says, in the words of whoever records it." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 1 ;
             sh:path schema1:description ],
-        [ sh:datatype xsd:string ;
-            sh:description "The name CSWP 29 gives the function or category." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 0 ;
-            sh:path schema1:name ],
         [ sh:class nist_csf_v2:Subcategory ;
             sh:description "The subcategories of the category. A knowledge bundle relates a subcategory to its category with isPartOf instead." ;
             sh:nodeKind sh:BlankNodeOrIRI ;
             sh:order 3 ;
             sh:path nist_csf_v2:category_subcategories ],
-        [ sh:description "withdrawn for a CSF 1.1 category that CSF 2.0 withdrew. A category of CSF 2.0 has no status." ;
-            sh:in ( "withdrawn" ) ;
-            sh:maxCount 1 ;
-            sh:order 4 ;
-            sh:path nist_csf_v2:category_status ],
         [ sh:datatype xsd:string ;
             sh:description "The CSF 2.0 category a withdrawn category moved to, as the catalog states it, such as PR.AA for PR.AC." ;
             sh:nodeKind sh:Literal ;
@@ -78,12 +79,6 @@ nist_csf_v2:Function a sh:NodeShape ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
     sh:property [ sh:datatype xsd:string ;
-            sh:description "The name CSWP 29 gives the function or category." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 0 ;
-            sh:path schema1:name ],
-        [ sh:datatype xsd:string ;
             sh:description "What the function, category, subcategory or example says, in the words of whoever records it." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
@@ -94,6 +89,13 @@ nist_csf_v2:Function a sh:NodeShape ;
             sh:nodeKind sh:BlankNodeOrIRI ;
             sh:order 3 ;
             sh:path nist_csf_v2:function_categories ],
+        [ sh:datatype xsd:string ;
+            sh:description "The name CSWP 29 gives the function or category." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path schema1:name ],
         [ sh:datatype xsd:string ;
             sh:description "The function's two letters, such as GV for GOVERN." ;
             sh:maxCount 1 ;
@@ -114,7 +116,8 @@ nist_csf_v2:ImplementationExample a sh:NodeShape ;
             sh:minCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 0 ;
-            sh:path schema1:description ],
+            sh:path schema1:description ;
+            sh:pattern "^\\s*\\S" ],
         [ sh:datatype xsd:string ;
             sh:description "The example's identifier in NIST's reference data, such as GV.OC-01.001 for the first example of subcategory GV.OC-01." ;
             sh:maxCount 1 ;
@@ -130,34 +133,35 @@ nist_csf_v2:Subcategory a sh:NodeShape ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
     sh:property [ sh:datatype xsd:string ;
-            sh:description "What the function, category, subcategory or example says, in the words of whoever records it." ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 0 ;
-            sh:path schema1:description ],
-        [ sh:datatype xsd:string ;
-            sh:description "The CSF 2.0 category or subcategory that took in a withdrawn subcategory's outcome, as the catalog states it, such as GV.OC-01 for ID.BE-02." ;
-            sh:nodeKind sh:Literal ;
-            sh:order 5 ;
-            sh:path nist_csf_v2:subcategory_incorporated_into ;
-            sh:pattern "^(GV|ID|PR|DE|RS|RC)(\\.[A-Z]{2}(-[0-9]{2})?)?$" ],
-        [ sh:class nist_csf_v2:ImplementationExample ;
-            sh:description "The implementation examples NIST publishes for the subcategory. CSWP 29 says they are notional, that none is required, and that they are not a complete list of what could be done." ;
-            sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 2 ;
-            sh:path nist_csf_v2:subcategory_examples ],
-        [ sh:description "withdrawn for a CSF 1.1 subcategory that CSF 2.0 withdrew. A subcategory of CSF 2.0 has no status." ;
-            sh:in ( "withdrawn" ) ;
-            sh:maxCount 1 ;
-            sh:order 3 ;
-            sh:path nist_csf_v2:subcategory_status ],
-        [ sh:datatype xsd:string ;
             sh:description "The CSF 2.0 subcategory a withdrawn subcategory moved to, as the catalog states it, such as GV.OC-03 for ID.GV-03. The catalog names two for a few." ;
             sh:nodeKind sh:Literal ;
             sh:order 4 ;
             sh:path nist_csf_v2:subcategory_moved_to ;
             sh:pattern "^(GV|ID|PR|DE|RS|RC)\\.[A-Z]{2}-[0-9]{2}$" ],
+        [ sh:datatype xsd:string ;
+            sh:description "What the function, category, subcategory or example says, in the words of whoever records it." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path schema1:description ;
+            sh:pattern "^\\s*\\S" ],
+        [ sh:description "withdrawn for a CSF 1.1 subcategory that CSF 2.0 withdrew. A subcategory of CSF 2.0 has no status." ;
+            sh:in ( "withdrawn" ) ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path nist_csf_v2:subcategory_status ],
+        [ sh:class nist_csf_v2:ImplementationExample ;
+            sh:description "The implementation examples NIST publishes for the subcategory. CSWP 29 says they are notional, that none is required, and that they are not a complete list of what could be done." ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 2 ;
+            sh:path nist_csf_v2:subcategory_examples ],
+        [ sh:datatype xsd:string ;
+            sh:description "The CSF 2.0 category or subcategory that took in a withdrawn subcategory's outcome, as the catalog states it, such as GV.OC-01 for ID.BE-02." ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path nist_csf_v2:subcategory_incorporated_into ;
+            sh:pattern "^(GV|ID|PR|DE|RS|RC)\\.[A-Z]{2}(-[0-9]{2})?$" ],
         [ sh:datatype xsd:string ;
             sh:description "The subcategory's identifier, such as GV.OC-01." ;
             sh:maxCount 1 ;

@@ -83,8 +83,15 @@ types:
     base: str
     uri: xsd:string
     description: The identifier of a function, a category or a subcategory, whichever of the three a withdrawn
-      element names as what incorporated it.
+      category names as what incorporated it.
     pattern: ^(GV|ID|PR|DE|RS|RC)(\.[A-Z]{2}(-[0-9]{2})?)?$
+  csf_category_or_subcategory_identifier:
+    typeof: string
+    base: str
+    uri: xsd:string
+    description: The identifier of a category or a subcategory, whichever of the two a withdrawn subcategory
+      names as what incorporated it.
+    pattern: ^(GV|ID|PR|DE|RS|RC)\.[A-Z]{2}(-[0-9]{2})?$
 slots: {}
 classes:
   CsfFramework:
@@ -105,6 +112,7 @@ classes:
         range: CsfFunction
         required: true
         multivalued: true
+        minimum_cardinality: 1
         inlined: true
         inlined_as_list: true
   CsfFunction:
@@ -119,6 +127,12 @@ classes:
     slots:
     - title
     - description
+    slot_usage:
+      title:
+        required: true
+        range: string
+      description:
+        range: string
     attributes:
       csf_function_id:
         description: The function's two letters, such as GV for GOVERN.
@@ -131,11 +145,6 @@ classes:
         multivalued: true
         inlined: true
         inlined_as_list: true
-    slot_usage:
-      title:
-        range: string
-      description:
-        range: string
     is_a: Concept
   CsfCategory:
     class_uri: nist_csf_v2:Category
@@ -152,6 +161,12 @@ classes:
     slots:
     - title
     - description
+    slot_usage:
+      title:
+        required: true
+        range: string
+      description:
+        range: string
     attributes:
       csf_category_id:
         description: The category's identifier, such as GV.OC.
@@ -179,11 +194,6 @@ classes:
           withdrawn categories.
         range: csf_element_identifier
         multivalued: true
-    slot_usage:
-      title:
-        range: string
-      description:
-        range: string
     is_a: Concept
   CsfSubcategory:
     class_uri: nist_csf_v2:Subcategory
@@ -202,6 +212,7 @@ classes:
     slot_usage:
       description:
         required: true
+        pattern: ^\s*\S
         range: string
     attributes:
       csf_subcategory_id:
@@ -228,7 +239,7 @@ classes:
       subcategory_incorporated_into:
         description: The CSF 2.0 category or subcategory that took in a withdrawn subcategory's outcome,
           as the catalog states it, such as GV.OC-01 for ID.BE-02.
-        range: csf_element_identifier
+        range: csf_category_or_subcategory_identifier
         multivalued: true
     is_a: Concept
   CsfImplementationExample:
@@ -245,6 +256,7 @@ classes:
     slot_usage:
       description:
         required: true
+        pattern: ^\s*\S
         range: string
     attributes:
       csf_implementation_example_id:

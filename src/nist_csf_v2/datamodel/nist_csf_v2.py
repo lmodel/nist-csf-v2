@@ -1,5 +1,5 @@
 # Auto generated from nist_csf_v2.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-10-30T08:17:22
+# Generation date: 2026-10-30T08:19:18
 # Schema: nist_csf_v2
 #
 # id: https://w3id.org/lmodel/nist-csf-v2
@@ -104,11 +104,19 @@ class CsfImplementationExampleIdentifier(String):
 
 
 class CsfElementIdentifier(String):
-    """ The identifier of a function, a category or a subcategory, whichever of the three a withdrawn element names as what incorporated it. """
+    """ The identifier of a function, a category or a subcategory, whichever of the three a withdrawn category names as what incorporated it. """
     type_class_uri = XSD["string"]
     type_class_curie = "xsd:string"
     type_name = "csf_element_identifier"
     type_model_uri = NIST_CSF_V2.CsfElementIdentifier
+
+
+class CsfCategoryOrSubcategoryIdentifier(String):
+    """ The identifier of a category or a subcategory, whichever of the two a withdrawn subcategory names as what incorporated it. """
+    type_class_uri = XSD["string"]
+    type_class_curie = "xsd:string"
+    type_name = "csf_category_or_subcategory_identifier"
+    type_model_uri = NIST_CSF_V2.CsfCategoryOrSubcategoryIdentifier
 
 
 # Class references
@@ -138,7 +146,7 @@ class CsfFramework(YAMLRoot):
 
         if self._is_empty(self.csf_functions):
             self.MissingRequiredField("csf_functions")
-        self._normalize_inlined_as_list(slot_name="csf_functions", slot_type=CsfFunction, key_name="csf_function_id", keyed=False)
+        self._normalize_inlined_as_list(slot_name="csf_functions", slot_type=CsfFunction, key_name="title", keyed=False)
 
         super().__post_init__(**kwargs)
 
@@ -156,24 +164,26 @@ class CsfFunction(YAMLRoot):
     class_name: ClassVar[str] = "CsfFunction"
     class_model_uri: ClassVar[URIRef] = NIST_CSF_V2.CsfFunction
 
+    title: str = None
     csf_function_id: Union[str, CsfFunctionIdentifier] = None
-    title: Optional[str] = None
     description: Optional[str] = None
     function_categories: Optional[Union[Union[dict, "CsfCategory"], list[Union[dict, "CsfCategory"]]]] = empty_list()
 
     def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.title):
+            self.MissingRequiredField("title")
+        if not isinstance(self.title, str):
+            self.title = str(self.title)
+
         if self._is_empty(self.csf_function_id):
             self.MissingRequiredField("csf_function_id")
         if not isinstance(self.csf_function_id, CsfFunctionIdentifier):
             self.csf_function_id = CsfFunctionIdentifier(self.csf_function_id)
 
-        if self.title is not None and not isinstance(self.title, str):
-            self.title = str(self.title)
-
         if self.description is not None and not isinstance(self.description, str):
             self.description = str(self.description)
 
-        self._normalize_inlined_as_list(slot_name="function_categories", slot_type=CsfCategory, key_name="csf_category_id", keyed=False)
+        self._normalize_inlined_as_list(slot_name="function_categories", slot_type=CsfCategory, key_name="title", keyed=False)
 
         super().__post_init__(**kwargs)
 
@@ -192,8 +202,8 @@ class CsfCategory(YAMLRoot):
     class_name: ClassVar[str] = "CsfCategory"
     class_model_uri: ClassVar[URIRef] = NIST_CSF_V2.CsfCategory
 
+    title: str = None
     csf_category_id: Union[str, CsfCategoryIdentifier] = None
-    title: Optional[str] = None
     description: Optional[str] = None
     category_subcategories: Optional[Union[Union[dict, "CsfSubcategory"], list[Union[dict, "CsfSubcategory"]]]] = empty_list()
     category_status: Optional[Union[str, "CsfElementStatus"]] = None
@@ -201,13 +211,15 @@ class CsfCategory(YAMLRoot):
     category_incorporated_into: Optional[Union[Union[str, CsfElementIdentifier], list[Union[str, CsfElementIdentifier]]]] = empty_list()
 
     def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.title):
+            self.MissingRequiredField("title")
+        if not isinstance(self.title, str):
+            self.title = str(self.title)
+
         if self._is_empty(self.csf_category_id):
             self.MissingRequiredField("csf_category_id")
         if not isinstance(self.csf_category_id, CsfCategoryIdentifier):
             self.csf_category_id = CsfCategoryIdentifier(self.csf_category_id)
-
-        if self.title is not None and not isinstance(self.title, str):
-            self.title = str(self.title)
 
         if self.description is not None and not isinstance(self.description, str):
             self.description = str(self.description)
@@ -247,7 +259,7 @@ class CsfSubcategory(YAMLRoot):
     subcategory_examples: Optional[Union[Union[dict, "CsfImplementationExample"], list[Union[dict, "CsfImplementationExample"]]]] = empty_list()
     subcategory_status: Optional[Union[str, "CsfElementStatus"]] = None
     subcategory_moved_to: Optional[Union[Union[str, CsfSubcategoryIdentifier], list[Union[str, CsfSubcategoryIdentifier]]]] = empty_list()
-    subcategory_incorporated_into: Optional[Union[Union[str, CsfElementIdentifier], list[Union[str, CsfElementIdentifier]]]] = empty_list()
+    subcategory_incorporated_into: Optional[Union[Union[str, CsfCategoryOrSubcategoryIdentifier], list[Union[str, CsfCategoryOrSubcategoryIdentifier]]]] = empty_list()
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.description):
@@ -271,7 +283,7 @@ class CsfSubcategory(YAMLRoot):
 
         if not isinstance(self.subcategory_incorporated_into, list):
             self.subcategory_incorporated_into = [self.subcategory_incorporated_into] if self.subcategory_incorporated_into is not None else []
-        self.subcategory_incorporated_into = [v if isinstance(v, CsfElementIdentifier) else CsfElementIdentifier(v) for v in self.subcategory_incorporated_into]
+        self.subcategory_incorporated_into = [v if isinstance(v, CsfCategoryOrSubcategoryIdentifier) else CsfCategoryOrSubcategoryIdentifier(v) for v in self.subcategory_incorporated_into]
 
         super().__post_init__(**kwargs)
 
@@ -372,13 +384,21 @@ slots.csfSubcategory__subcategory_moved_to = Slot(uri=NIST_CSF_V2.subcategory_mo
                    model_uri=NIST_CSF_V2.csfSubcategory__subcategory_moved_to, domain=None, range=Optional[Union[Union[str, CsfSubcategoryIdentifier], list[Union[str, CsfSubcategoryIdentifier]]]])
 
 slots.csfSubcategory__subcategory_incorporated_into = Slot(uri=NIST_CSF_V2.subcategory_incorporated_into, name="csfSubcategory__subcategory_incorporated_into", curie=NIST_CSF_V2.curie('subcategory_incorporated_into'),
-                   model_uri=NIST_CSF_V2.csfSubcategory__subcategory_incorporated_into, domain=None, range=Optional[Union[Union[str, CsfElementIdentifier], list[Union[str, CsfElementIdentifier]]]])
+                   model_uri=NIST_CSF_V2.csfSubcategory__subcategory_incorporated_into, domain=None, range=Optional[Union[Union[str, CsfCategoryOrSubcategoryIdentifier], list[Union[str, CsfCategoryOrSubcategoryIdentifier]]]])
 
 slots.csfImplementationExample__csf_implementation_example_id = Slot(uri=NIST_CSF_V2.csf_implementation_example_id, name="csfImplementationExample__csf_implementation_example_id", curie=NIST_CSF_V2.curie('csf_implementation_example_id'),
                    model_uri=NIST_CSF_V2.csfImplementationExample__csf_implementation_example_id, domain=None, range=Union[str, CsfImplementationExampleIdentifier])
 
+slots.CsfFunction_title = Slot(uri=SCHEMA.name, name="CsfFunction_title", curie=SCHEMA.curie('name'),
+                   model_uri=NIST_CSF_V2.CsfFunction_title, domain=CsfFunction, range=str)
+
+slots.CsfCategory_title = Slot(uri=SCHEMA.name, name="CsfCategory_title", curie=SCHEMA.curie('name'),
+                   model_uri=NIST_CSF_V2.CsfCategory_title, domain=CsfCategory, range=str)
+
 slots.CsfSubcategory_description = Slot(uri=SCHEMA.description, name="CsfSubcategory_description", curie=SCHEMA.curie('description'),
-                   model_uri=NIST_CSF_V2.CsfSubcategory_description, domain=CsfSubcategory, range=str)
+                   model_uri=NIST_CSF_V2.CsfSubcategory_description, domain=CsfSubcategory, range=str,
+                   pattern=re.compile(r'^\s*\S'))
 
 slots.CsfImplementationExample_description = Slot(uri=SCHEMA.description, name="CsfImplementationExample_description", curie=SCHEMA.curie('description'),
-                   model_uri=NIST_CSF_V2.CsfImplementationExample_description, domain=CsfImplementationExample, range=str)
+                   model_uri=NIST_CSF_V2.CsfImplementationExample_description, domain=CsfImplementationExample, range=str,
+                   pattern=re.compile(r'^\s*\S'))

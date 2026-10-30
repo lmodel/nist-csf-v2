@@ -24,7 +24,7 @@ export interface CsfFramework {
  */
 export interface CsfFunction {
     /** The name CSWP 29 gives the function or category. */
-    title?: string,
+    title: string,
     /** What the function, category, subcategory or example says, in the words of whoever records it. */
     description?: string,
     /** The function's two letters, such as GV for GOVERN. */
@@ -39,7 +39,7 @@ export interface CsfFunction {
  */
 export interface CsfCategory {
     /** The name CSWP 29 gives the function or category. */
-    title?: string,
+    title: string,
     /** What the function, category, subcategory or example says, in the words of whoever records it. */
     description?: string,
     /** The category's identifier, such as GV.OC. */

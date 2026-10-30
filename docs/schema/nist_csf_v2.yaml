@@ -114,12 +114,22 @@ types:
     name: csf_element_identifier
     definition_uri: https://w3id.org/lmodel/nist-csf-v2/CsfElementIdentifier
     description: The identifier of a function, a category or a subcategory, whichever
-      of the three a withdrawn element names as what incorporated it.
+      of the three a withdrawn category names as what incorporated it.
     from_schema: https://w3id.org/lmodel/nist-csf-v2
     typeof: string
     base: str
     uri: xsd:string
     pattern: ^(GV|ID|PR|DE|RS|RC)(\.[A-Z]{2}(-[0-9]{2})?)?$
+  csf_category_or_subcategory_identifier:
+    name: csf_category_or_subcategory_identifier
+    definition_uri: https://w3id.org/lmodel/nist-csf-v2/CsfCategoryOrSubcategoryIdentifier
+    description: The identifier of a category or a subcategory, whichever of the two
+      a withdrawn subcategory names as what incorporated it.
+    from_schema: https://w3id.org/lmodel/nist-csf-v2
+    typeof: string
+    base: str
+    uri: xsd:string
+    pattern: ^(GV|ID|PR|DE|RS|RC)\.[A-Z]{2}(-[0-9]{2})?$
   string:
     name: string
     definition_uri: https://w3id.org/linkml/String
@@ -466,6 +476,7 @@ slots:
     multivalued: true
     inlined: true
     inlined_as_list: true
+    minimum_cardinality: 1
   csfFunction__csf_function_id:
     name: csfFunction__csf_function_id
     description: The function's two letters, such as GV for GOVERN.
@@ -612,7 +623,7 @@ slots:
     owner: CsfSubcategory
     domain_of:
     - CsfSubcategory
-    range: csf_element_identifier
+    range: csf_category_or_subcategory_identifier
     multivalued: true
   csfImplementationExample__csf_implementation_example_id:
     name: csfImplementationExample__csf_implementation_example_id
@@ -625,6 +636,48 @@ slots:
     domain_of:
     - CsfImplementationExample
     range: csf_implementation_example_identifier
+    required: true
+  CsfFunction_title:
+    name: CsfFunction_title
+    definition_uri: https://w3id.org/lmodel/nist-csf-v2/title
+    description: The name CSWP 29 gives the function or category.
+    comments:
+    - It means what LOKF's title means and carries the same IRI, so lokf adapt folds
+      it into LOKF's slot and a knowledge bundle reads one title key.
+    from_schema: https://w3id.org/lmodel/nist-csf-v2
+    mappings:
+    - schema:name
+    is_a: title
+    domain: CsfFunction
+    slot_uri: schema:name
+    alias: title
+    owner: CsfFunction
+    domain_of:
+    - CsfFunction
+    is_usage_slot: true
+    usage_slot_name: title
+    range: string
+    required: true
+  CsfCategory_title:
+    name: CsfCategory_title
+    definition_uri: https://w3id.org/lmodel/nist-csf-v2/title
+    description: The name CSWP 29 gives the function or category.
+    comments:
+    - It means what LOKF's title means and carries the same IRI, so lokf adapt folds
+      it into LOKF's slot and a knowledge bundle reads one title key.
+    from_schema: https://w3id.org/lmodel/nist-csf-v2
+    mappings:
+    - schema:name
+    is_a: title
+    domain: CsfCategory
+    slot_uri: schema:name
+    alias: title
+    owner: CsfCategory
+    domain_of:
+    - CsfCategory
+    is_usage_slot: true
+    usage_slot_name: title
+    range: string
     required: true
   CsfSubcategory_description:
     name: CsfSubcategory_description
@@ -648,6 +701,7 @@ slots:
     usage_slot_name: description
     range: string
     required: true
+    pattern: ^\s*\S
   CsfImplementationExample_description:
     name: CsfImplementationExample_description
     definition_uri: https://w3id.org/lmodel/nist-csf-v2/description
@@ -670,6 +724,7 @@ slots:
     usage_slot_name: description
     range: string
     required: true
+    pattern: ^\s*\S
 classes:
   CsfFramework:
     name: CsfFramework
@@ -701,6 +756,7 @@ classes:
         multivalued: true
         inlined: true
         inlined_as_list: true
+        minimum_cardinality: 1
     class_uri: nist_csf_v2:Framework
     tree_root: true
   CsfFunction:
@@ -717,10 +773,14 @@ classes:
     broad_mappings:
     - oscal:Group
     slots:
-    - title
+    - CsfFunction_title
     - description
     - csfFunction__csf_function_id
     - csfFunction__function_categories
+    slot_usage:
+      title:
+        name: title
+        required: true
     attributes:
       csf_function_id:
         name: csf_function_id
@@ -754,13 +814,17 @@ classes:
     broad_mappings:
     - oscal:Control
     slots:
-    - title
+    - CsfCategory_title
     - description
     - csfCategory__csf_category_id
     - csfCategory__category_subcategories
     - csfCategory__category_status
     - csfCategory__category_moved_to
     - csfCategory__category_incorporated_into
+    slot_usage:
+      title:
+        name: title
+        required: true
     attributes:
       csf_category_id:
         name: csf_category_id
@@ -822,6 +886,7 @@ classes:
       description:
         name: description
         required: true
+        pattern: ^\s*\S
     attributes:
       csf_subcategory_id:
         name: csf_subcategory_id
@@ -853,7 +918,7 @@ classes:
         name: subcategory_incorporated_into
         description: The CSF 2.0 category or subcategory that took in a withdrawn
           subcategory's outcome, as the catalog states it, such as GV.OC-01 for ID.BE-02.
-        range: csf_element_identifier
+        range: csf_category_or_subcategory_identifier
         multivalued: true
     class_uri: nist_csf_v2:Subcategory
   CsfImplementationExample:
@@ -876,6 +941,7 @@ classes:
       description:
         name: description
         required: true
+        pattern: ^\s*\S
     attributes:
       csf_implementation_example_id:
         name: csf_implementation_example_id
@@ -886,7 +952,7 @@ classes:
     class_uri: nist_csf_v2:ImplementationExample
 metamodel_version: 1.7.0
 source_file: nist_csf_v2.yaml
-source_file_date: '2026-10-30T08:16:43'
-source_file_size: 12326
-generation_date: '2026-10-30T08:17:15'
+source_file_date: '2026-10-30T08:18:35'
+source_file_size: 12845
+generation_date: '2026-10-30T08:19:09'
 

@@ -145,12 +145,33 @@ linkml_meta = LinkMLMeta({'annotations': {'cprt_framework_version': {'tag': 'cpr
                                            'pattern': '^(GV|ID|PR|DE|RS|RC)\\.[A-Z]{2}$',
                                            'typeof': 'string',
                                            'uri': 'xsd:string'},
+               'csf_category_or_subcategory_identifier': {'base': 'str',
+                                                          'description': 'The '
+                                                                         'identifier '
+                                                                         'of a '
+                                                                         'category '
+                                                                         'or a '
+                                                                         'subcategory, '
+                                                                         'whichever '
+                                                                         'of the '
+                                                                         'two a '
+                                                                         'withdrawn '
+                                                                         'subcategory '
+                                                                         'names as '
+                                                                         'what '
+                                                                         'incorporated '
+                                                                         'it.',
+                                                          'from_schema': 'https://w3id.org/lmodel/nist-csf-v2',
+                                                          'name': 'csf_category_or_subcategory_identifier',
+                                                          'pattern': '^(GV|ID|PR|DE|RS|RC)\\.[A-Z]{2}(-[0-9]{2})?$',
+                                                          'typeof': 'string',
+                                                          'uri': 'xsd:string'},
                'csf_element_identifier': {'base': 'str',
                                           'description': 'The identifier of a '
                                                          'function, a category or '
                                                          'a subcategory, whichever '
                                                          'of the three a withdrawn '
-                                                         'element names as what '
+                                                         'category names as what '
                                                          'incorporated it.',
                                           'from_schema': 'https://w3id.org/lmodel/nist-csf-v2',
                                           'name': 'csf_element_identifier',
@@ -242,7 +263,7 @@ class CsfFramework(ConfiguredBaseModel):
          'tree_root': True})
 
     csf_version: str = Field(default=..., description="""The CSF edition, as NIST numbers it in the publication's title, such as 2.0.""", json_schema_extra = { "linkml_meta": {'domain_of': ['CsfFramework']} })
-    csf_functions: list[CsfFunction] = Field(default=..., description="""The six functions, in the order CSWP 29 gives them.""", json_schema_extra = { "linkml_meta": {'domain_of': ['CsfFramework']} })
+    csf_functions: list[CsfFunction] = Field(default=..., description="""The six functions, in the order CSWP 29 gives them.""", min_length=1, json_schema_extra = { "linkml_meta": {'domain_of': ['CsfFramework']} })
 
     @field_validator('csf_version')
     def pattern_csf_version(cls, v):
@@ -265,9 +286,10 @@ class CsfFunction(ConfiguredBaseModel):
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'broad_mappings': ['oscal:Group'],
          'class_uri': 'nist_csf_v2:Function',
          'from_schema': 'https://w3id.org/lmodel/nist-csf-v2',
-         'see_also': ['https://www.nist.gov/cyberframework']})
+         'see_also': ['https://www.nist.gov/cyberframework'],
+         'slot_usage': {'title': {'name': 'title', 'required': True}}})
 
-    title: Optional[str] = Field(default=None, description="""The name CSWP 29 gives the function or category.""", json_schema_extra = { "linkml_meta": {'comments': ["It means what LOKF's title means and carries the same IRI, so "
+    title: str = Field(default=..., description="""The name CSWP 29 gives the function or category.""", json_schema_extra = { "linkml_meta": {'comments': ["It means what LOKF's title means and carries the same IRI, so "
                       "lokf adapt folds it into LOKF's slot and a knowledge bundle "
                       'reads one title key.'],
          'domain_of': ['CsfFunction', 'CsfCategory'],
@@ -294,9 +316,10 @@ class CsfCategory(ConfiguredBaseModel):
                       'withdrawn too, and the catalog gives it no statement, so it has '
                       'no description.'],
          'from_schema': 'https://w3id.org/lmodel/nist-csf-v2',
-         'see_also': ['https://www.nist.gov/cyberframework']})
+         'see_also': ['https://www.nist.gov/cyberframework'],
+         'slot_usage': {'title': {'name': 'title', 'required': True}}})
 
-    title: Optional[str] = Field(default=None, description="""The name CSWP 29 gives the function or category.""", json_schema_extra = { "linkml_meta": {'comments': ["It means what LOKF's title means and carries the same IRI, so "
+    title: str = Field(default=..., description="""The name CSWP 29 gives the function or category.""", json_schema_extra = { "linkml_meta": {'comments': ["It means what LOKF's title means and carries the same IRI, so "
                       "lokf adapt folds it into LOKF's slot and a knowledge bundle "
                       'reads one title key.'],
          'domain_of': ['CsfFunction', 'CsfCategory'],
@@ -327,7 +350,9 @@ class CsfSubcategory(ConfiguredBaseModel):
                       'description is required here.'],
          'from_schema': 'https://w3id.org/lmodel/nist-csf-v2',
          'see_also': ['https://www.nist.gov/cyberframework'],
-         'slot_usage': {'description': {'name': 'description', 'required': True}}})
+         'slot_usage': {'description': {'name': 'description',
+                                        'pattern': '^\\s*\\S',
+                                        'required': True}}})
 
     description: str = Field(default=..., description="""What the function, category, subcategory or example says, in the words of whoever records it.""", json_schema_extra = { "linkml_meta": {'comments': ["It means what LOKF's description means and carries the same "
                       "IRI, so lokf adapt folds it into LOKF's slot and a knowledge "
@@ -343,6 +368,19 @@ class CsfSubcategory(ConfiguredBaseModel):
     subcategory_moved_to: Optional[list[str]] = Field(default=None, description="""The CSF 2.0 subcategory a withdrawn subcategory moved to, as the catalog states it, such as GV.OC-03 for ID.GV-03. The catalog names two for a few.""", json_schema_extra = { "linkml_meta": {'domain_of': ['CsfSubcategory']} })
     subcategory_incorporated_into: Optional[list[str]] = Field(default=None, description="""The CSF 2.0 category or subcategory that took in a withdrawn subcategory's outcome, as the catalog states it, such as GV.OC-01 for ID.BE-02.""", json_schema_extra = { "linkml_meta": {'domain_of': ['CsfSubcategory']} })
 
+    @field_validator('description')
+    def pattern_description(cls, v):
+        pattern=re.compile(r"^\s*\S")
+        if isinstance(v, list):
+            for element in v:
+                if isinstance(element, str) and not pattern.match(element):
+                    err_msg = f"Invalid description format: {element}"
+                    raise ValueError(err_msg)
+        elif isinstance(v, str) and not pattern.match(v):
+            err_msg = f"Invalid description format: {v}"
+            raise ValueError(err_msg)
+        return v
+
 
 class CsfImplementationExample(ConfiguredBaseModel):
     """
@@ -352,7 +390,9 @@ class CsfImplementationExample(ConfiguredBaseModel):
          'class_uri': 'nist_csf_v2:ImplementationExample',
          'from_schema': 'https://w3id.org/lmodel/nist-csf-v2',
          'see_also': ['https://www.nist.gov/cyberframework'],
-         'slot_usage': {'description': {'name': 'description', 'required': True}}})
+         'slot_usage': {'description': {'name': 'description',
+                                        'pattern': '^\\s*\\S',
+                                        'required': True}}})
 
     description: str = Field(default=..., description="""What the function, category, subcategory or example says, in the words of whoever records it.""", json_schema_extra = { "linkml_meta": {'comments': ["It means what LOKF's description means and carries the same "
                       "IRI, so lokf adapt folds it into LOKF's slot and a knowledge "
@@ -363,6 +403,19 @@ class CsfImplementationExample(ConfiguredBaseModel):
                        'CsfImplementationExample'],
          'slot_uri': 'schema:description'} })
     csf_implementation_example_id: str = Field(default=..., description="""The example's identifier in NIST's reference data, such as GV.OC-01.001 for the first example of subcategory GV.OC-01.""", json_schema_extra = { "linkml_meta": {'domain_of': ['CsfImplementationExample']} })
+
+    @field_validator('description')
+    def pattern_description(cls, v):
+        pattern=re.compile(r"^\s*\S")
+        if isinstance(v, list):
+            for element in v:
+                if isinstance(element, str) and not pattern.match(element):
+                    err_msg = f"Invalid description format: {element}"
+                    raise ValueError(err_msg)
+        elif isinstance(v, str) and not pattern.match(v):
+            err_msg = f"Invalid description format: {v}"
+            raise ValueError(err_msg)
+        return v
 
 
 # Model rebuild

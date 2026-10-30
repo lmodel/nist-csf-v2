@@ -41,5 +41,5 @@ message CsfSubcategory
  repeated  csfImplementationExample subcategoryExamples = 0
   csfElementStatus subcategoryStatus = 0
  repeated  csfSubcategoryIdentifier subcategoryMovedTo = 0
- repeated  csfElementIdentifier subcategoryIncorporatedInto = 0
+ repeated  csfCategoryOrSubcategoryIdentifier subcategoryIncorporatedInto = 0
  }

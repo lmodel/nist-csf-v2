@@ -111,12 +111,23 @@
     {
       "name": "csf_element_identifier",
       "definition_uri": "https://w3id.org/lmodel/nist-csf-v2/CsfElementIdentifier",
-      "description": "The identifier of a function, a category or a subcategory, whichever of the three a withdrawn element names as what incorporated it.",
+      "description": "The identifier of a function, a category or a subcategory, whichever of the three a withdrawn category names as what incorporated it.",
       "from_schema": "https://w3id.org/lmodel/nist-csf-v2",
       "typeof": "string",
       "base": "str",
       "uri": "http://www.w3.org/2001/XMLSchema#string",
       "pattern": "^(GV|ID|PR|DE|RS|RC)(\\.[A-Z]{2}(-[0-9]{2})?)?$",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "csf_category_or_subcategory_identifier",
+      "definition_uri": "https://w3id.org/lmodel/nist-csf-v2/CsfCategoryOrSubcategoryIdentifier",
+      "description": "The identifier of a category or a subcategory, whichever of the two a withdrawn subcategory names as what incorporated it.",
+      "from_schema": "https://w3id.org/lmodel/nist-csf-v2",
+      "typeof": "string",
+      "base": "str",
+      "uri": "http://www.w3.org/2001/XMLSchema#string",
+      "pattern": "^(GV|ID|PR|DE|RS|RC)\\.[A-Z]{2}(-[0-9]{2})?$",
       "@type": "TypeDefinition"
     },
     {
@@ -518,6 +529,7 @@
       "multivalued": true,
       "inlined": true,
       "inlined_as_list": true,
+      "minimum_cardinality": 1,
       "@type": "SlotDefinition"
     },
     {
@@ -688,7 +700,7 @@
       "domain_of": [
         "CsfSubcategory"
       ],
-      "range": "csf_element_identifier",
+      "range": "csf_category_or_subcategory_identifier",
       "multivalued": true,
       "@type": "SlotDefinition"
     },
@@ -703,6 +715,56 @@
         "CsfImplementationExample"
       ],
       "range": "csf_implementation_example_identifier",
+      "required": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "CsfFunction_title",
+      "definition_uri": "https://w3id.org/lmodel/nist-csf-v2/title",
+      "description": "The name CSWP 29 gives the function or category.",
+      "comments": [
+        "It means what LOKF's title means and carries the same IRI, so lokf adapt folds it into LOKF's slot and a knowledge bundle reads one title key."
+      ],
+      "from_schema": "https://w3id.org/lmodel/nist-csf-v2",
+      "mappings": [
+        "http://schema.org/name"
+      ],
+      "is_a": "title",
+      "domain": "CsfFunction",
+      "slot_uri": "http://schema.org/name",
+      "alias": "title",
+      "owner": "CsfFunction",
+      "domain_of": [
+        "CsfFunction"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "title",
+      "range": "string",
+      "required": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "CsfCategory_title",
+      "definition_uri": "https://w3id.org/lmodel/nist-csf-v2/title",
+      "description": "The name CSWP 29 gives the function or category.",
+      "comments": [
+        "It means what LOKF's title means and carries the same IRI, so lokf adapt folds it into LOKF's slot and a knowledge bundle reads one title key."
+      ],
+      "from_schema": "https://w3id.org/lmodel/nist-csf-v2",
+      "mappings": [
+        "http://schema.org/name"
+      ],
+      "is_a": "title",
+      "domain": "CsfCategory",
+      "slot_uri": "http://schema.org/name",
+      "alias": "title",
+      "owner": "CsfCategory",
+      "domain_of": [
+        "CsfCategory"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "title",
+      "range": "string",
       "required": true,
       "@type": "SlotDefinition"
     },
@@ -729,6 +791,7 @@
       "usage_slot_name": "description",
       "range": "string",
       "required": true,
+      "pattern": "^\\s*\\S",
       "@type": "SlotDefinition"
     },
     {
@@ -754,6 +817,7 @@
       "usage_slot_name": "description",
       "range": "string",
       "required": true,
+      "pattern": "^\\s*\\S",
       "@type": "SlotDefinition"
     }
   ],
@@ -793,6 +857,7 @@
           "multivalued": true,
           "inlined": true,
           "inlined_as_list": true,
+          "minimum_cardinality": 1,
           "@type": "SlotDefinition"
         }
       ],
@@ -815,7 +880,7 @@
         "oscal:Group"
       ],
       "slots": [
-        "title",
+        "CsfFunction_title",
         "description",
         "csfFunction__csf_function_id",
         "csfFunction__function_categories"
@@ -860,7 +925,7 @@
         "oscal:Control"
       ],
       "slots": [
-        "title",
+        "CsfCategory_title",
         "description",
         "csfCategory__csf_category_id",
         "csfCategory__category_subcategories",
@@ -969,7 +1034,7 @@
         {
           "name": "subcategory_incorporated_into",
           "description": "The CSF 2.0 category or subcategory that took in a withdrawn subcategory's outcome, as the catalog states it, such as GV.OC-01 for ID.BE-02.",
-          "range": "csf_element_identifier",
+          "range": "csf_category_or_subcategory_identifier",
           "multivalued": true,
           "@type": "SlotDefinition"
         }
@@ -1011,9 +1076,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "nist_csf_v2.yaml",
-  "source_file_date": "2026-10-30T08:16:43",
-  "source_file_size": 12326,
-  "generation_date": "2026-10-30T08:17:08",
+  "source_file_date": "2026-10-30T08:18:35",
+  "source_file_size": 12845,
+  "generation_date": "2026-10-30T08:19:02",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/nist_csf_v2.context.jsonld",

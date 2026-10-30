@@ -47,7 +47,7 @@ CREATE INDEX "ix_CsfFramework_id" ON "CsfFramework" (id);
 
 CREATE TABLE "CsfFunction" (
 	id INTEGER NOT NULL,
-	title TEXT,
+	title TEXT NOT NULL,
 	description TEXT,
 	csf_function_id TEXT NOT NULL,
 	"CsfFramework_id" INTEGER,
@@ -58,7 +58,7 @@ CREATE INDEX "ix_CsfFunction_id" ON "CsfFunction" (id);
 
 CREATE TABLE "CsfCategory" (
 	id INTEGER NOT NULL,
-	title TEXT,
+	title TEXT NOT NULL,
 	description TEXT,
 	csf_category_id TEXT NOT NULL,
 	category_status VARCHAR(9),
@@ -85,8 +85,8 @@ CREATE TABLE "CsfCategory_category_moved_to" (
 	PRIMARY KEY ("CsfCategory_id", category_moved_to),
 	FOREIGN KEY("CsfCategory_id") REFERENCES "CsfCategory" (id)
 );
-CREATE INDEX "ix_CsfCategory_category_moved_to_CsfCategory_id" ON "CsfCategory_category_moved_to" ("CsfCategory_id");
 CREATE INDEX "ix_CsfCategory_category_moved_to_category_moved_to" ON "CsfCategory_category_moved_to" (category_moved_to);
+CREATE INDEX "ix_CsfCategory_category_moved_to_CsfCategory_id" ON "CsfCategory_category_moved_to" ("CsfCategory_id");
 
 CREATE TABLE "CsfCategory_category_incorporated_into" (
 	"CsfCategory_id" INTEGER,
@@ -94,8 +94,8 @@ CREATE TABLE "CsfCategory_category_incorporated_into" (
 	PRIMARY KEY ("CsfCategory_id", category_incorporated_into),
 	FOREIGN KEY("CsfCategory_id") REFERENCES "CsfCategory" (id)
 );
-CREATE INDEX "ix_CsfCategory_category_incorporated_into_CsfCategory_id" ON "CsfCategory_category_incorporated_into" ("CsfCategory_id");
 CREATE INDEX "ix_CsfCategory_category_incorporated_into_category_incorporated_into" ON "CsfCategory_category_incorporated_into" (category_incorporated_into);
+CREATE INDEX "ix_CsfCategory_category_incorporated_into_CsfCategory_id" ON "CsfCategory_category_incorporated_into" ("CsfCategory_id");
 
 CREATE TABLE "CsfImplementationExample" (
 	id INTEGER NOT NULL,
@@ -122,5 +122,5 @@ CREATE TABLE "CsfSubcategory_subcategory_incorporated_into" (
 	PRIMARY KEY ("CsfSubcategory_id", subcategory_incorporated_into),
 	FOREIGN KEY("CsfSubcategory_id") REFERENCES "CsfSubcategory" (id)
 );
-CREATE INDEX "ix_CsfSubcategory_subcategory_incorporated_into_CsfSubcategory_id" ON "CsfSubcategory_subcategory_incorporated_into" ("CsfSubcategory_id");
 CREATE INDEX "ix_CsfSubcategory_subcategory_incorporated_into_subcategory_incorporated_into" ON "CsfSubcategory_subcategory_incorporated_into" (subcategory_incorporated_into);
+CREATE INDEX "ix_CsfSubcategory_subcategory_incorporated_into_CsfSubcategory_id" ON "CsfSubcategory_subcategory_incorporated_into" ("CsfSubcategory_id");

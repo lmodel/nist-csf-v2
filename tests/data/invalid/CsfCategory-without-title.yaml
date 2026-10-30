@@ -1,0 +1,6 @@
+# Invalid: every category has a name, withdrawn ones included, such as
+# Business Environment for ID.BE.
+csf_category_id: ID.BE
+category_status: withdrawn
+category_incorporated_into:
+  - GV.OC

@@ -1,6 +1,7 @@
 # Invalid: a category is incorporated into a function, a category or a
 # subcategory, never an implementation example.
 csf_category_id: ID.BE
+title: Business Environment
 category_status: withdrawn
 category_incorporated_into:
   - GV.OC-01.001
