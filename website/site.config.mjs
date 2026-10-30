@@ -57,7 +57,31 @@ export const DOCS = { dir: "docs", exclude: ["templates-linkml"] };
 // names. An entry whose key and value both end in /[...slug] stands for one
 // redirect per schema page.
 //   export const REDIRECTS = { "/elements": "/schema/", "/elements/[...slug]": "/schema/[...slug]", "/about": "/docs/about/" };
-export const REDIRECTS = { "/elements": "/schema/", "/elements/[...slug]": "/schema/[...slug]", "/about": "/docs/about/" };
+export const REDIRECTS = {
+  "/elements": "/schema/",
+  // The retired schema's pages: each class to its successor, and the rest,
+  // which have none, to the schema's index.
+  "/elements/CSFDocument": "/schema/CsfFramework/",
+  "/elements/CSFCatalogBody": "/schema/CsfFramework/",
+  "/elements/CSFFunction": "/schema/CsfFunction/",
+  "/elements/CSFCategory": "/schema/CsfCategory/",
+  "/elements/CSFSubcategory": "/schema/CsfSubcategory/",
+  "/elements/CSFMetadata": "/schema/",
+  "/elements/CSFElement": "/schema/",
+  "/elements/CSFPart": "/schema/",
+  "/elements/CSFProperty": "/schema/",
+  "/elements/Link": "/schema/",
+  "/elements/Role": "/schema/",
+  "/elements/Party": "/schema/",
+  "/elements/Address": "/schema/",
+  "/elements/ResponsibleParty": "/schema/",
+  "/elements/BackMatter": "/schema/",
+  "/elements/Resource": "/schema/",
+  "/elements/ResourceLink": "/schema/",
+  "/elements/CSFElementClassValue": "/schema/",
+  "/elements/[...slug]": "/schema/[...slug]",
+  "/about": "/docs/about/",
+};
 
 // A Keep a Changelog file, read as a page per release. "auto" takes
 // CHANGELOG.md when it holds a released version.
