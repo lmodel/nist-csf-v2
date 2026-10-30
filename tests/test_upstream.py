@@ -14,6 +14,7 @@ import json
 from functools import lru_cache
 from pathlib import Path
 
+import pytest
 import yaml
 from linkml.validator import validate
 
@@ -21,6 +22,7 @@ ROOT = Path(__file__).parent.parent
 SCHEMA = ROOT / "src" / "nist_csf_v2" / "schema" / "nist_csf_v2.yaml"
 COPY = ROOT / "src" / "nist_csf_v2" / "schema" / "oscal-content"
 CATALOG = COPY / "NIST_CSF_v2.0_catalog.json"
+VALID = ROOT / "tests" / "data" / "valid"
 
 # What CSF 2.0 holds, by CSWP 29's Appendix A: six functions, 22 categories
 # and 106 subcategories, with the 363 implementation examples NIST publishes
@@ -38,7 +40,7 @@ COUNTS = {
     "incorporations": 110,
 }
 FUNCTIONS = ["GV", "ID", "PR", "DE", "RS", "RC"]
-# Table 1 of CSWP 29's Appendix A, in the publication's order.
+# Table 1 of CSWP 29's Appendix A.
 CATEGORIES = [
     "GV.OC", "GV.RM", "GV.RR", "GV.PO", "GV.OV", "GV.SC",
     "ID.AM", "ID.RA", "ID.IM",
@@ -53,6 +55,20 @@ WITHDRAWN_WITHOUT_DESTINATION = {"PR.IP", "PR.PT", "DE.DP", "RS.RP"}
 # does not carry and the schema leaves out: how many CSF 2.0 subcategories
 # carry each, and how many carry none.
 MARKINGS = {"1st": 88, "3rd": 37, "unmarked subcategories": 3}
+# The key that holds each kind of element's identifier, and the keys that
+# hold the elements one element holds.
+ID_KEYS = (
+    "csf_function_id",
+    "csf_category_id",
+    "csf_subcategory_id",
+    "csf_implementation_example_id",
+)
+CHILD_KEYS = (
+    "csf_functions",
+    "function_categories",
+    "category_subcategories",
+    "subcategory_examples",
+)
 
 
 def _watch():
@@ -167,6 +183,24 @@ def _categories():
 
 def _subcategories():
     return [s for c in _categories() for s in c["category_subcategories"]]
+
+
+@lru_cache(maxsize=1)
+def _elements():
+    """Every element of the derived framework by its identifier, with the
+    identifier of the element that holds it, or None for a function."""
+    found = {}
+
+    def walk(entry, parent):
+        key = next(k for k in ID_KEYS if k in entry)
+        found[entry[key]] = (entry, parent)
+        for child_key in CHILD_KEYS:
+            for child in entry.get(child_key, []):
+                walk(child, entry[key])
+
+    for function in _framework()["csf_functions"]:
+        walk(function, None)
+    return found
 
 
 def _live(entries, noun):
@@ -317,6 +351,38 @@ def test_withdrawn_elements_state_their_destination():
         ), category["csf_category_id"]
     for category in _live(categories, "category"):
         assert category["description"], category["csf_category_id"]
+
+
+@pytest.mark.parametrize(
+    "path", sorted(VALID.glob("*.yaml")), ids=lambda path: path.name
+)
+def test_valid_examples_state_what_the_catalog_states(path):
+    """A valid example that names an element of NIST's catalog says what the
+    catalog says about it: what holds it, its title, whether it is withdrawn,
+    and where it moved or what incorporated it. An example's descriptions
+    paraphrase NIST's text, so they are not compared, and an identifier the
+    catalog does not hold is not checked."""
+    elements = _elements()
+
+    def check(entry, parent):
+        key = next((k for k in ID_KEYS if k in entry), None)
+        ident = entry[key] if key else None
+        if ident in elements:
+            theirs, their_parent = elements[ident]
+            if parent is not None:
+                assert parent == their_parent, (ident, their_parent)
+            if "title" in entry:
+                assert entry["title"] == theirs.get("title"), ident
+            for k in entry.keys() | theirs.keys():
+                if k.endswith("_status"):
+                    assert entry.get(k) == theirs.get(k), (ident, k)
+                elif k.endswith(("_moved_to", "_incorporated_into")) and k in entry:
+                    assert entry[k] == theirs.get(k), (ident, k)
+        for child_key in CHILD_KEYS:
+            for child in entry.get(child_key, []):
+                check(child, ident)
+
+    check(yaml.safe_load(path.read_text()), None)
 
 
 def test_examples_belong_to_the_current_edition():
