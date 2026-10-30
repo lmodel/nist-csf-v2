@@ -139,3 +139,18 @@ def test_mappings_use_a_bound_prefix():
     for mapping in mappings:
         prefix, sep, _ = mapping.partition(":")
         assert sep and prefix in prefixes, mapping
+
+
+def test_oscal_mappings_name_an_oscal_class():
+    """Every `oscal:` mapping in the copy names a class of the released oscal
+    copy: its class_uri, or `oscal:<Name>` for a class that declares none."""
+    doc = yaml.safe_load(COPY.read_text())
+    oscal = yaml.safe_load((NEIGHBOUR_DIR / "oscal.yaml").read_text())
+    iris = {
+        (cls or {}).get("class_uri") or f"oscal:{name}"
+        for name, cls in oscal["classes"].items()
+    }
+    mappings = [m for m in _mappings(doc) if m.startswith("oscal:")]
+    assert mappings
+    for mapping in mappings:
+        assert mapping in iris, mapping
