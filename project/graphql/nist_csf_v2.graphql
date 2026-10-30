@@ -9,7 +9,7 @@ type CsfCategory
   {
     title: String
     description: String
-    categoryId: CsfCategoryIdentifier!
+    csfCategoryId: CsfCategoryIdentifier!
     categorySubcategories: [CsfSubcategory]
     categoryStatus: CsfElementStatus
     categoryMovedTo: [CsfCategoryIdentifier]
@@ -19,27 +19,27 @@ type CsfCategory
 type CsfFramework
   {
     csfVersion: String!
-    functions: [CsfFunction]!
+    csfFunctions: [CsfFunction]!
   }
 
 type CsfFunction
   {
     title: String
     description: String
-    functionId: CsfFunctionIdentifier!
+    csfFunctionId: CsfFunctionIdentifier!
     functionCategories: [CsfCategory]
   }
 
 type CsfImplementationExample
   {
     description: String!
-    implementationExampleId: CsfImplementationExampleIdentifier!
+    csfImplementationExampleId: CsfImplementationExampleIdentifier!
   }
 
 type CsfSubcategory
   {
     description: String!
-    subcategoryId: CsfSubcategoryIdentifier!
+    csfSubcategoryId: CsfSubcategoryIdentifier!
     subcategoryExamples: [CsfImplementationExample]
     subcategoryStatus: CsfElementStatus
     subcategoryMovedTo: [CsfSubcategoryIdentifier]

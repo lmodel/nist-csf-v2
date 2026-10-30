@@ -13,7 +13,7 @@ import lombok.*;
 public class CsfSubcategory  {
 
   private String description;
-  private String subcategoryId;
+  private String csfSubcategoryId;
   private List<CsfImplementationExample> subcategoryExamples;
   private String subcategoryStatus;
   private List<String> subcategoryMovedTo;

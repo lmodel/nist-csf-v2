@@ -100,7 +100,7 @@ classes:
         description: The CSF edition, as NIST numbers it in the publication's title, such as 2.0.
         required: true
         pattern: ^[0-9]+\.[0-9]+$
-      functions:
+      csf_functions:
         description: The six functions, in the order CSWP 29 gives them.
         range: CsfFunction
         required: true
@@ -120,7 +120,7 @@ classes:
     - title
     - description
     attributes:
-      function_id:
+      csf_function_id:
         description: The function's two letters, such as GV for GOVERN.
         range: csf_function_identifier
         required: true
@@ -153,7 +153,7 @@ classes:
     - title
     - description
     attributes:
-      category_id:
+      csf_category_id:
         description: The category's identifier, such as GV.OC.
         range: csf_category_identifier
         required: true
@@ -204,7 +204,7 @@ classes:
         required: true
         range: string
     attributes:
-      subcategory_id:
+      csf_subcategory_id:
         description: The subcategory's identifier, such as GV.OC-01.
         range: csf_subcategory_identifier
         required: true
@@ -247,7 +247,7 @@ classes:
         required: true
         range: string
     attributes:
-      implementation_example_id:
+      csf_implementation_example_id:
         description: The example's identifier in NIST's reference data, such as GV.OC-01.001 for the first
           example of subcategory GV.OC-01.
         range: csf_implementation_example_identifier

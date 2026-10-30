@@ -4,11 +4,6 @@
             "additionalProperties": false,
             "description": "A group of related cybersecurity outcomes within a function, such as Organizational Context (GV.OC), or a CSF 1.1 category that CSF 2.0 withdrew, which the catalog keeps with its status and, where NIST recorded it, where it moved or what incorporated it.",
             "properties": {
-                "category_id": {
-                    "description": "The category's identifier, such as GV.OC.",
-                    "pattern": "^(GV|ID|PR|DE|RS|RC)\\.[A-Z]{2}$",
-                    "type": "string"
-                },
                 "category_incorporated_into": {
                     "description": "The function, category or subcategory of CSF 2.0 that took in a withdrawn category's outcomes, as the catalog states it, such as GV.OC for ID.BE. The catalog names none for some withdrawn categories.",
                     "items": {
@@ -45,6 +40,11 @@
                         "null"
                     ]
                 },
+                "csf_category_id": {
+                    "description": "The category's identifier, such as GV.OC.",
+                    "pattern": "^(GV|ID|PR|DE|RS|RC)\\.[A-Z]{2}$",
+                    "type": "string"
+                },
                 "description": {
                     "description": "What the function, category, subcategory or example says, in the words of whoever records it.",
                     "type": [
@@ -61,7 +61,7 @@
                 }
             },
             "required": [
-                "category_id"
+                "csf_category_id"
             ],
             "title": "CsfCategory",
             "type": "object"
@@ -78,22 +78,22 @@
             "additionalProperties": false,
             "description": "One edition of the CSF as a whole: its functions, each holding its categories and their subcategories.",
             "properties": {
-                "csf_version": {
-                    "description": "The CSF edition, as NIST numbers it in the publication's title, such as 2.0.",
-                    "pattern": "^[0-9]+\\.[0-9]+$",
-                    "type": "string"
-                },
-                "functions": {
+                "csf_functions": {
                     "description": "The six functions, in the order CSWP 29 gives them.",
                     "items": {
                         "$ref": "#/$defs/CsfFunction"
                     },
                     "type": "array"
+                },
+                "csf_version": {
+                    "description": "The CSF edition, as NIST numbers it in the publication's title, such as 2.0.",
+                    "pattern": "^[0-9]+\\.[0-9]+$",
+                    "type": "string"
                 }
             },
             "required": [
                 "csf_version",
-                "functions"
+                "csf_functions"
             ],
             "title": "CsfFramework",
             "type": "object"
@@ -102,6 +102,11 @@
             "additionalProperties": false,
             "description": "One of the six functions that sort the CSF's outcomes at the highest level: GOVERN, IDENTIFY, PROTECT, DETECT, RESPOND and RECOVER. Each is named by two letters and described in a sentence.",
             "properties": {
+                "csf_function_id": {
+                    "description": "The function's two letters, such as GV for GOVERN.",
+                    "pattern": "^(GV|ID|PR|DE|RS|RC)$",
+                    "type": "string"
+                },
                 "description": {
                     "description": "What the function, category, subcategory or example says, in the words of whoever records it.",
                     "type": [
@@ -119,11 +124,6 @@
                         "null"
                     ]
                 },
-                "function_id": {
-                    "description": "The function's two letters, such as GV for GOVERN.",
-                    "pattern": "^(GV|ID|PR|DE|RS|RC)$",
-                    "type": "string"
-                },
                 "title": {
                     "description": "The name CSWP 29 gives the function or category.",
                     "type": [
@@ -133,7 +133,7 @@
                 }
             },
             "required": [
-                "function_id"
+                "csf_function_id"
             ],
             "title": "CsfFunction",
             "type": "object"
@@ -142,19 +142,19 @@
             "additionalProperties": false,
             "description": "An implementation example: one concise, action-oriented step that could help achieve a subcategory's outcome. NIST publishes the examples beside the Core, in its reference tool and its catalog, not in CSWP 29 itself.",
             "properties": {
-                "description": {
-                    "description": "What the function, category, subcategory or example says, in the words of whoever records it.",
-                    "type": "string"
-                },
-                "implementation_example_id": {
+                "csf_implementation_example_id": {
                     "description": "The example's identifier in NIST's reference data, such as GV.OC-01.001 for the first example of subcategory GV.OC-01.",
                     "pattern": "^(GV|ID|PR|DE|RS|RC)\\.[A-Z]{2}-[0-9]{2}\\.[0-9]{3}$",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "What the function, category, subcategory or example says, in the words of whoever records it.",
                     "type": "string"
                 }
             },
             "required": [
                 "description",
-                "implementation_example_id"
+                "csf_implementation_example_id"
             ],
             "title": "CsfImplementationExample",
             "type": "object"
@@ -163,6 +163,11 @@
             "additionalProperties": false,
             "description": "A cybersecurity outcome: one statement of a result within a category, such as GV.OC-01, or a CSF 1.1 subcategory that CSF 2.0 withdrew, which the catalog keeps with its statement, its status and where it moved or what incorporated it.",
             "properties": {
+                "csf_subcategory_id": {
+                    "description": "The subcategory's identifier, such as GV.OC-01.",
+                    "pattern": "^(GV|ID|PR|DE|RS|RC)\\.[A-Z]{2}-[0-9]{2}$",
+                    "type": "string"
+                },
                 "description": {
                     "description": "What the function, category, subcategory or example says, in the words of whoever records it.",
                     "type": "string"
@@ -176,11 +181,6 @@
                         "array",
                         "null"
                     ]
-                },
-                "subcategory_id": {
-                    "description": "The subcategory's identifier, such as GV.OC-01.",
-                    "pattern": "^(GV|ID|PR|DE|RS|RC)\\.[A-Z]{2}-[0-9]{2}$",
-                    "type": "string"
                 },
                 "subcategory_incorporated_into": {
                     "description": "The CSF 2.0 category or subcategory that took in a withdrawn subcategory's outcome, as the catalog states it, such as GV.OC-01 for ID.BE-02.",
@@ -211,7 +211,7 @@
             },
             "required": [
                 "description",
-                "subcategory_id"
+                "csf_subcategory_id"
             ],
             "title": "CsfSubcategory",
             "type": "object"
@@ -223,22 +223,22 @@
     "description": "One edition of the CSF as a whole: its functions, each holding its categories and their subcategories.",
     "metamodel_version": "1.7.0",
     "properties": {
-        "csf_version": {
-            "description": "The CSF edition, as NIST numbers it in the publication's title, such as 2.0.",
-            "pattern": "^[0-9]+\\.[0-9]+$",
-            "type": "string"
-        },
-        "functions": {
+        "csf_functions": {
             "description": "The six functions, in the order CSWP 29 gives them.",
             "items": {
                 "$ref": "#/$defs/CsfFunction"
             },
             "type": "array"
+        },
+        "csf_version": {
+            "description": "The CSF edition, as NIST numbers it in the publication's title, such as 2.0.",
+            "pattern": "^[0-9]+\\.[0-9]+$",
+            "type": "string"
         }
     },
     "required": [
         "csf_version",
-        "functions"
+        "csf_functions"
     ],
     "title": "nist_csf_v2",
     "type": "object",

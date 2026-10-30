@@ -7,7 +7,7 @@ message CsfCategory
  {
   string title = 0
   string description = 0
-  csfCategoryIdentifier categoryId = 0
+  csfCategoryIdentifier csfCategoryId = 0
  repeated  csfSubcategory categorySubcategories = 0
   csfElementStatus categoryStatus = 0
  repeated  csfCategoryIdentifier categoryMovedTo = 0
@@ -17,27 +17,27 @@ message CsfCategory
 message CsfFramework
  {
   string csfVersion = 0
- repeated  csfFunction functions = 0
+ repeated  csfFunction csfFunctions = 0
  }
 // One of the six functions that sort the CSF's outcomes at the highest level: GOVERN, IDENTIFY, PROTECT, DETECT, RESPOND and RECOVER. Each is named by two letters and described in a sentence.
 message CsfFunction
  {
   string title = 0
   string description = 0
-  csfFunctionIdentifier functionId = 0
+  csfFunctionIdentifier csfFunctionId = 0
  repeated  csfCategory functionCategories = 0
  }
 // An implementation example: one concise, action-oriented step that could help achieve a subcategory's outcome. NIST publishes the examples beside the Core, in its reference tool and its catalog, not in CSWP 29 itself.
 message CsfImplementationExample
  {
   string description = 0
-  csfImplementationExampleIdentifier implementationExampleId = 0
+  csfImplementationExampleIdentifier csfImplementationExampleId = 0
  }
 // A cybersecurity outcome: one statement of a result within a category, such as GV.OC-01, or a CSF 1.1 subcategory that CSF 2.0 withdrew, which the catalog keeps with its statement, its status and where it moved or what incorporated it.
 message CsfSubcategory
  {
   string description = 0
-  csfSubcategoryIdentifier subcategoryId = 0
+  csfSubcategoryIdentifier csfSubcategoryId = 0
  repeated  csfImplementationExample subcategoryExamples = 0
   csfElementStatus subcategoryStatus = 0
  repeated  csfSubcategoryIdentifier subcategoryMovedTo = 0

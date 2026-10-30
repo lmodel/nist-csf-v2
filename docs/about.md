@@ -12,7 +12,10 @@ each a class, and holds them in one framework document.
 
 Element names are the schema's own. Classes carry the `Csf` prefix
 (`CsfCategory`, `CsfSubcategory`) so they can be imported beside other
-vocabularies. Slots are snake_case. The identifiers keep the form that the
+vocabularies. Slots are snake_case. The keys that hold the functions and the
+identifiers carry a `csf_` prefix (`csf_functions`, `csf_category_id`),
+because other NIST frameworks also have functions, categories and
+subcategories. The identifiers keep the form that the
 National Institute of Standards and Technology (NIST) gives them, such as
 `GV.OC-01`, and the example identifiers the form of NIST's reference data,
 such as `GV.OC-01.001`. The one enum, `CsfElementStatus`, has the one value

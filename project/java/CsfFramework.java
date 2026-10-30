@@ -13,6 +13,6 @@ import lombok.*;
 public class CsfFramework  {
 
   private String csfVersion;
-  private List<CsfFunction> functions;
+  private List<CsfFunction> csfFunctions;
 
 }

@@ -1,11 +1,11 @@
 # Subcategory GV.OC-01 with its one implementation example. The text
 # paraphrases CSWP 29 and NIST's examples.
-subcategory_id: GV.OC-01
+csf_subcategory_id: GV.OC-01
 description: >-
   The organization understands its mission, and that understanding informs
   how it manages cybersecurity risk.
 subcategory_examples:
-  - implementation_example_id: GV.OC-01.001
+  - csf_implementation_example_id: GV.OC-01.001
     description: >-
       Share the mission, for example through mission statements and service
       strategies, so that risks to it can be identified.

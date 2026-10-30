@@ -13,6 +13,6 @@ import lombok.*;
 public class CsfImplementationExample  {
 
   private String description;
-  private String implementationExampleId;
+  private String csfImplementationExampleId;
 
 }

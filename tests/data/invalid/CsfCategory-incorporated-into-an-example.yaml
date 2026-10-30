@@ -1,6 +1,6 @@
 # Invalid: a category is incorporated into a function, a category or a
 # subcategory, never an implementation example.
-category_id: ID.BE
+csf_category_id: ID.BE
 category_status: withdrawn
 category_incorporated_into:
   - GV.OC-01.001

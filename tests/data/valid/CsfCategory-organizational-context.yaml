@@ -1,6 +1,6 @@
 # Category GV.OC with one of its subcategories inlined, as the framework
 # document holds it. The descriptions paraphrase CSWP 29.
-category_id: GV.OC
+csf_category_id: GV.OC
 title: Organizational Context
 description: >-
   The organization understands the circumstances that surround its
@@ -8,7 +8,7 @@ description: >-
   what it depends on, and the legal, regulatory and contractual requirements
   it is under.
 category_subcategories:
-  - subcategory_id: GV.OC-02
+  - csf_subcategory_id: GV.OC-02
     description: >-
       The organization understands its internal and external stakeholders
       and takes their needs and expectations into account.

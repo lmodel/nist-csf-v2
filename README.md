@@ -81,7 +81,7 @@ Run `just` to list the project's [just](https://github.com/casey/just/) recipes.
 CsfFunction, CsfCategory, CsfSubcategory
 ```
 
-A concept writes the CSF identifier in `function_id`, `category_id` or `subcategory_id`. A subcategory's concept names its category's concept in `isPartOf`, and a category's concept names its function's. A name and a description are the concept's own `title` and `description`.
+A concept writes the CSF identifier in `csf_function_id`, `csf_category_id` or `csf_subcategory_id`. A subcategory's concept names its category's concept in `isPartOf`, and a category's concept names its function's. A name and a description are the concept's own `title` and `description`.
 
 A host imports the copy beside LOKF's schema, `lokf.yaml`, and beside other adapt copies. LinkML merges them into one namespace, where the last definition of a name wins silently. So no class, enum or type shares a name with LOKF's or with the copies of slsa, github-actions, oscal, spdx and nist-sp-800-218. A slot shares a name only where it carries LOKF's meaning and Internationalized Resource Identifier (IRI), as `title` and `description` do, so `lokf adapt` folds the two into LOKF's and renames nothing. The copy shares no other key with the five neighbours, and `tests/test_schema_rules.py` fails on a new shared name.
 

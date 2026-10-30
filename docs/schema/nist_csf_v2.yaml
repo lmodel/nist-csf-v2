@@ -452,12 +452,12 @@ slots:
     range: string
     required: true
     pattern: ^[0-9]+\.[0-9]+$
-  csfFramework__functions:
-    name: csfFramework__functions
+  csfFramework__csf_functions:
+    name: csfFramework__csf_functions
     description: The six functions, in the order CSWP 29 gives them.
     from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:functions
-    alias: functions
+    slot_uri: nist_csf_v2:csf_functions
+    alias: csf_functions
     owner: CsfFramework
     domain_of:
     - CsfFramework
@@ -466,12 +466,12 @@ slots:
     multivalued: true
     inlined: true
     inlined_as_list: true
-  csfFunction__function_id:
-    name: csfFunction__function_id
+  csfFunction__csf_function_id:
+    name: csfFunction__csf_function_id
     description: The function's two letters, such as GV for GOVERN.
     from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:function_id
-    alias: function_id
+    slot_uri: nist_csf_v2:csf_function_id
+    alias: csf_function_id
     owner: CsfFunction
     domain_of:
     - CsfFunction
@@ -491,12 +491,12 @@ slots:
     multivalued: true
     inlined: true
     inlined_as_list: true
-  csfCategory__category_id:
-    name: csfCategory__category_id
+  csfCategory__csf_category_id:
+    name: csfCategory__csf_category_id
     description: The category's identifier, such as GV.OC.
     from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:category_id
-    alias: category_id
+    slot_uri: nist_csf_v2:csf_category_id
+    alias: csf_category_id
     owner: CsfCategory
     domain_of:
     - CsfCategory
@@ -552,12 +552,12 @@ slots:
     - CsfCategory
     range: csf_element_identifier
     multivalued: true
-  csfSubcategory__subcategory_id:
-    name: csfSubcategory__subcategory_id
+  csfSubcategory__csf_subcategory_id:
+    name: csfSubcategory__csf_subcategory_id
     description: The subcategory's identifier, such as GV.OC-01.
     from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:subcategory_id
-    alias: subcategory_id
+    slot_uri: nist_csf_v2:csf_subcategory_id
+    alias: csf_subcategory_id
     owner: CsfSubcategory
     domain_of:
     - CsfSubcategory
@@ -614,13 +614,13 @@ slots:
     - CsfSubcategory
     range: csf_element_identifier
     multivalued: true
-  csfImplementationExample__implementation_example_id:
-    name: csfImplementationExample__implementation_example_id
+  csfImplementationExample__csf_implementation_example_id:
+    name: csfImplementationExample__csf_implementation_example_id
     description: The example's identifier in NIST's reference data, such as GV.OC-01.001
       for the first example of subcategory GV.OC-01.
     from_schema: https://w3id.org/lmodel/nist-csf-v2
-    slot_uri: nist_csf_v2:implementation_example_id
-    alias: implementation_example_id
+    slot_uri: nist_csf_v2:csf_implementation_example_id
+    alias: csf_implementation_example_id
     owner: CsfImplementationExample
     domain_of:
     - CsfImplementationExample
@@ -685,7 +685,7 @@ classes:
     - oscal:Catalog
     slots:
     - csfFramework__csf_version
-    - csfFramework__functions
+    - csfFramework__csf_functions
     attributes:
       csf_version:
         name: csf_version
@@ -693,8 +693,8 @@ classes:
           such as 2.0.
         required: true
         pattern: ^[0-9]+\.[0-9]+$
-      functions:
-        name: functions
+      csf_functions:
+        name: csf_functions
         description: The six functions, in the order CSWP 29 gives them.
         range: CsfFunction
         required: true
@@ -719,11 +719,11 @@ classes:
     slots:
     - title
     - description
-    - csfFunction__function_id
+    - csfFunction__csf_function_id
     - csfFunction__function_categories
     attributes:
-      function_id:
-        name: function_id
+      csf_function_id:
+        name: csf_function_id
         description: The function's two letters, such as GV for GOVERN.
         range: csf_function_identifier
         required: true
@@ -756,14 +756,14 @@ classes:
     slots:
     - title
     - description
-    - csfCategory__category_id
+    - csfCategory__csf_category_id
     - csfCategory__category_subcategories
     - csfCategory__category_status
     - csfCategory__category_moved_to
     - csfCategory__category_incorporated_into
     attributes:
-      category_id:
-        name: category_id
+      csf_category_id:
+        name: csf_category_id
         description: The category's identifier, such as GV.OC.
         range: csf_category_identifier
         required: true
@@ -813,7 +813,7 @@ classes:
     - oscal:Control
     slots:
     - CsfSubcategory_description
-    - csfSubcategory__subcategory_id
+    - csfSubcategory__csf_subcategory_id
     - csfSubcategory__subcategory_examples
     - csfSubcategory__subcategory_status
     - csfSubcategory__subcategory_moved_to
@@ -823,8 +823,8 @@ classes:
         name: description
         required: true
     attributes:
-      subcategory_id:
-        name: subcategory_id
+      csf_subcategory_id:
+        name: csf_subcategory_id
         description: The subcategory's identifier, such as GV.OC-01.
         range: csf_subcategory_identifier
         required: true
@@ -871,14 +871,14 @@ classes:
     - oscal:Part
     slots:
     - CsfImplementationExample_description
-    - csfImplementationExample__implementation_example_id
+    - csfImplementationExample__csf_implementation_example_id
     slot_usage:
       description:
         name: description
         required: true
     attributes:
-      implementation_example_id:
-        name: implementation_example_id
+      csf_implementation_example_id:
+        name: csf_implementation_example_id
         description: The example's identifier in NIST's reference data, such as GV.OC-01.001
           for the first example of subcategory GV.OC-01.
         range: csf_implementation_example_identifier
@@ -886,7 +886,7 @@ classes:
     class_uri: nist_csf_v2:ImplementationExample
 metamodel_version: 1.7.0
 source_file: nist_csf_v2.yaml
-source_file_date: '2026-10-29T21:21:20'
-source_file_size: 12306
-generation_date: '2026-10-29T21:21:47'
+source_file_date: '2026-10-30T08:16:43'
+source_file_size: 12326
+generation_date: '2026-10-30T08:17:15'
 

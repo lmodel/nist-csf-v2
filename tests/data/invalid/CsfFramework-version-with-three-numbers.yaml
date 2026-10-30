@@ -1,4 +1,4 @@
 # Invalid: NIST numbers CSF editions with two numbers, such as 2.0.
 csf_version: "2.0.0"
-functions:
-  - function_id: GV
+csf_functions:
+  - csf_function_id: GV

@@ -14,7 +14,7 @@ public class CsfFunction  {
 
   private String title;
   private String description;
-  private String functionId;
+  private String csfFunctionId;
   private List<CsfCategory> functionCategories;
 
 }

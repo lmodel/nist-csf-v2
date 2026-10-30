@@ -118,7 +118,7 @@ def derive(catalog):
         categories = []
         for category in group["controls"]:
             assert category["class"] == "category", category["id"]
-            entry = {"category_id": category["id"], "title": category["title"]}
+            entry = {"csf_category_id": category["id"], "title": category["title"]}
             statement = _prose(category, "statement")
             if statement:
                 entry["description"] = statement
@@ -132,12 +132,12 @@ def derive(catalog):
                         assert part["class"] == "example", part["id"]
                         examples.append(
                             {
-                                "implementation_example_id": part["id"],
+                                "csf_implementation_example_id": part["id"],
                                 "description": part["prose"],
                             }
                         )
                 item = {
-                    "subcategory_id": subcategory["id"],
+                    "csf_subcategory_id": subcategory["id"],
                     "description": _prose(subcategory, "statement"),
                     "subcategory_examples": examples,
                 }
@@ -147,13 +147,13 @@ def derive(catalog):
             categories.append(entry)
         functions.append(
             {
-                "function_id": group["id"],
+                "csf_function_id": group["id"],
                 "title": group["title"],
                 "description": _prose(group, "overview"),
                 "function_categories": categories,
             }
         )
-    return {"csf_version": ".".join(version.split(".")[:2]), "functions": functions}
+    return {"csf_version": ".".join(version.split(".")[:2]), "csf_functions": functions}
 
 
 @lru_cache(maxsize=1)
@@ -162,7 +162,7 @@ def _framework():
 
 
 def _categories():
-    return [c for f in _framework()["functions"] for c in f["function_categories"]]
+    return [c for f in _framework()["csf_functions"] for c in f["function_categories"]]
 
 
 def _subcategories():
@@ -226,7 +226,7 @@ def test_counts_match_the_publication():
         subcategories, "subcategory"
     )
     counted = {
-        "functions": len(_framework()["functions"]),
+        "functions": len(_framework()["csf_functions"]),
         "categories": len(_live(categories, "category")),
         "subcategories": len(_live(subcategories, "subcategory")),
         "implementation examples": sum(
@@ -255,8 +255,8 @@ def test_counts_match_the_publication():
 def test_functions_and_categories_are_the_publications():
     """The functions are the six of CSWP 29 in its order, and the CSF 2.0
     categories are the 22 of its Table 1."""
-    assert [f["function_id"] for f in _framework()["functions"]] == FUNCTIONS
-    live = {c["category_id"] for c in _live(_categories(), "category")}
+    assert [f["csf_function_id"] for f in _framework()["csf_functions"]] == FUNCTIONS
+    live = {c["csf_category_id"] for c in _live(_categories(), "category")}
     assert live == set(CATEGORIES)
 
 
@@ -264,21 +264,23 @@ def test_identifiers_nest_and_are_unique():
     """Each identifier starts with the identifier of what holds it, which no
     pattern in the schema can check, and none repeats."""
     seen = []
-    for function in _framework()["functions"]:
-        seen.append(function["function_id"])
+    for function in _framework()["csf_functions"]:
+        seen.append(function["csf_function_id"])
         for category in function["function_categories"]:
-            assert category["category_id"].startswith(function["function_id"] + ".")
-            seen.append(category["category_id"])
+            assert category["csf_category_id"].startswith(
+                function["csf_function_id"] + "."
+            )
+            seen.append(category["csf_category_id"])
             for subcategory in category["category_subcategories"]:
-                assert subcategory["subcategory_id"].startswith(
-                    category["category_id"] + "-"
+                assert subcategory["csf_subcategory_id"].startswith(
+                    category["csf_category_id"] + "-"
                 )
-                seen.append(subcategory["subcategory_id"])
+                seen.append(subcategory["csf_subcategory_id"])
                 for example in subcategory["subcategory_examples"]:
-                    assert example["implementation_example_id"].startswith(
-                        subcategory["subcategory_id"] + "."
+                    assert example["csf_implementation_example_id"].startswith(
+                        subcategory["csf_subcategory_id"] + "."
                     )
-                    seen.append(example["implementation_example_id"])
+                    seen.append(example["csf_implementation_example_id"])
     assert len(seen) == len(set(seen))
 
 
@@ -289,39 +291,41 @@ def test_withdrawn_elements_state_their_destination():
     CSF 2.0 names no destination. A withdrawn category holds only withdrawn
     subcategories and has no statement of its own; a category of CSF 2.0 may
     keep a withdrawn subcategory, as ID.AM keeps ID.AM-06."""
-    functions = _framework()["functions"]
+    functions = _framework()["csf_functions"]
     categories, subcategories = _categories(), _subcategories()
-    live = {f["function_id"] for f in functions}
-    live |= {c["category_id"] for c in _live(categories, "category")}
-    live |= {s["subcategory_id"] for s in _live(subcategories, "subcategory")}
+    live = {f["csf_function_id"] for f in functions}
+    live |= {c["csf_category_id"] for c in _live(categories, "category")}
+    live |= {s["csf_subcategory_id"] for s in _live(subcategories, "subcategory")}
     for noun, entries in (("category", categories), ("subcategory", subcategories)):
         for entry in entries:
             moved = entry.get(f"{noun}_moved_to", [])
             incorporated = entry.get(f"{noun}_incorporated_into", [])
-            assert not (moved and incorporated), entry[f"{noun}_id"]
-            assert set(moved + incorporated) <= live, entry[f"{noun}_id"]
+            assert not (moved and incorporated), entry[f"csf_{noun}_id"]
+            assert set(moved + incorporated) <= live, entry[f"csf_{noun}_id"]
             if entry.get(f"{noun}_status") == "withdrawn":
-                if entry[f"{noun}_id"] in WITHDRAWN_WITHOUT_DESTINATION:
-                    assert not moved and not incorporated, entry[f"{noun}_id"]
+                if entry[f"csf_{noun}_id"] in WITHDRAWN_WITHOUT_DESTINATION:
+                    assert not moved and not incorporated, entry[f"csf_{noun}_id"]
                 else:
-                    assert moved or incorporated, entry[f"{noun}_id"]
+                    assert moved or incorporated, entry[f"csf_{noun}_id"]
             else:
-                assert not moved and not incorporated, entry[f"{noun}_id"]
+                assert not moved and not incorporated, entry[f"csf_{noun}_id"]
     for category in _withdrawn(categories, "category"):
-        assert "description" not in category, category["category_id"]
+        assert "description" not in category, category["csf_category_id"]
         assert all(
             s.get("subcategory_status") == "withdrawn"
             for s in category["category_subcategories"]
-        ), category["category_id"]
+        ), category["csf_category_id"]
     for category in _live(categories, "category"):
-        assert category["description"], category["category_id"]
+        assert category["description"], category["csf_category_id"]
 
 
 def test_examples_belong_to_the_current_edition():
     """Every implementation example sits under a subcategory of CSF 2.0,
     none under a withdrawn one."""
     for subcategory in _withdrawn(_subcategories(), "subcategory"):
-        assert not subcategory["subcategory_examples"], subcategory["subcategory_id"]
+        assert not subcategory["subcategory_examples"], subcategory[
+            "csf_subcategory_id"
+        ]
 
 
 def test_risk_party_markings_are_left_out():

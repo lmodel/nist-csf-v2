@@ -14,7 +14,7 @@ public class CsfCategory  {
 
   private String title;
   private String description;
-  private String categoryId;
+  private String csfCategoryId;
   private List<CsfSubcategory> categorySubcategories;
   private String categoryStatus;
   private List<String> categoryMovedTo;

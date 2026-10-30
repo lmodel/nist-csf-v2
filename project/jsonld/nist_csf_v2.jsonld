@@ -504,11 +504,11 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "csfFramework__functions",
+      "name": "csfFramework__csf_functions",
       "description": "The six functions, in the order CSWP 29 gives them.",
       "from_schema": "https://w3id.org/lmodel/nist-csf-v2",
-      "slot_uri": "https://w3id.org/lmodel/nist-csf-v2/functions",
-      "alias": "functions",
+      "slot_uri": "https://w3id.org/lmodel/nist-csf-v2/csf_functions",
+      "alias": "csf_functions",
       "owner": "CsfFramework",
       "domain_of": [
         "CsfFramework"
@@ -521,11 +521,11 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "csfFunction__function_id",
+      "name": "csfFunction__csf_function_id",
       "description": "The function's two letters, such as GV for GOVERN.",
       "from_schema": "https://w3id.org/lmodel/nist-csf-v2",
-      "slot_uri": "https://w3id.org/lmodel/nist-csf-v2/function_id",
-      "alias": "function_id",
+      "slot_uri": "https://w3id.org/lmodel/nist-csf-v2/csf_function_id",
+      "alias": "csf_function_id",
       "owner": "CsfFunction",
       "domain_of": [
         "CsfFunction"
@@ -551,11 +551,11 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "csfCategory__category_id",
+      "name": "csfCategory__csf_category_id",
       "description": "The category's identifier, such as GV.OC.",
       "from_schema": "https://w3id.org/lmodel/nist-csf-v2",
-      "slot_uri": "https://w3id.org/lmodel/nist-csf-v2/category_id",
-      "alias": "category_id",
+      "slot_uri": "https://w3id.org/lmodel/nist-csf-v2/csf_category_id",
+      "alias": "csf_category_id",
       "owner": "CsfCategory",
       "domain_of": [
         "CsfCategory"
@@ -622,11 +622,11 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "csfSubcategory__subcategory_id",
+      "name": "csfSubcategory__csf_subcategory_id",
       "description": "The subcategory's identifier, such as GV.OC-01.",
       "from_schema": "https://w3id.org/lmodel/nist-csf-v2",
-      "slot_uri": "https://w3id.org/lmodel/nist-csf-v2/subcategory_id",
-      "alias": "subcategory_id",
+      "slot_uri": "https://w3id.org/lmodel/nist-csf-v2/csf_subcategory_id",
+      "alias": "csf_subcategory_id",
       "owner": "CsfSubcategory",
       "domain_of": [
         "CsfSubcategory"
@@ -693,11 +693,11 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "csfImplementationExample__implementation_example_id",
+      "name": "csfImplementationExample__csf_implementation_example_id",
       "description": "The example's identifier in NIST's reference data, such as GV.OC-01.001 for the first example of subcategory GV.OC-01.",
       "from_schema": "https://w3id.org/lmodel/nist-csf-v2",
-      "slot_uri": "https://w3id.org/lmodel/nist-csf-v2/implementation_example_id",
-      "alias": "implementation_example_id",
+      "slot_uri": "https://w3id.org/lmodel/nist-csf-v2/csf_implementation_example_id",
+      "alias": "csf_implementation_example_id",
       "owner": "CsfImplementationExample",
       "domain_of": [
         "CsfImplementationExample"
@@ -774,7 +774,7 @@
       ],
       "slots": [
         "csfFramework__csf_version",
-        "csfFramework__functions"
+        "csfFramework__csf_functions"
       ],
       "slot_usage": {},
       "attributes": [
@@ -786,7 +786,7 @@
           "@type": "SlotDefinition"
         },
         {
-          "name": "functions",
+          "name": "csf_functions",
           "description": "The six functions, in the order CSWP 29 gives them.",
           "range": "CsfFunction",
           "required": true,
@@ -817,13 +817,13 @@
       "slots": [
         "title",
         "description",
-        "csfFunction__function_id",
+        "csfFunction__csf_function_id",
         "csfFunction__function_categories"
       ],
       "slot_usage": {},
       "attributes": [
         {
-          "name": "function_id",
+          "name": "csf_function_id",
           "description": "The function's two letters, such as GV for GOVERN.",
           "range": "csf_function_identifier",
           "required": true,
@@ -862,7 +862,7 @@
       "slots": [
         "title",
         "description",
-        "csfCategory__category_id",
+        "csfCategory__csf_category_id",
         "csfCategory__category_subcategories",
         "csfCategory__category_status",
         "csfCategory__category_moved_to",
@@ -871,7 +871,7 @@
       "slot_usage": {},
       "attributes": [
         {
-          "name": "category_id",
+          "name": "csf_category_id",
           "description": "The category's identifier, such as GV.OC.",
           "range": "csf_category_identifier",
           "required": true,
@@ -929,7 +929,7 @@
       ],
       "slots": [
         "CsfSubcategory_description",
-        "csfSubcategory__subcategory_id",
+        "csfSubcategory__csf_subcategory_id",
         "csfSubcategory__subcategory_examples",
         "csfSubcategory__subcategory_status",
         "csfSubcategory__subcategory_moved_to",
@@ -938,7 +938,7 @@
       "slot_usage": {},
       "attributes": [
         {
-          "name": "subcategory_id",
+          "name": "csf_subcategory_id",
           "description": "The subcategory's identifier, such as GV.OC-01.",
           "range": "csf_subcategory_identifier",
           "required": true,
@@ -993,12 +993,12 @@
       ],
       "slots": [
         "CsfImplementationExample_description",
-        "csfImplementationExample__implementation_example_id"
+        "csfImplementationExample__csf_implementation_example_id"
       ],
       "slot_usage": {},
       "attributes": [
         {
-          "name": "implementation_example_id",
+          "name": "csf_implementation_example_id",
           "description": "The example's identifier in NIST's reference data, such as GV.OC-01.001 for the first example of subcategory GV.OC-01.",
           "range": "csf_implementation_example_identifier",
           "required": true,
@@ -1011,9 +1011,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "nist_csf_v2.yaml",
-  "source_file_date": "2026-10-29T21:21:20",
-  "source_file_size": 12306,
-  "generation_date": "2026-10-29T21:21:41",
+  "source_file_date": "2026-10-30T08:16:43",
+  "source_file_size": 12326,
+  "generation_date": "2026-10-30T08:17:08",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/nist_csf_v2.context.jsonld",

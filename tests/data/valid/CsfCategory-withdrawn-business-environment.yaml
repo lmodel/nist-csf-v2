@@ -1,13 +1,13 @@
 # ID.BE, a CSF 1.1 category that CSF 2.0 withdrew, as the catalog states it:
 # withdrawn, incorporated into GV.OC, with no statement of its own and one
 # of its withdrawn subcategories inlined.
-category_id: ID.BE
+csf_category_id: ID.BE
 title: Business Environment
 category_status: withdrawn
 category_incorporated_into:
   - GV.OC
 category_subcategories:
-  - subcategory_id: ID.BE-02
+  - csf_subcategory_id: ID.BE-02
     description: >-
       The organization identifies and communicates its place in critical
       infrastructure and in its industry sector.

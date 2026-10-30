@@ -15,7 +15,7 @@ export interface CsfFramework {
     /** The CSF edition, as NIST numbers it in the publication's title, such as 2.0. */
     csf_version: string,
     /** The six functions, in the order CSWP 29 gives them. */
-    functions: CsfFunction[],
+    csf_functions: CsfFunction[],
 }
 
 
@@ -28,7 +28,7 @@ export interface CsfFunction {
     /** What the function, category, subcategory or example says, in the words of whoever records it. */
     description?: string,
     /** The function's two letters, such as GV for GOVERN. */
-    function_id: string,
+    csf_function_id: string,
     /** The categories of the function. A knowledge bundle relates a category to its function with isPartOf instead. */
     function_categories?: CsfCategory[],
 }
@@ -43,7 +43,7 @@ export interface CsfCategory {
     /** What the function, category, subcategory or example says, in the words of whoever records it. */
     description?: string,
     /** The category's identifier, such as GV.OC. */
-    category_id: string,
+    csf_category_id: string,
     /** The subcategories of the category. A knowledge bundle relates a subcategory to its category with isPartOf instead. */
     category_subcategories?: CsfSubcategory[],
     /** withdrawn for a CSF 1.1 category that CSF 2.0 withdrew. A category of CSF 2.0 has no status. */
@@ -62,7 +62,7 @@ export interface CsfSubcategory {
     /** What the function, category, subcategory or example says, in the words of whoever records it. */
     description: string,
     /** The subcategory's identifier, such as GV.OC-01. */
-    subcategory_id: string,
+    csf_subcategory_id: string,
     /** The implementation examples NIST publishes for the subcategory. CSWP 29 says they are notional, that none is required, and that they are not a complete list of what could be done. */
     subcategory_examples?: CsfImplementationExample[],
     /** withdrawn for a CSF 1.1 subcategory that CSF 2.0 withdrew. A subcategory of CSF 2.0 has no status. */
@@ -81,7 +81,7 @@ export interface CsfImplementationExample {
     /** What the function, category, subcategory or example says, in the words of whoever records it. */
     description: string,
     /** The example's identifier in NIST's reference data, such as GV.OC-01.001 for the first example of subcategory GV.OC-01. */
-    implementation_example_id: string,
+    csf_implementation_example_id: string,
 }
 
 

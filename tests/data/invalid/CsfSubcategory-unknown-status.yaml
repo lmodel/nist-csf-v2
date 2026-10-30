@@ -1,4 +1,4 @@
 # Invalid: the catalog's one status is withdrawn.
-subcategory_id: ID.BE-02
+csf_subcategory_id: ID.BE-02
 description: The organization identifies its place in critical infrastructure.
 subcategory_status: deprecated

@@ -1,3 +1,3 @@
 # Invalid: every class is closed, so a key the class does not declare fails.
-function_id: GV
+csf_function_id: GV
 label: GOVERN (GV)

@@ -1,3 +1,3 @@
 # Invalid: the catalog's one status is withdrawn.
-category_id: ID.BE
+csf_category_id: ID.BE
 category_status: retired

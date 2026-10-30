@@ -242,7 +242,7 @@ class CsfFramework(ConfiguredBaseModel):
          'tree_root': True})
 
     csf_version: str = Field(default=..., description="""The CSF edition, as NIST numbers it in the publication's title, such as 2.0.""", json_schema_extra = { "linkml_meta": {'domain_of': ['CsfFramework']} })
-    functions: list[CsfFunction] = Field(default=..., description="""The six functions, in the order CSWP 29 gives them.""", json_schema_extra = { "linkml_meta": {'domain_of': ['CsfFramework']} })
+    csf_functions: list[CsfFunction] = Field(default=..., description="""The six functions, in the order CSWP 29 gives them.""", json_schema_extra = { "linkml_meta": {'domain_of': ['CsfFramework']} })
 
     @field_validator('csf_version')
     def pattern_csf_version(cls, v):
@@ -280,7 +280,7 @@ class CsfFunction(ConfiguredBaseModel):
                        'CsfSubcategory',
                        'CsfImplementationExample'],
          'slot_uri': 'schema:description'} })
-    function_id: str = Field(default=..., description="""The function's two letters, such as GV for GOVERN.""", json_schema_extra = { "linkml_meta": {'domain_of': ['CsfFunction']} })
+    csf_function_id: str = Field(default=..., description="""The function's two letters, such as GV for GOVERN.""", json_schema_extra = { "linkml_meta": {'domain_of': ['CsfFunction']} })
     function_categories: Optional[list[CsfCategory]] = Field(default=None, description="""The categories of the function. A knowledge bundle relates a category to its function with isPartOf instead.""", json_schema_extra = { "linkml_meta": {'domain_of': ['CsfFunction']} })
 
 
@@ -309,7 +309,7 @@ class CsfCategory(ConfiguredBaseModel):
                        'CsfSubcategory',
                        'CsfImplementationExample'],
          'slot_uri': 'schema:description'} })
-    category_id: str = Field(default=..., description="""The category's identifier, such as GV.OC.""", json_schema_extra = { "linkml_meta": {'domain_of': ['CsfCategory']} })
+    csf_category_id: str = Field(default=..., description="""The category's identifier, such as GV.OC.""", json_schema_extra = { "linkml_meta": {'domain_of': ['CsfCategory']} })
     category_subcategories: Optional[list[CsfSubcategory]] = Field(default=None, description="""The subcategories of the category. A knowledge bundle relates a subcategory to its category with isPartOf instead.""", json_schema_extra = { "linkml_meta": {'domain_of': ['CsfCategory']} })
     category_status: Optional[CsfElementStatus] = Field(default=None, description="""withdrawn for a CSF 1.1 category that CSF 2.0 withdrew. A category of CSF 2.0 has no status.""", json_schema_extra = { "linkml_meta": {'domain_of': ['CsfCategory']} })
     category_moved_to: Optional[list[str]] = Field(default=None, description="""The CSF 2.0 category a withdrawn category moved to, as the catalog states it, such as PR.AA for PR.AC.""", json_schema_extra = { "linkml_meta": {'domain_of': ['CsfCategory']} })
@@ -337,7 +337,7 @@ class CsfSubcategory(ConfiguredBaseModel):
                        'CsfSubcategory',
                        'CsfImplementationExample'],
          'slot_uri': 'schema:description'} })
-    subcategory_id: str = Field(default=..., description="""The subcategory's identifier, such as GV.OC-01.""", json_schema_extra = { "linkml_meta": {'domain_of': ['CsfSubcategory']} })
+    csf_subcategory_id: str = Field(default=..., description="""The subcategory's identifier, such as GV.OC-01.""", json_schema_extra = { "linkml_meta": {'domain_of': ['CsfSubcategory']} })
     subcategory_examples: Optional[list[CsfImplementationExample]] = Field(default=None, description="""The implementation examples NIST publishes for the subcategory. CSWP 29 says they are notional, that none is required, and that they are not a complete list of what could be done.""", json_schema_extra = { "linkml_meta": {'domain_of': ['CsfSubcategory']} })
     subcategory_status: Optional[CsfElementStatus] = Field(default=None, description="""withdrawn for a CSF 1.1 subcategory that CSF 2.0 withdrew. A subcategory of CSF 2.0 has no status.""", json_schema_extra = { "linkml_meta": {'domain_of': ['CsfSubcategory']} })
     subcategory_moved_to: Optional[list[str]] = Field(default=None, description="""The CSF 2.0 subcategory a withdrawn subcategory moved to, as the catalog states it, such as GV.OC-03 for ID.GV-03. The catalog names two for a few.""", json_schema_extra = { "linkml_meta": {'domain_of': ['CsfSubcategory']} })
@@ -362,7 +362,7 @@ class CsfImplementationExample(ConfiguredBaseModel):
                        'CsfSubcategory',
                        'CsfImplementationExample'],
          'slot_uri': 'schema:description'} })
-    implementation_example_id: str = Field(default=..., description="""The example's identifier in NIST's reference data, such as GV.OC-01.001 for the first example of subcategory GV.OC-01.""", json_schema_extra = { "linkml_meta": {'domain_of': ['CsfImplementationExample']} })
+    csf_implementation_example_id: str = Field(default=..., description="""The example's identifier in NIST's reference data, such as GV.OC-01.001 for the first example of subcategory GV.OC-01.""", json_schema_extra = { "linkml_meta": {'domain_of': ['CsfImplementationExample']} })
 
 
 # Model rebuild
