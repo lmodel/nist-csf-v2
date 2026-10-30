@@ -35,11 +35,11 @@ The Cybersecurity Framework (CSF) 2.0, which the National Institute of Standards
 
 The schema header's `version` is the CSF edition, 2.0.0, as NIST's Cybersecurity and Privacy Reference Tool numbers it (`CSF_2_0_0`). Its `source` is the publication's digital object identifier (DOI). NIST also publishes the framework as a catalog in the Open Security Controls Assessment Language (OSCAL). [src/nist_csf_v2/schema/oscal-content/](src/nist_csf_v2/schema/oscal-content) holds that catalog as usnistgov/oscal-content released it in v1.6.0, matched to the release by git object hash. `tests/test_upstream.py` derives the whole framework from the copy, validates it, and holds it to the counts above. A weekly workflow opens an issue when oscal-content gains another edition of the CSF, changes the catalog, or the copy drifts.
 
-CSF 2.0 is the current edition. NIST's community profiles of the CSF are separate documents, not editions, and the schema does not model them. Release tags number the schema's versions.
+CSF 2.0 is the current edition. Release tags number the schema's versions.
 
 ## Influences
 
-None beyond CSWP 29 itself: the schema renders one publication, and its release asset and governance files follow [lmodel/slsa](https://github.com/lmodel/slsa).
+None beyond CSWP 29: the schema renders one publication, and its release asset and governance files follow [lmodel/slsa](https://github.com/lmodel/slsa).
 
 ## Mappings
 
@@ -53,7 +53,8 @@ The schema names no mapping to SP 800-53, SP 800-171, the CIS Controls or any ot
 
 * The Informative References, which NIST publishes through its National Online Informative References (OLIR) program and its Cybersecurity and Privacy Reference Tool. They relate each subcategory to SP 800-53, SP 800-171, the CIS Controls and other documents, and the OSCAL catalog does not carry them.
 * The first-party and third-party risk marking that NIST's catalog gives most subcategories. CSWP 29 does not carry it.
-* The CSF Tiers of the publication's Appendix B and the Organizational Profiles of its Section 3, which describe how an organization uses the Core, and NIST's community profiles and Quick Start Guides.
+* The CSF Tiers of the publication's Appendix B and the Organizational Profiles of its Section 3, which describe how an organization uses the Core.
+* NIST's community profiles, which are separate documents and not editions of the CSF, and its Quick Start Guides.
 * The rules no pattern can check, which [docs/index.md](docs/index.md) lists.
 
 ## Repository Structure
