@@ -2,6 +2,11 @@
 
 ## 2026-10-30
 
+* **Changed**: Semantic release cites `.github/release/` for the lockfile both jobs install from.
+* **Changed**: Semantic release says that both jobs install the release tools from `.github/release/package-lock.json`.
+* **Changed**: Security policy counts the release tools' npm lock among what Dependabot keeps current.
+* **Changed**: License and attribution names the knowledge bundle's CC BY 4.0 licence, as the README now does.
+* **Changed**: Knowledge sources maps `.github/release/` to the Semantic release concept.
 * **Changed**: nist-csf-v2 LinkML schema now says that the four identifier keys are top-level slots, each listed first in its class so that the generated dataclasses key each inlined list by its identifier.
 * **Changed**: Generated artefacts no longer says `just test` leaves a generation date; LinkML 1.12.1 writes none.
 * **Changed**: Update the upstream pins now regenerates the project, the docs and the adapt copy before `just test`.

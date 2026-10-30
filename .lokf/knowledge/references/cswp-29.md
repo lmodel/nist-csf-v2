@@ -21,7 +21,7 @@ generated:
 status: draft
 verified:
   - by: process:ktl-librarian
-    at: "2026-10-30T08:54:28Z"
+    at: "2026-10-30T09:07:28Z"
 ---
 
 # NIST CSWP 29, the CSF 2.0

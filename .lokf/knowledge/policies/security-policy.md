@@ -14,7 +14,7 @@ sources:
     title: the four update entries
 generated:
   by: process:ktl-librarian
-  at: "2026-10-30T08:31:58Z"
+  at: "2026-10-30T09:07:28Z"
 status: draft
 ---
 
@@ -24,7 +24,7 @@ status: draft
 
 The repository releases the schema, the Python models generated from it, and the adapt copy as a release asset; nothing is published to PyPI. Its table of surfaces names each workflow and what holds it. The pull request checks run read-only. The release job runs only on a push to `main`, in the `release` Environment. The website's deploy job alone holds the Pages scopes. The upstream watch writes only issues. The librarian's agent runs without a write token, and its `publish` job runs no agent.
 
-Every workflow declares `permissions: {}` at the top, pins its actions to commit hashes and runs harden-runner in audit mode. Dependabot keeps the pins, the package's lock, the sidecar's lock and the website's npm packages current, each monthly.[^dependabot.yml] The policy says that a ruleset on `main` blocks deletion and force-pushes and keeps the history linear. It names two settings not yet in force: required reviewers on the `release` Environment, and secret scanning with push protection. It leaves out the CSF itself, LinkML, a compromised runner or harness, and whether the knowledge bundle is true.
+Every workflow declares `permissions: {}` at the top, pins its actions to commit hashes and runs harden-runner in audit mode. Dependabot keeps the pins, the package's lock, the sidecar's lock, the website's npm packages and the release tools' npm lock current, each monthly.[^dependabot.yml] The policy says that a ruleset on `main` blocks deletion and force-pushes and keeps the history linear. It names two settings not yet in force: required reviewers on the `release` Environment, and secret scanning with push protection. It leaves out the CSF itself, LinkML, a compromised runner or harness, and whether the knowledge bundle is true.
 
 [^security.md]: SECURITY.md, every section
 [^dependabot.yml]: .github/dependabot.yml, the four entries
