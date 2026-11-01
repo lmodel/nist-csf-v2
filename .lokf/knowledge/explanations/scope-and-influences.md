@@ -3,7 +3,7 @@ type: Explanation
 id: https://w3id.org/lmodel/nist-csf-v2/knowledge/explanations/scope-and-influences
 genre: explanation
 title: Scope, influences and mappings
-description: "What the schema renders and what it leaves out: the CSF 2.0 of CSWP 29 and nothing beyond it, with lmodel/slsa as its one influence on layout. It maps its classes to lmodel/oscal's, as NIST's catalog renders them, keeps the withdrawn CSF 1.1 elements as the catalog states them, and models neither the Informative References, the Profiles and Tiers, the risk-party marking nor the community profiles."
+description: "What the schema renders and what it leaves out: the CSF 2.0 of CSWP 29 and nothing beyond it, with lmodel/slsa as its one influence on layout. It maps its classes to lmodel/oscal's, as NIST's catalog renders them, keeps the withdrawn CSF 1.1 elements and the first-party and third-party risk marking as the catalog states them, and models neither the Informative References, the Profiles and Tiers nor the community profiles."
 resource: README.md
 about:
   - https://w3id.org/lmodel/nist-csf-v2/knowledge/datasets/nist-csf-v2-linkml-schema
@@ -13,13 +13,13 @@ sources:
     title: the What it models, Influences, Mappings and Not modelled here sections
   - id: changelog.md
     resource: CHANGELOG.md
-    title: the Changed and Removed entries
+    title: the Added, Changed and Removed entries
   - id: about.md
     resource: docs/about.md
     title: the section on what is left out
 generated:
   by: process:ktl-librarian
-  at: "2026-10-29T21:41:10Z"
+  at: "2026-11-01T22:06:24Z"
 status: draft
 verified:
   - by: process:ktl-librarian
@@ -32,7 +32,7 @@ The schema renders one publication, CSWP 29, at one edition, the CSF 2.0. The RE
 
 ## Why the CSF's own elements
 
-The schema models the function, the category, the subcategory and the implementation example, which [the glossary](../glossary/index.md) defines. It keeps the CSF 1.1 categories and subcategories that CSF 2.0 withdrew as NIST's catalog states them: with a status and, where NIST recorded it, where each moved or what incorporated it. The changelog says that it replaced classes copied from the shape of an OSCAL catalog. Those classes shared names with LOKF's and lmodel/oscal's, and their `class_uri: linkml:Any` let a catalog with any keys validate.[^changelog.md] NIST's catalog in OSCAL stays in the repository as the upstream copy that the tests read.
+The schema models the function, the category, the subcategory and the implementation example, which [the glossary](../glossary/index.md) defines. It keeps the CSF 1.1 categories and subcategories that CSF 2.0 withdrew as NIST's catalog states them: with a status and, where NIST recorded it, where each moved or what incorporated it. It also carries the first-party and third-party risk marking that the catalog gives most CSF 2.0 subcategories, which CSWP 29 does not carry; NIST publishes it beside the Core, as it publishes the implementation examples.[^about.md] The changelog says that it replaced classes copied from the shape of an OSCAL catalog. Those classes shared names with LOKF's and lmodel/oscal's, and their `class_uri: linkml:Any` let a catalog with any keys validate.[^changelog.md] NIST's catalog in OSCAL stays in the repository as the upstream copy that the tests read.
 
 ## Mappings
 
@@ -41,10 +41,9 @@ The README says that the schema crosses to one vocabulary and borrows from none.
 ## Not modelled here
 
 - the Informative References NIST publishes through its National Online Informative References program and its reference tool, which the OSCAL catalog does not carry;
-- the first-party and third-party risk marking in NIST's catalog, which CSWP 29 does not carry;
 - the CSF Tiers of Appendix B, the Organizational Profiles of Section 3, the community profiles and the Quick Start Guides;
 - the publication's prose outside the Core.[^about.md]
 
 [^readme.md]: README.md, the Influences, Mappings and Not modelled here sections
-[^changelog.md]: CHANGELOG.md, the Changed and Removed entries under Unreleased
+[^changelog.md]: CHANGELOG.md, the Added entry under Unreleased and the Changed and Removed entries
 [^about.md]: docs/about.md, What is left out
