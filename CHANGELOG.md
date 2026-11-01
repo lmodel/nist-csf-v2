@@ -6,6 +6,8 @@ The `v0.0.0` tag is a baseline, not a release: it marks where versioning starts 
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-11-01
+
 ### Added
 
 - **The first-party and third-party risk marking of each CSF 2.0 subcategory**, as `subcategory_risk_parties` with the `CsfRiskParty` values `first_party` and `third_party`. NIST's catalog gives it to 103 of the 106 subcategories, and the upstream test now derives it and holds it to the catalog's counts.
