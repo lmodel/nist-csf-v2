@@ -51,9 +51,11 @@ CATEGORIES = [
 # The withdrawn categories for which the catalog names no destination.
 WITHDRAWN_WITHOUT_DESTINATION = {"PR.IP", "PR.PT", "DE.DP", "RS.RP"}
 # The catalog's first-party and third-party risk markings, which CSWP 29
-# does not carry and the schema leaves out: how many CSF 2.0 subcategories
-# carry each, and how many carry none.
-MARKINGS = {"1st": 88, "3rd": 37, "unmarked subcategories": 3}
+# does not carry: how many CSF 2.0 subcategories carry each, and how many
+# carry none.
+MARKINGS = {"first_party": 88, "third_party": 37, "unmarked subcategories": 3}
+# The catalog's marking values and the schema's CsfRiskParty values.
+RISK_PARTIES = {"1st": "first_party", "3rd": "third_party"}
 # The key that holds each kind of element's identifier, and the keys that
 # hold the elements one element holds.
 ID_KEYS = (
@@ -120,6 +122,14 @@ def _withdrawal(element, entry, noun):
         entry.setdefault(f"{noun}_{link['rel']}", []).append(link["href"])
 
 
+def _risk_parties(element):
+    """The schema's CsfRiskParty values for the element's risk-party
+    markings, in the catalog's order."""
+    markings = [p for p in element.get("props", []) if p["name"] == "marking"]
+    assert all(p["class"] == "risk-party" for p in markings), element["id"]
+    return [RISK_PARTIES[p["value"]] for p in markings]
+
+
 def derive(catalog):
     """The CsfFramework that the catalog's groups, controls, parts, props and
     links describe, in the schema's terms."""
@@ -154,6 +164,9 @@ def derive(catalog):
                     "subcategory_examples": examples,
                 }
                 _withdrawal(subcategory, item, "subcategory")
+                parties = _risk_parties(subcategory)
+                if parties:
+                    item["subcategory_risk_parties"] = parties
                 subcategories.append(item)
             entry["category_subcategories"] = subcategories
             categories.append(entry)
@@ -355,7 +368,8 @@ def test_withdrawn_elements_state_their_destination():
 def test_valid_examples_state_what_the_catalog_states(path):
     """A valid example that names an element of NIST's catalog says what the
     catalog says about it: what holds it, its title, whether it is withdrawn,
-    and where it moved or what incorporated it. An example's descriptions
+    where it moved or what incorporated it, and whose risk it addresses
+    where the example says so. An example's descriptions
     paraphrase NIST's text, so they are not compared, and an identifier the
     catalog does not hold is not checked."""
     elements = _elements()
@@ -372,7 +386,10 @@ def test_valid_examples_state_what_the_catalog_states(path):
             for k in entry.keys() | theirs.keys():
                 if k.endswith("_status"):
                     assert entry.get(k) == theirs.get(k), (ident, k)
-                elif k.endswith(("_moved_to", "_incorporated_into")) and k in entry:
+                elif (
+                    k.endswith(("_moved_to", "_incorporated_into", "_risk_parties"))
+                    and k in entry
+                ):
                     assert entry[k] == theirs.get(k), (ident, k)
         for child_key in CHILD_KEYS:
             for child in entry.get(child_key, []):
@@ -390,26 +407,20 @@ def test_examples_belong_to_the_current_edition():
         ]
 
 
-def test_risk_party_markings_are_left_out():
-    """The catalog marks CSF 2.0 subcategories as first-party risk,
-    third-party risk or both. CSWP 29 carries no such marking, so the
-    derived framework has no key for it; this test records what is left
-    out, so a change in the catalog's markings is seen."""
-    counted = {"1st": 0, "3rd": 0, "unmarked subcategories": 0}
-    for group in _catalog()["groups"]:
-        for category in group["controls"]:
-            for subcategory in category.get("controls", []):
-                markings = [
-                    p for p in subcategory.get("props", []) if p["name"] == "marking"
-                ]
-                assert all(p["class"] == "risk-party" for p in markings)
-                if _status(subcategory):
-                    assert not markings, subcategory["id"]
-                    continue
-                if not markings:
-                    counted["unmarked subcategories"] += 1
-                for marking in markings:
-                    counted[marking["value"]] += 1
+def test_risk_party_markings_are_carried():
+    """Every CSF 2.0 subcategory carries the catalog's first-party and
+    third-party risk markings, a few carry none, and no withdrawn
+    subcategory carries any."""
+    counted = {"first_party": 0, "third_party": 0, "unmarked subcategories": 0}
+    for subcategory in _withdrawn(_subcategories(), "subcategory"):
+        assert "subcategory_risk_parties" not in subcategory, subcategory[
+            "csf_subcategory_id"
+        ]
+    for subcategory in _live(_subcategories(), "subcategory"):
+        parties = subcategory.get("subcategory_risk_parties", [])
+        assert len(set(parties)) == len(parties), subcategory["csf_subcategory_id"]
+        if not parties:
+            counted["unmarked subcategories"] += 1
+        for party in parties:
+            counted[party] += 1
     assert counted == MARKINGS
-    keys = {k for s in _subcategories() for k in s}
-    assert not any("risk" in k or "marking" in k for k in keys)

@@ -259,6 +259,7 @@ class CsfSubcategory(YAMLRoot):
     subcategory_status: Optional[Union[str, "CsfElementStatus"]] = None
     subcategory_moved_to: Optional[Union[Union[str, CsfSubcategoryIdentifier], list[Union[str, CsfSubcategoryIdentifier]]]] = empty_list()
     subcategory_incorporated_into: Optional[Union[Union[str, CsfCategoryOrSubcategoryIdentifier], list[Union[str, CsfCategoryOrSubcategoryIdentifier]]]] = empty_list()
+    subcategory_risk_parties: Optional[Union[Union[str, "CsfRiskParty"], list[Union[str, "CsfRiskParty"]]]] = empty_list()
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.csf_subcategory_id):
@@ -283,6 +284,10 @@ class CsfSubcategory(YAMLRoot):
         if not isinstance(self.subcategory_incorporated_into, list):
             self.subcategory_incorporated_into = [self.subcategory_incorporated_into] if self.subcategory_incorporated_into is not None else []
         self.subcategory_incorporated_into = [v if isinstance(v, CsfCategoryOrSubcategoryIdentifier) else CsfCategoryOrSubcategoryIdentifier(v) for v in self.subcategory_incorporated_into]
+
+        if not isinstance(self.subcategory_risk_parties, list):
+            self.subcategory_risk_parties = [self.subcategory_risk_parties] if self.subcategory_risk_parties is not None else []
+        self.subcategory_risk_parties = [v if isinstance(v, CsfRiskParty) else CsfRiskParty(v) for v in self.subcategory_risk_parties]
 
         super().__post_init__(**kwargs)
 
@@ -330,6 +335,24 @@ class CsfElementStatus(EnumDefinitionImpl):
     _defn = EnumDefinition(
         name="CsfElementStatus",
         description="""The state the catalog gives a category or subcategory that CSF 2.0 no longer carries. A category or subcategory of CSF 2.0 has no status.""",
+    )
+
+class CsfRiskParty(EnumDefinitionImpl):
+    """
+    Whose risk a subcategory's outcome addresses, as NIST's catalog marks it in a marking property of class risk-party.
+    """
+    first_party = PermissibleValue(
+        text="first_party",
+        title="First-party risk",
+        description="""Risk to the organization from its own systems, people and processes. The catalog's value is 1st.""")
+    third_party = PermissibleValue(
+        text="third_party",
+        title="Third-party risk",
+        description="""Risk that reaches the organization through its suppliers, partners and other third parties. The catalog's value is 3rd.""")
+
+    _defn = EnumDefinition(
+        name="CsfRiskParty",
+        description="""Whose risk a subcategory's outcome addresses, as NIST's catalog marks it in a marking property of class risk-party.""",
     )
 
 # Slots
@@ -387,6 +410,9 @@ slots.csfSubcategory__subcategory_moved_to = Slot(uri=NIST_CSF_V2.subcategory_mo
 
 slots.csfSubcategory__subcategory_incorporated_into = Slot(uri=NIST_CSF_V2.subcategory_incorporated_into, name="csfSubcategory__subcategory_incorporated_into", curie=NIST_CSF_V2.curie('subcategory_incorporated_into'),
                    model_uri=NIST_CSF_V2.csfSubcategory__subcategory_incorporated_into, domain=None, range=Optional[Union[Union[str, CsfCategoryOrSubcategoryIdentifier], list[Union[str, CsfCategoryOrSubcategoryIdentifier]]]])
+
+slots.csfSubcategory__subcategory_risk_parties = Slot(uri=NIST_CSF_V2.subcategory_risk_parties, name="csfSubcategory__subcategory_risk_parties", curie=NIST_CSF_V2.curie('subcategory_risk_parties'),
+                   model_uri=NIST_CSF_V2.csfSubcategory__subcategory_risk_parties, domain=None, range=Optional[Union[Union[str, "CsfRiskParty"], list[Union[str, "CsfRiskParty"]]]])
 
 slots.CsfFunction_title = Slot(uri=SCHEMA.name, name="CsfFunction_title", curie=SCHEMA.curie('name'),
                    model_uri=NIST_CSF_V2.CsfFunction_title, domain=CsfFunction, range=str)

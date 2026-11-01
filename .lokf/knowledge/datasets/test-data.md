@@ -3,7 +3,7 @@ type: Dataset
 id: https://w3id.org/lmodel/nist-csf-v2/knowledge/datasets/test-data
 genre: reference
 title: Test data and tests
-description: "The schema's tests: seven valid examples and 29 counter-examples under `tests/data/`, `tests/test_data.py`, which holds each to the validator, `tests/test_upstream.py`, which derives the framework from NIST's catalog and holds the examples to it, `tests/test_watch.py`, which runs the upstream watch against stubbed answers, and `tests/test_schema_rules.py`, which holds the adapt copy apart from LOKF and the slsa, github-actions, oscal, spdx and nist-sp-800-218 copies in `tests/neighbours/`."
+description: "The schema's tests: eight valid examples and 30 counter-examples under `tests/data/`, `tests/test_data.py`, which holds each to the validator, `tests/test_upstream.py`, which derives the framework from NIST's catalog and holds the examples to it, `tests/test_watch.py`, which runs the upstream watch against stubbed answers, and `tests/test_schema_rules.py`, which holds the adapt copy apart from LOKF and the slsa, github-actions, oscal, spdx and nist-sp-800-218 copies in `tests/neighbours/`."
 resource: tests
 sources:
   - id: data
@@ -27,7 +27,7 @@ sources:
     title: the naming rule
 generated:
   by: process:ktl-librarian
-  at: "2026-10-30T08:31:58Z"
+  at: "2026-11-01T22:06:37Z"
 status: draft
 verified:
   - by: process:ktl-librarian
@@ -36,12 +36,12 @@ verified:
 
 # Test data and tests
 
-`tests/data/valid/` holds seven examples: one for each class, and a second for `CsfCategory` and `CsfSubcategory` as withdrawn elements. `tests/data/invalid/` holds 29 counter-examples, each invalid for one reason.[^data] A file's class is the part of its name before the first hyphen, such as `CsfSubcategory-withdrawn-moved.yaml`. A counter-example's first line names where it fails, as `# Fails at:` and a JSON pointer such as `/csf_category_id`. The counter-examples break each constraint the schema states:
+`tests/data/valid/` holds eight examples: one for each class, a second for `CsfCategory` and `CsfSubcategory` as withdrawn elements, and a third for `CsfSubcategory` with both risk parties. `tests/data/invalid/` holds 30 counter-examples, each invalid for one reason.[^data] A file's class is the part of its name before the first hyphen, such as `CsfSubcategory-withdrawn-moved.yaml`. A counter-example's first line names where it fails, as `# Fails at:` and a JSON pointer such as `/csf_category_id`. The counter-examples break each constraint the schema states:
 
 - a missing required field, a title among them;
 - an identifier of the wrong form or of the wrong level, such as a category identifier where a subcategory's belongs, or one that starts with letters no function has;
 - an unknown function;
-- a status other than `withdrawn`;
+- a status other than `withdrawn`, and a risk party written as the catalog's `1st` rather than `first_party`;
 - a destination of the wrong kind, such as a category moved to a subcategory or a subcategory incorporated into a whole function;
 - an empty list of functions, and a blank description where a description is required;
 - a key the class does not declare.
@@ -51,9 +51,9 @@ verified:
 - the identifiers nest and never repeat;
 - the CSF 2.0 categories are the 22 of CSWP 29's Table 1;
 - a withdrawn element names a destination of CSF 2.0 or none;
-- the risk-party markings stay out of the derived framework.
+- the derived risk-party markings match the catalog's counts, and no withdrawn subcategory carries one.
 
-It holds each valid example to the catalog too: an element an example names must have the parent, the title, the status and the destinations the catalog gives it.
+It holds each valid example to the catalog too: an element an example names must have the parent, the title, the status, the destinations and the risk parties the catalog gives it.
 
 `tests/test_watch.py` runs `scripts/check_upstream_release.py` against stubbed answers from the GitHub API, with no network. It checks what the report says when nothing changed, when a release drops the pinned folders, when a release changes the licence, when the network fails, when NIST adds a file and when the pinned tag moves.[^test_watch.py]
 

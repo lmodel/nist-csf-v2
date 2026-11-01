@@ -101,7 +101,9 @@ linkml_meta = LinkMLMeta({'annotations': {'cprt_framework_version': {'tag': 'cpr
                   'The catalog also marks most CSF 2.0 subcategories as '
                   'first-party risk, third-party risk or both, in a marking '
                   'property of class risk-party. CSWP 29 carries no such marking, '
-                  "so it is the reference tool's and the schema leaves it out."],
+                  'but the catalog and the reference tool publish it beside the '
+                  'Core as they publish the implementation examples, so the schema '
+                  "carries it too, as a subcategory's risk parties."],
      'default_prefix': 'nist_csf_v2',
      'default_range': 'string',
      'description': 'A LinkML model of the Cybersecurity Framework (CSF) 2.0, '
@@ -251,6 +253,20 @@ class CsfElementStatus(str, Enum):
     """
 
 
+class CsfRiskParty(str, Enum):
+    """
+    Whose risk a subcategory's outcome addresses, as NIST's catalog marks it in a marking property of class risk-party.
+    """
+    First_party_risk = "first_party"
+    """
+    Risk to the organization from its own systems, people and processes. The catalog's value is 1st.
+    """
+    Third_party_risk = "third_party"
+    """
+    Risk that reaches the organization through its suppliers, partners and other third parties. The catalog's value is 3rd.
+    """
+
+
 
 class CsfFramework(ConfiguredBaseModel):
     """
@@ -367,6 +383,11 @@ class CsfSubcategory(ConfiguredBaseModel):
     subcategory_status: Optional[CsfElementStatus] = Field(default=None, description="""withdrawn for a CSF 1.1 subcategory that CSF 2.0 withdrew. A subcategory of CSF 2.0 has no status.""", json_schema_extra = { "linkml_meta": {'domain_of': ['CsfSubcategory']} })
     subcategory_moved_to: Optional[list[str]] = Field(default=None, description="""The CSF 2.0 subcategory a withdrawn subcategory moved to, as the catalog states it, such as GV.OC-03 for ID.GV-03. The catalog names two for a few.""", json_schema_extra = { "linkml_meta": {'domain_of': ['CsfSubcategory']} })
     subcategory_incorporated_into: Optional[list[str]] = Field(default=None, description="""The CSF 2.0 category or subcategory that took in a withdrawn subcategory's outcome, as the catalog states it, such as GV.OC-01 for ID.BE-02.""", json_schema_extra = { "linkml_meta": {'domain_of': ['CsfSubcategory']} })
+    subcategory_risk_parties: Optional[list[CsfRiskParty]] = Field(default=None, description="""Whose risk the subcategory's outcome addresses: the organization's own, its suppliers' and other third parties', or both.""", json_schema_extra = { "linkml_meta": {'comments': ['NIST publishes this in its catalog and its reference tool, not '
+                      'in CSWP 29. The catalog marks most CSF 2.0 subcategories and '
+                      'leaves a few unmarked, so an absent value says nothing about '
+                      'the outcome. A withdrawn subcategory carries none.'],
+         'domain_of': ['CsfSubcategory']} })
 
     @field_validator('description')
     def pattern_description(cls, v):

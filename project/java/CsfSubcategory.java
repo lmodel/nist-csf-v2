@@ -22,6 +22,7 @@ public class CsfSubcategory  {
   private String subcategoryStatus;
   private List<String> subcategoryMovedTo;
   private List<String> subcategoryIncorporatedInto;
+  private List<String> subcategoryRiskParties;
 
 
 }

@@ -164,6 +164,15 @@
             "title": "CsfImplementationExample",
             "type": "object"
         },
+        "CsfRiskParty": {
+            "description": "Whose risk a subcategory's outcome addresses, as NIST's catalog marks it in a marking property of class risk-party.",
+            "enum": [
+                "first_party",
+                "third_party"
+            ],
+            "title": "CsfRiskParty",
+            "type": "string"
+        },
         "CsfSubcategory": {
             "additionalProperties": false,
             "description": "A cybersecurity outcome: one statement of a result within a category, such as GV.OC-01, or a CSF 1.1 subcategory that CSF 2.0 withdrew, which the catalog keeps with its statement, its status and where it moved or what incorporated it.",
@@ -204,6 +213,16 @@
                     "items": {
                         "pattern": "^(GV|ID|PR|DE|RS|RC)\\.[A-Z]{2}-[0-9]{2}$",
                         "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "subcategory_risk_parties": {
+                    "description": "Whose risk the subcategory's outcome addresses: the organization's own, its suppliers' and other third parties', or both.",
+                    "items": {
+                        "$ref": "#/$defs/CsfRiskParty"
                     },
                     "type": [
                         "array",

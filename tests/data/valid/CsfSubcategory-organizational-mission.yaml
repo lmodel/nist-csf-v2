@@ -1,9 +1,12 @@
-# Subcategory GV.OC-01 with its one implementation example. The text
-# paraphrases CSWP 29 and NIST's examples.
+# Subcategory GV.OC-01 with its one implementation example and the
+# first-party risk marking NIST's catalog gives it. The text paraphrases
+# CSWP 29 and NIST's examples.
 csf_subcategory_id: GV.OC-01
 description: >-
   The organization understands its mission, and that understanding informs
   how it manages cybersecurity risk.
+subcategory_risk_parties:
+  - first_party
 subcategory_examples:
   - csf_implementation_example_id: GV.OC-01.001
     description: >-

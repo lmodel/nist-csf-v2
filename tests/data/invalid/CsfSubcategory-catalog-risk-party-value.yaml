@@ -1,0 +1,8 @@
+# Fails at: /subcategory_risk_parties/0
+# Invalid: the catalog's marking value 1st is named first_party here.
+csf_subcategory_id: GV.OC-01
+description: >-
+  The organization understands its mission, and that understanding informs
+  how it manages cybersecurity risk.
+subcategory_risk_parties:
+  - 1st

@@ -37,6 +37,9 @@
 -- # Class: CsfSubcategory_subcategory_incorporated_into
 --     * Slot: CsfSubcategory_id Description: Autocreated FK slot
 --     * Slot: subcategory_incorporated_into Description: The CSF 2.0 category or subcategory that took in a withdrawn subcategory's outcome, as the catalog states it, such as GV.OC-01 for ID.BE-02.
+-- # Class: CsfSubcategory_subcategory_risk_parties
+--     * Slot: CsfSubcategory_id Description: Autocreated FK slot
+--     * Slot: subcategory_risk_parties Description: Whose risk the subcategory's outcome addresses: the organization's own, its suppliers' and other third parties', or both.
 
 CREATE TABLE "CsfFramework" (
 	id INTEGER NOT NULL,
@@ -124,3 +127,12 @@ CREATE TABLE "CsfSubcategory_subcategory_incorporated_into" (
 );
 CREATE INDEX "ix_CsfSubcategory_subcategory_incorporated_into_subcategory_incorporated_into" ON "CsfSubcategory_subcategory_incorporated_into" (subcategory_incorporated_into);
 CREATE INDEX "ix_CsfSubcategory_subcategory_incorporated_into_CsfSubcategory_id" ON "CsfSubcategory_subcategory_incorporated_into" ("CsfSubcategory_id");
+
+CREATE TABLE "CsfSubcategory_subcategory_risk_parties" (
+	"CsfSubcategory_id" INTEGER,
+	subcategory_risk_parties VARCHAR(11),
+	PRIMARY KEY ("CsfSubcategory_id", subcategory_risk_parties),
+	FOREIGN KEY("CsfSubcategory_id") REFERENCES "CsfSubcategory" (id)
+);
+CREATE INDEX "ix_CsfSubcategory_subcategory_risk_parties_CsfSubcategory_id" ON "CsfSubcategory_subcategory_risk_parties" ("CsfSubcategory_id");
+CREATE INDEX "ix_CsfSubcategory_subcategory_risk_parties_subcategory_risk_parties" ON "CsfSubcategory_subcategory_risk_parties" (subcategory_risk_parties);

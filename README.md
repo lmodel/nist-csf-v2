@@ -14,7 +14,7 @@ NIST CSWP 29 Cybersecurity Framework (CSF) 2.0 (LinkML)
 
 ## What it models
 
-The schema models the Cybersecurity Framework (CSF) 2.0, which the National Institute of Standards and Technology (NIST) publishes as [Cybersecurity White Paper (CSWP) 29](https://doi.org/10.6028/NIST.CSWP.29) of February 26, 2024. The schema holds the Core's six functions (`CsfFunction`), 22 categories (`CsfCategory`) and 106 subcategories (`CsfSubcategory`), the 363 implementation examples NIST publishes beside it, and the CSF 1.1 elements that CSF 2.0 withdrew, each with where it moved.
+The schema models the Cybersecurity Framework (CSF) 2.0, which the National Institute of Standards and Technology (NIST) publishes as [Cybersecurity White Paper (CSWP) 29](https://doi.org/10.6028/NIST.CSWP.29) of February 26, 2024. The schema holds the Core's six functions (`CsfFunction`), 22 categories (`CsfCategory`) and 106 subcategories (`CsfSubcategory`), the 363 implementation examples NIST publishes beside it, and the CSF 1.1 elements that CSF 2.0 withdrew, each with where it moved. It also carries the first-party and third-party risk marking that NIST's catalog gives most subcategories (`subcategory_risk_parties`), which CSWP 29 does not.
 
 [src/nist_csf_v2/schema/oscal-content/](src/nist_csf_v2/schema/oscal-content) holds NIST's catalog of the framework in the Open Security Controls Assessment Language (OSCAL), from usnistgov/oscal-content v1.6.0, and `tests/test_upstream.py` derives the whole framework from it. A weekly workflow opens an issue when oscal-content gains another edition of the CSF, changes the catalog, or the copy drifts.
 
@@ -27,7 +27,6 @@ The schema maps to no other document. NIST publishes those relations as Informat
 ## Not modelled here
 
 * The Informative References, which NIST publishes through its National Online Informative References (OLIR) program and its Cybersecurity and Privacy Reference Tool. They relate each subcategory to SP 800-53, SP 800-171, the CIS Controls and other documents, and the OSCAL catalog does not carry them.
-* The first-party and third-party risk marking that NIST's catalog gives most subcategories. CSWP 29 does not carry it.
 * The CSF Tiers of the publication's Appendix B and the Organizational Profiles of its Section 3, which describe how an organization uses the Core.
 * NIST's community profiles, which are separate documents and not editions of the CSF, and its Quick Start Guides.
 * The rules no pattern can check, which [docs/index.md](docs/index.md) lists.

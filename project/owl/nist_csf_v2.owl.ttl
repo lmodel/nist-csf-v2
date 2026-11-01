@@ -9,7 +9,7 @@
 @prefix linkml: <https://w3id.org/linkml/> .
 @prefix pav: <http://purl.org/pav/> .
 xsd:string a rdfs:Datatype ;
-	owl:equivalentClass _:c14n70 , _:c14n72 , _:c14n74 , _:c14n76 , _:c14n78 , _:c14n80 .
+	owl:equivalentClass _:c14n74 , _:c14n76 , _:c14n78 , _:c14n80 , _:c14n82 , _:c14n84 .
 <https://w3id.org/lmodel/nist-csf-v2.owl.ttl> dcterms:license "Apache-2.0" ;
 	dcterms:source <https://doi.org/10.6028/NIST.CSWP.29> ;
 	dcterms:title "The NIST Cybersecurity Framework (CSF) 2.0" ;
@@ -18,7 +18,7 @@ xsd:string a rdfs:Datatype ;
 	rdfs:label "nist_csf_v2" ;
 	rdfs:seeAlso <https://csrc.nist.gov/pubs/cswp/29/the-nist-cybersecurity-framework-csf-20/final> , <https://github.com/usnistgov/oscal-content/tree/v1.6.0/nist.gov/CSF/v2.0> , <https://lmodel.github.io/nist-csf-v2> , <https://www.nist.gov/cyberframework> ;
 	skos:definition "A LinkML model of the Cybersecurity Framework (CSF) 2.0, which NIST publishes as Cybersecurity White Paper (CSWP) 29: its six functions, their categories and subcategories, the implementation examples NIST publishes with the subcategories, and the CSF 1.1 categories and subcategories that CSF 2.0 withdrew, each with its status and, where NIST recorded it, where it moved or what incorporated it." ;
-	skos:note "CSWP 29 is a work of the United States Government and is not subject to copyright in the United States. The descriptions here are this project's own words; NIST's text of each function, category, subcategory and example stays in the catalog copy." , "NIST's catalog renders each function as an OSCAL group, each category and subcategory as an OSCAL control and each implementation example as a part. The broad_mappings name those lmodel/oscal classes. A withdrawn category or subcategory is a control with a status property and links to where it moved or what incorporated it; the schema carries those as the element's status and identifiers." , "The catalog also marks most CSF 2.0 subcategories as first-party risk, third-party risk or both, in a marking property of class risk-party. CSWP 29 carries no such marking, so it is the reference tool's and the schema leaves it out." , "The version is the CSF edition that CSWP 29 defines, and source is the publication's digital object identifier. NIST's Cybersecurity and Privacy Reference Tool names the same edition CSF_2_0_0, and the catalog NIST publishes for it in usnistgov/oscal-content is copied to src/nist_csf_v2/schema/oscal-content/ at the tag and commit in the annotations. That catalog carries a version number of its own, 1.2.1, which numbers the catalog and not the framework. The release tags are the schema's own versions, and scripts/check_upstream_release.py reads the same pins and reports when NIST publishes another edition or changes the catalog." ;
+	skos:note "CSWP 29 is a work of the United States Government and is not subject to copyright in the United States. The descriptions here are this project's own words; NIST's text of each function, category, subcategory and example stays in the catalog copy." , "NIST's catalog renders each function as an OSCAL group, each category and subcategory as an OSCAL control and each implementation example as a part. The broad_mappings name those lmodel/oscal classes. A withdrawn category or subcategory is a control with a status property and links to where it moved or what incorporated it; the schema carries those as the element's status and identifiers." , "The catalog also marks most CSF 2.0 subcategories as first-party risk, third-party risk or both, in a marking property of class risk-party. CSWP 29 carries no such marking, but the catalog and the reference tool publish it beside the Core as they publish the implementation examples, so the schema carries it too, as a subcategory's risk parties." , "The version is the CSF edition that CSWP 29 defines, and source is the publication's digital object identifier. NIST's Cybersecurity and Privacy Reference Tool names the same edition CSF_2_0_0, and the catalog NIST publishes for it in usnistgov/oscal-content is copied to src/nist_csf_v2/schema/oscal-content/ at the tag and commit in the annotations. That catalog carries a version number of its own, 1.2.1, which numbers the catalog and not the framework. The release tags are the schema's own versions, and scripts/check_upstream_release.py reads the same pins and reports when NIST publishes another edition or changes the catalog." ;
 	nist_csf_v2:cprt_framework_version "CSF_2_0_0" ;
 	nist_csf_v2:oscal_content_commit "f0de6d8d8c059d374f15e0ae07508d82e370fc1d" ;
 	nist_csf_v2:oscal_content_tag "v1.6.0" ;
@@ -26,7 +26,7 @@ xsd:string a rdfs:Datatype ;
 nist_csf_v2:CsfCategory a owl:Class ;
 	rdfs:label "CsfCategory" ;
 	rdfs:seeAlso <https://www.nist.gov/cyberframework> ;
-	rdfs:subClassOf _:c14n1 , _:c14n12 , _:c14n16 , _:c14n21 , _:c14n22 , _:c14n24 , _:c14n28 , _:c14n33 , _:c14n34 , _:c14n36 , _:c14n38 , _:c14n41 , _:c14n43 , _:c14n44 , _:c14n52 , _:c14n61 , _:c14n7 , _:c14n9 ;
+	rdfs:subClassOf _:c14n1 , _:c14n12 , _:c14n16 , _:c14n22 , _:c14n23 , _:c14n25 , _:c14n29 , _:c14n34 , _:c14n35 , _:c14n37 , _:c14n40 , _:c14n43 , _:c14n45 , _:c14n47 , _:c14n55 , _:c14n65 , _:c14n7 , _:c14n9 ;
 	skos:broadMatch oscal:Control ;
 	skos:definition "A group of related cybersecurity outcomes within a function, such as Organizational Context (GV.OC), or a CSF 1.1 category that CSF 2.0 withdrew, which the catalog keeps with its status and, where NIST recorded it, where it moved or what incorporated it." ;
 	skos:exactMatch nist_csf_v2:Category ;
@@ -45,7 +45,7 @@ nist_csf_v2:CsfElementStatus a owl:Class ;
 nist_csf_v2:CsfFramework a owl:Class ;
 	rdfs:label "CsfFramework" ;
 	rdfs:seeAlso <https://csrc.nist.gov/pubs/cswp/29/the-nist-cybersecurity-framework-csf-20/final> ;
-	rdfs:subClassOf _:c14n15 , _:c14n17 , _:c14n2 , _:c14n54 , _:c14n55 ;
+	rdfs:subClassOf _:c14n15 , _:c14n18 , _:c14n2 , _:c14n57 , _:c14n58 ;
 	skos:broadMatch oscal:Catalog ;
 	skos:definition "One edition of the CSF as a whole: its functions, each holding its categories and their subcategories." ;
 	skos:exactMatch nist_csf_v2:Framework ;
@@ -53,7 +53,7 @@ nist_csf_v2:CsfFramework a owl:Class ;
 nist_csf_v2:CsfFunction a owl:Class ;
 	rdfs:label "CsfFunction" ;
 	rdfs:seeAlso <https://www.nist.gov/cyberframework> ;
-	rdfs:subClassOf _:c14n0 , _:c14n18 , _:c14n19 , _:c14n25 , _:c14n31 , _:c14n4 , _:c14n42 , _:c14n49 , _:c14n51 , _:c14n56 , _:c14n57 ;
+	rdfs:subClassOf _:c14n0 , _:c14n19 , _:c14n20 , _:c14n26 , _:c14n32 , _:c14n4 , _:c14n44 , _:c14n52 , _:c14n54 , _:c14n59 , _:c14n60 ;
 	skos:broadMatch oscal:Group ;
 	skos:definition "One of the six functions that sort the CSF's outcomes at the highest level: GOVERN, IDENTIFY, PROTECT, DETECT, RESPOND and RECOVER. Each is named by two letters and described in a sentence." ;
 	skos:exactMatch nist_csf_v2:Function ;
@@ -61,15 +61,32 @@ nist_csf_v2:CsfFunction a owl:Class ;
 nist_csf_v2:CsfImplementationExample a owl:Class ;
 	rdfs:label "CsfImplementationExample" ;
 	rdfs:seeAlso <https://www.nist.gov/cyberframework> ;
-	rdfs:subClassOf _:c14n10 , _:c14n3 , _:c14n37 , _:c14n45 , _:c14n5 , _:c14n60 ;
+	rdfs:subClassOf _:c14n10 , _:c14n3 , _:c14n39 , _:c14n48 , _:c14n5 , _:c14n64 ;
 	skos:broadMatch oscal:Part ;
 	skos:definition "An implementation example: one concise, action-oriented step that could help achieve a subcategory's outcome. NIST publishes the examples beside the Core, in its reference tool and its catalog, not in CSWP 29 itself." ;
 	skos:exactMatch nist_csf_v2:ImplementationExample ;
 	skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
+nist_csf_v2:CsfRiskParty\#first_party dcterms:title "First-party risk" ;
+	a owl:Class ;
+	rdfs:label "first_party" ;
+	rdfs:subClassOf nist_csf_v2:CsfRiskParty ;
+	skos:definition "Risk to the organization from its own systems, people and processes. The catalog's value is 1st." .
+nist_csf_v2:CsfRiskParty\#third_party dcterms:title "Third-party risk" ;
+	a owl:Class ;
+	rdfs:label "third_party" ;
+	rdfs:subClassOf nist_csf_v2:CsfRiskParty ;
+	skos:definition "Risk that reaches the organization through its suppliers, partners and other third parties. The catalog's value is 3rd." .
+nist_csf_v2:CsfRiskParty a owl:Class ;
+	rdfs:label "CsfRiskParty" ;
+	rdfs:seeAlso <https://www.nist.gov/cyberframework> ;
+	owl:unionOf _:c14n63 ;
+	skos:definition "Whose risk a subcategory's outcome addresses, as NIST's catalog marks it in a marking property of class risk-party." ;
+	skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> ;
+	linkml:permissible_values nist_csf_v2:CsfRiskParty\#first_party , nist_csf_v2:CsfRiskParty\#third_party .
 nist_csf_v2:CsfSubcategory a owl:Class ;
 	rdfs:label "CsfSubcategory" ;
 	rdfs:seeAlso <https://www.nist.gov/cyberframework> ;
-	rdfs:subClassOf _:c14n11 , _:c14n13 , _:c14n14 , _:c14n20 , _:c14n23 , _:c14n26 , _:c14n27 , _:c14n35 , _:c14n40 , _:c14n47 , _:c14n48 , _:c14n50 , _:c14n53 , _:c14n58 , _:c14n6 ;
+	rdfs:subClassOf _:c14n11 , _:c14n13 , _:c14n14 , _:c14n17 , _:c14n21 , _:c14n24 , _:c14n27 , _:c14n28 , _:c14n36 , _:c14n38 , _:c14n42 , _:c14n50 , _:c14n51 , _:c14n53 , _:c14n56 , _:c14n6 , _:c14n61 ;
 	skos:broadMatch oscal:Control ;
 	skos:definition "A cybersecurity outcome: one statement of a result within a category, such as GV.OC-01, or a CSF 1.1 subcategory that CSF 2.0 withdrew, which the catalog keeps with its statement, its status and where it moved or what incorporated it." ;
 	skos:exactMatch nist_csf_v2:Subcategory ;
@@ -140,6 +157,11 @@ nist_csf_v2:subcategory_moved_to a owl:DatatypeProperty ;
 	rdfs:label "subcategory_moved_to" ;
 	skos:definition "The CSF 2.0 subcategory a withdrawn subcategory moved to, as the catalog states it, such as GV.OC-03 for ID.GV-03. The catalog names two for a few." ;
 	skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> .
+nist_csf_v2:subcategory_risk_parties a owl:ObjectProperty ;
+	rdfs:label "subcategory_risk_parties" ;
+	skos:definition "Whose risk the subcategory's outcome addresses: the organization's own, its suppliers' and other third parties', or both." ;
+	skos:inScheme <https://w3id.org/lmodel/nist-csf-v2> ;
+	skos:note "NIST publishes this in its catalog and its reference tool, not in CSWP 29. The catalog marks most CSF 2.0 subcategories and leaves a few unmarked, so an absent value says nothing about the outcome. A withdrawn subcategory carries none." .
 nist_csf_v2:subcategory_status a owl:ObjectProperty ;
 	rdfs:label "subcategory_status" ;
 	skos:definition "withdrawn for a CSF 1.1 subcategory that CSF 2.0 withdrew. A subcategory of CSF 2.0 has no status." ;
@@ -177,182 +199,182 @@ _:c14n16 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty nist_csf_v2:csf_category_id .
 _:c14n17 a owl:Restriction ;
+	owl:allValuesFrom nist_csf_v2:CsfRiskParty ;
+	owl:onProperty nist_csf_v2:subcategory_risk_parties .
+_:c14n18 a owl:Restriction ;
 	owl:allValuesFrom nist_csf_v2:CsfFunction ;
 	owl:onProperty nist_csf_v2:csf_functions .
-_:c14n18 a owl:Restriction ;
+_:c14n19 a owl:Restriction ;
 	owl:minCardinality 1 ;
 	owl:onProperty nist_csf_v2:title .
-_:c14n19 a owl:Restriction ;
-	owl:allValuesFrom xsd:string ;
-	owl:onProperty nist_csf_v2:title .
 _:c14n2 a owl:Restriction ;
-	owl:allValuesFrom _:c14n68 ;
+	owl:allValuesFrom _:c14n72 ;
 	owl:onProperty nist_csf_v2:csf_version .
 _:c14n20 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
-	owl:onProperty nist_csf_v2:subcategory_moved_to .
+	owl:onProperty nist_csf_v2:title .
 _:c14n21 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty nist_csf_v2:subcategory_moved_to .
+_:c14n22 a owl:Restriction ;
 	owl:allValuesFrom nist_csf_v2:CsfSubcategory ;
 	owl:onProperty nist_csf_v2:category_subcategories .
-_:c14n22 a owl:Restriction ;
+_:c14n23 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty nist_csf_v2:csf_category_id .
-_:c14n23 a owl:Restriction ;
+_:c14n24 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty nist_csf_v2:csf_subcategory_id .
-_:c14n24 a owl:Restriction ;
+_:c14n25 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty nist_csf_v2:category_subcategories .
-_:c14n25 a owl:Restriction ;
+_:c14n26 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty nist_csf_v2:csf_function_id .
-_:c14n26 a owl:Restriction ;
+_:c14n27 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty nist_csf_v2:subcategory_examples .
-_:c14n27 a owl:Restriction ;
+_:c14n28 a owl:Restriction ;
 	owl:allValuesFrom nist_csf_v2:CsfElementStatus ;
 	owl:onProperty nist_csf_v2:subcategory_status .
-_:c14n28 a owl:Restriction ;
+_:c14n29 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty nist_csf_v2:description .
-_:c14n29 xsd:pattern "^(GV|ID|PR|DE|RS|RC)$" .
 _:c14n3 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty nist_csf_v2:description .
-_:c14n30 xsd:pattern "^(GV|ID|PR|DE|RS|RC)(\\.[A-Z]{2}(-[0-9]{2})?)?$" .
-_:c14n31 a owl:Restriction ;
+_:c14n30 xsd:pattern "^(GV|ID|PR|DE|RS|RC)$" .
+_:c14n31 xsd:pattern "^(GV|ID|PR|DE|RS|RC)(\\.[A-Z]{2}(-[0-9]{2})?)?$" .
+_:c14n32 a owl:Restriction ;
 	owl:allValuesFrom nist_csf_v2:CsfCategory ;
 	owl:onProperty nist_csf_v2:function_categories .
-_:c14n32 xsd:pattern "^(GV|ID|PR|DE|RS|RC)\\.[A-Z]{2}-[0-9]{2}$" .
-_:c14n33 a owl:Restriction ;
+_:c14n33 xsd:pattern "^(GV|ID|PR|DE|RS|RC)\\.[A-Z]{2}-[0-9]{2}$" .
+_:c14n34 a owl:Restriction ;
 	owl:allValuesFrom nist_csf_v2:CsfElementStatus ;
 	owl:onProperty nist_csf_v2:category_status .
-_:c14n34 a owl:Restriction ;
+_:c14n35 a owl:Restriction ;
 	owl:minCardinality 1 ;
 	owl:onProperty nist_csf_v2:csf_category_id .
-_:c14n35 a owl:Restriction ;
-	owl:allValuesFrom xsd:string ;
-	owl:onProperty nist_csf_v2:csf_subcategory_id .
 _:c14n36 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
-	owl:onProperty nist_csf_v2:category_incorporated_into .
+	owl:onProperty nist_csf_v2:csf_subcategory_id .
 _:c14n37 a owl:Restriction ;
-	owl:minCardinality 1 ;
-	owl:onProperty nist_csf_v2:description .
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty nist_csf_v2:category_incorporated_into .
 _:c14n38 a owl:Restriction ;
 	owl:minCardinality 0 ;
-	owl:onProperty nist_csf_v2:category_incorporated_into .
-_:c14n39 xsd:pattern "^(GV|ID|PR|DE|RS|RC)\\.[A-Z]{2}$" .
+	owl:onProperty nist_csf_v2:subcategory_risk_parties .
+_:c14n39 a owl:Restriction ;
+	owl:minCardinality 1 ;
+	owl:onProperty nist_csf_v2:description .
 _:c14n4 a owl:Restriction ;
 	owl:minCardinality 1 ;
 	owl:onProperty nist_csf_v2:csf_function_id .
 _:c14n40 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty nist_csf_v2:category_incorporated_into .
+_:c14n41 xsd:pattern "^(GV|ID|PR|DE|RS|RC)\\.[A-Z]{2}$" .
+_:c14n42 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty nist_csf_v2:subcategory_incorporated_into .
-_:c14n41 a owl:Restriction ;
+_:c14n43 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty nist_csf_v2:description .
-_:c14n42 a owl:Restriction ;
+_:c14n44 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty nist_csf_v2:description .
-_:c14n43 a owl:Restriction ;
+_:c14n45 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty nist_csf_v2:category_status .
-_:c14n44 a owl:Restriction ;
+_:c14n46 rdf:first nist_csf_v2:CsfRiskParty\#third_party ;
+	rdf:rest rdf:nil .
+_:c14n47 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty nist_csf_v2:category_moved_to .
-_:c14n45 a owl:Restriction ;
+_:c14n48 a owl:Restriction ;
 	owl:minCardinality 1 ;
 	owl:onProperty nist_csf_v2:csf_implementation_example_id .
-_:c14n46 xsd:pattern "^[0-9]+\\.[0-9]+$" .
-_:c14n47 a owl:Restriction ;
-	owl:allValuesFrom _:c14n62 ;
-	owl:onProperty nist_csf_v2:description .
-_:c14n48 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty nist_csf_v2:subcategory_status .
-_:c14n49 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty nist_csf_v2:csf_function_id .
+_:c14n49 xsd:pattern "^[0-9]+\\.[0-9]+$" .
 _:c14n5 a owl:Restriction ;
-	owl:allValuesFrom _:c14n65 ;
+	owl:allValuesFrom _:c14n66 ;
 	owl:onProperty nist_csf_v2:description .
 _:c14n50 a owl:Restriction ;
+	owl:allValuesFrom _:c14n69 ;
+	owl:onProperty nist_csf_v2:description .
+_:c14n51 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty nist_csf_v2:subcategory_status .
+_:c14n52 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty nist_csf_v2:csf_function_id .
+_:c14n53 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty nist_csf_v2:subcategory_incorporated_into .
-_:c14n51 a owl:Restriction ;
+_:c14n54 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty nist_csf_v2:function_categories .
-_:c14n52 a owl:Restriction ;
+_:c14n55 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty nist_csf_v2:title .
-_:c14n53 a owl:Restriction ;
+_:c14n56 a owl:Restriction ;
 	owl:minCardinality 1 ;
 	owl:onProperty nist_csf_v2:csf_subcategory_id .
-_:c14n54 a owl:Restriction ;
+_:c14n57 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty nist_csf_v2:csf_version .
-_:c14n55 a owl:Restriction ;
+_:c14n58 a owl:Restriction ;
 	owl:minCardinality 1 ;
 	owl:onProperty nist_csf_v2:csf_functions .
-_:c14n56 a owl:Restriction ;
+_:c14n59 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty nist_csf_v2:description .
-_:c14n57 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty nist_csf_v2:description .
-_:c14n58 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty nist_csf_v2:description .
-_:c14n59 xsd:pattern "^(GV|ID|PR|DE|RS|RC)\\.[A-Z]{2}(-[0-9]{2})?$" .
 _:c14n6 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty nist_csf_v2:subcategory_moved_to .
 _:c14n60 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty nist_csf_v2:description .
+_:c14n61 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty nist_csf_v2:description .
+_:c14n62 xsd:pattern "^(GV|ID|PR|DE|RS|RC)\\.[A-Z]{2}(-[0-9]{2})?$" .
+_:c14n63 rdf:first nist_csf_v2:CsfRiskParty\#first_party ;
+	rdf:rest _:c14n46 .
+_:c14n64 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty nist_csf_v2:csf_implementation_example_id .
-_:c14n61 a owl:Restriction ;
+_:c14n65 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty nist_csf_v2:category_moved_to .
-_:c14n62 a rdfs:Datatype ;
+_:c14n66 a rdfs:Datatype ;
 	owl:onDatatype xsd:string ;
-	owl:withRestrictions _:c14n63 .
-_:c14n63 rdf:first _:c14n64 ;
+	owl:withRestrictions _:c14n67 .
+_:c14n67 rdf:first _:c14n68 ;
 	rdf:rest rdf:nil .
-_:c14n64 xsd:pattern "^\\s*\\S" .
-_:c14n65 a rdfs:Datatype ;
+_:c14n68 xsd:pattern "^\\s*\\S" .
+_:c14n69 a rdfs:Datatype ;
 	owl:onDatatype xsd:string ;
-	owl:withRestrictions _:c14n66 .
-_:c14n66 rdf:first _:c14n67 ;
-	rdf:rest rdf:nil .
-_:c14n67 xsd:pattern "^\\s*\\S" .
-_:c14n68 a rdfs:Datatype ;
-	owl:onDatatype xsd:string ;
-	owl:withRestrictions _:c14n69 .
-_:c14n69 rdf:first _:c14n46 ;
-	rdf:rest rdf:nil .
+	owl:withRestrictions _:c14n70 .
 _:c14n7 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty nist_csf_v2:description .
-_:c14n70 a rdfs:Datatype ;
-	owl:onDatatype xsd:string ;
-	owl:withRestrictions _:c14n71 .
-_:c14n71 rdf:first _:c14n59 ;
+_:c14n70 rdf:first _:c14n71 ;
 	rdf:rest rdf:nil .
+_:c14n71 xsd:pattern "^\\s*\\S" .
 _:c14n72 a rdfs:Datatype ;
 	owl:onDatatype xsd:string ;
 	owl:withRestrictions _:c14n73 .
-_:c14n73 rdf:first _:c14n39 ;
+_:c14n73 rdf:first _:c14n49 ;
 	rdf:rest rdf:nil .
 _:c14n74 a rdfs:Datatype ;
 	owl:onDatatype xsd:string ;
 	owl:withRestrictions _:c14n75 .
-_:c14n75 rdf:first _:c14n32 ;
+_:c14n75 rdf:first _:c14n62 ;
 	rdf:rest rdf:nil .
 _:c14n76 a rdfs:Datatype ;
 	owl:onDatatype xsd:string ;
 	owl:withRestrictions _:c14n77 .
-_:c14n77 rdf:first _:c14n29 ;
+_:c14n77 rdf:first _:c14n33 ;
 	rdf:rest rdf:nil .
 _:c14n78 a rdfs:Datatype ;
 	owl:onDatatype xsd:string ;
@@ -363,7 +385,17 @@ _:c14n8 xsd:pattern "^(GV|ID|PR|DE|RS|RC)\\.[A-Z]{2}-[0-9]{2}\\.[0-9]{3}$" .
 _:c14n80 a rdfs:Datatype ;
 	owl:onDatatype xsd:string ;
 	owl:withRestrictions _:c14n81 .
-_:c14n81 rdf:first _:c14n8 ;
+_:c14n81 rdf:first _:c14n31 ;
+	rdf:rest rdf:nil .
+_:c14n82 a rdfs:Datatype ;
+	owl:onDatatype xsd:string ;
+	owl:withRestrictions _:c14n83 .
+_:c14n83 rdf:first _:c14n41 ;
+	rdf:rest rdf:nil .
+_:c14n84 a rdfs:Datatype ;
+	owl:onDatatype xsd:string ;
+	owl:withRestrictions _:c14n85 .
+_:c14n85 rdf:first _:c14n8 ;
 	rdf:rest rdf:nil .
 _:c14n9 a owl:Restriction ;
 	owl:maxCardinality 1 ;

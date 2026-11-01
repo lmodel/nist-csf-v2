@@ -3,7 +3,7 @@ type: Dataset
 id: https://w3id.org/lmodel/nist-csf-v2/knowledge/datasets/nist-csf-v2-linkml-schema
 genre: reference
 title: nist-csf-v2 LinkML schema
-description: "The LinkML schema of the Cybersecurity Framework (CSF) 2.0, `src/nist_csf_v2/schema/nist_csf_v2.yaml` (schema id `https://w3id.org/lmodel/nist-csf-v2`, version 2.0.0): five classes, one enum with the value `withdrawn` and six identifier types. Its `lokf adapt` copy `.lokf/nist-csf-v2.yaml`, rooted on the function, the category and the subcategory, is the bundle's domain schema."
+description: "The LinkML schema of the Cybersecurity Framework (CSF) 2.0, `src/nist_csf_v2/schema/nist_csf_v2.yaml` (schema id `https://w3id.org/lmodel/nist-csf-v2`, version 2.0.0): five classes, two enums and six identifier types. Its `lokf adapt` copy `.lokf/nist-csf-v2.yaml`, rooted on the function, the category and the subcategory, is the bundle's domain schema."
 resource: src/nist_csf_v2/schema/nist_csf_v2.yaml
 version: 2.0.0
 license: Apache-2.0
@@ -29,7 +29,7 @@ sources:
     title: the tool.lokf table
 generated:
   by: process:ktl-librarian
-  at: "2026-10-30T09:04:34Z"
+  at: "2026-11-01T22:06:37Z"
 status: draft
 verified:
   - by: process:ktl-librarian
@@ -45,10 +45,10 @@ verified:
 - **`CsfFramework`** is the tree root: one edition of the CSF as a whole. It requires `csf_version`, two numbers such as `2.0`, and `csf_functions`, which holds at least one function.
 - **`CsfFunction`** is one of the six functions. It requires `csf_function_id`, two letters out of `GV`, `ID`, `PR`, `DE`, `RS` and `RC`, and a `title`, and it may hold its categories in `function_categories`.
 - **`CsfCategory`** is a category, or a CSF 1.1 category that CSF 2.0 withdrew. It requires `csf_category_id`, such as `GV.OC`, and a `title`, and it may hold `category_subcategories`, `category_status`, `category_moved_to` and `category_incorporated_into`.
-- **`CsfSubcategory`** is a subcategory, or a withdrawn one. It requires `csf_subcategory_id`, such as `GV.OC-01`, and a `description`, its statement, which may not be blank. It may hold `subcategory_examples`, `subcategory_status`, `subcategory_moved_to` and `subcategory_incorporated_into`.
+- **`CsfSubcategory`** is a subcategory, or a withdrawn one. It requires `csf_subcategory_id`, such as `GV.OC-01`, and a `description`, its statement, which may not be blank. It may hold `subcategory_examples`, `subcategory_status`, `subcategory_moved_to`, `subcategory_incorporated_into` and `subcategory_risk_parties`.
 - **`CsfImplementationExample`** is an implementation example. It requires `csf_implementation_example_id`, such as `GV.OC-01.001`, and a `description` that is not blank.
 
-The enum `CsfElementStatus` has one value, `withdrawn`, the status the catalog gives a CSF 1.1 category or subcategory that CSF 2.0 withdrew. Six types hold the forms of the identifiers:
+The enum `CsfElementStatus` has one value, `withdrawn`, the status the catalog gives a CSF 1.1 category or subcategory that CSF 2.0 withdrew. The enum `CsfRiskParty` has two, `first_party` and `third_party`, the catalog's risk-party markings `1st` and `3rd`. Six types hold the forms of the identifiers:
 
 - `csf_function_identifier`, `csf_category_identifier`, `csf_subcategory_identifier` and `csf_implementation_example_identifier`;
 - `csf_element_identifier`, for a function, category or subcategory that incorporated a withdrawn category;
@@ -58,7 +58,7 @@ The schema has six top-level slots: the four identifier keys, `csf_function_id`,
 
 ## Mappings
 
-Each class names a class of lmodel/oscal in `broad_mappings`: `oscal:Catalog` for the framework, `oscal:Group` for the function, `oscal:Control` for the category and the subcategory, and `oscal:Part` for the example. A comment in the header says that NIST's catalog renders the elements that way. Another says that the catalog's first-party and third-party risk marking is the reference tool's, not CSWP 29's, so the schema leaves it out. [Scope, influences and mappings](../explanations/scope-and-influences.md) says more.
+Each class names a class of lmodel/oscal in `broad_mappings`: `oscal:Catalog` for the framework, `oscal:Group` for the function, `oscal:Control` for the category and the subcategory, and `oscal:Part` for the example. A comment in the header says that NIST's catalog renders the elements that way. Another says that the catalog's first-party and third-party risk marking is not in CSWP 29, but that NIST publishes it beside the Core as it publishes the implementation examples, so the schema carries it as a subcategory's `subcategory_risk_parties`, of the enum `CsfRiskParty`. [Scope, influences and mappings](../explanations/scope-and-influences.md) says more.
 
 ## As the bundle's domain schema
 

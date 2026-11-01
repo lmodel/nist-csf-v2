@@ -6,6 +6,16 @@ export enum CsfElementStatus {
     /** The element was in CSF 1.1 and CSF 2.0 withdrew it. The catalog keeps it, and names where it moved or what incorporated it where NIST recorded that. */
     withdrawn = "withdrawn",
 };
+/**
+* Whose risk a subcategory's outcome addresses, as NIST's catalog marks it in a marking property of class risk-party.
+*/
+export enum CsfRiskParty {
+    
+    /** Risk to the organization from its own systems, people and processes. The catalog's value is 1st. */
+    First_party_risk = "first_party",
+    /** Risk that reaches the organization through its suppliers, partners and other third parties. The catalog's value is 3rd. */
+    Third_party_risk = "third_party",
+};
 
 
 /**
@@ -71,6 +81,8 @@ export interface CsfSubcategory {
     subcategory_moved_to?: string[],
     /** The CSF 2.0 category or subcategory that took in a withdrawn subcategory's outcome, as the catalog states it, such as GV.OC-01 for ID.BE-02. */
     subcategory_incorporated_into?: string[],
+    /** Whose risk the subcategory's outcome addresses: the organization's own, its suppliers' and other third parties', or both. */
+    subcategory_risk_parties?: string,
 }
 
 
