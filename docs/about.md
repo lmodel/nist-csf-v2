@@ -28,13 +28,15 @@ the repository keeps beside the schema.
 
 ## What is left out
 
-The schema models the Core and the implementation examples, and the CSF 1.1
-categories and subcategories that NIST's catalog keeps as withdrawn. It holds
-none of the publication's prose outside the Core: the Organizational Profiles
-of Section 3, the CSF Tiers of Appendix B and the glossary of Appendix C. It
+The schema models the Core and the implementation examples, the first-party
+and third-party risk marking NIST's catalog gives most subcategories, and the
+CSF 1.1 categories and subcategories that NIST's catalog keeps as withdrawn.
+The examples and the marking are not in CSWP 29: NIST publishes them beside
+the Core, in its catalog and its reference tool. The schema holds none of
+the publication's prose outside the Core: the Organizational Profiles of
+Section 3, the CSF Tiers of Appendix B and the glossary of Appendix C. It
 holds no Informative Reference, which NIST publishes apart from the catalog,
-and no community profile. The first-party and third-party risk marking in
-NIST's catalog is left out too, because CSWP 29 does not carry it.
+and no community profile.
 
 ## Reference
 

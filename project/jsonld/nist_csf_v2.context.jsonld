@@ -58,6 +58,14 @@
       "subcategory_moved_to": {
          "@id": "subcategory_moved_to"
       },
+      "subcategory_risk_parties": {
+         "@context": {
+            "text": "skos:notation",
+            "description": "skos:prefLabel",
+            "meaning": "@id"
+         },
+         "@id": "subcategory_risk_parties"
+      },
       "subcategory_status": {
          "@context": {
             "text": "skos:notation",

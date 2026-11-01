@@ -1,0 +1,10 @@
+# Subcategory GV.OC-02, which NIST's catalog marks as both first-party and
+# third-party risk. The text paraphrases CSWP 29; the examples are left out.
+csf_subcategory_id: GV.OC-02
+description: >-
+  The organization understands what its internal and external stakeholders
+  need and expect where cybersecurity risk is concerned, and takes it into
+  account.
+subcategory_risk_parties:
+  - first_party
+  - third_party

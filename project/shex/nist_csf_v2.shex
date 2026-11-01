@@ -102,7 +102,9 @@ linkml:Sparqlpath xsd:string
           <subcategory_examples> @<CsfImplementationExample> * ;
           <subcategory_status> [ <https://w3id.org/lmodel/nist-csf-v2/CsfElementStatus#withdrawn> ] ? ;
           <subcategory_moved_to> @<CsfSubcategoryIdentifier> * ;
-          <subcategory_incorporated_into> @<CsfCategoryOrSubcategoryIdentifier> *
+          <subcategory_incorporated_into> @<CsfCategoryOrSubcategoryIdentifier> * ;
+          <subcategory_risk_parties> [ <https://w3id.org/lmodel/nist-csf-v2/CsfRiskParty#first_party>
+             <https://w3id.org/lmodel/nist-csf-v2/CsfRiskParty#third_party> ] *
        ) ;
        rdf:type [ <Subcategory> ] ?
     )

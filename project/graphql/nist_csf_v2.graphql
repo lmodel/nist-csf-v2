@@ -5,6 +5,12 @@ enum CsfElementStatus
     withdrawn
   }
 
+enum CsfRiskParty
+  {
+    first_party
+    third_party
+  }
+
 type CsfCategory
   {
     csfCategoryId: CsfCategoryIdentifier!
@@ -44,4 +50,5 @@ type CsfSubcategory
     subcategoryStatus: CsfElementStatus
     subcategoryMovedTo: [CsfSubcategoryIdentifier]
     subcategoryIncorporatedInto: [CsfCategoryOrSubcategoryIdentifier]
+    subcategoryRiskParties: [CsfRiskParty]
   }

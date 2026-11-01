@@ -24,7 +24,7 @@
     "The version is the CSF edition that CSWP 29 defines, and source is the publication's digital object identifier. NIST's Cybersecurity and Privacy Reference Tool names the same edition CSF_2_0_0, and the catalog NIST publishes for it in usnistgov/oscal-content is copied to src/nist_csf_v2/schema/oscal-content/ at the tag and commit in the annotations. That catalog carries a version number of its own, 1.2.1, which numbers the catalog and not the framework. The release tags are the schema's own versions, and scripts/check_upstream_release.py reads the same pins and reports when NIST publishes another edition or changes the catalog.",
     "CSWP 29 is a work of the United States Government and is not subject to copyright in the United States. The descriptions here are this project's own words; NIST's text of each function, category, subcategory and example stays in the catalog copy.",
     "NIST's catalog renders each function as an OSCAL group, each category and subcategory as an OSCAL control and each implementation example as a part. The broad_mappings name those lmodel/oscal classes. A withdrawn category or subcategory is a control with a status property and links to where it moved or what incorporated it; the schema carries those as the element's status and identifiers.",
-    "The catalog also marks most CSF 2.0 subcategories as first-party risk, third-party risk or both, in a marking property of class risk-party. CSWP 29 carries no such marking, so it is the reference tool's and the schema leaves it out."
+    "The catalog also marks most CSF 2.0 subcategories as first-party risk, third-party risk or both, in a marking property of class risk-party. CSWP 29 carries no such marking, but the catalog and the reference tool publish it beside the Core as they publish the implementation examples, so the schema carries it too, as a subcategory's risk parties."
   ],
   "source": "https://doi.org/10.6028/NIST.CSWP.29",
   "see_also": [
@@ -454,6 +454,27 @@
           "description": "The element was in CSF 1.1 and CSF 2.0 withdrew it. The catalog keeps it, and names where it moved or what incorporated it where NIST recorded that."
         }
       ]
+    },
+    {
+      "name": "CsfRiskParty",
+      "definition_uri": "https://w3id.org/lmodel/nist-csf-v2/CsfRiskParty",
+      "description": "Whose risk a subcategory's outcome addresses, as NIST's catalog marks it in a marking property of class risk-party.",
+      "from_schema": "https://w3id.org/lmodel/nist-csf-v2",
+      "see_also": [
+        "https://www.nist.gov/cyberframework"
+      ],
+      "permissible_values": [
+        {
+          "text": "first_party",
+          "description": "Risk to the organization from its own systems, people and processes. The catalog's value is 1st.",
+          "title": "First-party risk"
+        },
+        {
+          "text": "third_party",
+          "description": "Risk that reaches the organization through its suppliers, partners and other third parties. The catalog's value is 3rd.",
+          "title": "Third-party risk"
+        }
+      ]
     }
   ],
   "slots": [
@@ -715,6 +736,23 @@
         "CsfSubcategory"
       ],
       "range": "csf_category_or_subcategory_identifier",
+      "multivalued": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "csfSubcategory__subcategory_risk_parties",
+      "description": "Whose risk the subcategory's outcome addresses: the organization's own, its suppliers' and other third parties', or both.",
+      "comments": [
+        "NIST publishes this in its catalog and its reference tool, not in CSWP 29. The catalog marks most CSF 2.0 subcategories and leaves a few unmarked, so an absent value says nothing about the outcome. A withdrawn subcategory carries none."
+      ],
+      "from_schema": "https://w3id.org/lmodel/nist-csf-v2",
+      "slot_uri": "https://w3id.org/lmodel/nist-csf-v2/subcategory_risk_parties",
+      "alias": "subcategory_risk_parties",
+      "owner": "CsfSubcategory",
+      "domain_of": [
+        "CsfSubcategory"
+      ],
+      "range": "CsfRiskParty",
       "multivalued": true,
       "@type": "SlotDefinition"
     },
@@ -984,7 +1022,8 @@
         "csfSubcategory__subcategory_examples",
         "csfSubcategory__subcategory_status",
         "csfSubcategory__subcategory_moved_to",
-        "csfSubcategory__subcategory_incorporated_into"
+        "csfSubcategory__subcategory_incorporated_into",
+        "csfSubcategory__subcategory_risk_parties"
       ],
       "slot_usage": {},
       "attributes": [
@@ -1014,6 +1053,16 @@
           "name": "subcategory_incorporated_into",
           "description": "The CSF 2.0 category or subcategory that took in a withdrawn subcategory's outcome, as the catalog states it, such as GV.OC-01 for ID.BE-02.",
           "range": "csf_category_or_subcategory_identifier",
+          "multivalued": true,
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "subcategory_risk_parties",
+          "description": "Whose risk the subcategory's outcome addresses: the organization's own, its suppliers' and other third parties', or both.",
+          "comments": [
+            "NIST publishes this in its catalog and its reference tool, not in CSWP 29. The catalog marks most CSF 2.0 subcategories and leaves a few unmarked, so an absent value says nothing about the outcome. A withdrawn subcategory carries none."
+          ],
+          "range": "CsfRiskParty",
           "multivalued": true,
           "@type": "SlotDefinition"
         }
@@ -1046,8 +1095,8 @@
   ],
   "metamodel_version": "1.12.0",
   "source_file": "nist_csf_v2.yaml",
-  "source_file_date": "2026-10-30T09:02:11",
-  "source_file_size": 13379,
+  "source_file_date": "2026-11-01T22:04:02",
+  "source_file_size": 14720,
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/nist_csf_v2.context.jsonld",

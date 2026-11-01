@@ -37,7 +37,9 @@ comments:
   schema carries those as the element's status and identifiers.
 - The catalog also marks most CSF 2.0 subcategories as first-party risk, third-party
   risk or both, in a marking property of class risk-party. CSWP 29 carries no such
-  marking, so it is the reference tool's and the schema leaves it out.
+  marking, but the catalog and the reference tool publish it beside the Core as they
+  publish the implementation examples, so the schema carries it too, as a subcategory's
+  risk parties.
 source: https://doi.org/10.6028/NIST.CSWP.29
 see_also:
 - https://lmodel.github.io/nist-csf-v2
@@ -413,6 +415,25 @@ enums:
         description: The element was in CSF 1.1 and CSF 2.0 withdrew it. The catalog
           keeps it, and names where it moved or what incorporated it where NIST recorded
           that.
+  CsfRiskParty:
+    name: CsfRiskParty
+    definition_uri: https://w3id.org/lmodel/nist-csf-v2/CsfRiskParty
+    description: Whose risk a subcategory's outcome addresses, as NIST's catalog marks
+      it in a marking property of class risk-party.
+    from_schema: https://w3id.org/lmodel/nist-csf-v2
+    see_also:
+    - https://www.nist.gov/cyberframework
+    permissible_values:
+      first_party:
+        text: first_party
+        description: Risk to the organization from its own systems, people and processes.
+          The catalog's value is 1st.
+        title: First-party risk
+      third_party:
+        text: third_party
+        description: Risk that reaches the organization through its suppliers, partners
+          and other third parties. The catalog's value is 3rd.
+        title: Third-party risk
 slots:
   csf_function_id:
     name: csf_function_id
@@ -636,6 +657,22 @@ slots:
     domain_of:
     - CsfSubcategory
     range: csf_category_or_subcategory_identifier
+    multivalued: true
+  csfSubcategory__subcategory_risk_parties:
+    name: csfSubcategory__subcategory_risk_parties
+    description: 'Whose risk the subcategory''s outcome addresses: the organization''s
+      own, its suppliers'' and other third parties'', or both.'
+    comments:
+    - NIST publishes this in its catalog and its reference tool, not in CSWP 29. The
+      catalog marks most CSF 2.0 subcategories and leaves a few unmarked, so an absent
+      value says nothing about the outcome. A withdrawn subcategory carries none.
+    from_schema: https://w3id.org/lmodel/nist-csf-v2
+    slot_uri: nist_csf_v2:subcategory_risk_parties
+    alias: subcategory_risk_parties
+    owner: CsfSubcategory
+    domain_of:
+    - CsfSubcategory
+    range: CsfRiskParty
     multivalued: true
   CsfFunction_title:
     name: CsfFunction_title
@@ -872,6 +909,7 @@ classes:
     - csfSubcategory__subcategory_status
     - csfSubcategory__subcategory_moved_to
     - csfSubcategory__subcategory_incorporated_into
+    - csfSubcategory__subcategory_risk_parties
     slot_usage:
       description:
         name: description
@@ -905,6 +943,17 @@ classes:
           subcategory's outcome, as the catalog states it, such as GV.OC-01 for ID.BE-02.
         range: csf_category_or_subcategory_identifier
         multivalued: true
+      subcategory_risk_parties:
+        name: subcategory_risk_parties
+        description: 'Whose risk the subcategory''s outcome addresses: the organization''s
+          own, its suppliers'' and other third parties'', or both.'
+        comments:
+        - NIST publishes this in its catalog and its reference tool, not in CSWP 29.
+          The catalog marks most CSF 2.0 subcategories and leaves a few unmarked,
+          so an absent value says nothing about the outcome. A withdrawn subcategory
+          carries none.
+        range: CsfRiskParty
+        multivalued: true
     class_uri: nist_csf_v2:Subcategory
   CsfImplementationExample:
     name: CsfImplementationExample
@@ -930,6 +979,6 @@ classes:
     class_uri: nist_csf_v2:ImplementationExample
 metamodel_version: 1.12.0
 source_file: nist_csf_v2.yaml
-source_file_date: '2026-10-30T09:02:11'
-source_file_size: 13379
+source_file_date: '2026-11-01T22:05:05'
+source_file_size: 14720
 
