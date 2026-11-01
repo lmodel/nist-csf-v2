@@ -4,19 +4,9 @@
 
 NIST CSWP 29 Cybersecurity Framework (CSF) 2.0 (LinkML)
 
-> **Two ways in.** This README is one; the other is a docent, a museum's name
-> for a guide. Install
-> [`ktl-docent`](https://github.com/noelmcloughlin/knowledge-trust-ladder) into
-> whatever agent you already use, by a route from
-> [the install page](https://w3id.org/ktl/docs/install/), and ask it anything
-> about this project. It answers from `.lokf/knowledge/`,
-> the checked part of what the project knows, and says how far each answer has
-> been trusted (still a draft, checked by automation only, or confirmed by a
-> named person). It opens the source for exact values, and records what it
-> could not answer so the gap gets filled. The same docent serves a person at a
-> prompt, an agent reading this file, or a chatbot that can load a skill.
-> **Agents:** if `.lokf/knowledge/index.md` exists, read it first. `llms.txt`
-> says how to weigh it.
+> **Only want to ask?** Install `ktl-docent` into any agent you use, by a route from [the install page](https://w3id.org/ktl/docs/install/), and ask it about this project. It answers from the bundle and says how far each answer has been checked.
+>
+> **Agents:** if `.lokf/knowledge/index.md` exists, read it first. `llms.txt` says how to weigh it.
 
 ## Documentation Website
 
@@ -24,30 +14,15 @@ NIST CSWP 29 Cybersecurity Framework (CSF) 2.0 (LinkML)
 
 ## What it models
 
-The Cybersecurity Framework (CSF) 2.0, which the National Institute of Standards and Technology (NIST) publishes as [Cybersecurity White Paper (CSWP) 29](https://doi.org/10.6028/NIST.CSWP.29) of February 26, 2024:
+The schema models the Cybersecurity Framework (CSF) 2.0, which the National Institute of Standards and Technology (NIST) publishes as [Cybersecurity White Paper (CSWP) 29](https://doi.org/10.6028/NIST.CSWP.29) of February 26, 2024. The schema holds the Core's six functions (`CsfFunction`), 22 categories (`CsfCategory`) and 106 subcategories (`CsfSubcategory`), the 363 implementation examples NIST publishes beside it, and the CSF 1.1 elements that CSF 2.0 withdrew, each with where it moved.
 
-* **Functions** (`CsfFunction`): the six functions that sort the Core's outcomes at the highest level, GOVERN (GV), IDENTIFY (ID), PROTECT (PR), DETECT (DE), RESPOND (RS) and RECOVER (RC).
-* **Categories** (`CsfCategory`): the 22 groups of related outcomes within a function, each with an identifier such as `GV.OC`.
-* **Subcategories** (`CsfSubcategory`): the 106 outcomes, each a statement with an identifier such as `GV.OC-01`.
-* **Implementation examples** (`CsfImplementationExample`): the 363 notional, action-oriented steps NIST publishes beside the Core, each with an identifier such as `GV.OC-01.001`.
-* **Withdrawn elements**: the 12 categories and 79 subcategories of CSF 1.1 that CSF 2.0 withdrew, which NIST's catalog keeps. Each carries `withdrawn` as its status, and the CSF 2.0 function, category or subcategory it moved to or that incorporated its outcomes, where NIST recorded one.
-* **The framework** (`CsfFramework`): one edition of the CSF as a single document that holds all of these.
-
-The schema header's `version` is the CSF edition, 2.0.0, as NIST's Cybersecurity and Privacy Reference Tool numbers it (`CSF_2_0_0`). Its `source` is the publication's digital object identifier (DOI). NIST also publishes the framework as a catalog in the Open Security Controls Assessment Language (OSCAL). [src/nist_csf_v2/schema/oscal-content/](src/nist_csf_v2/schema/oscal-content) holds that catalog as usnistgov/oscal-content released it in v1.6.0, matched to the release by git object hash. `tests/test_upstream.py` derives the whole framework from the copy, validates it, and holds it to the counts above. A weekly workflow opens an issue when oscal-content gains another edition of the CSF, changes the catalog, or the copy drifts.
-
-CSF 2.0 is the current edition. Release tags number the schema's versions.
-
-## Influences
-
-None beyond CSWP 29: the schema renders one publication, and its release asset and governance files follow [lmodel/slsa](https://github.com/lmodel/slsa).
+[src/nist_csf_v2/schema/oscal-content/](src/nist_csf_v2/schema/oscal-content) holds NIST's catalog of the framework in the Open Security Controls Assessment Language (OSCAL), from usnistgov/oscal-content v1.6.0, and `tests/test_upstream.py` derives the whole framework from it. A weekly workflow opens an issue when oscal-content gains another edition of the CSF, changes the catalog, or the copy drifts.
 
 ## Mappings
 
-The schema crosses to one vocabulary and borrows from none.
+* **OSCAL**: each class names its counterpart in [lmodel/oscal](https://github.com/lmodel/oscal) in `broad_mappings`: a function is a group, a category and a subcategory are controls, and an implementation example is a part.
 
-* **OSCAL**: NIST's catalog renders the framework as an OSCAL catalog, a function as a group, a category and a subcategory as controls, and an implementation example as a part. Each class names its counterpart in [lmodel/oscal](https://github.com/lmodel/oscal) in `broad_mappings`, because the OSCAL class is the more general one.
-
-The schema names no mapping to SP 800-53, SP 800-171, the CIS Controls or any other document. NIST publishes those relations as Informative References, listed below.
+The schema maps to no other document. NIST publishes those relations as Informative References, listed below.
 
 ## Not modelled here
 
@@ -74,27 +49,23 @@ Run `just` to list the project's [just](https://github.com/casey/just/) recipes.
 
 ## Knowledge Trust Ladder (KTL)
 
-`.lokf/` holds this project's [KTL](https://w3id.org/ktl/) knowledge bundle, in the Linked Open Knowledge Format (LOKF). Its domain schema is `.lokf/nist-csf-v2.yaml`, which `lokf adapt` writes from `src/nist_csf_v2/schema/nist_csf_v2.yaml`. Edit the source, never the copy. A release carries the copy as `schema-<tag>-nist-csf-v2.yaml`, on the terms [CONTRIBUTING.md](CONTRIBUTING.md#releasing-maintainers) gives.
+`.lokf/` holds this project's [KTL](https://w3id.org/ktl/) knowledge bundle. Its domain schema, `.lokf/nist-csf-v2.yaml`, is the copy `just lokf-adapt` writes from `src/nist_csf_v2/schema/nist_csf_v2.yaml`, and `just lokf-adapt-check` says when it is stale. Edit the source, never the copy. A release carries the copy as `schema-<tag>-nist-csf-v2.yaml`, on the terms [CONTRIBUTING.md](CONTRIBUTING.md#releasing-maintainers) gives.
 
-`just lokf-adapt` rewrites the copy, and `just lokf-adapt-check` says when it is stale. `project.justfile` names the classes the copy roots on `Concept`, and a concept may name any of them as its `type`. In Obsidian, add these classes to the KTL Registrar and KTL Curator plugins' *Known LOKF types* setting:
+The copy roots these classes on `Concept`, so a concept may name any of them as its `type`. In Obsidian, add them to the *Known LOKF types* setting of the KTL Registrar and KTL Curator plugins:
 
 ```text
 CsfFunction, CsfCategory, CsfSubcategory
 ```
 
-A concept writes the CSF identifier in `csf_function_id`, `csf_category_id` or `csf_subcategory_id`. A subcategory's concept names its category's concept in `isPartOf`, and a category's concept names its function's. A name and a description are the concept's own `title` and `description`.
+A concept writes the CSF identifier in `csf_function_id`, `csf_category_id` or `csf_subcategory_id`. A subcategory's concept names its category's concept in `isPartOf`, and a category's concept names its function's.
 
-A host imports the copy beside LOKF's schema, `lokf.yaml`, and beside other adapt copies. LinkML merges them into one namespace, where the last definition of a name wins silently. So no class, enum or type shares a name with LOKF's or with the copies of slsa, github-actions, oscal, spdx and nist-sp-800-218. A slot shares a name only where it carries LOKF's meaning and Internationalized Resource Identifier (IRI), as `title` and `description` do, so `lokf adapt` folds the two into LOKF's and renames nothing. The copy shares no other key with the five neighbours, and `tests/test_schema_rules.py` fails on a new shared name.
+No class, enum or type of the copy shares a name with LOKF's schema or with another lmodel copy, and `tests/test_schema_rules.py` fails on a new shared name.
 
 ## License
 
-The schema and the code are under the Apache License 2.0 ([LICENSE](LICENSE)).
+The schema and the code are under the Apache License 2.0 ([LICENSE](LICENSE)), and the knowledge bundle in `.lokf/knowledge/` is under CC BY 4.0.
 
-The knowledge bundle in `.lokf/knowledge/` is under the Creative Commons Attribution 4.0 International licence (CC BY 4.0), as its `index.md` declares.
-
-CSWP 29 is a work of the United States Government and is not subject to copyright in the United States. The schema's descriptions are this project's own words. NIST's catalog in [src/nist_csf_v2/schema/oscal-content/](src/nist_csf_v2/schema/oscal-content) keeps NIST's licence beside it: see [NOTICE](NOTICE).
-
-This is not an official NIST project, and its use implies no endorsement by NIST.
+CSWP 29 is a work of the United States Government and is not subject to copyright in the United States. The schema's descriptions are this project's own words, and NIST's catalog keeps NIST's licence beside it: see [NOTICE](NOTICE). This is not an official NIST project, and its use implies no endorsement by NIST.
 
 ## Contributing and security
 
