@@ -3,7 +3,7 @@ type: Dataset
 id: https://w3id.org/lmodel/nist-csf-v2/knowledge/datasets/nist-csf-v2-linkml-schema
 genre: reference
 title: nist-csf-v2 LinkML schema
-description: "The LinkML schema of the Cybersecurity Framework (CSF) 2.0, `src/nist_csf_v2/schema/nist_csf_v2.yaml` (schema id `https://w3id.org/lmodel/nist-csf-v2`, version 2.0.0): five classes, two enums and six identifier types. Its `lokf adapt` copy `.lokf/nist-csf-v2.yaml`, rooted on the function, the category and the subcategory, is the bundle's domain schema."
+description: "The LinkML schema of the Cybersecurity Framework (CSF) 2.0, `src/nist_csf_v2/schema/nist_csf_v2.yaml` (schema id `https://w3id.org/lmodel/nist-csf-v2`, version 2.0.0): five classes, two enums and six identifier types. Its `lokf adapt` copy `.lokf/schema/nist-csf-v2.yaml`, rooted on the function, the category and the subcategory, is the bundle's domain schema."
 resource: src/nist_csf_v2/schema/nist_csf_v2.yaml
 version: 2.0.0
 license: Apache-2.0
@@ -21,7 +21,7 @@ sources:
     resource: project.justfile
     title: the lokf-adapt recipes and their roots
   - id: nist-csf-v2.yaml
-    resource: .lokf/nist-csf-v2.yaml
+    resource: .lokf/schema/nist-csf-v2.yaml
     title: the notes lokf adapt wrote
   - resource: .lokf/justfile
     title: the schema line
@@ -29,7 +29,7 @@ sources:
     title: the tool.lokf table
 generated:
   by: process:ktl-librarian
-  at: "2026-11-01T22:06:37Z"
+  at: "2026-11-06T21:22:29Z"
 status: draft
 verified:
   - by: process:ktl-librarian
@@ -62,7 +62,7 @@ Each class names a class of lmodel/oscal in `broad_mappings`: `oscal:Catalog` fo
 
 ## As the bundle's domain schema
 
-A LOKF domain schema is a LinkML schema that imports LOKF's `lokf.yaml` and adds a host's classes and keys, so that `lokf validate` checks the concepts typed with them. The README says that this bundle's domain schema is `.lokf/nist-csf-v2.yaml`, which `lokf adapt` writes from the schema. Edit the source, never the copy.[^readme.md] The `schema :=` line of `.lokf/justfile` and the `[tool.lokf]` table of `.lokf/pyproject.toml` both name the copy.
+A LOKF domain schema is a LinkML schema that imports LOKF's `lokf.yaml` and adds a host's classes and keys, so that `lokf validate` checks the concepts typed with them. The README says that this bundle's domain schema is `.lokf/schema/nist-csf-v2.yaml`, which `lokf adapt` writes from the schema. Edit the source, never the copy.[^readme.md] The `schema :=` line of `.lokf/justfile` and the `[tool.lokf]` table of `.lokf/pyproject.toml` both name the copy.
 
 `project.justfile` passes three roots to `lokf adapt`: `CsfFunction`, `CsfCategory` and `CsfSubcategory`. Its comment says that these are the three elements that CSWP 29 gives an identifier and that other documents cite. It also says that an implementation example stays inlined in its subcategory.[^project.justfile] The copy's notes say that `lokf adapt` re-rooted the three classes on `lokf:Concept` and folded `title` and `description` into LOKF's slots.[^nist-csf-v2.yaml] The copy renames nothing, and `CsfFramework` is no longer a tree root in it. The concepts under `functions/` in this bundle are typed `CsfFunction`.
 
@@ -71,4 +71,4 @@ The generated models, `project/` and the adapt copy come from this file: see [Ge
 [^nist_csf_v2.yaml]: src/nist_csf_v2/schema/nist_csf_v2.yaml, the header and the classes
 [^readme.md]: README.md, the Knowledge Trust Ladder (KTL) section
 [^project.justfile]: project.justfile, the knowledge bundle recipes
-[^nist-csf-v2.yaml]: .lokf/nist-csf-v2.yaml, the notes
+[^nist-csf-v2.yaml]: .lokf/schema/nist-csf-v2.yaml, the notes

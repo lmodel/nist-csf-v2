@@ -12,7 +12,7 @@ sources:
   - resource: src/nist_csf_v2/schema
   - resource: src/nist_csf_v2/datamodel
   - resource: project.justfile
-  - resource: .lokf/nist-csf-v2.yaml
+  - resource: .lokf/schema/nist-csf-v2.yaml
   - resource: .lokf/justfile
   - resource: .lokf/pyproject.toml
   - resource: NOTICE
@@ -78,7 +78,7 @@ exclusions:
     reason: The sidecar's link to the bundle.
   - resource: .github/PULL_REQUEST_TEMPLATE
     reason: The sidecar sync's pull request template.
-  - resource: .lokf/lokf.yaml
+  - resource: .lokf/schema/lokf.yaml
     reason: LOKF's schema, pinned by the sidecar.
   - resource: .lokf/scripts
     reason: The sidecar's scripts, which the weekly sync replaces.
@@ -98,7 +98,7 @@ exclusions:
     reason: The sidecar's git settings.
 generated:
   by: process:ktl-librarian
-  at: "2026-10-30T09:07:28Z"
+  at: "2026-11-06T21:22:29Z"
 status: draft
 verified:
   - by: process:ktl-librarian
@@ -114,7 +114,7 @@ Each concept derived from a file or folder of this repository names it by its pa
 | Source | Yields | Re-check by |
 | --- | --- | --- |
 | `src/nist_csf_v2/schema/nist_csf_v2.yaml` | `datasets/nist-csf-v2-linkml-schema`, the five `glossary/` terms | re-read the header's `version`, `source`, annotations and comments, each class's required slots and patterns, the enum's value and the `broad_mappings` |
-| `project.justfile`, `.lokf/nist-csf-v2.yaml`, `.lokf/justfile`, `.lokf/pyproject.toml`, the README's Knowledge Trust Ladder (KTL) section | the domain-schema section of `datasets/nist-csf-v2-linkml-schema` | re-read the `--root` list, the copy's notes, the `schema :=` line and the `[tool.lokf]` table |
+| `project.justfile`, `.lokf/schema/nist-csf-v2.yaml`, `.lokf/justfile`, `.lokf/pyproject.toml`, the README's Knowledge Trust Ladder (KTL) section | the domain-schema section of `datasets/nist-csf-v2-linkml-schema` | re-read the `--root` list, the copy's notes, the `schema :=` line and the `[tool.lokf]` table |
 | `src/nist_csf_v2/schema/oscal-content/`, the NIST sections of `NOTICE` | `datasets/csf-catalog-copy`, the six `functions/`, `glossary/withdrawn-element` | re-read the catalog's metadata, its groups and their categories and subcategories, the status properties and the links; the upstream watch compares the blobs weekly |
 | `scripts/check_upstream_release.py`, `.github/scripts/` | `playbooks/update-upstream-pins`, `workflows/upstream-watch`, the pin paragraph of `references/cswp-29` | re-read the pins, the docstring and the issue title |
 | `README.md` (What it models, Influences, Mappings, Not modelled here), `docs/about.md`, `.linkmllint.yaml`, `CHANGELOG.md` | `explanations/scope-and-influences`, `explanations/element-names` | re-read each section and the lint comment |
