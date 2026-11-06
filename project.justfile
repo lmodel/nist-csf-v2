@@ -6,8 +6,8 @@
 
 # ============ Knowledge bundle: the adapted domain schema ============
 
-# `.lokf/nist-csf-v2.yaml` is the copy `lokf adapt` writes from the schema so
-# that it can sit beside `.lokf/lokf.yaml` (`lokf adapt --help` lists the
+# `.lokf/schema/nist-csf-v2.yaml` is the copy `lokf adapt` writes from the schema so
+# that it can sit beside `.lokf/schema/lokf.yaml` (`lokf adapt --help` lists the
 # moves). The roots are the classes a knowledge concept may use as its
 # `type`: the function, the category and the subcategory, the three elements
 # that CSWP 29 gives an identifier and that other documents cite. An
@@ -19,12 +19,12 @@
 lokf_cmd := env_var_or_default("LOKF_CMD", "uv run --project .lokf lokf")
 lokf_adapt_roots := "--root CsfFunction --root CsfCategory --root CsfSubcategory"
 
-# Rewrite .lokf/nist-csf-v2.yaml from the schema (run after every schema change)
+# Rewrite .lokf/schema/nist-csf-v2.yaml from the schema (run after every schema change)
 [group('knowledge bundle')]
 lokf-adapt:
-  {{lokf_cmd}} adapt {{source_schema_path}} {{lokf_adapt_roots}} --lokf .lokf/lokf.yaml -o .lokf/nist-csf-v2.yaml
+  {{lokf_cmd}} adapt {{source_schema_path}} {{lokf_adapt_roots}} --lokf .lokf/schema/lokf.yaml -o .lokf/schema/nist-csf-v2.yaml
 
-# Fail when .lokf/nist-csf-v2.yaml is stale against the schema or .lokf/lokf.yaml
+# Fail when .lokf/schema/nist-csf-v2.yaml is stale against the schema or .lokf/schema/lokf.yaml
 [group('knowledge bundle')]
 lokf-adapt-check:
-  {{lokf_cmd}} adapt {{source_schema_path}} {{lokf_adapt_roots}} --lokf .lokf/lokf.yaml -o .lokf/nist-csf-v2.yaml --check
+  {{lokf_cmd}} adapt {{source_schema_path}} {{lokf_adapt_roots}} --lokf .lokf/schema/lokf.yaml -o .lokf/schema/nist-csf-v2.yaml --check

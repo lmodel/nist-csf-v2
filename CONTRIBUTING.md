@@ -37,7 +37,7 @@ npx skills add noelmcloughlin/knowledge-trust-ladder --skill ktl-curator --yes  
 
 ## Before opening a pull request
 
-- **Edit the schema, then regenerate.** Edit `src/nist_csf_v2/schema/nist_csf_v2.yaml`, run `just gen-project`, `just gen-doc` and `just lokf-adapt`, and commit the output; `project/`, `src/nist_csf_v2/datamodel/`, `docs/schema/` and `.lokf/nist-csf-v2.yaml` are generated.
+- **Edit the schema, then regenerate.** Edit `src/nist_csf_v2/schema/nist_csf_v2.yaml`, run `just gen-project`, `just gen-doc` and `just lokf-adapt`, and commit the output; `project/`, `src/nist_csf_v2/datamodel/`, `docs/schema/` and `.lokf/schema/nist-csf-v2.yaml` are generated.
 - **Render what CSWP 29 defines**, in your own words, and name the section or table in the pull request; [AI_COVENANT.md](AI_COVENANT.md) says why. `tests/test_upstream.py` holds the schema to NIST's catalog.
 - **Leave `src/nist_csf_v2/schema/oscal-content/` as NIST published it.** Replace it whole from one release of usnistgov/oscal-content instead, and move the pins in `scripts/check_upstream_release.py` and the schema header; `upstream-watch.yaml` checks the copy.
 - **Keep names apart.** A host imports this adapt copy beside the Linked Open Knowledge Format (LOKF) schema and the released neighbours' copies in `tests/neighbours/`, so a shared name carries one Internationalized Resource Identifier (IRI). `tests/test_schema_rules.py` checks.
