@@ -1,0 +1,650 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix linkml: <https://w3id.org/linkml/> .
+@prefix pav: <http://purl.org/pav/> .
+<https://w3id.org/lmodel/nist-csf-v2/CsfCategory> a linkml:ClassDefinition ;
+	rdfs:seeAlso "https://www.nist.gov/cyberframework"^^xsd:anyURI ;
+	skos:broadMatch "oscal:Control"^^xsd:anyURI ;
+	skos:exactMatch "nist_csf_v2:Category"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/lmodel/nist-csf-v2"^^xsd:anyURI ;
+	skos:note "A withdrawn category keeps its CSF 1.1 subcategories, each withdrawn too, and the catalog gives it no statement, so it has no description." ;
+	linkml:attributes <https://w3id.org/lmodel/nist-csf-v2/category_incorporated_into> , <https://w3id.org/lmodel/nist-csf-v2/category_moved_to> , <https://w3id.org/lmodel/nist-csf-v2/category_status> , <https://w3id.org/lmodel/nist-csf-v2/category_subcategories> ;
+	linkml:class_uri "https://w3id.org/lmodel/nist-csf-v2/Category"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-csf-v2/CsfCategory"^^xsd:anyURI ;
+	linkml:description "A group of related cybersecurity outcomes within a function, such as Organizational Context (GV.OC), or a CSF 1.1 category that CSF 2.0 withdrew, which the catalog keeps with its status and, where NIST recorded it, where it moved or what incorporated it." ;
+	linkml:slot_usage _:c14n13 ;
+	linkml:slots <https://w3id.org/lmodel/nist-csf-v2/CsfCategory_title> , <https://w3id.org/lmodel/nist-csf-v2/csfCategory__category_incorporated_into> , <https://w3id.org/lmodel/nist-csf-v2/csfCategory__category_moved_to> , <https://w3id.org/lmodel/nist-csf-v2/csfCategory__category_status> , <https://w3id.org/lmodel/nist-csf-v2/csfCategory__category_subcategories> , <https://w3id.org/lmodel/nist-csf-v2/csf_category_id> , <https://w3id.org/lmodel/nist-csf-v2/description> .
+<https://w3id.org/lmodel/nist-csf-v2/CsfCategory_title> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-csf-v2"^^xsd:anyURI ;
+	skos:mappingRelation "http://schema.org/name"^^xsd:anyURI ;
+	skos:note "It means what LOKF's title means and carries the same IRI, so lokf adapt folds it into LOKF's slot and a knowledge bundle reads one title key." ;
+	skos:prefLabel "title" ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-csf-v2/title"^^xsd:anyURI ;
+	linkml:description "The name CSWP 29 gives the function or category." ;
+	linkml:domain <https://w3id.org/lmodel/nist-csf-v2/CsfCategory> ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-csf-v2/CsfCategory> ;
+	linkml:is_a <https://w3id.org/lmodel/nist-csf-v2/title> ;
+	linkml:is_usage_slot true ;
+	linkml:owner <https://w3id.org/lmodel/nist-csf-v2/CsfCategory> ;
+	linkml:range <https://w3id.org/lmodel/nist-csf-v2/string> ;
+	linkml:required true ;
+	linkml:slot_uri "http://schema.org/name"^^xsd:anyURI ;
+	linkml:usage_slot_name "title" .
+<https://w3id.org/lmodel/nist-csf-v2/CsfElementStatus> rdfs:seeAlso "https://doi.org/10.6028/NIST.CSWP.29"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/lmodel/nist-csf-v2"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-csf-v2/CsfElementStatus"^^xsd:anyURI ;
+	linkml:description "The state the catalog gives a category or subcategory that CSF 2.0 no longer carries. A category or subcategory of CSF 2.0 has no status." ;
+	linkml:permissible_values <https://w3id.org/lmodel/nist-csf-v2/withdrawn> .
+<https://w3id.org/lmodel/nist-csf-v2/CsfFramework> a linkml:ClassDefinition ;
+	rdfs:seeAlso "https://csrc.nist.gov/pubs/cswp/29/the-nist-cybersecurity-framework-csf-20/final"^^xsd:anyURI ;
+	skos:broadMatch "oscal:Catalog"^^xsd:anyURI ;
+	skos:exactMatch "nist_csf_v2:Framework"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/lmodel/nist-csf-v2"^^xsd:anyURI ;
+	linkml:attributes <https://w3id.org/lmodel/nist-csf-v2/csf_functions> , <https://w3id.org/lmodel/nist-csf-v2/csf_version> ;
+	linkml:class_uri "https://w3id.org/lmodel/nist-csf-v2/Framework"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-csf-v2/CsfFramework"^^xsd:anyURI ;
+	linkml:description "One edition of the CSF as a whole: its functions, each holding its categories and their subcategories." ;
+	linkml:slot_usage _:c14n10 ;
+	linkml:slots <https://w3id.org/lmodel/nist-csf-v2/csfFramework__csf_functions> , <https://w3id.org/lmodel/nist-csf-v2/csfFramework__csf_version> ;
+	linkml:tree_root true .
+<https://w3id.org/lmodel/nist-csf-v2/CsfFunction> a linkml:ClassDefinition ;
+	rdfs:seeAlso "https://www.nist.gov/cyberframework"^^xsd:anyURI ;
+	skos:broadMatch "oscal:Group"^^xsd:anyURI ;
+	skos:exactMatch "nist_csf_v2:Function"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/lmodel/nist-csf-v2"^^xsd:anyURI ;
+	linkml:attributes <https://w3id.org/lmodel/nist-csf-v2/function_categories> ;
+	linkml:class_uri "https://w3id.org/lmodel/nist-csf-v2/Function"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-csf-v2/CsfFunction"^^xsd:anyURI ;
+	linkml:description "One of the six functions that sort the CSF's outcomes at the highest level: GOVERN, IDENTIFY, PROTECT, DETECT, RESPOND and RECOVER. Each is named by two letters and described in a sentence." ;
+	linkml:slot_usage _:c14n3 ;
+	linkml:slots <https://w3id.org/lmodel/nist-csf-v2/CsfFunction_title> , <https://w3id.org/lmodel/nist-csf-v2/csfFunction__function_categories> , <https://w3id.org/lmodel/nist-csf-v2/csf_function_id> , <https://w3id.org/lmodel/nist-csf-v2/description> .
+<https://w3id.org/lmodel/nist-csf-v2/CsfFunction_title> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-csf-v2"^^xsd:anyURI ;
+	skos:mappingRelation "http://schema.org/name"^^xsd:anyURI ;
+	skos:note "It means what LOKF's title means and carries the same IRI, so lokf adapt folds it into LOKF's slot and a knowledge bundle reads one title key." ;
+	skos:prefLabel "title" ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-csf-v2/title"^^xsd:anyURI ;
+	linkml:description "The name CSWP 29 gives the function or category." ;
+	linkml:domain <https://w3id.org/lmodel/nist-csf-v2/CsfFunction> ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-csf-v2/CsfFunction> ;
+	linkml:is_a <https://w3id.org/lmodel/nist-csf-v2/title> ;
+	linkml:is_usage_slot true ;
+	linkml:owner <https://w3id.org/lmodel/nist-csf-v2/CsfFunction> ;
+	linkml:range <https://w3id.org/lmodel/nist-csf-v2/string> ;
+	linkml:required true ;
+	linkml:slot_uri "http://schema.org/name"^^xsd:anyURI ;
+	linkml:usage_slot_name "title" .
+<https://w3id.org/lmodel/nist-csf-v2/CsfImplementationExample> a linkml:ClassDefinition ;
+	rdfs:seeAlso "https://www.nist.gov/cyberframework"^^xsd:anyURI ;
+	skos:broadMatch "oscal:Part"^^xsd:anyURI ;
+	skos:exactMatch "nist_csf_v2:ImplementationExample"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/lmodel/nist-csf-v2"^^xsd:anyURI ;
+	linkml:class_uri "https://w3id.org/lmodel/nist-csf-v2/ImplementationExample"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-csf-v2/CsfImplementationExample"^^xsd:anyURI ;
+	linkml:description "An implementation example: one concise, action-oriented step that could help achieve a subcategory's outcome. NIST publishes the examples beside the Core, in its reference tool and its catalog, not in CSWP 29 itself." ;
+	linkml:slot_usage _:c14n5 ;
+	linkml:slots <https://w3id.org/lmodel/nist-csf-v2/CsfImplementationExample_description> , <https://w3id.org/lmodel/nist-csf-v2/csf_implementation_example_id> .
+<https://w3id.org/lmodel/nist-csf-v2/CsfImplementationExample_description> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-csf-v2"^^xsd:anyURI ;
+	skos:mappingRelation "http://schema.org/description"^^xsd:anyURI ;
+	skos:note "It means what LOKF's description means and carries the same IRI, so lokf adapt folds it into LOKF's slot and a knowledge bundle reads one description key." ;
+	skos:prefLabel "description" ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-csf-v2/description"^^xsd:anyURI ;
+	linkml:description "What the function, category, subcategory or example says, in the words of whoever records it." ;
+	linkml:domain <https://w3id.org/lmodel/nist-csf-v2/CsfImplementationExample> ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-csf-v2/CsfImplementationExample> ;
+	linkml:is_a <https://w3id.org/lmodel/nist-csf-v2/description> ;
+	linkml:is_usage_slot true ;
+	linkml:owner <https://w3id.org/lmodel/nist-csf-v2/CsfImplementationExample> ;
+	linkml:pattern "^\\s*\\S" ;
+	linkml:range <https://w3id.org/lmodel/nist-csf-v2/string> ;
+	linkml:required true ;
+	linkml:slot_uri "http://schema.org/description"^^xsd:anyURI ;
+	linkml:usage_slot_name "description" .
+<https://w3id.org/lmodel/nist-csf-v2/CsfRiskParty> rdfs:seeAlso "https://www.nist.gov/cyberframework"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/lmodel/nist-csf-v2"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-csf-v2/CsfRiskParty"^^xsd:anyURI ;
+	linkml:description "Whose risk a subcategory's outcome addresses, as NIST's catalog marks it in a marking property of class risk-party." ;
+	linkml:permissible_values <https://w3id.org/lmodel/nist-csf-v2/first_party> , <https://w3id.org/lmodel/nist-csf-v2/third_party> .
+<https://w3id.org/lmodel/nist-csf-v2/CsfSubcategory> a linkml:ClassDefinition ;
+	rdfs:seeAlso "https://www.nist.gov/cyberframework"^^xsd:anyURI ;
+	skos:broadMatch "oscal:Control"^^xsd:anyURI ;
+	skos:exactMatch "nist_csf_v2:Subcategory"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/lmodel/nist-csf-v2"^^xsd:anyURI ;
+	skos:note "A subcategory has no title of its own: its identifier names it and its statement is its description, which is why the description is required here." ;
+	linkml:attributes <https://w3id.org/lmodel/nist-csf-v2/subcategory_examples> , <https://w3id.org/lmodel/nist-csf-v2/subcategory_incorporated_into> , <https://w3id.org/lmodel/nist-csf-v2/subcategory_moved_to> , <https://w3id.org/lmodel/nist-csf-v2/subcategory_risk_parties> , <https://w3id.org/lmodel/nist-csf-v2/subcategory_status> ;
+	linkml:class_uri "https://w3id.org/lmodel/nist-csf-v2/Subcategory"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-csf-v2/CsfSubcategory"^^xsd:anyURI ;
+	linkml:description "A cybersecurity outcome: one statement of a result within a category, such as GV.OC-01, or a CSF 1.1 subcategory that CSF 2.0 withdrew, which the catalog keeps with its statement, its status and where it moved or what incorporated it." ;
+	linkml:slot_usage _:c14n0 ;
+	linkml:slots <https://w3id.org/lmodel/nist-csf-v2/CsfSubcategory_description> , <https://w3id.org/lmodel/nist-csf-v2/csfSubcategory__subcategory_examples> , <https://w3id.org/lmodel/nist-csf-v2/csfSubcategory__subcategory_incorporated_into> , <https://w3id.org/lmodel/nist-csf-v2/csfSubcategory__subcategory_moved_to> , <https://w3id.org/lmodel/nist-csf-v2/csfSubcategory__subcategory_risk_parties> , <https://w3id.org/lmodel/nist-csf-v2/csfSubcategory__subcategory_status> , <https://w3id.org/lmodel/nist-csf-v2/csf_subcategory_id> .
+<https://w3id.org/lmodel/nist-csf-v2/CsfSubcategory_description> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-csf-v2"^^xsd:anyURI ;
+	skos:mappingRelation "http://schema.org/description"^^xsd:anyURI ;
+	skos:note "It means what LOKF's description means and carries the same IRI, so lokf adapt folds it into LOKF's slot and a knowledge bundle reads one description key." ;
+	skos:prefLabel "description" ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-csf-v2/description"^^xsd:anyURI ;
+	linkml:description "What the function, category, subcategory or example says, in the words of whoever records it." ;
+	linkml:domain <https://w3id.org/lmodel/nist-csf-v2/CsfSubcategory> ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-csf-v2/CsfSubcategory> ;
+	linkml:is_a <https://w3id.org/lmodel/nist-csf-v2/description> ;
+	linkml:is_usage_slot true ;
+	linkml:owner <https://w3id.org/lmodel/nist-csf-v2/CsfSubcategory> ;
+	linkml:pattern "^\\s*\\S" ;
+	linkml:range <https://w3id.org/lmodel/nist-csf-v2/string> ;
+	linkml:required true ;
+	linkml:slot_uri "http://schema.org/description"^^xsd:anyURI ;
+	linkml:usage_slot_name "description" .
+<https://w3id.org/lmodel/nist-csf-v2/boolean> a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"boolean\"." ;
+	skos:exactMatch "schema:Boolean"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "Bool" ;
+	linkml:definition_uri "https://w3id.org/linkml/Boolean"^^xsd:anyURI ;
+	linkml:description "A binary (true or false) value" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "bool" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#boolean"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-csf-v2/category_incorporated_into> a linkml:SlotDefinition ;
+	linkml:description "The function, category or subcategory of CSF 2.0 that took in a withdrawn category's outcomes, as the catalog states it, such as GV.OC for ID.BE. The catalog names none for some withdrawn categories." ;
+	linkml:multivalued true ;
+	linkml:range <https://w3id.org/lmodel/nist-csf-v2/csf_element_identifier> .
+<https://w3id.org/lmodel/nist-csf-v2/category_moved_to> a linkml:SlotDefinition ;
+	linkml:description "The CSF 2.0 category a withdrawn category moved to, as the catalog states it, such as PR.AA for PR.AC." ;
+	linkml:multivalued true ;
+	linkml:range <https://w3id.org/lmodel/nist-csf-v2/csf_category_identifier> .
+<https://w3id.org/lmodel/nist-csf-v2/category_status> a linkml:SlotDefinition ;
+	linkml:description "withdrawn for a CSF 1.1 category that CSF 2.0 withdrew. A category of CSF 2.0 has no status." ;
+	linkml:range <https://w3id.org/lmodel/nist-csf-v2/CsfElementStatus> .
+<https://w3id.org/lmodel/nist-csf-v2/category_subcategories> a linkml:SlotDefinition ;
+	linkml:description "The subcategories of the category. A knowledge bundle relates a subcategory to its category with isPartOf instead." ;
+	linkml:inlined true ;
+	linkml:inlined_as_list true ;
+	linkml:multivalued true ;
+	linkml:range <https://w3id.org/lmodel/nist-csf-v2/CsfSubcategory> .
+<https://w3id.org/lmodel/nist-csf-v2/csfCategory__category_incorporated_into> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-csf-v2"^^xsd:anyURI ;
+	skos:prefLabel "category_incorporated_into" ;
+	linkml:description "The function, category or subcategory of CSF 2.0 that took in a withdrawn category's outcomes, as the catalog states it, such as GV.OC for ID.BE. The catalog names none for some withdrawn categories." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-csf-v2/CsfCategory> ;
+	linkml:multivalued true ;
+	linkml:owner <https://w3id.org/lmodel/nist-csf-v2/CsfCategory> ;
+	linkml:range <https://w3id.org/lmodel/nist-csf-v2/csf_element_identifier> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-csf-v2/category_incorporated_into"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-csf-v2/csfCategory__category_moved_to> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-csf-v2"^^xsd:anyURI ;
+	skos:prefLabel "category_moved_to" ;
+	linkml:description "The CSF 2.0 category a withdrawn category moved to, as the catalog states it, such as PR.AA for PR.AC." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-csf-v2/CsfCategory> ;
+	linkml:multivalued true ;
+	linkml:owner <https://w3id.org/lmodel/nist-csf-v2/CsfCategory> ;
+	linkml:range <https://w3id.org/lmodel/nist-csf-v2/csf_category_identifier> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-csf-v2/category_moved_to"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-csf-v2/csfCategory__category_status> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-csf-v2"^^xsd:anyURI ;
+	skos:prefLabel "category_status" ;
+	linkml:description "withdrawn for a CSF 1.1 category that CSF 2.0 withdrew. A category of CSF 2.0 has no status." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-csf-v2/CsfCategory> ;
+	linkml:owner <https://w3id.org/lmodel/nist-csf-v2/CsfCategory> ;
+	linkml:range <https://w3id.org/lmodel/nist-csf-v2/CsfElementStatus> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-csf-v2/category_status"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-csf-v2/csfCategory__category_subcategories> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-csf-v2"^^xsd:anyURI ;
+	skos:prefLabel "category_subcategories" ;
+	linkml:description "The subcategories of the category. A knowledge bundle relates a subcategory to its category with isPartOf instead." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-csf-v2/CsfCategory> ;
+	linkml:inlined true ;
+	linkml:inlined_as_list true ;
+	linkml:multivalued true ;
+	linkml:owner <https://w3id.org/lmodel/nist-csf-v2/CsfCategory> ;
+	linkml:range <https://w3id.org/lmodel/nist-csf-v2/CsfSubcategory> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-csf-v2/category_subcategories"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-csf-v2/csfFramework__csf_functions> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-csf-v2"^^xsd:anyURI ;
+	skos:prefLabel "csf_functions" ;
+	linkml:description "The six functions, in the order CSWP 29 gives them." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-csf-v2/CsfFramework> ;
+	linkml:inlined true ;
+	linkml:inlined_as_list true ;
+	linkml:minimum_cardinality 1 ;
+	linkml:multivalued true ;
+	linkml:owner <https://w3id.org/lmodel/nist-csf-v2/CsfFramework> ;
+	linkml:range <https://w3id.org/lmodel/nist-csf-v2/CsfFunction> ;
+	linkml:required true ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-csf-v2/csf_functions"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-csf-v2/csfFramework__csf_version> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-csf-v2"^^xsd:anyURI ;
+	skos:prefLabel "csf_version" ;
+	linkml:description "The CSF edition, as NIST numbers it in the publication's title, such as 2.0." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-csf-v2/CsfFramework> ;
+	linkml:owner <https://w3id.org/lmodel/nist-csf-v2/CsfFramework> ;
+	linkml:pattern "^[0-9]+\\.[0-9]+$" ;
+	linkml:range <https://w3id.org/lmodel/nist-csf-v2/string> ;
+	linkml:required true ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-csf-v2/csf_version"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-csf-v2/csfFunction__function_categories> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-csf-v2"^^xsd:anyURI ;
+	skos:prefLabel "function_categories" ;
+	linkml:description "The categories of the function. A knowledge bundle relates a category to its function with isPartOf instead." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-csf-v2/CsfFunction> ;
+	linkml:inlined true ;
+	linkml:inlined_as_list true ;
+	linkml:multivalued true ;
+	linkml:owner <https://w3id.org/lmodel/nist-csf-v2/CsfFunction> ;
+	linkml:range <https://w3id.org/lmodel/nist-csf-v2/CsfCategory> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-csf-v2/function_categories"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-csf-v2/csfSubcategory__subcategory_examples> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-csf-v2"^^xsd:anyURI ;
+	skos:prefLabel "subcategory_examples" ;
+	linkml:description "The implementation examples NIST publishes for the subcategory. CSWP 29 says they are notional, that none is required, and that they are not a complete list of what could be done." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-csf-v2/CsfSubcategory> ;
+	linkml:inlined true ;
+	linkml:inlined_as_list true ;
+	linkml:multivalued true ;
+	linkml:owner <https://w3id.org/lmodel/nist-csf-v2/CsfSubcategory> ;
+	linkml:range <https://w3id.org/lmodel/nist-csf-v2/CsfImplementationExample> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-csf-v2/subcategory_examples"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-csf-v2/csfSubcategory__subcategory_incorporated_into> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-csf-v2"^^xsd:anyURI ;
+	skos:prefLabel "subcategory_incorporated_into" ;
+	linkml:description "The CSF 2.0 category or subcategory that took in a withdrawn subcategory's outcome, as the catalog states it, such as GV.OC-01 for ID.BE-02." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-csf-v2/CsfSubcategory> ;
+	linkml:multivalued true ;
+	linkml:owner <https://w3id.org/lmodel/nist-csf-v2/CsfSubcategory> ;
+	linkml:range <https://w3id.org/lmodel/nist-csf-v2/csf_category_or_subcategory_identifier> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-csf-v2/subcategory_incorporated_into"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-csf-v2/csfSubcategory__subcategory_moved_to> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-csf-v2"^^xsd:anyURI ;
+	skos:prefLabel "subcategory_moved_to" ;
+	linkml:description "The CSF 2.0 subcategory a withdrawn subcategory moved to, as the catalog states it, such as GV.OC-03 for ID.GV-03. The catalog names two for a few." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-csf-v2/CsfSubcategory> ;
+	linkml:multivalued true ;
+	linkml:owner <https://w3id.org/lmodel/nist-csf-v2/CsfSubcategory> ;
+	linkml:range <https://w3id.org/lmodel/nist-csf-v2/csf_subcategory_identifier> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-csf-v2/subcategory_moved_to"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-csf-v2/csfSubcategory__subcategory_risk_parties> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-csf-v2"^^xsd:anyURI ;
+	skos:note "NIST publishes this in its catalog and its reference tool, not in CSWP 29. The catalog marks most CSF 2.0 subcategories and leaves a few unmarked, so an absent value says nothing about the outcome. A withdrawn subcategory carries none." ;
+	skos:prefLabel "subcategory_risk_parties" ;
+	linkml:description "Whose risk the subcategory's outcome addresses: the organization's own, its suppliers' and other third parties', or both." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-csf-v2/CsfSubcategory> ;
+	linkml:multivalued true ;
+	linkml:owner <https://w3id.org/lmodel/nist-csf-v2/CsfSubcategory> ;
+	linkml:range <https://w3id.org/lmodel/nist-csf-v2/CsfRiskParty> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-csf-v2/subcategory_risk_parties"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-csf-v2/csfSubcategory__subcategory_status> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-csf-v2"^^xsd:anyURI ;
+	skos:prefLabel "subcategory_status" ;
+	linkml:description "withdrawn for a CSF 1.1 subcategory that CSF 2.0 withdrew. A subcategory of CSF 2.0 has no status." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-csf-v2/CsfSubcategory> ;
+	linkml:owner <https://w3id.org/lmodel/nist-csf-v2/CsfSubcategory> ;
+	linkml:range <https://w3id.org/lmodel/nist-csf-v2/CsfElementStatus> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-csf-v2/subcategory_status"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-csf-v2/csf_category_id> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-csf-v2"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-csf-v2/csf_category_id"^^xsd:anyURI ;
+	linkml:description "The category's identifier, such as GV.OC." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-csf-v2/CsfCategory> ;
+	linkml:owner <https://w3id.org/lmodel/nist-csf-v2/CsfCategory> ;
+	linkml:range <https://w3id.org/lmodel/nist-csf-v2/csf_category_identifier> ;
+	linkml:required true ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-csf-v2/csf_category_id"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-csf-v2/csf_category_identifier> a linkml:TypeDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-csf-v2"^^xsd:anyURI ;
+	linkml:base "str" ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-csf-v2/CsfCategoryIdentifier"^^xsd:anyURI ;
+	linkml:description "A category's identifier: its function's letters, a dot and two letters for the category, such as GV.OC for Organizational Context." ;
+	linkml:pattern "^(GV|ID|PR|DE|RS|RC)\\.[A-Z]{2}$" ;
+	linkml:typeof <https://w3id.org/lmodel/nist-csf-v2/string> ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#string"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-csf-v2/csf_category_or_subcategory_identifier> a linkml:TypeDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-csf-v2"^^xsd:anyURI ;
+	linkml:base "str" ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-csf-v2/CsfCategoryOrSubcategoryIdentifier"^^xsd:anyURI ;
+	linkml:description "The identifier of a category or a subcategory, whichever of the two a withdrawn subcategory names as what incorporated it." ;
+	linkml:pattern "^(GV|ID|PR|DE|RS|RC)\\.[A-Z]{2}(-[0-9]{2})?$" ;
+	linkml:typeof <https://w3id.org/lmodel/nist-csf-v2/string> ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#string"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-csf-v2/csf_element_identifier> a linkml:TypeDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-csf-v2"^^xsd:anyURI ;
+	linkml:base "str" ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-csf-v2/CsfElementIdentifier"^^xsd:anyURI ;
+	linkml:description "The identifier of a function, a category or a subcategory, whichever of the three a withdrawn category names as what incorporated it." ;
+	linkml:pattern "^(GV|ID|PR|DE|RS|RC)(\\.[A-Z]{2}(-[0-9]{2})?)?$" ;
+	linkml:typeof <https://w3id.org/lmodel/nist-csf-v2/string> ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#string"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-csf-v2/csf_function_id> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-csf-v2"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-csf-v2/csf_function_id"^^xsd:anyURI ;
+	linkml:description "The function's two letters, such as GV for GOVERN." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-csf-v2/CsfFunction> ;
+	linkml:owner <https://w3id.org/lmodel/nist-csf-v2/CsfFunction> ;
+	linkml:range <https://w3id.org/lmodel/nist-csf-v2/csf_function_identifier> ;
+	linkml:required true ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-csf-v2/csf_function_id"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-csf-v2/csf_function_identifier> a linkml:TypeDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-csf-v2"^^xsd:anyURI ;
+	linkml:base "str" ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-csf-v2/CsfFunctionIdentifier"^^xsd:anyURI ;
+	linkml:description "The two letters that name one of the six functions, such as GV for GOVERN." ;
+	linkml:pattern "^(GV|ID|PR|DE|RS|RC)$" ;
+	linkml:typeof <https://w3id.org/lmodel/nist-csf-v2/string> ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#string"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-csf-v2/csf_functions> a linkml:SlotDefinition ;
+	linkml:description "The six functions, in the order CSWP 29 gives them." ;
+	linkml:inlined true ;
+	linkml:inlined_as_list true ;
+	linkml:minimum_cardinality 1 ;
+	linkml:multivalued true ;
+	linkml:range <https://w3id.org/lmodel/nist-csf-v2/CsfFunction> ;
+	linkml:required true .
+<https://w3id.org/lmodel/nist-csf-v2/csf_implementation_example_id> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-csf-v2"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-csf-v2/csf_implementation_example_id"^^xsd:anyURI ;
+	linkml:description "The example's identifier in NIST's reference data, such as GV.OC-01.001 for the first example of subcategory GV.OC-01." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-csf-v2/CsfImplementationExample> ;
+	linkml:owner <https://w3id.org/lmodel/nist-csf-v2/CsfImplementationExample> ;
+	linkml:range <https://w3id.org/lmodel/nist-csf-v2/csf_implementation_example_identifier> ;
+	linkml:required true ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-csf-v2/csf_implementation_example_id"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-csf-v2/csf_implementation_example_identifier> a linkml:TypeDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-csf-v2"^^xsd:anyURI ;
+	linkml:base "str" ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-csf-v2/CsfImplementationExampleIdentifier"^^xsd:anyURI ;
+	linkml:description "The identifier NIST's reference data gives an implementation example: its subcategory's identifier, a dot and a three-digit number, such as GV.OC-01.001. The numbers run once through the whole Core, so no two examples share one." ;
+	linkml:pattern "^(GV|ID|PR|DE|RS|RC)\\.[A-Z]{2}-[0-9]{2}\\.[0-9]{3}$" ;
+	linkml:typeof <https://w3id.org/lmodel/nist-csf-v2/string> ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#string"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-csf-v2/csf_subcategory_id> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-csf-v2"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-csf-v2/csf_subcategory_id"^^xsd:anyURI ;
+	linkml:description "The subcategory's identifier, such as GV.OC-01." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-csf-v2/CsfSubcategory> ;
+	linkml:owner <https://w3id.org/lmodel/nist-csf-v2/CsfSubcategory> ;
+	linkml:range <https://w3id.org/lmodel/nist-csf-v2/csf_subcategory_identifier> ;
+	linkml:required true ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-csf-v2/csf_subcategory_id"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-csf-v2/csf_subcategory_identifier> a linkml:TypeDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-csf-v2"^^xsd:anyURI ;
+	linkml:base "str" ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-csf-v2/CsfSubcategoryIdentifier"^^xsd:anyURI ;
+	linkml:description "A subcategory's identifier: its category's identifier, a hyphen and a two-digit number, such as GV.OC-01. CSWP 29 says the numbers are not sequential on purpose: a gap marks a CSF 1.1 subcategory that CSF 2.0 moved elsewhere." ;
+	linkml:pattern "^(GV|ID|PR|DE|RS|RC)\\.[A-Z]{2}-[0-9]{2}$" ;
+	linkml:typeof <https://w3id.org/lmodel/nist-csf-v2/string> ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#string"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-csf-v2/csf_version> a linkml:SlotDefinition ;
+	linkml:description "The CSF edition, as NIST numbers it in the publication's title, such as 2.0." ;
+	linkml:pattern "^[0-9]+\\.[0-9]+$" ;
+	linkml:required true .
+<https://w3id.org/lmodel/nist-csf-v2/curie> dcterms:conformsTo "https://www.w3.org/TR/curie/" ;
+	a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"curie\"." ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	skos:note "in RDF serializations this MUST be expanded to a URI" , "in non-RDF serializations MAY be serialized as the compact representation" ;
+	linkml:base "Curie" ;
+	linkml:definition_uri "https://w3id.org/linkml/Curie"^^xsd:anyURI ;
+	linkml:description "a compact URI" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "str" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#string"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-csf-v2/date> a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"date\"." , "URI is dateTime because OWL reasoners don't work with straight date or time" ;
+	skos:exactMatch "schema:Date"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "XSDDate" ;
+	linkml:definition_uri "https://w3id.org/linkml/Date"^^xsd:anyURI ;
+	linkml:description "a date (year, month and day) in an idealized calendar" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "str" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#date"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-csf-v2/date_or_datetime> a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"date_or_datetime\"." ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "str" ;
+	linkml:definition_uri "https://w3id.org/linkml/DateOrDatetime"^^xsd:anyURI ;
+	linkml:description "Either a date or a datetime" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "str" ;
+	linkml:uri "https://w3id.org/linkml/DateOrDatetime"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-csf-v2/datetime> a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"datetime\"." ;
+	skos:exactMatch "schema:DateTime"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "XSDDateTime" ;
+	linkml:definition_uri "https://w3id.org/linkml/Datetime"^^xsd:anyURI ;
+	linkml:description "The combination of a date and time" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "str" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#dateTime"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-csf-v2/decimal> a linkml:TypeDefinition ;
+	skos:broadMatch "schema:Number"^^xsd:anyURI ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"decimal\"." ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "Decimal" ;
+	linkml:definition_uri "https://w3id.org/linkml/Decimal"^^xsd:anyURI ;
+	linkml:description "A real number with arbitrary precision that conforms to the xsd:decimal specification" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#decimal"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-csf-v2/description> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-csf-v2"^^xsd:anyURI ;
+	skos:mappingRelation "http://schema.org/description"^^xsd:anyURI ;
+	skos:note "It means what LOKF's description means and carries the same IRI, so lokf adapt folds it into LOKF's slot and a knowledge bundle reads one description key." ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-csf-v2/description"^^xsd:anyURI ;
+	linkml:description "What the function, category, subcategory or example says, in the words of whoever records it." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-csf-v2/CsfCategory> , <https://w3id.org/lmodel/nist-csf-v2/CsfFunction> , <https://w3id.org/lmodel/nist-csf-v2/CsfImplementationExample> , <https://w3id.org/lmodel/nist-csf-v2/CsfSubcategory> ;
+	linkml:owner <https://w3id.org/lmodel/nist-csf-v2/CsfImplementationExample> ;
+	linkml:range <https://w3id.org/lmodel/nist-csf-v2/string> ;
+	linkml:slot_uri "http://schema.org/description"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-csf-v2/double> a linkml:TypeDefinition ;
+	skos:closeMatch "schema:Float"^^xsd:anyURI ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"double\"." ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "float" ;
+	linkml:definition_uri "https://w3id.org/linkml/Double"^^xsd:anyURI ;
+	linkml:description "A real number that conforms to the xsd:double specification" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#double"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-csf-v2/first_party> dcterms:title "First-party risk" ;
+	linkml:description "Risk to the organization from its own systems, people and processes. The catalog's value is 1st." .
+<https://w3id.org/lmodel/nist-csf-v2/float> a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"float\"." ;
+	skos:exactMatch "schema:Float"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "float" ;
+	linkml:definition_uri "https://w3id.org/linkml/Float"^^xsd:anyURI ;
+	linkml:description "A real number that conforms to the xsd:float specification" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#float"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-csf-v2/function_categories> a linkml:SlotDefinition ;
+	linkml:description "The categories of the function. A knowledge bundle relates a category to its function with isPartOf instead." ;
+	linkml:inlined true ;
+	linkml:inlined_as_list true ;
+	linkml:multivalued true ;
+	linkml:range <https://w3id.org/lmodel/nist-csf-v2/CsfCategory> .
+<https://w3id.org/lmodel/nist-csf-v2/integer> a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"integer\"." ;
+	skos:exactMatch "schema:Integer"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "int" ;
+	linkml:definition_uri "https://w3id.org/linkml/Integer"^^xsd:anyURI ;
+	linkml:description "An integer" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#integer"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-csf-v2/jsonpath> dcterms:conformsTo "https://www.ietf.org/archive/id/draft-goessner-dispatch-jsonpath-00.html" ;
+	a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"jsonpath\"." ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "str" ;
+	linkml:definition_uri "https://w3id.org/linkml/Jsonpath"^^xsd:anyURI ;
+	linkml:description "A string encoding a JSON Path. The value of the string MUST conform to JSON Point syntax and SHOULD dereference to zero or more valid objects within the current instance document when encoded in tree form." ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "str" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#string"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-csf-v2/jsonpointer> dcterms:conformsTo "https://datatracker.ietf.org/doc/html/rfc6901" ;
+	a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"jsonpointer\"." ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "str" ;
+	linkml:definition_uri "https://w3id.org/linkml/Jsonpointer"^^xsd:anyURI ;
+	linkml:description "A string encoding a JSON Pointer. The value of the string MUST conform to JSON Point syntax and SHOULD dereference to a valid object within the current instance document when encoded in tree form." ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "str" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#string"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-csf-v2/ncname> a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"ncname\"." ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "NCName" ;
+	linkml:definition_uri "https://w3id.org/linkml/Ncname"^^xsd:anyURI ;
+	linkml:description "Prefix part of CURIE" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "str" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#string"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-csf-v2/nist_csf_v2> dcterms:license "Apache-2.0" ;
+	dcterms:source "https://doi.org/10.6028/NIST.CSWP.29"^^xsd:anyURI ;
+	dcterms:title "The NIST Cybersecurity Framework (CSF) 2.0" ;
+	pav:version "2.0.0" ;
+	a linkml:SchemaDefinition ;
+	rdfs:seeAlso "https://csrc.nist.gov/pubs/cswp/29/the-nist-cybersecurity-framework-csf-20/final"^^xsd:anyURI , "https://github.com/usnistgov/oscal-content/tree/v1.6.0/nist.gov/CSF/v2.0"^^xsd:anyURI , "https://lmodel.github.io/nist-csf-v2"^^xsd:anyURI , "https://www.nist.gov/cyberframework"^^xsd:anyURI ;
+	skos:note "CSWP 29 is a work of the United States Government and is not subject to copyright in the United States. The descriptions here are this project's own words; NIST's text of each function, category, subcategory and example stays in the catalog copy." , "NIST's catalog renders each function as an OSCAL group, each category and subcategory as an OSCAL control and each implementation example as a part. The broad_mappings name those lmodel/oscal classes. A withdrawn category or subcategory is a control with a status property and links to where it moved or what incorporated it; the schema carries those as the element's status and identifiers." , "The catalog also marks most CSF 2.0 subcategories as first-party risk, third-party risk or both, in a marking property of class risk-party. CSWP 29 carries no such marking, but the catalog and the reference tool publish it beside the Core as they publish the implementation examples, so the schema carries it too, as a subcategory's risk parties." , "The version is the CSF edition that CSWP 29 defines, and source is the publication's digital object identifier. NIST's Cybersecurity and Privacy Reference Tool names the same edition CSF_2_0_0, and the catalog NIST publishes for it in usnistgov/oscal-content is copied to src/nist_csf_v2/schema/oscal-content/ at the tag and commit in the annotations. That catalog carries a version number of its own, 1.2.1, which numbers the catalog and not the framework. The release tags are the schema's own versions, and scripts/check_upstream_release.py reads the same pins and reports when NIST publishes another edition or changes the catalog." ;
+	sh:declare _:c14n11 , _:c14n2 , _:c14n4 , _:c14n7 , _:c14n9 ;
+	linkml:annotations _:c14n1 , _:c14n12 , _:c14n6 , _:c14n8 ;
+	linkml:classes <https://w3id.org/lmodel/nist-csf-v2/CsfCategory> , <https://w3id.org/lmodel/nist-csf-v2/CsfFramework> , <https://w3id.org/lmodel/nist-csf-v2/CsfFunction> , <https://w3id.org/lmodel/nist-csf-v2/CsfImplementationExample> , <https://w3id.org/lmodel/nist-csf-v2/CsfSubcategory> ;
+	linkml:default_prefix "nist_csf_v2" ;
+	linkml:default_range <https://w3id.org/lmodel/nist-csf-v2/string> ;
+	linkml:description "A LinkML model of the Cybersecurity Framework (CSF) 2.0, which NIST publishes as Cybersecurity White Paper (CSWP) 29: its six functions, their categories and subcategories, the implementation examples NIST publishes with the subcategories, and the CSF 1.1 categories and subcategories that CSF 2.0 withdrew, each with its status and, where NIST recorded it, where it moved or what incorporated it." ;
+	linkml:enums <https://w3id.org/lmodel/nist-csf-v2/CsfElementStatus> , <https://w3id.org/lmodel/nist-csf-v2/CsfRiskParty> ;
+	linkml:id "https://w3id.org/lmodel/nist-csf-v2"^^xsd:anyURI ;
+	linkml:imports "linkml:types"^^xsd:anyURI ;
+	linkml:metamodel_version "1.12.0" ;
+	linkml:slots <https://w3id.org/lmodel/nist-csf-v2/CsfCategory_title> , <https://w3id.org/lmodel/nist-csf-v2/CsfFunction_title> , <https://w3id.org/lmodel/nist-csf-v2/CsfImplementationExample_description> , <https://w3id.org/lmodel/nist-csf-v2/CsfSubcategory_description> , <https://w3id.org/lmodel/nist-csf-v2/csfCategory__category_incorporated_into> , <https://w3id.org/lmodel/nist-csf-v2/csfCategory__category_moved_to> , <https://w3id.org/lmodel/nist-csf-v2/csfCategory__category_status> , <https://w3id.org/lmodel/nist-csf-v2/csfCategory__category_subcategories> , <https://w3id.org/lmodel/nist-csf-v2/csfFramework__csf_functions> , <https://w3id.org/lmodel/nist-csf-v2/csfFramework__csf_version> , <https://w3id.org/lmodel/nist-csf-v2/csfFunction__function_categories> , <https://w3id.org/lmodel/nist-csf-v2/csfSubcategory__subcategory_examples> , <https://w3id.org/lmodel/nist-csf-v2/csfSubcategory__subcategory_incorporated_into> , <https://w3id.org/lmodel/nist-csf-v2/csfSubcategory__subcategory_moved_to> , <https://w3id.org/lmodel/nist-csf-v2/csfSubcategory__subcategory_risk_parties> , <https://w3id.org/lmodel/nist-csf-v2/csfSubcategory__subcategory_status> , <https://w3id.org/lmodel/nist-csf-v2/csf_category_id> , <https://w3id.org/lmodel/nist-csf-v2/csf_function_id> , <https://w3id.org/lmodel/nist-csf-v2/csf_implementation_example_id> , <https://w3id.org/lmodel/nist-csf-v2/csf_subcategory_id> , <https://w3id.org/lmodel/nist-csf-v2/description> , <https://w3id.org/lmodel/nist-csf-v2/title> ;
+	linkml:source_file "nist_csf_v2.yaml" ;
+	linkml:source_file_date "2026-11-07T02:04:02"^^xsd:dateTime ;
+	linkml:source_file_size 14720 ;
+	linkml:types <https://w3id.org/lmodel/nist-csf-v2/boolean> , <https://w3id.org/lmodel/nist-csf-v2/csf_category_identifier> , <https://w3id.org/lmodel/nist-csf-v2/csf_category_or_subcategory_identifier> , <https://w3id.org/lmodel/nist-csf-v2/csf_element_identifier> , <https://w3id.org/lmodel/nist-csf-v2/csf_function_identifier> , <https://w3id.org/lmodel/nist-csf-v2/csf_implementation_example_identifier> , <https://w3id.org/lmodel/nist-csf-v2/csf_subcategory_identifier> , <https://w3id.org/lmodel/nist-csf-v2/curie> , <https://w3id.org/lmodel/nist-csf-v2/date> , <https://w3id.org/lmodel/nist-csf-v2/date_or_datetime> , <https://w3id.org/lmodel/nist-csf-v2/datetime> , <https://w3id.org/lmodel/nist-csf-v2/decimal> , <https://w3id.org/lmodel/nist-csf-v2/double> , <https://w3id.org/lmodel/nist-csf-v2/float> , <https://w3id.org/lmodel/nist-csf-v2/integer> , <https://w3id.org/lmodel/nist-csf-v2/jsonpath> , <https://w3id.org/lmodel/nist-csf-v2/jsonpointer> , <https://w3id.org/lmodel/nist-csf-v2/ncname> , <https://w3id.org/lmodel/nist-csf-v2/nodeidentifier> , <https://w3id.org/lmodel/nist-csf-v2/objectidentifier> , <https://w3id.org/lmodel/nist-csf-v2/sparqlpath> , <https://w3id.org/lmodel/nist-csf-v2/string> , <https://w3id.org/lmodel/nist-csf-v2/time> , <https://w3id.org/lmodel/nist-csf-v2/uri> , <https://w3id.org/lmodel/nist-csf-v2/uriorcurie> .
+<https://w3id.org/lmodel/nist-csf-v2/nodeidentifier> a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"nodeidentifier\"." ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "NodeIdentifier" ;
+	linkml:definition_uri "https://w3id.org/linkml/Nodeidentifier"^^xsd:anyURI ;
+	linkml:description "A URI, CURIE or BNODE that represents a node in a model." ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "str" ;
+	linkml:uri "http://www.w3.org/ns/shex#nonLiteral"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-csf-v2/objectidentifier> a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"objectidentifier\"." ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	skos:note "Used for inheritance and type checking" ;
+	linkml:base "ElementIdentifier" ;
+	linkml:definition_uri "https://w3id.org/linkml/Objectidentifier"^^xsd:anyURI ;
+	linkml:description "A URI or CURIE that represents an object in the model." ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "str" ;
+	linkml:uri "http://www.w3.org/ns/shex#iri"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-csf-v2/sparqlpath> dcterms:conformsTo "https://www.w3.org/TR/sparql11-query/#propertypaths" ;
+	a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"sparqlpath\"." ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "str" ;
+	linkml:definition_uri "https://w3id.org/linkml/Sparqlpath"^^xsd:anyURI ;
+	linkml:description "A string encoding a SPARQL Property Path. The value of the string MUST conform to SPARQL syntax and SHOULD dereference to zero or more valid objects within the current instance document when encoded as RDF." ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "str" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#string"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-csf-v2/string> a linkml:TypeDefinition ;
+	skos:editorialNote "In RDF serializations, a slot with range of string is treated as a literal or type xsd:string. If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"string\"." ;
+	skos:exactMatch "schema:Text"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "str" ;
+	linkml:definition_uri "https://w3id.org/linkml/String"^^xsd:anyURI ;
+	linkml:description "A character string" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#string"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-csf-v2/subcategory_examples> a linkml:SlotDefinition ;
+	linkml:description "The implementation examples NIST publishes for the subcategory. CSWP 29 says they are notional, that none is required, and that they are not a complete list of what could be done." ;
+	linkml:inlined true ;
+	linkml:inlined_as_list true ;
+	linkml:multivalued true ;
+	linkml:range <https://w3id.org/lmodel/nist-csf-v2/CsfImplementationExample> .
+<https://w3id.org/lmodel/nist-csf-v2/subcategory_incorporated_into> a linkml:SlotDefinition ;
+	linkml:description "The CSF 2.0 category or subcategory that took in a withdrawn subcategory's outcome, as the catalog states it, such as GV.OC-01 for ID.BE-02." ;
+	linkml:multivalued true ;
+	linkml:range <https://w3id.org/lmodel/nist-csf-v2/csf_category_or_subcategory_identifier> .
+<https://w3id.org/lmodel/nist-csf-v2/subcategory_moved_to> a linkml:SlotDefinition ;
+	linkml:description "The CSF 2.0 subcategory a withdrawn subcategory moved to, as the catalog states it, such as GV.OC-03 for ID.GV-03. The catalog names two for a few." ;
+	linkml:multivalued true ;
+	linkml:range <https://w3id.org/lmodel/nist-csf-v2/csf_subcategory_identifier> .
+<https://w3id.org/lmodel/nist-csf-v2/subcategory_risk_parties> a linkml:SlotDefinition ;
+	skos:note "NIST publishes this in its catalog and its reference tool, not in CSWP 29. The catalog marks most CSF 2.0 subcategories and leaves a few unmarked, so an absent value says nothing about the outcome. A withdrawn subcategory carries none." ;
+	linkml:description "Whose risk the subcategory's outcome addresses: the organization's own, its suppliers' and other third parties', or both." ;
+	linkml:multivalued true ;
+	linkml:range <https://w3id.org/lmodel/nist-csf-v2/CsfRiskParty> .
+<https://w3id.org/lmodel/nist-csf-v2/subcategory_status> a linkml:SlotDefinition ;
+	linkml:description "withdrawn for a CSF 1.1 subcategory that CSF 2.0 withdrew. A subcategory of CSF 2.0 has no status." ;
+	linkml:range <https://w3id.org/lmodel/nist-csf-v2/CsfElementStatus> .
+<https://w3id.org/lmodel/nist-csf-v2/third_party> dcterms:title "Third-party risk" ;
+	linkml:description "Risk that reaches the organization through its suppliers, partners and other third parties. The catalog's value is 3rd." .
+<https://w3id.org/lmodel/nist-csf-v2/time> a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"time\"." , "URI is dateTime because OWL reasoners do not work with straight date or time" ;
+	skos:exactMatch "schema:Time"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "XSDTime" ;
+	linkml:definition_uri "https://w3id.org/linkml/Time"^^xsd:anyURI ;
+	linkml:description "A time object represents a (local) time of day, independent of any particular day" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "str" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#time"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-csf-v2/title> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-csf-v2"^^xsd:anyURI ;
+	skos:mappingRelation "http://schema.org/name"^^xsd:anyURI ;
+	skos:note "It means what LOKF's title means and carries the same IRI, so lokf adapt folds it into LOKF's slot and a knowledge bundle reads one title key." ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-csf-v2/title"^^xsd:anyURI ;
+	linkml:description "The name CSWP 29 gives the function or category." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-csf-v2/CsfCategory> , <https://w3id.org/lmodel/nist-csf-v2/CsfFunction> ;
+	linkml:owner <https://w3id.org/lmodel/nist-csf-v2/CsfCategory> ;
+	linkml:range <https://w3id.org/lmodel/nist-csf-v2/string> ;
+	linkml:slot_uri "http://schema.org/name"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-csf-v2/uri> dcterms:conformsTo "https://www.ietf.org/rfc/rfc3987.txt" ;
+	a linkml:TypeDefinition ;
+	skos:closeMatch "schema:URL"^^xsd:anyURI ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"uri\"." ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	skos:note "in RDF serializations a slot with range of uri is treated as a literal or type xsd:anyURI unless it is an identifier or a reference to an identifier, in which case it is translated directly to a node" ;
+	linkml:base "URI" ;
+	linkml:definition_uri "https://w3id.org/linkml/Uri"^^xsd:anyURI ;
+	linkml:description "a complete URI" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "str" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#anyURI"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-csf-v2/uriorcurie> a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"uriorcurie\"." ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "URIorCURIE" ;
+	linkml:definition_uri "https://w3id.org/linkml/Uriorcurie"^^xsd:anyURI ;
+	linkml:description "a URI or a CURIE" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "str" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#anyURI"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-csf-v2/withdrawn> linkml:description "The element was in CSF 1.1 and CSF 2.0 withdrew it. The catalog keeps it, and names where it moved or what incorporated it where NIST recorded that." .
+_:c14n1 skos:example "2024-02" ;
+	linkml:tag "publication_date"^^xsd:anyURI .
+_:c14n11 sh:namespace "https://w3id.org/lmodel/oscal/"^^xsd:anyURI ;
+	sh:prefix "oscal" .
+_:c14n12 skos:example "f0de6d8d8c059d374f15e0ae07508d82e370fc1d" ;
+	linkml:tag "oscal_content_commit"^^xsd:anyURI .
+_:c14n2 sh:namespace "http://schema.org/"^^xsd:anyURI ;
+	sh:prefix "schema" .
+_:c14n4 sh:namespace "https://w3id.org/linkml/"^^xsd:anyURI ;
+	sh:prefix "linkml" .
+_:c14n6 skos:example "CSF_2_0_0" ;
+	linkml:tag "cprt_framework_version"^^xsd:anyURI .
+_:c14n7 sh:namespace "https://w3id.org/lmodel/nist-csf-v2/"^^xsd:anyURI ;
+	sh:prefix "nist_csf_v2" .
+_:c14n8 skos:example "v1.6.0" ;
+	linkml:tag "oscal_content_tag"^^xsd:anyURI .
+_:c14n9 sh:namespace "http://www.w3.org/2001/XMLSchema#"^^xsd:anyURI ;
+	sh:prefix "xsd" .
+
