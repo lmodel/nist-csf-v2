@@ -18,7 +18,7 @@ A [LOKF](https://lokf.nolan-nichols.com) knowledge base for nist-csf-v2. Every M
 
 # Services
 
-* [Documentation site](services/documentation-site.md) - The Astro Starlight site in `website/`, for <https://lmodel.github.io/nist-csf-v2>: the README as its home page, the pages of `docs/`, the schema's element pages, a page per concept of this bundle with its trust label, and the bundle's exports, built and published by Knowledge website.
+* [Documentation site](services/documentation-site.md) - The Hugo site in `website/`, for <https://lmodel.github.io/nist-csf-v2>: the README as its home page, the pages of `docs/`, the schema's element pages, a page per concept of this bundle with its trust label, and the bundle's exports, built and published by Knowledge website.
 
 # Datasets
 
