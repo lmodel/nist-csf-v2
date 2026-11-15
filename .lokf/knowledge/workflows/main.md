@@ -3,7 +3,7 @@ type: Service
 id: https://w3id.org/lmodel/nist-csf-v2/knowledge/workflows/main
 genre: reference
 title: Build and test (main.yaml)
-description: "The Build and test workflow, `.github/workflows/main.yaml`: on a push to main and on every pull request, its test job runs `just test` on Python 3.10 to 3.14, and on 3.13 also `just lint` and `just lokf-adapt-check`, the check that `.lokf/schema/nist-csf-v2.yaml` is current."
+description: "The Build and test workflow, `.github/workflows/main.yaml`: on a push to main and on every pull request, its test job runs `just test` on Python 3.11 to 3.14, and on 3.13 also `just lint` and `just lokf-adapt-check`, the check that `.lokf/schema/nist-csf-v2.yaml` is current."
 resource: .github/workflows/main.yaml
 sources:
   - id: main.yaml
@@ -11,7 +11,7 @@ sources:
     title: the header comment, the on key and the jobs
 generated:
   by: process:ktl-librarian
-  at: "2026-11-06T21:22:29Z"
+  at: "2026-11-15T10:36:53Z"
 status: draft
 verified:
   - by: process:ktl-librarian
@@ -20,6 +20,6 @@ verified:
 
 # Build and test (main.yaml)
 
-`.github/workflows/main.yaml` is the workflow named "Build and test". It runs on a push to `main` and on every pull request, with `contents: read`.[^main.yaml] Its one job, `test`, runs on Python 3.10, 3.11, 3.12, 3.13 and 3.14. It installs with `uv sync --locked --group dev` and runs `just test`. On Python 3.13 it also runs `just lint`, and it syncs the sidecar's environment and runs `just lokf-adapt-check`, because the copy is what the bundle validates against and the release attaches.
+`.github/workflows/main.yaml` is the workflow named "Build and test". It runs on a push to `main` and on every pull request, with `contents: read`.[^main.yaml] Its one job, `test`, runs on Python 3.11, 3.12, 3.13 and 3.14. It installs with `uv sync --locked --group dev` and runs `just test`. On Python 3.13 it also runs `just lint`, and it syncs the sidecar's environment and runs `just lokf-adapt-check`, because the copy is what the bundle validates against and the release attaches.
 
 [^main.yaml]: .github/workflows/main.yaml, the header comment, the on key and the jobs
