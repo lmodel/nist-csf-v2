@@ -98,7 +98,7 @@ exclusions:
     reason: The sidecar's git settings.
 generated:
   by: process:ktl-librarian
-  at: "2026-11-15T02:43:20Z"
+  at: "2026-11-15T20:59:04Z"
 status: draft
 verified:
   - by: process:ktl-librarian
@@ -124,7 +124,7 @@ Each concept derived from a file or folder of this repository names it by its pa
 | `CONTRIBUTING.md`, the `lint`, `gen-project`, `gen-doc` and `test` recipes | `playbooks/regenerate-and-test` | confirm the setup, the checklist and the recipes |
 | `.releaserc.json`, `.github/scripts/changelog-release.mjs`, `CHANGELOG.md`, the Releasing section of `CONTRIBUTING.md` | `playbooks/release` | re-read the release rules, the commands and the baseline paragraph |
 | the nine files in `.github/workflows/` | the nine `workflows/` concepts | re-read each file's `on` keys, its jobs' permissions and environments, and the variables and secrets it reads |
-| `.github/release/` | `workflows/semantic-release` | re-read `package.json` and the versions the lockfile pins |
+| `.release/` | `workflows/semantic-release` | re-read `package.json` and the versions the lockfile pins |
 | `website/` | `services/documentation-site` | re-read `site.toml` and `website/README.md` |
 | `NOTICE`, `LICENSE`, the License section of `README.md` | `policies/license-and-attribution` | re-read each third-party entry |
 | `SECURITY.md`, `.github/dependabot.yml` | `policies/security-policy` | re-read the table of surfaces and the settings not yet in force |
