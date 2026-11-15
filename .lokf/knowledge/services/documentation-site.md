@@ -11,27 +11,41 @@ sources:
   - id: site.toml
     resource: website/site.toml
     title: the site's address, title and redirects
+  - id: hugo.toml
+    resource: website/hugo.toml
+    title: docsExclude
+  - id: content.gotmpl
+    resource: website/content/_content.gotmpl
+    title: the redirects
+  - id: prepare.sh
+    resource: website/scripts/prepare.sh
+    title: the schema's pages
   - id: website-readme.md
     resource: website/README.md
     title: what each page is built from
 generated:
   by: process:ktl-librarian
-  at: "2026-11-15T02:43:20Z"
+  at: "2026-11-15T03:07:39Z"
 status: draft
 ---
 
 # Documentation site
 
-`website/` holds a Hugo site. `website/site.toml` names the repository `lmodel/nist-csf-v2`, the site `https://lmodel.github.io` with the base path `/nist-csf-v2`, and the title `nist-csf-v2`.[^site.toml] It shows the pages of `docs/` except `docs/templates-linkml/`. It redirects the addresses the retired mkdocs site gave its pages:
+`website/` holds a Hugo site. `website/site.toml` names the repository `lmodel/nist-csf-v2`, the address `https://lmodel.github.io/nist-csf-v2/` and the title `nist-csf-v2`, and sets no logo, so the site shows the Knowledge Trust Ladder logo.[^site.toml] It shows the pages of `docs/` except `docs/templates-linkml/` and `docs/elements/`, which `website/hugo.toml` leaves out.[^hugo.toml] It redirects the addresses the retired mkdocs site gave its pages:
 
 - `/elements` to `/schema/`;
 - each class page of the retired schema to its successor's page, or to `/schema/` where it has none;
-- any other page under `/elements` whose name the schema still has to that page under `/schema/`;
+- any other page under `/elements` whose name the schema still has to that element's page under `/schema/`;
 - `/about` to `/docs/about/`.
 
-The other options take the site's defaults: the Knowledge Trust Ladder logo, the README as the home page, the changelog once it holds a release, and the schema's pages that `just gen-doc` writes.
+It also sends each `/schema/<name>/` address to that element's page under its kind's folder, such as `/schema/classes/CsfFunction/`.[^content.gotmpl]
 
-`website/README.md` says what each page is built from, and that `npm run build` syncs the bundle, the README, the docs and the schema's pages before it builds and checks every link.[^website-readme.md] [Knowledge website](../workflows/knowledge-website.md) builds the site on each change to its sources and publishes it once `KNOWLEDGE_WEBSITE_ENABLED` is `true`.
+`website/scripts/prepare.sh` runs LinkML's `gen-doc` on `src/nist_csf_v2/schema/nist_csf_v2.yaml` and writes the schema's pages into `website/generated/`, which is never committed.[^prepare.sh]
+
+`website/README.md` says what each page is built from: the README becomes the home page, and the changelog a page per release. It also says that `scripts/build.sh` in `website/` writes `dist/` with the search index and then checks every link between its pages, and that Hugo and Pagefind come from PyPI, at the versions `pyproject.toml` names and the hashes `uv.lock` holds.[^website-readme.md] [Knowledge website](../workflows/knowledge-website.md) builds the site on each change to its sources and publishes it once `KNOWLEDGE_WEBSITE_ENABLED` is `true`.
 
 [^site.toml]: website/site.toml, the site's address, title and redirects
-[^website-readme.md]: website/README.md, the build and its sources
+[^hugo.toml]: website/hugo.toml, docsExclude
+[^content.gotmpl]: website/content/_content.gotmpl, the redirects
+[^prepare.sh]: website/scripts/prepare.sh, the schema's pages
+[^website-readme.md]: website/README.md, what each page is built from
